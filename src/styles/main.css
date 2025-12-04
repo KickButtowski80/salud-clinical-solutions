@@ -1,3 +1,10 @@
+@import "./base.css";
+@import "./header.css";
+@import "./hero.css";
+@import "./services.css";
+@import "./leadership.css";
+@import "./footer.css";
+
 .skip-link {
   position: absolute;
   left: -9999px;
