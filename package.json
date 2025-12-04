@@ -2,6 +2,19 @@
   "name": "salud-clinical-solutions",
   "version": "1.0.0",
   "description": "",
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "last 2 versions",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "scripts": {
     "clean": "rm -rf .parcel-cache dist",
     "dev": "parcel index.html --no-cache",
