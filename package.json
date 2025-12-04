@@ -20,7 +20,7 @@
   },
   "scripts": {
     "clean": "rm -rf .parcel-cache dist",
-    "dev": "parcel index.html --no-cache",
+    "dev": "parcel index.html --no-cache --open",
     "build": "parcel build index.html --no-cache --public-url ./",
     "serve": "parcel serve index.html --no-cache"
   },
