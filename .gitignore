@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+.pnp.*          # just in case of Plug'n'Play tools
+
+# pnpm store (optional, but often ignored if inside project)
+.pnpm-store/
+
+# Parcel cache
+.parcel-cache/
+
+# Build output (adjust if you changed the out-dir)
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Editor/OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+.parcel-cache/
+
+*:Zone.Identifier
