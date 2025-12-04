@@ -15,6 +15,9 @@
       "last 1 safari version"
     ]
   },
+  "engines": {
+    "node": ">=20 <21"
+  },
   "scripts": {
     "clean": "rm -rf .parcel-cache dist",
     "dev": "parcel index.html --no-cache",
