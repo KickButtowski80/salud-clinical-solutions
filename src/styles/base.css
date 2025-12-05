@@ -1,0 +1,80 @@
+:root {
+  /* Brand Colors */
+  --color-primary: #008080;
+  --color-primary-dark: #006666;
+  --color-primary-light: #009999;
+  /* Accent (Amber) */
+  --color-accent: #FFC857;
+  --color-accent-dark: #FFB84D;
+
+  /* Neutral Colors */
+  --color-text-primary: #2c3e50;
+  --color-text-secondary: #6c757d;
+  --color-text-light: #ffffff;
+  --color-on-accent: #1f2933;
+  --color-on-success: #0f1f17;
+  --color-on-warning: #1f2933;
+  --color-on-error: #ffffff;
+  --color-background: #ffffff;
+  --color-background-light: #f8f9fa;
+  
+  /* Semantic Colors */
+  --color-success: #28a745;
+  --color-error: #c82333;
+  --color-warning: #ffc107;
+}
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-primary-dark { background-color: var(--color-primary-dark); }
+.bg-accent { background-color: var(--color-accent); }
+.bg-accent-dark { background-color: var(--color-accent-dark); }
+.bg-success { background-color: var(--color-success); }
+.bg-error { background-color: var(--color-error); }
+.bg-warning { background-color: var(--color-warning); }
+.bg-surface { background-color: var(--color-background-light); }
+
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-accent { color: var(--color-accent); }
+.text-success { color: var(--color-success); }
+.text-error { color: var(--color-error); }
+.text-warning { color: var(--color-warning); }
+.text-on-accent { color: var(--color-on-accent); }
+.text-on-success { color: var(--color-on-success); }
+.text-on-warning { color: var(--color-on-warning); }
+.text-on-error { color: var(--color-on-error); }
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #e2e8f0;
+    --color-background: #0f172a;       /* slightly lighter to harmonize with amber */
+    --color-background-light: #1e293b; /* band/background cards */
+    /* Dark-mode adjustments for better contrast */
+    --color-primary: #58d5cc;   /* tuned teal for this neutral */
+    --color-primary-dark: #3bb8b0;
+    --color-primary-light: #8ee9e1;
+    --color-accent: #f4b860;    /* muted amber to reduce clash */
+    --color-accent-dark: #e0a94f;
+
+    --color-success: #48bb78;
+    --color-error: #f56565;
+    --color-warning: #ecc94b;
+
+    /* On-colors for dark mode (dark text on lighter semantic bg) */
+    --color-on-accent: #0f172a;
+    --color-on-success: #0f172a;
+    --color-on-warning: #0f172a;
+    --color-on-error: #0f172a;
+  }
+  
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+  }
+}
