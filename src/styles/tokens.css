@@ -75,13 +75,13 @@
      Using a dedicated scale also avoids random magic numbers (e.g., 9999)
      scattered through component CSS. Adjust or extend as new layers
      (overlays, drawers, etc.) are introduced. */
-  --z-base: 0;        /* normal content */
-  --z-dropdown: 100;  /* dropdown menus, popovers */
-  --z-sticky: 200;    /* sticky header / in-flow elements */
-  --z-fixed: 300;     /* fixed-position UI: scroll-to-top, floating actions */
-  --z-modal: 400;     /* modal dialogs and their backdrops */
-  --z-toast: 500;     /* toast notifications */
-  --z-tooltip: 600;   /* tooltips and highest-priority overlays */
+  --z-layer-base: 0;           /* normal page content */
+  --z-layer-raised: 100;       /* raised surfaces: cards, dropdowns, popovers */
+  --z-layer-sticky: 200;       /* sticky header / in-flow navigation */
+  --z-layer-fixed: 300;        /* fixed-position UI: scroll-to-top, floating actions */
+  --z-layer-overlay: 400;      /* overlays: modal dialogs, backdrops, drawers */
+  --z-layer-notification: 500; /* transient notifications: toasts, banners */
+  --z-layer-tooltip: 600;      /* tooltips, skip-links, highest-priority overlays */
 }
 
 @media (prefers-color-scheme: dark) {
