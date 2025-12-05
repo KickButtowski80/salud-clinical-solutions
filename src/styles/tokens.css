@@ -67,6 +67,17 @@
   --container-lg: 1024px;
   --container-xl: 1280px;
   --container-2xl: 1536px;
+
+  /* Z-index scale
+     Base scale for stacking common UI elements. Higher = closer to the user.
+     Adjust or extend as new layers (e.g., overlays) are introduced. */
+  --z-base: 0;        /* normal content */
+  --z-dropdown: 100;  /* dropdown menus, popovers */
+  --z-sticky: 200;    /* sticky header / in-flow elements */
+  --z-fixed: 300;     /* fixed-position UI: scroll-to-top, floating actions */
+  --z-modal: 400;     /* modal dialogs and their backdrops */
+  --z-toast: 500;     /* toast notifications */
+  --z-tooltip: 600;   /* tooltips and highest-priority overlays */
 }
 
 @media (prefers-color-scheme: dark) {
