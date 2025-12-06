@@ -60,34 +60,119 @@
   gap: var(--space-8);
 }
 
+.nav-menu > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Active nav icon (below menu box) with drop-down bounce */
+.nav-link-icon {
+  height: 3rem;
+  width: auto;
+  display: block;
+  margin-top: 0.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Drop down with subtle bounce animation */
+@keyframes drop-down-bounce {
+  0% {
+    transform: translateY(-15px) scaleX(1.2);
+    opacity: 0;
+  }
+  25% {
+    transform: translateY(0) scaleX(1.2);
+    opacity: 1;
+  }
+  40% {
+    transform: translateY(-4px) scaleX(1.2);
+  }
+  55% {
+    transform: translateY(0) scaleX(1.2);
+  }
+  100% {
+    transform: translateY(0) scaleX(1.2);
+  }
+}
+
+.nav-menu > li:has(.nav-link--active) .nav-link-icon {
+  animation: drop-down-bounce 1.5s ease-out;
+}
+
 .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-base);
-  padding: var(--space-3) var(--space-4);
-  border-radius: 6px;
+  font-size: var(--font-size-xl);
+  padding: var(--space-4) var(--space-6);
+  border-radius: 8px;
   color: var(--color-on-primary);
   transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
+  min-height: 4.5rem;
 }
 
 .nav-link:hover,
 .nav-link:focus-visible {
-  background-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.nav-link--active {
+  color: var(--color-on-primary);
+  position: relative;
+}
+
+/* Background drop animation for active menu item */
+.nav-link--active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(244, 184, 96, 0.24);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(244, 184, 96, 0.2);
+  animation: background-drop-bounce 1.5s ease-out;
+}
+
+/* Background drop and bounce animation */
+@keyframes background-drop-bounce {
+  0% {
+    transform: translateY(-15px) scale(0.95);
+    opacity: 0;
+  }
+  25% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: translateY(-3px) scale(1.02);
+  }
+  55% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
 
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: -2px;
-  left: 50%;
+  bottom: 0;
+  left: 0;
   width: 0;
   height: 2px;
   background-color: var(--color-accent);
   transition: width 0.2s ease, background-color 0.2s ease;
-  transform: translateX(-50%);
+  transform: translateX(0);
 }
 
 .nav-link:hover::after,
