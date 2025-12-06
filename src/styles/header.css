@@ -5,9 +5,15 @@
   position: sticky;
   top: 0;
   z-index: var(--z-layer-sticky);
-  background-color: var(--color-background);
+  background-color: var(--color-primary-strong);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid var(--color-background-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  .header {
+    background-color: var(--color-primary-soft);
+  }
 }
 
 .nav {
@@ -23,13 +29,14 @@
 .brand-line-1 {
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-text-primary);
+  color: var(--color-on-primary);
 }
 
 .brand-line-2 {
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-text-secondary);
+  color: var(--color-on-primary);
+  padding-bottom: 1.5rem;
 }
 
 /* Logo image */
@@ -37,6 +44,7 @@
   height: 4.5rem;
   width: auto;
   display: block;
+  object-fit: contain;
   transition: transform 0.2s ease;
 }
 
@@ -58,7 +66,7 @@
   font-size: var(--font-size-base);
   padding: var(--space-3) var(--space-4);
   border-radius: 6px;
-  color: var(--color-text-light);
+  color: var(--color-on-primary);
   transition: all 0.2s ease;
   position: relative;
 }
