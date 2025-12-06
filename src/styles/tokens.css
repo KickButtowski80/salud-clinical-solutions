@@ -1,7 +1,7 @@
 :root {
   /* Brand Colors */
   --color-primary: #008080;
-  --color-primary-strong: #006666;
+  --color-primary-strong: #00545c; /* darker teal so logo teal has more contrast */
   --color-primary-soft: #009999;
   /* Accent (Amber) */
   --color-accent: #FFC857;
@@ -10,12 +10,13 @@
   /* Neutral Colors */
   --color-text-primary: #2c3e50;
   --color-text-secondary: #6c757d;
-  --color-text-light: #ffffff;
+  --color-text-light: #f9fafb; /* generic light text */
+  --color-on-primary: #ffffff; /* text on primary backgrounds */
   --color-on-accent: #1f2933;
   --color-on-success: #0f1f17;
   --color-on-warning: #1f2933;
-  --color-on-error: #ffffff;
-  --color-background: #ffffff;
+  --color-on-error: #ffffff;   /* text on error backgrounds */
+  --color-background: #fdfdfd; /* page background */
   --color-background-light: #f8f9fa;
   --color-header-bg: #e5e7eb; /* slightly darker band for header in light mode */
   
@@ -104,7 +105,8 @@
     --color-error: #f56565;
     --color-warning: #ecc94b;
 
-    /* On-colors for dark mode (dark text on lighter semantic bg) */
+    /* On-colors for dark mode (dark text on lighter semantic/brand bg) */
+    --color-on-primary: #0f172a;
     --color-on-accent: #0f172a;
     --color-on-success: #0f172a;
     --color-on-warning: #0f172a;
