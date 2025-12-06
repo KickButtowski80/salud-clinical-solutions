@@ -67,7 +67,7 @@
   padding: var(--space-3) var(--space-4);
   border-radius: 6px;
   color: var(--color-on-primary);
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
 }
 
@@ -86,7 +86,7 @@
   width: 0;
   height: 2px;
   background-color: var(--color-accent);
-  transition: all 0.2s ease;
+  transition: width 0.2s ease, background-color 0.2s ease;
   transform: translateX(-50%);
 }
 
