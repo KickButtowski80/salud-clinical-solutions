@@ -20,7 +20,7 @@
   },
   "scripts": {
     "clean": "rm -rf .parcel-cache dist",
-    "dev": "parcel index.html --no-cache --open",
+    "dev": "parcel index.html --open",
     "build": "parcel build index.html --no-cache --public-url ./",
     "serve": "parcel serve index.html --no-cache"
   },
@@ -28,6 +28,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.16.1"
+    "parcel": "^2.16.1",
+    "posthtml": "^0.16.7",
+    "posthtml-include": "^2.0.1"
   }
 }

@@ -1,22 +1,24 @@
 :root {
   /* Brand Colors */
   --color-primary: #008080;
-  --color-primary-dark: #006666;
-  --color-primary-light: #009999;
+  --color-primary-strong: #00545c; /* darker teal so logo teal has more contrast */
+  --color-primary-soft: #009999;
   /* Accent (Amber) */
   --color-accent: #FFC857;
-  --color-accent-dark: #FFB84D;
+  --color-accent-strong: #FFB84D;
 
   /* Neutral Colors */
   --color-text-primary: #2c3e50;
   --color-text-secondary: #6c757d;
-  --color-text-light: #ffffff;
+  --color-text-light: #f9fafb; /* generic light text */
+  --color-on-primary: #ffffff; /* text on primary backgrounds */
   --color-on-accent: #1f2933;
   --color-on-success: #0f1f17;
   --color-on-warning: #1f2933;
-  --color-on-error: #ffffff;
-  --color-background: #ffffff;
+  --color-on-error: #ffffff;   /* text on error backgrounds */
+  --color-background: #fdfdfd; /* page background */
   --color-background-light: #f8f9fa;
+  --color-header-bg: #e5e7eb; /* slightly darker band for header in light mode */
   
   /* Semantic Colors */
   --color-success: #28a745;
@@ -28,6 +30,7 @@
   --font-family-heading: var(--font-family-primary);
 
   /* Font Sizes - Fluid Typography */
+  --font-size-xxs: clamp(0.7rem, 0.65rem + 0.15vw, 0.8rem);
   --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
   --font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
   --font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
@@ -90,18 +93,20 @@
     --color-text-secondary: #e2e8f0;
     --color-background: #0f172a;       /* slightly lighter to harmonize with amber */
     --color-background-light: #1e293b; /* band/background cards */
+    --color-header-bg: #020617;        /* darker band for header in dark mode */
     /* Dark-mode adjustments for better contrast */
     --color-primary: #58d5cc;   /* tuned teal for this neutral */
-    --color-primary-dark: #3bb8b0;
-    --color-primary-light: #8ee9e1;
+    --color-primary-strong: #3bb8b0;
+    --color-primary-soft: #8ee9e1;
     --color-accent: #f4b860;    /* muted amber to reduce clash */
-    --color-accent-dark: #e0a94f;
+    --color-accent-strong: #e0a94f;
 
     --color-success: #48bb78;
     --color-error: #f56565;
     --color-warning: #ecc94b;
 
-    /* On-colors for dark mode (dark text on lighter semantic bg) */
+    /* On-colors for dark mode (dark text on lighter semantic/brand bg) */
+    --color-on-primary: #0f172a;
     --color-on-accent: #0f172a;
     --color-on-success: #0f172a;
     --color-on-warning: #0f172a;
