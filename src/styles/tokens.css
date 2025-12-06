@@ -28,6 +28,7 @@
   --font-family-heading: var(--font-family-primary);
 
   /* Font Sizes - Fluid Typography */
+  --font-size-xxs: clamp(0.7rem, 0.65rem + 0.15vw, 0.8rem);
   --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
   --font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
   --font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
