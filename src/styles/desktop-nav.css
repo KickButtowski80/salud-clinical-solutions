@@ -62,6 +62,14 @@
   min-height: 3.25rem;
 }
 
+/* Inline icon inside desktop nav links (e.g., Home) */
+.nav-link__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: var(--space-2);
+  flex-shrink: 0;
+}
+
 .nav-link:hover,
 .nav-link--active {
   background-color: rgba(255, 255, 255, 0.12);
