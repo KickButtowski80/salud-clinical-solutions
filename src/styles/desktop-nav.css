@@ -68,6 +68,23 @@
   height: 1.25rem;
   margin-right: var(--space-2);
   flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+/* Hover/focus scale for all desktop nav icons */
+.nav-link:hover .nav-link__icon,
+.nav-link:focus-visible .nav-link__icon {
+  transform: scale(1.08);
+}
+
+/* Subtle scale-up for Home icon (currently the only nav-link--active) */
+.nav-link--active .nav-link__icon {
+  transform: scale(1.12);
+}
+
+.nav-link--active:hover .nav-link__icon,
+.nav-link--active:focus-visible .nav-link__icon {
+  transform: scale(1.22);
 }
 
 .nav-link:hover,
