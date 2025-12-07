@@ -134,27 +134,4 @@ export function initNavIntersectionObserver() {
     const fallbackId = sectionIds.find((id) => document.getElementById(id)) || 'home';
     updateNavForSection(fallbackId);
   }
-
-  // Initial state: if page loads scrolled, pick the section overlapping mid-viewport
-  const initFromScroll = () => {
-    const viewportMid = window.innerHeight / 2;
-    let bestId = null;
-    let smallestDistance = Infinity;
-
-    sections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      const sectionMid = rect.top + rect.height / 2;
-      const distance = Math.abs(sectionMid - viewportMid);
-      if (distance < smallestDistance) {
-        smallestDistance = distance;
-        bestId = section.id;
-      }
-    });
-
-    if (bestId) {
-      updateNavForSection(bestId);
-    }
-  };
-
-  initFromScroll();
 }
