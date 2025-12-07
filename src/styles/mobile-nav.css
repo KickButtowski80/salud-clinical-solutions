@@ -37,7 +37,8 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-on-primary);
   border-radius: var(--radius-md);
-  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  position: relative;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .mobile-nav__icon {
@@ -49,6 +50,22 @@
 .mobile-nav__link[aria-current="page"],
 .mobile-nav__link--active {
   color: var(--color-accent);
+  background-color: rgba(244, 184, 96, 0.18);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.mobile-nav__link[aria-current="page"]::after,
+.mobile-nav__link--active::after {
+  content: '';
+  position: absolute;
+  bottom: 0.15rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 0.18rem;
+  border-radius: 999px;
+  background-color: var(--color-accent);
 }
 
 .mobile-nav__link:focus-visible {
