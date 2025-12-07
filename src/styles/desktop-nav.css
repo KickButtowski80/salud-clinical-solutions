@@ -63,11 +63,16 @@
 }
 
 .nav-link:hover,
-.nav-link:focus-visible, 
 .nav-link--active {
   background-color: rgba(255, 255, 255, 0.12);
   transform: translateY(-0.125rem);
   box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+}
+
+/* Keyboard focus outline, similar to mobile nav */
+.nav-link:focus-visible {
+  outline: 0.125rem solid var(--color-accent);
+  outline-offset: 0.15rem;
 }
 
 /* Do not add extra hover box on the active link itself */
