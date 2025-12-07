@@ -1,11 +1,16 @@
 .bg-primary { background-color: var(--color-primary); }
-.bg-primary-dark { background-color: var(--color-primary-dark); }
+.bg-primary-strong { background-color: var(--color-primary-strong); }
+.bg-primary-soft { background-color: var(--color-primary-soft); }
 .bg-accent { background-color: var(--color-accent); }
-.bg-accent-dark { background-color: var(--color-accent-dark); }
-.bg-success { background-color: var(--color-success); }
+.bg-accent-strong { background-color: var(--color-accent-strong); }
+.bg-accent-soft { background-color: var(--color-accent-soft); }
 .bg-error { background-color: var(--color-error); }
+.bg-error-strong { background-color: var(--color-error-strong); }
+.bg-error-soft { background-color: var(--color-error-soft); }
 .bg-warning { background-color: var(--color-warning); }
-.bg-surface { background-color: var(--color-background-light); }
+.bg-warning-strong { background-color: var(--color-warning-strong); }
+.bg-warning-soft { background-color: var(--color-warning-soft); }
+.bg-surface { background-color: var(--color-background-soft); }
 
 .text-primary { color: var(--color-text-primary); }
 .text-secondary { color: var(--color-text-secondary); }
@@ -18,6 +23,7 @@
 .text-on-warning { color: var(--color-on-warning); }
 .text-on-error { color: var(--color-on-error); }
 
+.text-xxs { font-size: var(--font-size-xxs); }
 .text-xs { font-size: var(--font-size-xs); }
 .text-sm { font-size: var(--font-size-sm); }
 .text-base { font-size: var(--font-size-base); }
