@@ -5,8 +5,10 @@
   position: sticky;
   top: 0;
   z-index: var(--z-layer-sticky);
-  background-color: var(--color-primary-strong);
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+  background: linear-gradient(to top, var(--color-primary-strong) 30%, #2d6a6cf2 100%);
+  box-shadow:
+    0 0.25rem 0.9rem rgba(0, 0, 0, 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
   border-bottom: 0.0625rem solid var(--color-background-light);
 }
 
@@ -55,148 +57,6 @@
   }
 }
 
-/* Navigation list & links */
-.nav-menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: var(--space-8);
-}
-
-.nav-menu > li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Active nav icon (below menu box) with drop-down bounce */
-.nav-link-icon {
-  height: 3rem;
-  width: auto;
-  display: block;
-  margin-top: 0.5rem;
-  filter: drop-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.2));
-}
-
-/* Drop down with subtle bounce animation (icon keeps same width) */
-@keyframes drop-down-bounce {
-  0% {
-    transform: translateY(-0.9375rem);
-    opacity: 0;
-  }
-  25% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  40% {
-    transform: translateY(-0.25rem);
-  }
-  55% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.nav-menu > li:has(.nav-link--active) .nav-link-icon {
-  animation: drop-down-bounce 1.5s ease-out both;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-lg);
-  padding: var(--space-2) var(--space-5);
-  border-radius: 0.5rem;
-  color: var(--color-on-primary);
-  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  position: relative;
-  min-height: 3.25rem;
-}
-
-.nav-link:hover,
-.nav-link:focus-visible, 
-.nav-link--active {
-  background-color: rgba(255, 255, 255, 0.12);
-  transform: translateY(-0.125rem);
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
-}
-
-/* Do not add extra hover box on the active link itself */
-.nav-link--active:hover,
-.nav-link--active:focus-visible {
-  background-color: transparent;
-  box-shadow: none;
-}
-
-.nav-link--active {
-  color: var(--color-on-primary);
-  position: relative;
-  /* transform: translateY(-0.125rem); */
-}
-
-/* Background drop animation for active menu item */
-.nav-link--active::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(244, 184, 96, 0.24);
-  border-radius: 0.5rem;
-  box-shadow: 0 0.25rem 0.75rem rgba(244, 184, 96, 0.2);
-  animation: background-drop-bounce 1.5s ease-out;
-}
-
-@media (prefers-color-scheme: dark) {
-  .nav-link--active::before {
-    background-color: rgba(244, 184, 96, 0.32);
-  }
-}
-
-/* Background drop and bounce animation */
-@keyframes background-drop-bounce {
-  0% {
-    transform: translateY(-0.9375rem) scale(0.95);
-    opacity: 0;
-  }
-  25% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  40% {
-    transform: translateY(-0.1875rem) scale(1.02);
-  }
-  55% {
-    transform: translateY(0) scale(1);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 0.125rem;
-  background-color: var(--color-accent);
-  transition: width 0.2s ease, background-color 0.2s ease;
-  transform: translateX(0);
-}
-
-.nav-link:hover::after,
-.nav-link:focus-visible::after {
-  width: 60%;
-}
 
 /* Media queries */
 @media (min-width: 768px) {
@@ -207,27 +67,29 @@
   /* Desktop-only brand text reveal on hover: drop-down animation */
   .brand-line-1,
   .brand-line-2 {
-    visibility: hidden;
+    opacity: 0;
     transform: translateY(-10px);
-    transition: visibility 0.4s ease-out, transform 0.4s ease-out;
+    transition:
+      opacity 0.4s ease-out,
+      transform 0.4s ease-out;
   }
 
   .brand:hover .brand-line-1,
-  .brand:focus-within .brand-line-1 {
-    visibility: visible;
+  .brand:focus-visible .brand-line-1 {
+    opacity: 1;
     transform: translateY(0);
     transition-delay: 0.05s;
   }
 
   .brand:hover .brand-line-2,
-  .brand:focus-within .brand-line-2 {
-    visibility: visible;
+  .brand:focus-visible .brand-line-2 {
+    opacity: 1;
     transform: translateY(0);
     transition-delay: 0.18s; /* drops after line 1 */
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   /* Mobile: slightly smaller logo */
   .logo-img {
     height: 3rem;
