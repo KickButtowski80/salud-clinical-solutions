@@ -48,9 +48,11 @@
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.logo-img:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0.18rem 0.45rem rgba(0, 0, 0, 0.32));
+@media (hover: hover) {
+  .logo-img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0.18rem 0.45rem rgba(0, 0, 0, 0.32));
+  }
 }
 
 /* Navigation list & links */
