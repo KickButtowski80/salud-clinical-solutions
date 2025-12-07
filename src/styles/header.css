@@ -227,7 +227,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   /* Mobile: slightly smaller logo */
   .logo-img {
     height: 3rem;
