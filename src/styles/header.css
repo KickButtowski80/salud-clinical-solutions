@@ -71,14 +71,14 @@
   }
 
   .brand:hover .brand-line-1,
-  .brand:focus-within .brand-line-1 {
+  .brand:focus-visible .brand-line-1 {
     visibility: visible;
     transform: translateY(0);
     transition-delay: 0.05s;
   }
 
   .brand:hover .brand-line-2,
-  .brand:focus-within .brand-line-2 {
+  .brand:focus-visible .brand-line-2 {
     visibility: visible;
     transform: translateY(0);
     transition-delay: 0.18s; /* drops after line 1 */
