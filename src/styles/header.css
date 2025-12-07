@@ -18,7 +18,7 @@
 
 .nav {
   min-height: 3.75rem;
-  padding: 0 var(--space-6);
+  padding: 0 var(--space-3);
 }
 
 /* Brand block (logo + text) */
@@ -225,6 +225,16 @@
 }
 
 @media (max-width: 640px) {
+  /* Mobile: slightly smaller logo */
+  .logo-img {
+    height: 3rem;
+  }
+
+  /* Mobile: temporarily hide nav menu items for visual testing */
+  .nav-menu {
+    display: none;
+  }
+
   .brand-line-2 {
     display: none; /* optional: hide long tagline on small screens */
   }
