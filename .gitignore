@@ -27,4 +27,5 @@ Thumbs.db
 
 .parcel-cache/
 
-*:Zone.Identifier
+*.Zone.Identifier
+*Zone.Identifier
