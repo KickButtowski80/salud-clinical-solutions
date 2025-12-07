@@ -65,21 +65,23 @@
   /* Desktop-only brand text reveal on hover: drop-down animation */
   .brand-line-1,
   .brand-line-2 {
-    visibility: hidden;
+    opacity: 0;
     transform: translateY(-10px);
-    transition: visibility 0.4s ease-out, transform 0.4s ease-out;
+    transition:
+      opacity 0.4s ease-out,
+      transform 0.4s ease-out;
   }
 
   .brand:hover .brand-line-1,
   .brand:focus-visible .brand-line-1 {
-    visibility: visible;
+    opacity: 1;
     transform: translateY(0);
     transition-delay: 0.05s;
   }
 
   .brand:hover .brand-line-2,
   .brand:focus-visible .brand-line-2 {
-    visibility: visible;
+    opacity: 1;
     transform: translateY(0);
     transition-delay: 0.18s; /* drops after line 1 */
   }
