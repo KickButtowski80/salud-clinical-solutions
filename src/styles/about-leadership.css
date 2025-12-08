@@ -157,7 +157,7 @@
 }
 
 .staff-card-bio {
-  font-size: 0.9rem;
+  font-size: var(--font-size-base);
   line-height: 1.7;
 }
 
@@ -199,7 +199,7 @@
   }
 
   .staff-card-bio {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 }
 
