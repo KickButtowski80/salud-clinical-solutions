@@ -25,20 +25,26 @@
    <include src="sections/header.html"></include>
 
     <main id="main-content" role="main">
-        <!-- Hero will be added in ticket #8 -->
-        <section id="hero" aria-label="Hero section">
-            <h1>Welcome to Salud Clinical Solutions</h1>
+        <!-- TEMP: Test sections for IntersectionObserver (Issue #9) -->
+        <section id="home" aria-label="Hero section" class="section-test">
+            <h1>Home (Hero) Section</h1>
             <p>Hero placeholder: introductory content for the clinic will be implemented in ticket #8.</p>
+            <p>Scroll down to see the active navigation update as sections enter the viewport.</p>
         </section>
 
-        <!-- Services will be added in ticket #9 -->
-        <section id="services" aria-label="Services section">
+        <section id="services" aria-label="Services section" class="section-test">
+            <h2>Services / Locums Section</h2>
             <p>Services placeholder: detailed list of clinical services will be implemented in ticket #9.</p>
         </section>
 
-        <!-- Leadership will be added in ticket #10 -->
-        <section id="leadership" aria-label="Leadership section">
-            <p>Leadership</p>
+        <section id="rachtan" aria-label="About us section" class="section-test">
+            <h2>About Us (Rachtan) Section</h2>
+            <p>About us placeholder: information about the company and team will be implemented in ticket #10.</p>
+        </section>
+
+        <section id="contact" aria-label="Contact section" class="section-test">
+            <h2>Contact Section</h2>
+            <p>Contact placeholder: contact details and form will be implemented in ticket #11.</p>
         </section>
     </main>
 
@@ -48,6 +54,6 @@
     <footer aria-label="Site footer">
         <p>Footer placeholder: contact details and site links will be implemented in ticket #11.</p>
     </footer>
-    <script src="./src/scripts/main.js"></script>
+    <script type="module" src="./src/scripts/main.js"></script>
 </body>
 </html>

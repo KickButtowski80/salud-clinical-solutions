@@ -2,13 +2,18 @@
 @import "./tokens.css";
 @import "./utilities.css";
 @import "./base.css";
-@import "./header.css";
-@import "./desktop-nav.css";
-@import "./hero.css";
-@import "./services.css";
-@import "./leadership.css";
-@import "./footer.css";
-@import "./mobile-nav.css";
+@import url('./header.css');
+@import url('./desktop-nav.css');
+@import url('./mobile-nav.css');
+
+/* TEMP: taller sections for IntersectionObserver testing (Issue #9) */
+.section-test {
+  min-height: 90vh;
+  padding: 4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
 .skip-link {
   position: absolute;
