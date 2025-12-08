@@ -6,13 +6,24 @@
 @import url('./desktop-nav.css');
 @import url('./mobile-nav.css');
 
-/* TEMP: taller sections for IntersectionObserver testing (Issue #9) */
+/* TEMP: sections for IntersectionObserver testing (Issue #9) */
 .section-test {
-  min-height: 90vh;
   padding: 4rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.section-test--short {
+  min-height: 55vh;
+}
+
+.section-test--medium {
+  min-height: 90vh;
+}
+
+.section-test--tall {
+  min-height: 130vh;
 }
 
 .skip-link {
