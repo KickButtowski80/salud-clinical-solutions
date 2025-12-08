@@ -68,7 +68,7 @@
   height: 1.25rem;
   margin-right: var(--space-2);
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 /* Hover/focus scale for all desktop nav icons */
@@ -108,8 +108,15 @@
 }
 
 .nav-link--active {
-  color: var(--color-on-primary);
+  /* Use white text on amber pill for stronger contrast */
+  color: var(--color-primary-strong);
   position: relative;
+  z-index: 1; /* ensure text/icon sit above the pill background */
+}
+
+/* Make the active nav icon appear light on the amber pill */
+.nav-link--active .nav-link__icon {
+  filter: brightness(0) invert(1);
 }
 
 /* Background drop animation for active menu item */
@@ -120,10 +127,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(244, 184, 96, 0.24);
+  /* Match mobile active pill color: warm amber gradient */
+  background: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    #f8d078 60%
+  );
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 0.75rem rgba(244, 184, 96, 0.2);
   animation: background-drop-bounce 1.5s ease-out;
+  z-index: -1; /* place pill behind the link content */
 }
 
 @media (prefers-color-scheme: dark) {
