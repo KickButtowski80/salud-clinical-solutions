@@ -5,6 +5,7 @@
 @import url('./header.css');
 @import url('./desktop-nav.css');
 @import url('./mobile-nav.css');
+@import url('./leadership.css');
 
 /* TEMP: sections for IntersectionObserver testing (Issue #9) */
 .section-test {
