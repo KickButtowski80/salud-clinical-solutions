@@ -1,5 +1,5 @@
 export function initNavIntersectionObserver() {
-  const sectionIds = ['home', 'services', 'rachtan', 'contact'];
+  const sectionIds = ['home', 'services', 'about-us', 'contact'];
 
   const sections = sectionIds
     .map((id) => document.getElementById(id))
