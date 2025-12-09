@@ -95,6 +95,31 @@
   color: rgba(148, 163, 184, 0.9);
 }
 
+.staff-card-back-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.staff-card-thumb {
+  width: 5.75rem;
+  height: 5.75rem;
+  border-radius: 999px;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.6);
+}
+
+.staff-card-name-back {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.staff-card-role-back {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
 .staff-card-front {
   transform: rotateY(0deg);
 }
