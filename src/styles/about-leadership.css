@@ -395,12 +395,9 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .staff-card-inner {
-    transition: none;
-    transform: none !important;
-  }
-
+  .staff-card-inner,
   .staff-card-toggle:checked + .staff-card-inner {
+    transition: none;
     transform: none;
   }
 }
