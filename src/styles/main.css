@@ -15,18 +15,6 @@
   gap: 1rem;
 }
 
-.section-test--short {
-  min-height: 55vh;
-}
-
-.section-test--medium {
-  min-height: 90vh;
-}
-
-.section-test--tall {
-  min-height: 130vh;
-}
-
 .skip-link {
   position: absolute;
   left: -9999px;
