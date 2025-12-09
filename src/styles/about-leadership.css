@@ -1,6 +1,6 @@
 .about {
   gap: 2.5rem;
-  line-height: 1.7;
+  line-height: 1.9;
 }
 
 .about-card {
@@ -21,8 +21,34 @@
   border-bottom: 1px solid rgba(148, 163, 184, 0.15);
 }
 
+/* About intro paragraph text treatment */
+.about-body {
+  text-justify: inter-word;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
 .about-title {
   margin-bottom: 0.75rem;
+}
+
+/* Make Learn Us title spans explicit so they never both show */
+.about-title .block.md-hidden {
+  display: block;
+}
+
+.about-title .hidden.md-block {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .about-title .block.md-hidden {
+    display: none;
+  }
+
+  .about-title .hidden.md-block {
+    display: block;
+  }
 }
 
 
@@ -85,8 +111,11 @@
 }
 
 .leadership-subtitle {
-  line-height: 1.8;
+  line-height: 1.9;
   max-width: 46rem;
+  text-justify: inter-word;
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 
@@ -117,6 +146,14 @@
 
   .leadership-media-caption {
     display: none;
+  }
+}
+
+/* Desktop text justification for smoother edges on wider columns */
+@media (min-width: 768px) {
+  .about-body,
+  .leadership-subtitle {
+    text-align: justify;
   }
 }
 
