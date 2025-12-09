@@ -90,8 +90,15 @@
 }
 
 .leadership-subtitle {
-  font-size: var(--font-size-sm);
-  max-width: 42rem;
+  font-size: var(--font-size-base);
+  line-height: 1.8;
+  max-width: 46rem;
+}
+
+@media (min-width: 1024px) {
+  .leadership-subtitle {
+    font-size: var(--font-size-lg);
+  }
 }
 
 @media (max-width: 768px) {
