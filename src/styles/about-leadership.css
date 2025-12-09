@@ -43,7 +43,7 @@
 
 .leadership-header-media {
   border-radius: 0.85rem;
-  padding: 1rem;
+  padding: 0;
   background:
     radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 60%),
     radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.14), transparent 60%),
@@ -82,6 +82,7 @@
 .leadership-media-caption {
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
+  margin: 0.5rem 0.75rem 0.75rem;
 }
 
 .leadership-title {
@@ -109,10 +110,21 @@
   .leadership-header-media {
     align-items: center;
     text-align: center;
+    background: none;
+    border-radius: 0;
+  }
+
+  .leadership-header-media-img {
+    width: 100%;
+    min-height: 12rem;
+    max-height: 18rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.75rem;
   }
 
   .leadership-media-caption {
-    max-width: 18rem;
+    display: none;
   }
 }
 
