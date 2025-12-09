@@ -1,5 +1,6 @@
 .about {
   gap: 2.5rem;
+  line-height: 1.7;
 }
 
 .about-card {
@@ -21,14 +22,9 @@
 }
 
 .about-title {
-  font-size: 2rem;
   margin-bottom: 0.75rem;
 }
 
-.about-body {
-  font-size: 1rem;
-  line-height: 1.7;
-}
 
 .leadership {
   gap: 1.75rem;
@@ -80,27 +76,19 @@
 }
 
 .leadership-media-caption {
-  font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
   margin: 0.5rem 0.75rem 0.75rem;
 }
 
 .leadership-title {
-  font-size: var(--font-size-2xl);
   margin-bottom: 0.25rem;
 }
 
 .leadership-subtitle {
-  font-size: var(--font-size-base);
   line-height: 1.8;
   max-width: 46rem;
 }
 
-@media (min-width: 1024px) {
-  .leadership-subtitle {
-    font-size: var(--font-size-lg);
-  }
-}
 
 @media (max-width: 768px) {
   .leadership-header-layout {
@@ -206,12 +194,10 @@
 }
 
 .staff-card-name-back {
-  font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
 }
 
 .staff-card-role-back {
-  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
 }
 
@@ -268,16 +254,11 @@
 }
 
 .staff-card-name {
-  font-size: 1.05rem;
   margin-top: 0.75rem;
 }
 
-.staff-card-role {
-  font-size: 0.9rem;
-}
 
 .staff-card-bio {
-  font-size: var(--font-size-base);
   line-height: 1.7;
 }
 
@@ -316,10 +297,6 @@
   .staff-card-photo {
     height: 5rem;
     aspect-ratio: auto;
-  }
-
-  .staff-card-bio {
-    font-size: 0.9rem;
   }
 }
 
