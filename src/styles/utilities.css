@@ -111,6 +111,12 @@
 .hidden { display: none; }
 .block { display: block; }
 
+/* Composed responsive display helpers */
+@media (min-width: 768px) {
+  /* When both .hidden and .md-block are present, show on md+ */
+  .hidden.md-block { display: block; }
+}
+
 /* Gap utilities (override default gap when combined with .grid/.flex) */
 .gap-2 { gap: var(--space-2); }
 .gap-4 { gap: var(--space-4); }
