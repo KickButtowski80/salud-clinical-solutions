@@ -95,6 +95,10 @@
     grid-template-columns: 1fr;
   }
 
+  .leadership-header {
+    text-align: center;
+  }
+
   .leadership-header-media {
     align-items: center;
     text-align: center;
