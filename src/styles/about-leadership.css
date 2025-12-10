@@ -277,13 +277,14 @@
 
 /* Preview text (front card) */
 .staff-card-preview {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  min-height: 6rem; /* reserve space ~3 lines at line-height 1.8 */
   font-size: clamp(0.9rem, 0.5vw + 0.85rem, 1.05rem);
   color: rgba(226, 232, 240, 0.9);
   line-height: 1.8;
+  display: -webkit-box;
 }
 
 /* CTA (front card) */
