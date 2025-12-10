@@ -1,48 +1,40 @@
-<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-  <!-- 
-    Scroll-to-top icon: Heartbeat wave with arrow emerging from center
-    Animation: wave draws from left, arrow appears in middle, wave completes to right
-  -->
-  
-  <!-- Left side of wave (draws first) -->
-  <path
-    class="scroll-top__wave-left"
-    d="M4 28 L9 28 L11 32 L14 24 L17 32 L20 28 L24 28"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="3"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
-  
-  <!-- Arrow stem rising from center (appears after left wave) -->
-  <path
-    class="scroll-top__stem"
-    d="M24 28 L24 14"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="3"
-    stroke-linecap="round"
-  />
-  
-  <!-- Arrow head (appears with stem) -->
+  <svg viewBox="0 0 48 48" class="scroll-top__svg" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fallback stroke so the icon is visible when the SVG is opened
+       standalone (e.g. in an editor). The site CSS still overrides
+       these colors via .scroll-top__arrow / .scroll-top__stem. -->
+  <!-- Arrow (always visible; page CSS can override this stroke color) -->
   <path
     class="scroll-top__arrow"
-    d="M18 20 L24 12 L30 20"
+    d="M20 24 L24 10 L28 24"
     fill="none"
-    stroke="currentColor"
-    stroke-width="3"
+    stroke="black"
+    stroke-width="3.5"
     stroke-linecap="round"
     stroke-linejoin="round"
   />
-  
-  <!-- Right side of wave (draws last, completing the wave) -->
   <path
-    class="scroll-top__wave-right"
-    d="M24 28 L28 28 L31 32 L34 24 L37 32 L39 28 L44 28"
+    class="scroll-top__stem"
+    d="M24 12 L24 34"
     fill="none"
-    stroke="currentColor"
-    stroke-width="3"
+    stroke="black"
+    stroke-width="3.5"
+    stroke-linecap="round"
+  />
+  <!-- Wave pulse (goes through arrow peak, slightly more wavy) -->
+  <path
+    class="scroll-top__pulse"
+    d="M4 30
+       Q8 28, 10 36
+       Q12 40, 14 26
+       Q16 14, 18 16
+       L24 8
+       L30 16
+       Q32 14, 34 26
+       Q36 40, 38 36
+       Q40 28, 44 30"
+    fill="none"
+    stroke="black"
+    stroke-width="2.5"
     stroke-linecap="round"
     stroke-linejoin="round"
   />
