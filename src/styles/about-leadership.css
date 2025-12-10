@@ -299,7 +299,7 @@
   overflow: hidden;
   font-size: var(--font-size-sm);
   color: rgba(226, 232, 240, 0.9);
-  line-height: 1.8;
+  line-height: 2;
 }
 
 /* CTA (front card) */
