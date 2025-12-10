@@ -46,7 +46,10 @@
 
         <!-- Back Face -->
         <div class="staff-card-face staff-card-back">
-          <label for="staff-igal" class="staff-card-close" aria-label="Close details">&times;</label>
+          <!-- Visual close affordance; clicking anywhere on the card (label)
+               still toggles the checkbox. This avoids multiple labels
+               being associated with the same control. -->
+          <span class="staff-card-close" aria-hidden="true">&times;</span>
 
           <div class="staff-card-header">
             <img src="https://placehold.co/96x96/1e40af/ffffff?text=IT" alt="" class="staff-card-thumb"
@@ -102,7 +105,8 @@
 
         <!-- Back Face -->
         <div class="staff-card-face staff-card-back">
-          <label for="staff-sasha" class="staff-card-close" aria-label="Close details">&times;</label>
+          <!-- Visual close affordance; the outer label handles the toggle. -->
+          <span class="staff-card-close" aria-hidden="true">&times;</span>
 
           <div class="staff-card-header">
             <img src="https://placehold.co/96x96/0369a1/ffffff?text=SG" alt="" class="staff-card-thumb"
@@ -158,7 +162,8 @@
 
         <!-- Back Face -->
         <div class="staff-card-face staff-card-back">
-          <label for="staff-bettina" class="staff-card-close" aria-label="Close details">&times;</label>
+          <!-- Visual close affordance; the outer label handles the toggle. -->
+          <span class="staff-card-close" aria-hidden="true">&times;</span>
 
           <div class="staff-card-header">
             <img src="https://placehold.co/96x96/0f766e/ffffff?text=BR" alt="" class="staff-card-thumb"
