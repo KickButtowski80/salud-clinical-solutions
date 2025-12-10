@@ -1,0 +1,18 @@
+<!-- Scroll-to-top button component.
+     - data-scroll-top is used as a JS hook so scroll-to-top.js can
+       find and wire this button without relying on a global id or
+       mixing behavior into visual classes.
+     - The icon SVG is included inline (via <include>) so the internal
+       paths (.scroll-top__arrow / .scroll-top__pulse, etc.) can be
+       styled and animated by the site's CSS.
+-->
+<button
+  type="button"
+  class="scroll-top"
+  data-scroll-top
+  aria-label="Scroll back to top"
+>
+  <span class="scroll-top__icon" aria-hidden="true">
+    <include src="./src/assets/images/scroll-top-icon.svg"></include>
+  </span>
+</button>
