@@ -1,0 +1,49 @@
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <!-- 
+    Scroll-to-top icon: Heartbeat wave with arrow emerging from center
+    Animation: wave draws from left, arrow appears in middle, wave completes to right
+  -->
+  
+  <!-- Left side of wave (draws first) -->
+  <path
+    class="scroll-top__wave-left"
+    d="M4 28 L9 28 L11 32 L14 24 L17 32 L20 28 L24 28"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  
+  <!-- Arrow stem rising from center (appears after left wave) -->
+  <path
+    class="scroll-top__stem"
+    d="M24 28 L24 14"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+  
+  <!-- Arrow head (appears with stem) -->
+  <path
+    class="scroll-top__arrow"
+    d="M18 20 L24 12 L30 20"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  
+  <!-- Right side of wave (draws last, completing the wave) -->
+  <path
+    class="scroll-top__wave-right"
+    d="M24 28 L28 28 L31 32 L34 24 L37 32 L39 28 L44 28"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

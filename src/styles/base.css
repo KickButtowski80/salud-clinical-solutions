@@ -11,3 +11,118 @@ body {
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
 }
+
+/* --------------------------------------------------------------------------
+   Scroll-to-top button (Issue #20)
+   -------------------------------------------------------------------------- */
+
+.scroll-top {
+  position: fixed;
+  right: var(--space-6);
+  bottom: var(--space-16);
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-accent-strong);
+  background:
+    radial-gradient(circle at top, rgba(244, 184, 96, 0.35), transparent 60%),
+    radial-gradient(circle at bottom, rgba(0, 136, 136, 0.6), transparent 65%),
+    var(--color-primary-strong);
+  color: var(--color-on-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  box-shadow:
+    0 12px 30px rgba(15, 23, 42, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.9);
+  transition:
+    opacity 0.25s ease-out,
+    transform 0.25s ease-out,
+    box-shadow 0.25s ease-out,
+    border-color 0.25s ease-out,
+    background 0.25s ease-out;
+  z-index: var(--z-layer-fixed);
+}
+
+.scroll-top__icon {
+  display: inline-flex;
+}
+
+.scroll-top__svg {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.scroll-top--visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-top:hover,
+.scroll-top:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.65),
+    0 0 32px rgba(244, 184, 96, 0.4);
+  background:
+    radial-gradient(circle at top, rgba(244, 184, 96, 0.5), transparent 60%),
+    radial-gradient(circle at bottom, rgba(0, 153, 153, 0.7), transparent 65%),
+    var(--color-primary);
+}
+
+.scroll-top:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  .scroll-top {
+    width: 6rem;
+    height: 6rem;
+    right: var(--space-4);
+    bottom: var(--space-12);
+  }
+
+  .scroll-top__svg {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+/* Arrow always visible in accent color */
+.scroll-top__arrow,
+.scroll-top__stem {
+  stroke: var(--color-accent);
+}
+
+/* Wave in primary color, slightly transparent */
+.scroll-top__pulse {
+  stroke: var(--color-on-primary);
+  opacity: 0.7;
+}
+
+/* Wave animation: flows through infinitely */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-top__pulse {
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+    animation: wave-flow 2s ease-in-out infinite;
+  }
+}
+
+@keyframes wave-flow {
+  0% {
+    stroke-dashoffset: 150;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -150;
+  }
+}
