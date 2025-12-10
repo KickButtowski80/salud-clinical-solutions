@@ -1,5 +1,23 @@
 // DEBUG: Visual overlay for IntersectionObserver root margin
+//
+// This helper draws three fixed bands over the viewport so you can see
+// exactly where the IntersectionObserver "active" area is, based on the
+// current `rootMargin` configuration used below.
+//
+// With `rootMargin: '-33% 0px -33% 0px'` the browser shrinks the effective
+// root rectangle by 33% from the top and 33% from the bottom. That leaves
+// roughly the middle third of the viewport as the zone where intersections
+// count toward `entry.isIntersecting` and `intersectionRatio`.
+//
+// The overlay is **for local visual debugging only** and is never created
+// automatically in production. Instead, we expose a helper on `window`
+// (see `initNavIntersectionObserver`) so you can opt in from DevTools:
+//   `window.__showNavIoDebug && window.__showNavIoDebug();`
+//
+// Red bands = ignored areas (top / bottom).  
+// Green band = active zone where sections can become "current".
 function createDebugOverlay() {
+  // Keep this description in sync with the observer options below.
   // Root margin is: -33% 0px -33% 0px (top, right, bottom, left)
   // This means the "active zone" is roughly the middle third of the viewport
   const overlay = document.createElement('div');
@@ -56,9 +74,12 @@ function createDebugOverlay() {
 }
 
 export function initNavIntersectionObserver() {
-  // DEBUG: call this manually in the console if you want to see the zones:
+  // DEBUG hook: from the browser console you can call
   //   window.__showNavIoDebug && window.__showNavIoDebug();
-  // To keep bundle clean, we expose a helper instead of auto-running it.
+  // to draw the red/green overlay that visualizes the current
+  // IntersectionObserver root margin (see `createDebugOverlay`).
+  // We intentionally *do not* run this by default so the nav behaves
+  // normally unless you're explicitly debugging.
   // eslint-disable-next-line no-underscore-dangle
   window.__showNavIoDebug = createDebugOverlay;
 
