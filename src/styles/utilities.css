@@ -33,6 +33,8 @@
 .text-3xl { font-size: var(--font-size-3xl); }
 .text-4xl { font-size: var(--font-size-4xl); }
 
+.text-center { text-align: center; }
+
 .font-medium { font-weight: var(--font-weight-medium); }
 .font-semibold { font-weight: var(--font-weight-semibold); }
 .font-bold { font-weight: var(--font-weight-bold); }
@@ -93,21 +95,25 @@
 .items-start { align-items: flex-start; }
 .items-end { align-items: flex-end; }
 
+/* Base display utilities (must come before responsive overrides) */
+.hidden { display: none; }
+.block { display: block; }
+
 @media (min-width: 768px) {
   .md-block { display: block; }
   .md-hidden { display: none; }
   .md-flex { display: flex; }
+  /* When both .hidden and .md-block are present, show on md+ */
+  .hidden.md-block { display: block; }
 }
 
 @media (min-width: 1024px) {
   .lg-block { display: block; }
   .lg-hidden { display: none; }
   .lg-flex { display: flex; }
+  /* When both .hidden and .lg-block are present, show on lg+ */
+  .hidden.lg-block { display: block; }
 }
-
-/* Base display utilities */
-.hidden { display: none; }
-.block { display: block; }
 
 /* Gap utilities (override default gap when combined with .grid/.flex) */
 .gap-2 { gap: var(--space-2); }

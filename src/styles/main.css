@@ -5,10 +5,10 @@
 @import url('./header.css');
 @import url('./desktop-nav.css');
 @import url('./mobile-nav.css');
+@import url('./about-leadership.css');
 
-/* TEMP: taller sections for IntersectionObserver testing (Issue #9) */
+/* TEMP: sections for IntersectionObserver testing (Issue #9) */
 .section-test {
-  min-height: 90vh;
   padding: 4rem 1.5rem;
   display: flex;
   flex-direction: column;
