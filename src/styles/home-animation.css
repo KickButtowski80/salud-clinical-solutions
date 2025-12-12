@@ -72,40 +72,6 @@
   stroke-opacity: 0;
 }
 
-/* Handshake Logo Overlay */
-.handshake-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  /* Center the container */
-  transform: translate(-50%, -50%);
-  width: 60%; /* Logo slightly larger than map's central area */
-  z-index: var(--z-layer-raised);
-}
-
-.handshake-u {
-  width: 100%;
-  height: auto;
-  overflow: visible;
-  /* Optional Heartbeat Animation (Step 3) */
-  transform-origin: center;
-  animation: uHeartbeat 5s ease-in-out infinite;
-  animation-delay: 2s; /* Start after entrance */
-}
-
-/* Hand Colors */
-.hand-left {
-  color: var(--color-primary-strong); /* Darker Teal */
-  animation: handLeftEntrance 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  transform-origin: center;
-}
-
- .hand-right {
-  color: var(--color-accent); /* Amber for partnership contrast */
-  animation: handRightEntrance 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  transform-origin: center;
- }
-
 /* Network Flow Animation (Step 2) */
 /* Staggered pulses for lines */
 .connection-line:nth-child(1) { animation: pulseLine 3s ease-in-out infinite 2.0s; }
@@ -143,40 +109,6 @@
   }
 }
 
-@keyframes handLeftEntrance {
-  0% {
-    opacity: 0;
-    transform: translateX(-12px) rotate(-5deg);
-  }
-  60% {
-    opacity: 1;
-    transform: translateX(0) rotate(0);
-  }
-  80% {
-    transform: scale(1.02); /* Gentle handshake squeeze */
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes handRightEntrance {
-  0% {
-    opacity: 0;
-    transform: translateX(12px) rotate(5deg);
-  }
-  60% {
-    opacity: 1;
-    transform: translateX(0) rotate(0);
-  }
-  80% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 @keyframes pulseLine {
   0% {
     stroke-opacity: 0;
@@ -196,25 +128,12 @@
   }
 }
 
-@keyframes uHeartbeat {
-  0%, 90%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 0 rgba(0,0,0,0));
-  }
-  95% {
-    transform: scale(1.01);
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-  }
-}
-
 /* Reduced Motion Preference */
 @media (prefers-reduced-motion: reduce) {
+  .ca-map path,
   .node,
   .hub-node,
-  .hand-left,
-  .hand-right,
-  .connection-line,
-  .handshake-u {
+  .connection-line {
     animation: none;
     opacity: 1;
     transform: none;
