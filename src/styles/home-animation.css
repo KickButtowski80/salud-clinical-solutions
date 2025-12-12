@@ -1,0 +1,238 @@
+/* Hero Visual & Animation Styles */
+
+.hero-visual {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  /* Aspect ratio roughly matches the CA map SVG viewBox */
+  aspect-ratio: 2/3; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ca-map {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  /* Ensure it sits behind the handshake */
+  z-index: var(--z-layer-base);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.16));
+}
+
+.ca-silhouette path {
+  fill: rgba(255, 255, 255, 0.1);
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 0.5;
+  vector-effect: non-scaling-stroke;
+  /* Animation 1: Entrance */
+  opacity: 0;
+  transform-origin: center;
+  animation: mapEntrance 0.8s ease-out forwards;
+}
+
+.ca-map path {
+  fill: var(--color-on-primary) !important;
+  fill-opacity: 0.12;
+  stroke: var(--color-on-primary) !important;
+  stroke-opacity: 0.55;
+  stroke-width: 0.75 !important;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  /* Animation 1: Entrance */
+  opacity: 0;
+  transform-origin: center;
+  animation: mapEntrance 0.8s ease-out forwards;
+}
+
+/* Network Nodes */
+.node {
+  fill: var(--color-accent);
+  opacity: 0;
+  animation: fadeInNodes 1s ease-out 0.8s forwards;
+}
+
+.hub-node {
+  fill: var(--color-primary-strong);
+  stroke: var(--color-primary);
+  stroke-width: 0.5;
+  opacity: 0;
+  animation: fadeInNodes 1s ease-out 0.8s forwards, pulseHub 3s ease-in-out infinite 2s;
+}
+
+/* Connection Lines */
+.connection-line {
+  stroke: var(--color-accent);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-opacity: 0;
+}
+
+/* Handshake Logo Overlay */
+.handshake-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Center the container */
+  transform: translate(-50%, -50%);
+  width: 60%; /* Logo slightly larger than map's central area */
+  z-index: var(--z-layer-raised);
+}
+
+.handshake-u {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  /* Optional Heartbeat Animation (Step 3) */
+  transform-origin: center;
+  animation: uHeartbeat 5s ease-in-out infinite;
+  animation-delay: 2s; /* Start after entrance */
+}
+
+/* Hand Colors */
+.hand-left {
+  color: var(--color-primary-strong); /* Darker Teal */
+}
+.hand-right {
+  color: var(--color-accent); /* Amber for partnership contrast */
+}
+
+/* Hand Entrance Animations (Step 1) */
+.hand-left {
+  animation: handLeftEntrance 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform-origin: center;
+}
+
+.hand-right {
+  animation: handRightEntrance 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform-origin: center;
+}
+
+/* Network Flow Animation (Step 2) */
+/* Staggered pulses for lines */
+.connection-line:nth-child(1) { animation: pulseLine 3s ease-in-out infinite 2.0s; }
+.connection-line:nth-child(2) { animation: pulseLine 3s ease-in-out infinite 2.4s; }
+.connection-line:nth-child(3) { animation: pulseLine 3s ease-in-out infinite 2.8s; }
+.connection-line:nth-child(4) { animation: pulseLine 3s ease-in-out infinite 3.2s; }
+.connection-line:nth-child(5) { animation: pulseLine 3s ease-in-out infinite 3.6s; }
+.connection-line:nth-child(6) { animation: pulseLine 3s ease-in-out infinite 4.0s; }
+
+/* Keyframes */
+
+@keyframes mapEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInNodes {
+  to { opacity: 0.6; }
+}
+
+@keyframes pulseHub {
+  0%, 100% { 
+    opacity: 0.8; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.2);
+  }
+}
+
+@keyframes handLeftEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(-12px) rotate(-5deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(0) rotate(0);
+  }
+  80% {
+    transform: scale(1.02); /* Gentle handshake squeeze */
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes handRightEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(12px) rotate(5deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(0) rotate(0);
+  }
+  80% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseLine {
+  0% {
+    stroke-opacity: 0;
+    stroke-width: 1;
+  }
+  20% {
+    stroke-opacity: 0.8;
+    stroke-width: 2;
+    filter: drop-shadow(0 0 2px var(--color-accent));
+  }
+  40% {
+    stroke-opacity: 0;
+    stroke-width: 1;
+  }
+  100% {
+    stroke-opacity: 0;
+  }
+}
+
+@keyframes uHeartbeat {
+  0%, 90%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(0,0,0,0));
+  }
+  95% {
+    transform: scale(1.01);
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+  }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  .ca-silhouette path,
+  .node,
+  .hub-node,
+  .hand-left,
+  .hand-right,
+  .connection-line,
+  .handshake-u {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  
+  .connection-line {
+    stroke-opacity: 0.2;
+  }
+}
+
+/* Responsive Adjustments */
+@media (min-width: 769px) {
+  .hero-visual {
+    max-width: 480px;
+  }
+}

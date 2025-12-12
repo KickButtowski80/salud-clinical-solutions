@@ -3,6 +3,7 @@
 @import "./utilities.css";
 @import "./base.css";
 @import "./home.css";
+@import "./home-animation.css";
 @import url('./header.css');
 @import url('./desktop-nav.css');
 @import url('./mobile-nav.css');
