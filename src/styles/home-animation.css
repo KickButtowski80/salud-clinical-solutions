@@ -18,7 +18,7 @@
   overflow: visible;
   /* Ensure it sits behind the handshake */
   z-index: var(--z-layer-base);
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.16));
+  filter: drop-shadow(0 10px 20px color-mix(in srgb, var(--color-text-primary) 18%, transparent));
 }
 
 .ca-silhouette path {
@@ -39,11 +39,22 @@
   stroke-opacity: 0.55;
   stroke-width: 0.75 !important;
   stroke-linejoin: round;
+  cursor: pointer;
+  transition: fill-opacity 160ms ease, stroke-opacity 160ms ease, stroke-width 160ms ease;
   vector-effect: non-scaling-stroke;
   /* Animation 1: Entrance */
   opacity: 0;
   transform-origin: center;
   animation: mapEntrance 0.8s ease-out forwards;
+}
+
+.ca-map path:hover,
+.ca-map path:focus-visible,
+.ca-map path.is-active {
+  stroke: var(--color-accent) !important;
+  stroke-opacity: 0.95;
+  stroke-width: 1.25 !important;
+  fill-opacity: 0.18;
 }
 
 /* Network Nodes */
