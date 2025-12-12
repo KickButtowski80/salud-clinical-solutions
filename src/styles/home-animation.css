@@ -21,17 +21,6 @@
   filter: drop-shadow(0 10px 20px color-mix(in srgb, var(--color-text-primary) 18%, transparent));
 }
 
-.ca-silhouette path {
-  fill: rgba(255, 255, 255, 0.1);
-  stroke: rgba(255, 255, 255, 0.3);
-  stroke-width: 0.5;
-  vector-effect: non-scaling-stroke;
-  /* Animation 1: Entrance */
-  opacity: 0;
-  transform-origin: center;
-  animation: mapEntrance 0.8s ease-out forwards;
-}
-
 .ca-map path {
   fill: var(--color-on-primary) !important;
   fill-opacity: 0.12;
@@ -40,7 +29,8 @@
   stroke-width: 0.75 !important;
   stroke-linejoin: round;
   cursor: pointer;
-  transition: fill-opacity 160ms ease, stroke-opacity 160ms ease, stroke-width 160ms ease;
+  transition: fill-opacity 160ms ease, stroke-opacity 160ms ease, stroke-width 160ms ease, transform 180ms ease, filter 180ms ease;
+  will-change: transform, filter;
   vector-effect: non-scaling-stroke;
   /* Animation 1: Entrance */
   opacity: 0;
@@ -54,7 +44,9 @@
   stroke: var(--color-accent) !important;
   stroke-opacity: 0.95;
   stroke-width: 1.25 !important;
-  fill-opacity: 0.18;
+  fill-opacity: 0.24;
+  filter: drop-shadow(0 6px 12px color-mix(in srgb, var(--color-text-primary) 22%, transparent));
+  transform: translateY(-2px) scale(1.04);
 }
 
 /* Network Nodes */
@@ -104,21 +96,15 @@
 /* Hand Colors */
 .hand-left {
   color: var(--color-primary-strong); /* Darker Teal */
-}
-.hand-right {
-  color: var(--color-accent); /* Amber for partnership contrast */
-}
-
-/* Hand Entrance Animations (Step 1) */
-.hand-left {
   animation: handLeftEntrance 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   transform-origin: center;
 }
 
-.hand-right {
+ .hand-right {
+  color: var(--color-accent); /* Amber for partnership contrast */
   animation: handRightEntrance 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   transform-origin: center;
-}
+ }
 
 /* Network Flow Animation (Step 2) */
 /* Staggered pulses for lines */
@@ -223,7 +209,6 @@
 
 /* Reduced Motion Preference */
 @media (prefers-reduced-motion: reduce) {
-  .ca-silhouette path,
   .node,
   .hub-node,
   .hand-left,
