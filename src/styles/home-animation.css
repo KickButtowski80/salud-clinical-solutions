@@ -252,6 +252,58 @@
     --hub-label-size: 2.9px;
     --hub-label-stroke-width: 1.6px;
   }
+
+  /* Mobile Chrome SVG flicker mitigation:
+     - Avoid expensive SVG filters during motion (drop-shadow is a common culprit)
+     - Avoid animating transforms on dozens of county paths (forces raster re-compose)
+     - Avoid will-change on SVG paths (can worsen GPU tiling flicker on mobile)
+  */
+  .ca-map {
+    filter: none;
+  }
+
+  .hero-visual .ca-map path {
+    will-change: auto;
+    transition: fill-opacity 160ms ease, stroke-opacity 160ms ease, stroke-width 160ms ease;
+    animation:
+      mapEntranceMobile 0.7s ease-out forwards,
+      disableHoverAtEnd 0.01s linear 19s forwards;
+  }
+
+  .hero-visual .ca-map path:hover,
+  .hero-visual .ca-map path:focus-visible,
+  .hero-visual .ca-map path.is-active {
+    transform: none;
+    filter: none;
+  }
+
+  .hero-visual .ca-map .network-route,
+  .hero-visual .ca-map .network-logo,
+  .hero-visual .ca-map .hub--ring,
+  .hero-visual .ca-map .hub--major,
+  .hero-visual .ca-map .hub--minor,
+  .hero-visual .ca-map .hub-label,
+  .hero-visual .ca-map .network-final-logo,
+  .hero-visual .ca-map .network-final-badge,
+  .hero-visual .ca-map .network-final-badge-haze,
+  .hero-visual .ca-map .network-final-badge-border {
+    filter: none;
+  }
+
+  .hero-visual .ca-map .hub--ring,
+  .hero-visual .ca-map .hub--major,
+  .hero-visual .ca-map .hub--minor {
+    animation: none;
+  }
+}
+
+@keyframes mapEntranceMobile {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Keyframes */
