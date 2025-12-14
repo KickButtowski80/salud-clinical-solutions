@@ -21,12 +21,12 @@
   filter: drop-shadow(0 10px 20px color-mix(in srgb, var(--color-text-primary) 18%, transparent));
 }
 
-.ca-map path {
-  fill: var(--color-on-primary) !important;
+.hero-visual .ca-map path {
+  fill: var(--color-on-primary);
   fill-opacity: 0.12;
-  stroke: var(--color-on-primary) !important;
+  stroke: var(--color-on-primary);
   stroke-opacity: 0.55;
-  stroke-width: 0.75 !important;
+  stroke-width: 0.75;
   stroke-linejoin: round;
   cursor: pointer;
   transition: fill-opacity 160ms ease, stroke-opacity 160ms ease, stroke-width 160ms ease, transform 180ms ease, filter 180ms ease;
@@ -38,12 +38,12 @@
   animation: mapEntrance 0.8s ease-out forwards;
 }
 
-.ca-map path:hover,
-.ca-map path:focus-visible,
-.ca-map path.is-active {
-  stroke: var(--color-accent) !important;
+.hero-visual .ca-map path:hover,
+.hero-visual .ca-map path:focus-visible,
+.hero-visual .ca-map path.is-active {
+  stroke: var(--color-accent);
   stroke-opacity: 0.95;
-  stroke-width: 1.25 !important;
+  stroke-width: 1.25;
   fill-opacity: 0.24;
   filter: drop-shadow(0 6px 12px color-mix(in srgb, var(--color-text-primary) 22%, transparent));
   transform: translateY(-2px) scale(1.04);
