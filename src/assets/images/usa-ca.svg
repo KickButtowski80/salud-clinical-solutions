@@ -403,4 +403,16 @@
       <text class="hub-label" x="58" y="133">El Centro</text>
     </g>
   </g>
+
+  <g id="network-final-logo" class="network-final-logo" opacity="0" transform="translate(42.71 71.75)">
+    <g class="network-final-logo__inner" transform="scale(0.6)">
+      <image
+        class="network-logo network-logo--final"
+        x="-38" y="-38" width="76" height="76"
+        href="./src/assets/images/active-logo-removebg-preview.webp"
+        xlink:href="./src/assets/images/active-logo-removebg-preview.webp" />
+      <animateTransform attributeName="transform" type="scale" begin="travelMotion.begin+18s" dur="0.6s" values="0.6;1" fill="freeze" />
+    </g>
+    <animate attributeName="opacity" begin="travelMotion.begin+18s" dur="0.22s" to="1" fill="freeze" />
+  </g>
 </svg>

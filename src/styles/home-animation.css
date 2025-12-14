@@ -11,6 +11,9 @@
   --hub-label-stroke: rgba(255, 255, 255, 0.92);
   --hub-label-size: 3.4px;
   --hub-label-stroke-width: 1.8px;
+  --travel-start: 1s;
+  --travel-duration: 18s;
+  --travel-end: calc(var(--travel-start) + var(--travel-duration));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -126,7 +129,8 @@
   opacity: 0;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: routeDraw 1.6s ease-out 1.0s forwards;
+  animation:
+    routeDraw 1.6s ease-out 1.0s forwards;
 }
 
 .hero-visual .ca-map .network-travel {
@@ -141,7 +145,23 @@
 }
 
 .hero-visual .ca-map .network-logo--traveler {
-  opacity: 1;
+  opacity: 0;
+}
+
+.hero-visual .ca-map .network-final-logo {
+  pointer-events: none;
+  transform-origin: center;
+  filter:
+    drop-shadow(0 14px 34px rgba(15, 23, 42, 0.22))
+    drop-shadow(0 0 64px color-mix(in srgb, var(--hub-dot-fill) 22%, transparent));
+}
+
+.hero-visual .ca-map .network-logo--final {
+  filter:
+    drop-shadow(0 12px 26px rgba(15, 23, 42, 0.32))
+    drop-shadow(0 0 34px color-mix(in srgb, var(--hub-dot-fill) 62%, transparent))
+    drop-shadow(0 0 68px color-mix(in srgb, var(--hub-ring-stroke) 62%, transparent));
+  transform-origin: center;
 }
 
 .hero-visual .ca-map .network-logo--drop {
@@ -150,7 +170,9 @@
 
 .hero-visual .ca-map .hub-group {
   opacity: 0;
-  animation: fadeInHub 0.8s ease-out var(--d, 1s) forwards;
+  animation:
+    fadeInHub 0.8s ease-out var(--d, 1s) forwards,
+    hubsDim 0.8s ease-out var(--travel-end) forwards;
 }
 
 .hero-visual .ca-map .hub {
@@ -263,6 +285,12 @@
   to {
     opacity: 1;
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes hubsDim {
+  to {
+    opacity: 0.18;
   }
 }
 
