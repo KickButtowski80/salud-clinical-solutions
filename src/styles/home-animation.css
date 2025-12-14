@@ -149,15 +149,38 @@
   pointer-events: none;
   transform-origin: center;
   filter:
-    drop-shadow(0 14px 34px rgba(15, 23, 42, 0.22))
-    drop-shadow(0 0 64px color-mix(in srgb, var(--hub-dot-fill) 22%, transparent));
+    drop-shadow(0 18px 42px rgba(15, 23, 42, 0.45));
+}
+
+.hero-visual .ca-map .network-final-badge {
+  filter:
+    drop-shadow(0 22px 48px rgba(15, 23, 42, 0.45))
+    drop-shadow(0 0 26px rgba(56, 189, 248, 0.14))
+    drop-shadow(0 0 22px rgba(251, 191, 36, 0.10));
+}
+
+.hero-visual .ca-map .network-final-badge-highlight {
+  opacity: 0.85;
+}
+
+.hero-visual .ca-map .network-final-badge-haze {
+  filter:
+    drop-shadow(0 14px 32px rgba(15, 23, 42, 0.22))
+    drop-shadow(0 0 34px rgba(255, 255, 255, 0.10));
+}
+
+.hero-visual .ca-map .network-final-badge-inner {
+  opacity: 0.95;
+}
+
+.hero-visual .ca-map .network-final-badge-border {
+  filter: drop-shadow(0 12px 30px rgba(15, 23, 42, 0.32));
 }
 
 .hero-visual .ca-map .network-logo--final {
   filter:
-    drop-shadow(0 12px 26px rgba(15, 23, 42, 0.32))
-    drop-shadow(0 0 34px color-mix(in srgb, var(--hub-dot-fill) 62%, transparent))
-    drop-shadow(0 0 68px color-mix(in srgb, var(--hub-ring-stroke) 62%, transparent));
+    drop-shadow(0 8px 18px rgba(15, 23, 42, 0.28))
+    drop-shadow(0 0 16px color-mix(in srgb, var(--hub-dot-fill) 26%, transparent));
   transform-origin: center;
 }
 
