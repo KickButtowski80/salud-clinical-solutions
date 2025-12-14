@@ -330,19 +330,19 @@
         <animate attributeName="opacity" begin="travelMotion.begin+8.0s" dur="0.2s" to="1" fill="freeze" />
       </image>
       <image class="network-logo network-logo--drop" x="26.5" y="79.5" width="5" height="5" href="./src/assets/images/active-logo-removebg-preview.webp" xlink:href="./src/assets/images/active-logo-removebg-preview.webp" opacity="0">
-        <animate attributeName="opacity" begin="travelMotion.begin+9.2s" dur="0.2s" to="1" fill="freeze" />
+        <animate attributeName="opacity" begin="travelMotion.begin+10.2s" dur="0.2s" to="1" fill="freeze" />
       </image>
       <image class="network-logo network-logo--drop" x="25.5" y="91.5" width="5" height="5" href="./src/assets/images/active-logo-removebg-preview.webp" xlink:href="./src/assets/images/active-logo-removebg-preview.webp" opacity="0">
-        <animate attributeName="opacity" begin="travelMotion.begin+10.3s" dur="0.2s" to="1" fill="freeze" />
+        <animate attributeName="opacity" begin="travelMotion.begin+11.8s" dur="0.2s" to="1" fill="freeze" />
       </image>
       <image class="network-logo network-logo--drop" x="31.5" y="97.5" width="5" height="5" href="./src/assets/images/active-logo-removebg-preview.webp" xlink:href="./src/assets/images/active-logo-removebg-preview.webp" opacity="0">
-        <animate attributeName="opacity" begin="travelMotion.begin+11.1s" dur="0.2s" to="1" fill="freeze" />
+        <animate attributeName="opacity" begin="travelMotion.begin+13.0s" dur="0.2s" to="1" fill="freeze" />
       </image>
       <image class="network-logo network-logo--drop" x="39.5" y="115.5" width="5" height="5" href="./src/assets/images/active-logo-removebg-preview.webp" xlink:href="./src/assets/images/active-logo-removebg-preview.webp" opacity="0">
-        <animate attributeName="opacity" begin="travelMotion.begin+13.6s" dur="0.2s" to="1" fill="freeze" />
+        <animate attributeName="opacity" begin="travelMotion.begin+15.6s" dur="0.2s" to="1" fill="freeze" />
       </image>
       <image class="network-logo network-logo--drop" x="48.5" y="129.5" width="5" height="5" href="./src/assets/images/active-logo-removebg-preview.webp" xlink:href="./src/assets/images/active-logo-removebg-preview.webp" opacity="0">
-        <animate attributeName="opacity" begin="travelMotion.begin+16.0s" dur="0.2s" to="1" fill="freeze" />
+        <animate attributeName="opacity" begin="travelMotion.begin+17.4s" dur="0.2s" to="1" fill="freeze" />
       </image>
     </g>
   </g>
