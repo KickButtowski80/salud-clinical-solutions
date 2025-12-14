@@ -85,8 +85,9 @@
 
 .hero-map-replay {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: auto;
+  bottom: -3.5rem;
+  right: 6.75rem;
   z-index: 10;
   border: 1px solid rgba(255, 255, 255, 0.35);
   background: rgba(15, 23, 42, 0.35);
@@ -106,16 +107,6 @@
 .hero-map-replay:focus-visible {
   background: rgba(15, 23, 42, 0.48);
   filter: brightness(1.05);
-}
-
-@media (max-width: 768px) {
-  .hero-map-replay {
-    top: 0.6rem;
-    right: 0.6rem;
-    padding: 0.6rem 0.95rem;
-    min-height: 44px;
-    min-width: 104px;
-  }
 }
 
 @media (min-width: 1024px) {
