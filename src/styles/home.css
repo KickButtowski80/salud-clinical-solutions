@@ -16,6 +16,7 @@
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   margin-bottom: var(--space-6);
+  color: var(--color-on-primary);
 }
 
 .hero-subtitle {
@@ -23,6 +24,15 @@
   line-height: var(--line-height-relaxed);
   margin-bottom: var(--space-8);
   opacity: 0.9;
+  color: var(--color-on-primary);
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.12), transparent 55%),
+    rgba(15, 23, 42, 0.35);
+  padding: 1.25rem 1.25rem;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.35);
 }
 
 .hero-actions {
@@ -100,6 +110,10 @@
 
   .hero-header {
     margin: 0 auto;
+  }
+
+  .hero-subtitle {
+    padding: 1rem 1rem;
   }
 
   .hero-title {
