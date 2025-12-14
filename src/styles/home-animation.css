@@ -118,14 +118,14 @@
 .hero-visual .ca-map .network-route {
   fill: none;
   stroke: var(--hub-line-stroke);
-  stroke-width: 1.4;
+  stroke-width: 2.0;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
   filter: drop-shadow(0 0 10px var(--hub-line-glow));
   opacity: 0;
-  stroke-dasharray: 200;
-  stroke-dashoffset: 200;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
   animation: routeDraw 1.6s ease-out 1.0s forwards;
 }
 
