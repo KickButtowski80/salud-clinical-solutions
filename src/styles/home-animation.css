@@ -81,6 +81,58 @@
 .connection-line:nth-child(5) { animation: pulseLine 3s ease-in-out infinite 3.6s; }
 .connection-line:nth-child(6) { animation: pulseLine 3s ease-in-out infinite 4.0s; }
 
+/* Hub labels inside the SVG */
+.hero-visual .ca-map .network-hubs {
+  pointer-events: none;
+}
+
+.hero-visual .ca-map .hub-group {
+  opacity: 0;
+  animation: fadeInHub 0.8s ease-out var(--d, 1s) forwards;
+}
+
+.hero-visual .ca-map .hub {
+  vector-effect: non-scaling-stroke;
+}
+
+.hero-visual .ca-map .hub--major,
+.hero-visual .ca-map .hub--minor {
+  fill: var(--color-accent);
+  stroke: color-mix(in srgb, var(--color-on-primary) 55%, transparent);
+  stroke-width: 0.5;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-accent) 65%, transparent));
+}
+
+.hero-visual .ca-map .hub--minor {
+  fill: color-mix(in srgb, var(--color-accent) 75%, var(--color-on-primary));
+  opacity: 0.9;
+}
+
+.hero-visual .ca-map .hub--ring {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-opacity: 0.55;
+  stroke-width: 0.6;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hubRingPulse 2.8s ease-in-out infinite;
+}
+
+.hero-visual .ca-map .hub-label {
+  font-family: var(--font-family-sans);
+  font-size: 3.8px;
+  font-weight: 650;
+  fill: rgba(15, 23, 42, 0.95);
+  paint-order: stroke;
+  stroke: rgba(255, 255, 255, 0.92);
+  stroke-width: 2.0px;
+  stroke-linejoin: round;
+  opacity: 0.95;
+  filter:
+    drop-shadow(0 1px 0 rgba(15, 23, 42, 0.35))
+    drop-shadow(0 4px 10px rgba(15, 23, 42, 0.35));
+}
+
 /* Keyframes */
 
 @keyframes mapEntrance {
@@ -128,12 +180,31 @@
   }
 }
 
+@keyframes fadeInHub {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hubRingPulse {
+  0%, 100% {
+    stroke-opacity: 0.25;
+    transform: scale(0.92);
+  }
+  50% {
+    stroke-opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
 /* Reduced Motion Preference */
 @media (prefers-reduced-motion: reduce) {
   .ca-map path,
   .node,
   .hub-node,
-  .connection-line {
+  .connection-line,
+  .hub-group,
+  .hub--ring {
     animation: none;
     opacity: 1;
     transform: none;
