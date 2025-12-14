@@ -11,9 +11,6 @@
   --hub-label-stroke: rgba(255, 255, 255, 0.92);
   --hub-label-size: 3.4px;
   --hub-label-stroke-width: 1.8px;
-  --travel-start: 1s;
-  --travel-duration: 18s;
-  --travel-end: calc(var(--travel-start) + var(--travel-duration));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -170,9 +167,7 @@
 
 .hero-visual .ca-map .hub-group {
   opacity: 0;
-  animation:
-    fadeInHub 0.8s ease-out var(--d, 1s) forwards,
-    hubsDim 0.8s ease-out var(--travel-end) forwards;
+  animation: fadeInHub 0.8s ease-out var(--d, 1s) forwards;
 }
 
 .hero-visual .ca-map .hub {
@@ -285,12 +280,6 @@
   to {
     opacity: 1;
     stroke-dashoffset: 0;
-  }
-}
-
-@keyframes hubsDim {
-  to {
-    opacity: 0.18;
   }
 }
 

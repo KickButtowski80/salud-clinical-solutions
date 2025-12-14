@@ -79,6 +79,31 @@
   justify-content: center;
 }
 
+.hero-visual {
+  position: relative;
+}
+
+.hero-map-replay {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(15, 23, 42, 0.35);
+  color: var(--color-on-primary);
+  border-radius: 999px;
+  padding: 0.5rem 0.8rem;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: filter 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-map-replay:hover,
+.hero-map-replay:focus-visible {
+  background: rgba(15, 23, 42, 0.48);
+  filter: brightness(1.05);
+}
+
 @media (min-width: 1024px) {
   .hero {
     grid-template-columns: 1.2fr 1fr;

@@ -291,11 +291,12 @@
      id="Modoc"
      inkscape:connector-curvature="0" />
 
-  <g id="network-lines" class="network-lines">
+  <g id="network-lines" class="network-lines" opacity="1">
     <path
       id="network-route"
       class="network-route"
       d="M 11 22 L 13 30 L 19 58 L 28 52 L 24 74 L 33 82 L 32 94 L 38 100 L 46 118 L 55 132" />
+    <animate attributeName="opacity" begin="travelMotion.begin+18s" dur="0.6s" to="0.22" fill="freeze" />
   </g>
 
   <g id="network-travel" class="network-travel">
@@ -349,7 +350,9 @@
 
   <g
      id="network-hubs"
-     class="network-hubs">
+     class="network-hubs"
+     opacity="1">
+    <animate attributeName="opacity" begin="travelMotion.begin+18s" dur="0.6s" to="0.12" fill="freeze" />
     <g class="hub-group" style="--d: 0.1s">
       <circle class="hub hub--major" cx="38" cy="100" r="1.9" />
       <circle class="hub hub--ring" cx="38" cy="100" r="3.6" />
@@ -406,9 +409,12 @@
 
   <g id="network-final-logo" class="network-final-logo" opacity="0" transform="translate(42.71 71.75)">
     <g class="network-final-logo__inner" transform="scale(0.6)">
+      <circle class="network-final-badge" cx="0" cy="0" r="46" fill="#ffffff" fill-opacity="0.62" />
+      <circle class="network-final-badge-ring" cx="0" cy="0" r="46" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2.2" />
+      <circle class="network-final-badge-glow" cx="0" cy="0" r="52" fill="none" stroke="#ffffff" stroke-opacity="0.22" stroke-width="10" />
       <image
         class="network-logo network-logo--final"
-        x="-38" y="-38" width="76" height="76"
+        x="-44" y="-44" width="88" height="88"
         href="./src/assets/images/active-logo-removebg-preview.webp"
         xlink:href="./src/assets/images/active-logo-removebg-preview.webp" />
       <animateTransform attributeName="transform" type="scale" begin="travelMotion.begin+18s" dur="0.6s" values="0.6;1" fill="freeze" />
