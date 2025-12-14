@@ -1,5 +1,24 @@
 /* Hero Visual & Animation Styles */
 
+:root {
+  --hub-dot-fill: var(--color-accent);
+  --hub-dot-stroke: color-mix(in srgb, var(--color-on-primary) 55%, transparent);
+  --hub-ring-stroke: var(--color-accent);
+  --hub-ring-glow: color-mix(in srgb, var(--color-accent) 80%, transparent);
+  --hub-label-fill: rgba(15, 23, 42, 0.95);
+  --hub-label-stroke: rgba(255, 255, 255, 0.92);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hub-dot-fill: var(--color-accent-strong);
+    --hub-ring-stroke: color-mix(in srgb, var(--color-primary-soft) 75%, var(--color-text-primary));
+    --hub-ring-glow: color-mix(in srgb, var(--color-primary-soft) 70%, transparent);
+    --hub-label-fill: rgba(15, 23, 42, 0.98);
+    --hub-label-stroke: rgba(255, 255, 255, 0.88);
+  }
+}
+
 .hero-visual {
   position: relative;
   width: 100%;
@@ -97,34 +116,38 @@
 
 .hero-visual .ca-map .hub--major,
 .hero-visual .ca-map .hub--minor {
-  fill: var(--color-accent);
-  stroke: color-mix(in srgb, var(--color-on-primary) 55%, transparent);
+  fill: var(--hub-dot-fill);
+  stroke: var(--hub-dot-stroke);
   stroke-width: 0.5;
-  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-accent) 65%, transparent));
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--hub-dot-fill) 70%, transparent));
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hubDotPulse 3.6s ease-in-out infinite;
 }
 
 .hero-visual .ca-map .hub--minor {
-  fill: color-mix(in srgb, var(--color-accent) 75%, var(--color-on-primary));
+  fill: color-mix(in srgb, var(--hub-dot-fill) 80%, var(--color-on-primary));
   opacity: 0.9;
 }
 
 .hero-visual .ca-map .hub--ring {
   fill: none;
-  stroke: var(--color-accent);
-  stroke-opacity: 0.55;
-  stroke-width: 0.6;
+  stroke: var(--hub-ring-stroke);
+  stroke-opacity: 0.7;
+  stroke-width: 1.1;
   transform-box: fill-box;
   transform-origin: center;
-  animation: hubRingPulse 2.8s ease-in-out infinite;
+  filter: drop-shadow(0 0 7px var(--hub-ring-glow));
+  animation: hubRingPulse 3.6s ease-in-out infinite;
 }
 
 .hero-visual .ca-map .hub-label {
   font-family: var(--font-family-sans);
   font-size: 3.8px;
   font-weight: 650;
-  fill: rgba(15, 23, 42, 0.95);
+  fill: var(--hub-label-fill);
   paint-order: stroke;
-  stroke: rgba(255, 255, 255, 0.92);
+  stroke: var(--hub-label-stroke);
   stroke-width: 2.0px;
   stroke-linejoin: round;
   opacity: 0.95;
@@ -188,12 +211,23 @@
 
 @keyframes hubRingPulse {
   0%, 100% {
-    stroke-opacity: 0.25;
-    transform: scale(0.92);
+    stroke-opacity: 0.45;
+    transform: scale(0.85);
   }
   50% {
-    stroke-opacity: 0.8;
-    transform: scale(1.08);
+    stroke-opacity: 0.95;
+    transform: scale(1.25);
+  }
+}
+
+@keyframes hubDotPulse {
+  0%, 100% {
+    opacity: 0.95;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
   }
 }
 
@@ -204,7 +238,9 @@
   .hub-node,
   .connection-line,
   .hub-group,
-  .hub--ring {
+  .hub--ring,
+  .hub--major,
+  .hub--minor {
     animation: none;
     opacity: 1;
     transform: none;
