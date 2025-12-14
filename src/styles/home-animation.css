@@ -5,8 +5,12 @@
   --hub-dot-stroke: color-mix(in srgb, var(--color-on-primary) 55%, transparent);
   --hub-ring-stroke: var(--color-accent);
   --hub-ring-glow: color-mix(in srgb, var(--color-accent) 80%, transparent);
+  --hub-line-stroke: color-mix(in srgb, var(--color-on-primary) 75%, transparent);
+  --hub-line-glow: color-mix(in srgb, var(--color-accent) 70%, transparent);
   --hub-label-fill: rgba(15, 23, 42, 0.95);
   --hub-label-stroke: rgba(255, 255, 255, 0.92);
+  --hub-label-size: 3.4px;
+  --hub-label-stroke-width: 1.8px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,6 +18,8 @@
     --hub-dot-fill: var(--color-accent-strong);
     --hub-ring-stroke: color-mix(in srgb, var(--color-primary-soft) 75%, var(--color-text-primary));
     --hub-ring-glow: color-mix(in srgb, var(--color-primary-soft) 70%, transparent);
+    --hub-line-stroke: color-mix(in srgb, var(--color-primary-soft) 90%, var(--color-text-primary));
+    --hub-line-glow: color-mix(in srgb, var(--color-primary-soft) 85%, transparent);
     --hub-label-fill: rgba(15, 23, 42, 0.98);
     --hub-label-stroke: rgba(255, 255, 255, 0.88);
   }
@@ -105,6 +111,43 @@
   pointer-events: none;
 }
 
+.hero-visual .ca-map .network-lines {
+  pointer-events: none;
+}
+
+.hero-visual .ca-map .network-route {
+  fill: none;
+  stroke: var(--hub-line-stroke);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 10px var(--hub-line-glow));
+  opacity: 0;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: routeDraw 1.6s ease-out 1.0s forwards;
+}
+
+.hero-visual .ca-map .network-travel {
+  pointer-events: none;
+}
+
+.hero-visual .ca-map .network-logo {
+  overflow: visible;
+  filter:
+    drop-shadow(0 2px 8px rgba(15, 23, 42, 0.35))
+    drop-shadow(0 0 10px color-mix(in srgb, var(--hub-dot-fill) 40%, transparent));
+}
+
+.hero-visual .ca-map .network-logo--traveler {
+  opacity: 1;
+}
+
+.hero-visual .ca-map .network-logo--drop {
+  opacity: 0;
+}
+
 .hero-visual .ca-map .hub-group {
   opacity: 0;
   animation: fadeInHub 0.8s ease-out var(--d, 1s) forwards;
@@ -143,17 +186,24 @@
 
 .hero-visual .ca-map .hub-label {
   font-family: var(--font-family-sans);
-  font-size: 3.8px;
+  font-size: var(--hub-label-size);
   font-weight: 650;
   fill: var(--hub-label-fill);
   paint-order: stroke;
   stroke: var(--hub-label-stroke);
-  stroke-width: 2.0px;
+  stroke-width: var(--hub-label-stroke-width);
   stroke-linejoin: round;
   opacity: 0.95;
   filter:
     drop-shadow(0 1px 0 rgba(15, 23, 42, 0.35))
     drop-shadow(0 4px 10px rgba(15, 23, 42, 0.35));
+}
+
+@media (max-width: 768px) {
+  :root {
+    --hub-label-size: 2.9px;
+    --hub-label-stroke-width: 1.6px;
+  }
 }
 
 /* Keyframes */
@@ -209,6 +259,13 @@
   }
 }
 
+@keyframes routeDraw {
+  to {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
 @keyframes hubRingPulse {
   0%, 100% {
     stroke-opacity: 0.45;
@@ -245,6 +302,20 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .hero-visual .ca-map .network-route {
+    opacity: 0.6;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+
+  .hero-visual .ca-map .network-logo--traveler {
+    display: none;
+  }
+
+  .hero-visual .ca-map .network-logo--drop {
+    opacity: 1;
   }
   
   .connection-line {
