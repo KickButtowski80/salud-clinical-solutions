@@ -28,7 +28,7 @@
 .hero-visual {
   position: relative;
   width: 100%;
-  max-width: 380px;
+  max-width: 420px;
   margin: 0 auto;
   /* Aspect ratio roughly matches the CA map SVG viewBox */
   aspect-ratio: 2/3; 
@@ -72,6 +72,11 @@
   fill-opacity: 0.24;
   filter: drop-shadow(0 6px 12px color-mix(in srgb, var(--color-text-primary) 22%, transparent));
   transform: translateY(-2px) scale(1.04);
+}
+
+.hero-visual.is-final .ca-map path {
+  pointer-events: none;
+  cursor: default;
 }
 
 /* Network Nodes */
