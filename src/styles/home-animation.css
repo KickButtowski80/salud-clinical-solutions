@@ -57,10 +57,11 @@
   transition: fill-opacity 160ms ease, stroke-opacity 160ms ease, stroke-width 160ms ease, transform 180ms ease, filter 180ms ease;
   will-change: transform, filter;
   vector-effect: non-scaling-stroke;
-  /* Animation 1: Entrance */
   opacity: 0;
   transform-origin: center;
-  animation: mapEntrance 0.8s ease-out forwards;
+  animation:
+    mapEntrance 0.8s ease-out forwards,
+    disableHoverAtEnd 0.01s linear 19s forwards;
 }
 
 .hero-visual .ca-map path:hover,
@@ -74,9 +75,11 @@
   transform: translateY(-2px) scale(1.04);
 }
 
-.hero-visual.is-final .ca-map path {
-  pointer-events: none;
-  cursor: default;
+@keyframes disableHoverAtEnd {
+  to {
+    pointer-events: none;
+    cursor: default;
+  }
 }
 
 /* Network Nodes */
