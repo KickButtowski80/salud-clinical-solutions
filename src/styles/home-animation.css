@@ -293,7 +293,18 @@
   .hero-visual .ca-map .hub--ring,
   .hero-visual .ca-map .hub--major,
   .hero-visual .ca-map .hub--minor {
-    animation: none;
+    animation-duration: 6.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  .hero-visual .ca-map .hub--major,
+  .hero-visual .ca-map .hub--minor {
+    animation-name: hubDotPulseMobile;
+  }
+
+  .hero-visual .ca-map .hub--ring {
+    animation-name: hubRingPulseMobile;
   }
 }
 
@@ -303,6 +314,28 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes hubDotPulseMobile {
+  0%, 100% {
+    opacity: 0.92;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.035);
+  }
+}
+
+@keyframes hubRingPulseMobile {
+  0%, 100% {
+    stroke-opacity: 0.42;
+    transform: scale(0.96);
+  }
+  50% {
+    stroke-opacity: 0.72;
+    transform: scale(1.08);
   }
 }
 
