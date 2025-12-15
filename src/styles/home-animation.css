@@ -90,8 +90,12 @@
 
 .hero-final-glass__logo {
   width: 68%;
-  height: auto;
+  aspect-ratio: 1;
   display: block;
+  background-image: url("../assets/images/active-logo-removebg-preview.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 @keyframes heroFinalGlassIn {
