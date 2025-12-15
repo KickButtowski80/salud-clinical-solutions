@@ -19,7 +19,14 @@ export const initHeroMapReplay = () => {
     const svg = container.querySelector('svg.ca-map');
     if (!svg) return;
 
+    const glass = container.querySelector('.hero-final-glass');
+
     const clone = svg.cloneNode(true);
     svg.replaceWith(clone);
+
+    if (glass) {
+      const glassClone = glass.cloneNode(true);
+      glass.replaceWith(glassClone);
+    }
   });
 };
