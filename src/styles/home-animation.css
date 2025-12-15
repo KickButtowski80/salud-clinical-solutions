@@ -1,0 +1,555 @@
+/* Hero Visual & Animation Styles */
+
+:root {
+  --hub-dot-fill: var(--color-accent);
+  --hub-dot-stroke: color-mix(in srgb, var(--color-on-primary) 55%, transparent);
+  --hub-ring-stroke: var(--color-accent);
+  --hub-ring-glow: color-mix(in srgb, var(--color-accent) 80%, transparent);
+  --hub-line-stroke: color-mix(in srgb, var(--color-on-primary) 75%, transparent);
+  --hub-line-glow: color-mix(in srgb, var(--color-accent) 70%, transparent);
+  --hub-label-fill: rgba(15, 23, 42, 0.95);
+  --hub-label-stroke: rgba(255, 255, 255, 0.92);
+  --hub-label-size: 3.4px;
+  --hub-label-stroke-width: 1.8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hub-dot-fill: var(--color-accent-strong);
+    --hub-ring-stroke: color-mix(in srgb, var(--color-primary-soft) 75%, var(--color-text-primary));
+    --hub-ring-glow: color-mix(in srgb, var(--color-primary-soft) 70%, transparent);
+    --hub-line-stroke: color-mix(in srgb, var(--color-primary-soft) 90%, var(--color-text-primary));
+    --hub-line-glow: color-mix(in srgb, var(--color-primary-soft) 85%, transparent);
+    --hub-label-fill: rgba(15, 23, 42, 0.98);
+    --hub-label-stroke: rgba(255, 255, 255, 0.88);
+  }
+}
+
+.hero-visual {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  /* Aspect ratio roughly matches the CA map SVG viewBox */
+  aspect-ratio: 2/3; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-final-glass {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.94);
+  width: min(360px, 86%);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 8;
+  overflow: hidden;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  box-shadow:
+    0 18px 46px rgba(0, 0, 0, 0.22),
+    0 0 28px rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  animation: heroFinalGlassIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.3) 19s forwards;
+}
+
+.hero-final-glass__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.36), transparent 52%),
+    radial-gradient(circle at 75% 78%, rgba(56, 189, 248, 0.16), transparent 56%),
+    rgba(255, 255, 255, 0.18);
+}
+
+.hero-final-glass__specular {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.72),
+    inset 0 0 10px rgba(255, 255, 255, 0.24);
+}
+
+.hero-final-glass__content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-final-glass__logo {
+  width: 68%;
+  height: auto;
+  display: block;
+}
+
+@keyframes heroFinalGlassIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.ca-map {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  /* Ensure it sits behind the handshake */
+  z-index: var(--z-layer-base);
+  filter: drop-shadow(0 10px 20px color-mix(in srgb, var(--color-text-primary) 18%, transparent));
+}
+
+.hero-visual .ca-map path {
+  fill: var(--color-on-primary);
+  fill-opacity: 0.12;
+  stroke: var(--color-on-primary);
+  stroke-opacity: 0.55;
+  stroke-width: 0.75;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transition: fill-opacity 160ms ease, stroke-opacity 160ms ease, stroke-width 160ms ease, transform 180ms ease, filter 180ms ease;
+  will-change: transform, filter;
+  vector-effect: non-scaling-stroke;
+  opacity: 0;
+  transform-origin: center;
+  animation:
+    mapEntrance 0.8s ease-out forwards,
+    disableHoverAtEnd 0.01s linear 19s forwards;
+}
+
+.hero-visual .ca-map path:hover,
+.hero-visual .ca-map path:focus-visible,
+.hero-visual .ca-map path.is-active {
+  stroke: var(--color-accent);
+  stroke-opacity: 0.95;
+  stroke-width: 1.25;
+  fill-opacity: 0.24;
+  filter: drop-shadow(0 6px 12px color-mix(in srgb, var(--color-text-primary) 22%, transparent));
+  transform: translateY(-2px) scale(1.04);
+}
+
+@keyframes disableHoverAtEnd {
+  to {
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+/* Network Nodes */
+.node {
+  fill: var(--color-accent);
+  opacity: 0;
+  animation: fadeInNodes 1s ease-out 0.8s forwards;
+}
+
+.hub-node {
+  fill: var(--color-primary-strong);
+  stroke: var(--color-primary);
+  stroke-width: 0.5;
+  opacity: 0;
+  animation: fadeInNodes 1s ease-out 0.8s forwards, pulseHub 3s ease-in-out infinite 2s;
+}
+
+/* Connection Lines */
+.connection-line {
+  stroke: var(--color-accent);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-opacity: 0;
+}
+
+/* Network Flow Animation (Step 2) */
+/* Staggered pulses for lines */
+.connection-line:nth-child(1) { animation: pulseLine 3s ease-in-out infinite 2.0s; }
+.connection-line:nth-child(2) { animation: pulseLine 3s ease-in-out infinite 2.4s; }
+.connection-line:nth-child(3) { animation: pulseLine 3s ease-in-out infinite 2.8s; }
+.connection-line:nth-child(4) { animation: pulseLine 3s ease-in-out infinite 3.2s; }
+.connection-line:nth-child(5) { animation: pulseLine 3s ease-in-out infinite 3.6s; }
+.connection-line:nth-child(6) { animation: pulseLine 3s ease-in-out infinite 4.0s; }
+
+/* Hub labels inside the SVG */
+.hero-visual .ca-map .network-hubs {
+  pointer-events: none;
+}
+
+.hero-visual .ca-map .network-lines {
+  pointer-events: none;
+}
+
+.hero-visual .ca-map .network-route {
+  fill: none;
+  stroke: var(--hub-line-stroke);
+  stroke-width: 2.0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 10px var(--hub-line-glow));
+  opacity: 0;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation:
+    routeDraw 1.6s ease-out 1.0s forwards;
+}
+
+.hero-visual .ca-map .network-travel {
+  pointer-events: none;
+}
+
+.hero-visual .ca-map .network-logo {
+  overflow: visible;
+  filter:
+    drop-shadow(0 2px 8px rgba(15, 23, 42, 0.35))
+    drop-shadow(0 0 10px color-mix(in srgb, var(--hub-dot-fill) 40%, transparent));
+}
+
+.hero-visual .ca-map .network-logo--traveler {
+  opacity: 0;
+}
+
+.hero-visual .ca-map .network-final-logo {
+  pointer-events: none;
+  transform-origin: center;
+  filter: none;
+}
+
+.hero-visual .ca-map .network-final-badge {
+  filter: none;
+}
+
+.hero-visual .ca-map .network-final-badge-highlight {
+  opacity: 0.86;
+}
+
+.hero-visual .ca-map .network-final-badge-haze {
+  filter: none;
+}
+
+.hero-visual .ca-map .network-final-badge-inner {
+  opacity: 0.95;
+}
+
+.hero-visual .ca-map .network-final-badge-border {
+  filter: none;
+}
+
+.hero-visual .ca-map .network-final-shadow,
+.hero-visual .ca-map .network-final-badge-border-soft {
+  filter: none;
+}
+
+.hero-visual .ca-map .network-logo--final {
+  filter:
+    drop-shadow(0 8px 18px rgba(15, 23, 42, 0.28))
+    drop-shadow(0 0 16px color-mix(in srgb, var(--hub-dot-fill) 26%, transparent));
+  transform-origin: center;
+}
+
+.hero-visual .ca-map .network-logo--drop {
+  opacity: 0;
+}
+
+.hero-visual .ca-map .hub-group {
+  opacity: 0;
+  animation: fadeInHub 0.8s ease-out var(--d, 1s) forwards;
+}
+
+.hero-visual .ca-map .hub {
+  vector-effect: non-scaling-stroke;
+}
+
+.hero-visual .ca-map .hub--major,
+.hero-visual .ca-map .hub--minor {
+  fill: var(--hub-dot-fill);
+  stroke: var(--hub-dot-stroke);
+  stroke-width: 0.5;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--hub-dot-fill) 70%, transparent));
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hubDotPulse 3.6s ease-in-out infinite;
+}
+
+.hero-visual .ca-map .hub--minor {
+  fill: color-mix(in srgb, var(--hub-dot-fill) 80%, var(--color-on-primary));
+  opacity: 0.9;
+}
+
+.hero-visual .ca-map .hub--ring {
+  fill: none;
+  stroke: var(--hub-ring-stroke);
+  stroke-opacity: 0.7;
+  stroke-width: 1.1;
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0 7px var(--hub-ring-glow));
+  animation: hubRingPulse 3.6s ease-in-out infinite;
+}
+
+.hero-visual .ca-map .hub-label {
+  font-family: var(--font-family-sans);
+  font-size: var(--hub-label-size);
+  font-weight: 650;
+  fill: var(--hub-label-fill);
+  paint-order: stroke;
+  stroke: var(--hub-label-stroke);
+  stroke-width: var(--hub-label-stroke-width);
+  stroke-linejoin: round;
+  opacity: 0.95;
+  filter:
+    drop-shadow(0 1px 0 rgba(15, 23, 42, 0.35))
+    drop-shadow(0 4px 10px rgba(15, 23, 42, 0.35));
+}
+
+@media (max-width: 768px) {
+  :root {
+    --hub-label-size: 2.9px;
+    --hub-label-stroke-width: 1.6px;
+  }
+
+  .hero-final-glass {
+    display: block;
+    width: min(280px, 82%);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow:
+      0 14px 34px rgba(0, 0, 0, 0.18),
+      0 0 18px rgba(255, 255, 255, 0.08);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .hero-final-glass__overlay {
+    background:
+      radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.32), transparent 54%),
+      radial-gradient(circle at 75% 78%, rgba(56, 189, 248, 0.14), transparent 58%),
+      rgba(255, 255, 255, 0.16);
+  }
+
+  .hero-final-glass__specular {
+    box-shadow:
+      inset 1px 1px 0 rgba(255, 255, 255, 0.62),
+      inset 0 0 8px rgba(255, 255, 255, 0.18);
+  }
+
+  /* Mobile Chrome SVG flicker mitigation:
+     - Avoid expensive SVG filters during motion (drop-shadow is a common culprit)
+     - Avoid animating transforms on dozens of county paths (forces raster re-compose)
+     - Avoid will-change on SVG paths (can worsen GPU tiling flicker on mobile)
+  */
+  .ca-map {
+    filter: none;
+  }
+
+  .hero-visual .ca-map path {
+    will-change: auto;
+    transition: fill-opacity 160ms ease, stroke-opacity 160ms ease, stroke-width 160ms ease;
+    animation:
+      mapEntranceMobile 0.7s ease-out forwards,
+      disableHoverAtEnd 0.01s linear 19s forwards;
+  }
+
+  .hero-visual .ca-map path:hover,
+  .hero-visual .ca-map path:focus-visible,
+  .hero-visual .ca-map path.is-active {
+    transform: none;
+    filter: none;
+  }
+
+  .hero-visual .ca-map .network-route,
+  .hero-visual .ca-map .network-logo,
+  .hero-visual .ca-map .hub--ring,
+  .hero-visual .ca-map .hub--major,
+  .hero-visual .ca-map .hub--minor,
+  .hero-visual .ca-map .hub-label,
+  .hero-visual .ca-map .network-final-logo,
+  .hero-visual .ca-map .network-final-badge,
+  .hero-visual .ca-map .network-final-badge-haze,
+  .hero-visual .ca-map .network-final-badge-border {
+    filter: none;
+  }
+
+  .hero-visual .ca-map .hub--ring,
+  .hero-visual .ca-map .hub--major,
+  .hero-visual .ca-map .hub--minor {
+    animation-duration: 6.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  .hero-visual .ca-map .hub--major,
+  .hero-visual .ca-map .hub--minor {
+    animation-name: hubDotPulseMobile;
+  }
+
+  .hero-visual .ca-map .hub--ring {
+    animation-name: hubRingPulseMobile;
+  }
+}
+
+@keyframes mapEntranceMobile {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hubDotPulseMobile {
+  0%, 100% {
+    opacity: 0.92;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.035);
+  }
+}
+
+@keyframes hubRingPulseMobile {
+  0%, 100% {
+    stroke-opacity: 0.42;
+    transform: scale(0.96);
+  }
+  50% {
+    stroke-opacity: 0.72;
+    transform: scale(1.08);
+  }
+}
+
+/* Keyframes */
+
+@keyframes mapEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInNodes {
+  to { opacity: 0.6; }
+}
+
+@keyframes pulseHub {
+  0%, 100% { 
+    opacity: 0.8; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.2);
+  }
+}
+
+@keyframes pulseLine {
+  0% {
+    stroke-opacity: 0;
+    stroke-width: 1;
+  }
+  20% {
+    stroke-opacity: 0.8;
+    stroke-width: 2;
+    filter: drop-shadow(0 0 2px var(--color-accent));
+  }
+  40% {
+    stroke-opacity: 0;
+    stroke-width: 1;
+  }
+  100% {
+    stroke-opacity: 0;
+  }
+}
+
+@keyframes fadeInHub {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes routeDraw {
+  to {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes hubRingPulse {
+  0%, 100% {
+    stroke-opacity: 0.45;
+    transform: scale(0.85);
+  }
+  50% {
+    stroke-opacity: 0.95;
+    transform: scale(1.25);
+  }
+}
+
+@keyframes hubDotPulse {
+  0%, 100% {
+    opacity: 0.95;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  .ca-map path,
+  .node,
+  .hub-node,
+  .connection-line,
+  .hub-group,
+  .hub--ring,
+  .hub--major,
+  .hub--minor {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-visual .ca-map .network-route {
+    opacity: 0.6;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+
+  .hero-visual .ca-map .network-logo--traveler {
+    display: none;
+  }
+
+  .hero-visual .ca-map .network-logo--drop {
+    opacity: 1;
+  }
+  
+  .connection-line {
+    stroke-opacity: 0.2;
+  }
+}
+
+/* Responsive Adjustments */
+@media (min-width: 769px) {
+  .hero-visual {
+    max-width: 480px;
+  }
+}
