@@ -42,7 +42,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%) scale(0.94);
-  width: min(300px, 78%);
+  width: min(360px, 86%);
   aspect-ratio: 1;
   border-radius: 999px;
   pointer-events: none;
@@ -89,7 +89,7 @@
 }
 
 .hero-final-glass__logo {
-  width: 64%;
+  width: 68%;
   height: auto;
   display: block;
 }
