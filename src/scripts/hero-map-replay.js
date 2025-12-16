@@ -19,14 +19,14 @@ export const initHeroMapReplay = () => {
     const svg = container.querySelector('svg.ca-map');
     if (!svg) return;
 
-    const glass = container.querySelector('.hero-final-glass');
+    const finalLogo = container.querySelector('.hero-final-logo');
 
     const clone = svg.cloneNode(true);
     svg.replaceWith(clone);
 
-    if (glass) {
-      const glassClone = glass.cloneNode(true);
-      glass.replaceWith(glassClone);
+    if (finalLogo) {
+      const finalLogoClone = finalLogo.cloneNode(true);
+      finalLogo.replaceWith(finalLogoClone);
     }
   });
 };
