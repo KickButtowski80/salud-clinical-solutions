@@ -307,30 +307,6 @@
     --hub-label-stroke-width: 1.6px;
   }
 
-  .hero-final-glass {
-    display: block;
-    width: min(280px, 82%);
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    box-shadow:
-      0 14px 34px rgba(0, 0, 0, 0.18),
-      0 0 18px rgba(255, 255, 255, 0.08);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  .hero-final-glass__overlay {
-    background:
-      radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.32), transparent 54%),
-      radial-gradient(circle at 75% 78%, rgba(56, 189, 248, 0.14), transparent 58%),
-      rgba(255, 255, 255, 0.16);
-  }
-
-  .hero-final-glass__specular {
-    box-shadow:
-      inset 1px 1px 0 rgba(255, 255, 255, 0.62),
-      inset 0 0 8px rgba(255, 255, 255, 0.18);
-  }
-
   /* Mobile Chrome SVG flicker mitigation:
      - Avoid expensive SVG filters during motion (drop-shadow is a common culprit)
      - Avoid animating transforms on dozens of county paths (forces raster re-compose)
@@ -518,7 +494,11 @@
   .hero-final-logo {
     animation: none;
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(
+        calc(-50% + var(--hero-final-logo-offset-x)),
+        calc(-50% + var(--hero-final-logo-offset-y))
+      )
+      scale(1);
   }
 
   .hero-visual .ca-map .network-route {
