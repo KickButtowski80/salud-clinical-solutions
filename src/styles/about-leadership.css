@@ -207,6 +207,16 @@
   outline-offset: 0.15rem;
 }
 
+.staff-card__toggle:focus-visible + .staff-card__inner {
+  outline: 0.15rem solid var(--color-accent);
+  outline-offset: 0.15rem;
+}
+
+.staff-card__close:focus-visible {
+  outline: 0.15rem solid var(--color-accent);
+  outline-offset: 0.15rem;
+}
+
 .staff-card__toggle:checked + .staff-card__inner {
   transform: rotateY(180deg);
   min-height: var(--staff-card-back-height, 30rem);
