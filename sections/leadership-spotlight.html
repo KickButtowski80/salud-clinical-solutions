@@ -19,12 +19,13 @@
   </div>
 
   <!-- Team Grid -->
-  <div class="leadership-grid grid" role="list" aria-label="Leadership team members">
+  <ul class="leadership-grid grid" aria-label="Leadership team members">
 
     <!-- Staff Card - Igal Tarash -->
-    <article class="staff-card" role="listitem">
-      <input type="checkbox" class="staff-card__toggle" id="staff-igal" aria-label="Toggle Igal Tarash details" />
-      <label class="staff-card__inner" for="staff-igal">
+    <li>
+    <article class="staff-card">
+      <input type="checkbox" class="staff-card__toggle" id="staff-igal" aria-labelledby="staff-igal-label" />
+      <label class="staff-card__inner" id="staff-igal-label" for="staff-igal">
 
         <!-- Front Face -->
         <div class="staff-card__face staff-card__face--front">
@@ -49,7 +50,7 @@
                still toggles the checkbox. This avoids multiple labels
                being associated with the same control. -->
           <div class="staff-card__back-content">
-            <span class="staff-card__close" aria-hidden="true">&times;</span>
+            <button type="button" class="staff-card__close" aria-label="Close details">&times;</button>
 
             <div class="staff-card__header">
               <img src="https://placehold.co/96x96/1e40af/ffffff?text=IT" alt="" class="staff-card__thumb"
@@ -77,11 +78,13 @@
         </div>
       </label>
     </article>
+    </li>
 
     <!-- Staff Card - Sasha Getty -->
-    <article class="staff-card" role="listitem">
-      <input type="checkbox" class="staff-card__toggle" id="staff-sasha" aria-label="Toggle Sasha Getty details" />
-      <label class="staff-card__inner" for="staff-sasha">
+    <li>
+    <article class="staff-card">
+      <input type="checkbox" class="staff-card__toggle" id="staff-sasha" aria-labelledby="staff-sasha-label" />
+      <label class="staff-card__inner" id="staff-sasha-label" for="staff-sasha">
 
         <!-- Front Face -->
         <div class="staff-card__face staff-card__face--front">
@@ -104,7 +107,7 @@
         <div class="staff-card__face staff-card__face--back">
           <!-- Visual close affordance; the outer label handles the toggle. -->
           <div class="staff-card__back-content">
-            <span class="staff-card__close" aria-hidden="true">&times;</span>
+            <button type="button" class="staff-card__close" aria-label="Close details">&times;</button>
 
             <div class="staff-card__header">
               <img src="https://placehold.co/96x96/0369a1/ffffff?text=SG" alt="" class="staff-card__thumb"
@@ -132,12 +135,14 @@
         </div>
       </label>
     </article>
+    </li>
 
     <!-- Staff Card - Bettina Rubendall -->
-    <article class="staff-card" role="listitem">
+    <li>
+    <article class="staff-card">
       <input type="checkbox" class="staff-card__toggle" id="staff-bettina"
-        aria-label="Toggle Bettina Rubendall details" />
-      <label class="staff-card__inner" for="staff-bettina">
+        aria-labelledby="staff-bettina-label" />
+      <label class="staff-card__inner" id="staff-bettina-label" for="staff-bettina">
 
         <!-- Front Face -->
         <div class="staff-card__face staff-card__face--front">
@@ -160,7 +165,7 @@
         <div class="staff-card__face staff-card__face--back">
           <!-- Visual close affordance; the outer label handles the toggle. -->
           <div class="staff-card__back-content">
-            <span class="staff-card__close" aria-hidden="true">&times;</span>
+            <button type="button" class="staff-card__close" aria-label="Close details">&times;</button>
 
             <div class="staff-card__header">
               <img src="https://placehold.co/96x96/0f766e/ffffff?text=BR" alt="" class="staff-card__thumb"
@@ -187,5 +192,6 @@
         </div>
       </label>
     </article>
-  </div>
+    </li>
+  </ul>
 </section>
