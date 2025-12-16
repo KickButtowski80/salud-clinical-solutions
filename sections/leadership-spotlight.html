@@ -1,7 +1,7 @@
 <section class="leadership" aria-labelledby="leadership-heading">
   <!-- Header -->
   <div class="leadership-header-layout">
-    <div class="leadership-header">
+    <header class="leadership-header">
       <h2 id="leadership-heading" class="leadership-title">Leadership Spotlight</h2>
       <p class="leadership-subtitle">
         Clinician-led founders with deep correctional and behavioral health experience who design and run our staffing
@@ -9,7 +9,7 @@
         This team balances patient safety, operational reliability, and a genuinely supportive experience for every
         clinician we place.
       </p>
-    </div>
+    </header>
 
     <figure class="leadership-header-media" aria-hidden="true">
       <img src="./src/assets/images/slaud-about.webp" alt="Leadership team collaborating"
@@ -19,179 +19,179 @@
   </div>
 
   <!-- Team Grid -->
-  <div class="leadership-grid grid" role="list" aria-label="Leadership team members">
+  <ul class="leadership-grid grid" aria-label="Leadership team members">
 
     <!-- Staff Card - Igal Tarash -->
-    <article class="staff-card" role="listitem">
-      <input type="checkbox" class="staff-card-toggle" id="staff-igal" aria-label="Toggle Igal Tarash details" />
-      <label class="staff-card-inner" for="staff-igal">
+    <li>
+    <article class="staff-card">
+      <input type="checkbox" class="staff-card__toggle" id="staff-igal" aria-labelledby="staff-igal-label" />
+      <label class="staff-card__inner" id="staff-igal-label" for="staff-igal">
 
         <!-- Front Face -->
-        <div class="staff-card-face staff-card-front">
-          <div class="staff-card-header">
-            <div class="staff-card-avatar" aria-hidden="true">IT</div>
-            <div class="staff-card-info">
-              <h3 class="staff-card-name">Igal Tarash, D.O., MBA</h3>
-              <p class="staff-card-role">Co-Founder &amp; Chief Executive Officer</p>
+        <div class="staff-card__face staff-card__face--front">
+          <header class="staff-card__header">
+            <div class="staff-card__avatar" aria-hidden="true">IT</div>
+            <div class="staff-card__info">
+              <h3 class="staff-card__name">Igal Tarash, D.O., MBA</h3>
+              <p class="staff-card__role">Co-Founder &amp; Chief Executive Officer</p>
             </div>
-          </div>
-          <p class="staff-card-preview">
-            Igal Tarash, better known to his patients as Dr. T, is a multi-cultural, multi-lingual physician with
-            specialized expertise in psychiatry, behavioral medicine, and clinical research. With years of experience in
-            correctional healthcare systems, he understands how staffing reliability directly influences patient
-            outcomes and operational performance.
-          </p>
-          <span class="staff-card-cta" aria-hidden="true">Read more &rarr;</span>
+          </header>
+          <ul class="staff-card__highlights" aria-label="Igal Tarash highlights">
+            <li>Psychiatry, behavioral medicine, and clinical research expertise.</li>
+            <li>Deep correctional healthcare experience focused on operational reliability.</li>
+            <li>Clinician + MBA leadership guiding strategic direction and partnerships.</li>
+          </ul>
+          <span class="staff-card__cta" aria-hidden="true">Get to know my story &rarr;</span>
         </div>
 
         <!-- Back Face -->
-        <div class="staff-card-face staff-card-back">
+        <div class="staff-card__face staff-card__face--back">
           <!-- Visual close affordance; clicking anywhere on the card (label)
                still toggles the checkbox. This avoids multiple labels
                being associated with the same control. -->
-          <span class="staff-card-close" aria-hidden="true">&times;</span>
+          <div class="staff-card__back-content">
+            <button type="button" class="staff-card__close" aria-label="Close details">&times;</button>
 
-          <div class="staff-card-header">
-            <img src="https://placehold.co/96x96/1e40af/ffffff?text=IT" alt="" class="staff-card-thumb"
-              loading="lazy" />
-            <div class="staff-card-info">
-              <h3 class="staff-card-name">Igal Tarash, D.O., MBA</h3>
-              <p class="staff-card-role">Co-Founder &amp; Chief Executive Officer</p>
+            <div class="staff-card__header">
+              <img src="https://placehold.co/96x96/1e40af/ffffff?text=IT" alt="" class="staff-card__thumb"
+                loading="lazy" />
+              <div class="staff-card__info">
+                <h3 class="staff-card__name">Igal Tarash, D.O., MBA</h3>
+                <p class="staff-card__role">Co-Founder &amp; Chief Executive Officer</p>
+              </div>
             </div>
-          </div>
 
-          <div class="staff-card-bio">
-            <p>
-              Igal Tarash, better known to his patients as Dr. T, is a multi-cultural, multi-lingual physician with
-              specialized expertise
-              in psychiatry, behavioral medicine, and clinical research. With years of experience in correctional
-              healthcare systems,
-              he understands how staffing reliability directly influences patient outcomes and operational performance.
-            </p>
-            <p>
-              Holding both an M.D. and an MBA, Dr. T leads Salud Clinical Solutions with a blend of clinical insight and
-              organizational
-              leadership. He oversees the agency's strategic direction, cultivates client partnerships, and ensures
-              operational excellence
-              throughout the organization.
-            </p>
+            <div class="staff-card__bio">
+              <p>
+                I'm Dr. Igal Tarash—many of my patients know me as Dr. T. I'm a multicultural, multilingual physician with
+                specialized expertise in psychiatry, behavioral medicine, and clinical research. With years of experience
+                in correctional healthcare systems, I've seen firsthand how staffing reliability directly influences
+                patient outcomes and operational performance.
+              </p>
+              <p>
+                I hold both an M.D. and an MBA, and I lead Salud Clinical Solutions with a blend of clinical insight and
+                organizational leadership. I oversee our strategic direction, build client partnerships, and ensure
+                operational excellence across the organization.
+              </p>
+            </div>
           </div>
         </div>
       </label>
     </article>
+    </li>
 
     <!-- Staff Card - Sasha Getty -->
-    <article class="staff-card" role="listitem">
-      <input type="checkbox" class="staff-card-toggle" id="staff-sasha" aria-label="Toggle Sasha Getty details" />
-      <label class="staff-card-inner" for="staff-sasha">
+    <li>
+    <article class="staff-card">
+      <input type="checkbox" class="staff-card__toggle" id="staff-sasha" aria-labelledby="staff-sasha-label" />
+      <label class="staff-card__inner" id="staff-sasha-label" for="staff-sasha">
 
         <!-- Front Face -->
-        <div class="staff-card-face staff-card-front">
-          <div class="staff-card-header">
-            <div class="staff-card-avatar" aria-hidden="true">SG</div>
-            <div class="staff-card-info">
-              <h3 class="staff-card-name">Sasha Getty, M.D.</h3>
-              <p class="staff-card-role">Co-Founder &amp; Chief Financial Officer</p>
+        <div class="staff-card__face staff-card__face--front">
+          <header class="staff-card__header">
+            <div class="staff-card__avatar" aria-hidden="true">SG</div>
+            <div class="staff-card__info">
+              <h3 class="staff-card__name">Sasha Getty, M.D.</h3>
+              <p class="staff-card__role">Co-Founder &amp; Chief Financial Officer</p>
             </div>
-          </div>
-          <p class="staff-card-preview">
-            Dr. Getty is a board-certified psychiatrist with years of experience working in high-acuity,
-            resource-limited correctional healthcare environments. His work has given him a deep understanding of the
-            vital role that dependable, well-qualified staffing plays in maintaining continuity of care, protecting
-            patient safety, and supporting clinical teams.
-          </p>
-          <span class="staff-card-cta" aria-hidden="true">Read more &rarr;</span>
+          </header>
+          <ul class="staff-card__highlights" aria-label="Sasha Getty highlights">
+            <li>Board-certified psychiatrist in high-acuity correctional settings.</li>
+            <li>Focused on continuity of care, patient safety, and clinical team support.</li>
+            <li>Financial stewardship and operational planning for long-term stability.</li>
+          </ul>
+          <span class="staff-card__cta" aria-hidden="true">Get to know my story &rarr;</span>
         </div>
 
         <!-- Back Face -->
-        <div class="staff-card-face staff-card-back">
+        <div class="staff-card__face staff-card__face--back">
           <!-- Visual close affordance; the outer label handles the toggle. -->
-          <span class="staff-card-close" aria-hidden="true">&times;</span>
+          <div class="staff-card__back-content">
+            <button type="button" class="staff-card__close" aria-label="Close details">&times;</button>
 
-          <div class="staff-card-header">
-            <img src="https://placehold.co/96x96/0369a1/ffffff?text=SG" alt="" class="staff-card-thumb"
-              loading="lazy" />
-            <div class="staff-card-info">
-              <h3 class="staff-card-name">Sasha Getty, M.D.</h3>
-              <p class="staff-card-role">Co-Founder &amp; Chief Financial Officer</p>
+            <div class="staff-card__header">
+              <img src="https://placehold.co/96x96/0369a1/ffffff?text=SG" alt="" class="staff-card__thumb"
+                loading="lazy" />
+              <div class="staff-card__info">
+                <h3 class="staff-card__name">Sasha Getty, M.D.</h3>
+                <p class="staff-card__role">Co-Founder &amp; Chief Financial Officer</p>
+              </div>
             </div>
-          </div>
 
-          <div class="staff-card-bio">
-            <p>
-              Dr. Getty is a board-certified psychiatrist with years of experience working in high-acuity,
-              resource-limited correctional
-              healthcare environments. His work has given him a deep understanding of the vital role that dependable,
-              well-qualified staffing
-              plays in maintaining continuity of care, protecting patient safety, and supporting clinical teams.
-            </p>
-            <p>
-              As CFO, Dr. Getty oversees financial management, organizational planning, and long-term operational
-              stability. His analytical
-              mindset and background in complex systems of care shape the agency's commitment to delivering reliable,
-              compliant, and
-              mission-aligned staffing solutions.
-            </p>
+            <div class="staff-card__bio">
+              <p>
+                I'm Dr. Sasha Getty, a board-certified psychiatrist with years of experience working in high-acuity,
+                resource-limited correctional healthcare environments. That work has given me a deep understanding of the vital role
+                dependable, well-qualified staffing plays in maintaining continuity of care, protecting patient safety,
+                and supporting clinical teams.
+              </p>
+              <p>
+                As CFO, I oversee financial management, organizational planning, and long-term operational stability.
+                My analytical mindset and background in complex systems of care help shape our commitment to delivering
+                reliable, compliant, mission-aligned staffing solutions.
+              </p>
+            </div>
           </div>
         </div>
       </label>
     </article>
+    </li>
 
     <!-- Staff Card - Bettina Rubendall -->
-    <article class="staff-card" role="listitem">
-      <input type="checkbox" class="staff-card-toggle" id="staff-bettina"
-        aria-label="Toggle Bettina Rubendall details" />
-      <label class="staff-card-inner" for="staff-bettina">
+    <li>
+    <article class="staff-card">
+      <input type="checkbox" class="staff-card__toggle" id="staff-bettina"
+        aria-labelledby="staff-bettina-label" />
+      <label class="staff-card__inner" id="staff-bettina-label" for="staff-bettina">
 
         <!-- Front Face -->
-        <div class="staff-card-face staff-card-front">
-          <div class="staff-card-header">
-            <div class="staff-card-avatar" aria-hidden="true">BR</div>
-            <div class="staff-card-info">
-              <h3 class="staff-card-name">Bettina Rubendall</h3>
-              <p class="staff-card-role">Co-Founder &amp; Operations Manager</p>
+        <div class="staff-card__face staff-card__face--front">
+          <header class="staff-card__header">
+            <div class="staff-card__avatar" aria-hidden="true">BR</div>
+            <div class="staff-card__info">
+              <h3 class="staff-card__name">Bettina Rubendall</h3>
+              <p class="staff-card__role">Co-Founder &amp; Operations Manager</p>
             </div>
-          </div>
-          <p class="staff-card-preview">
-            Bettina Rubendall brings over a decade of specialized experience in healthcare staffing and locum tenens
-            operations. Her extensive background includes talent acquisition, contracting, vendor relations, operations
-            management, and workforce planning across a broad range of clinical settings.
-          </p>
-          <span class="staff-card-cta" aria-hidden="true">Read more &rarr;</span>
+          </header>
+          <ul class="staff-card__highlights" aria-label="Bettina Rubendall highlights">
+            <li>10+ years in healthcare staffing and locum tenens operations.</li>
+            <li>Talent acquisition, contracting, vendor relations, and workforce planning.</li>
+            <li>Owns onboarding, credentialing, compliance, and placement logistics.</li>
+          </ul>
+          <span class="staff-card__cta" aria-hidden="true">Get to know my story &rarr;</span>
         </div>
 
         <!-- Back Face -->
-        <div class="staff-card-face staff-card-back">
+        <div class="staff-card__face staff-card__face--back">
           <!-- Visual close affordance; the outer label handles the toggle. -->
-          <span class="staff-card-close" aria-hidden="true">&times;</span>
+          <div class="staff-card__back-content">
+            <button type="button" class="staff-card__close" aria-label="Close details">&times;</button>
 
-          <div class="staff-card-header">
-            <img src="https://placehold.co/96x96/0f766e/ffffff?text=BR" alt="" class="staff-card-thumb"
-              loading="lazy" />
-            <div class="staff-card-info">
-              <h3 class="staff-card-name">Bettina Rubendall</h3>
-              <p class="staff-card-role">Co-Founder &amp; Operations Manager</p>
+            <div class="staff-card__header">
+              <img src="https://placehold.co/96x96/0f766e/ffffff?text=BR" alt="" class="staff-card__thumb"
+                loading="lazy" />
+              <div class="staff-card__info">
+                <h3 class="staff-card__name">Bettina Rubendall</h3>
+                <p class="staff-card__role">Co-Founder &amp; Operations Manager</p>
+              </div>
             </div>
-          </div>
 
-          <div class="staff-card-bio">
-            <p>
-              Bettina Rubendall brings over a decade of specialized experience in healthcare staffing and locum tenens
-              operations.
-              Her extensive background includes talent acquisition, contracting, vendor relations, operations
-              management, and workforce
-              planning across a broad range of clinical settings.
-            </p>
-            <p>
-              At Salud Clinical Solutions, Bettina oversees the operational backbone of the company—managing onboarding,
-              credentialing
-              workflows, compliance, and day-to-day placement logistics. Her deep industry expertise and hands-on
-              leadership ensure that
-              clinicians and partner facilities receive responsive, accurate, and high-quality support.
-            </p>
+            <div class="staff-card__bio">
+              <p>
+                I'm Bettina Rubendall, and I bring over a decade of specialized experience in healthcare staffing and locum tenens operations.
+                My background includes talent acquisition, contracting, vendor relations, operations management, and
+                workforce planning across a broad range of clinical settings.
+              </p>
+              <p>
+                At Salud Clinical Solutions, I oversee the operational backbone of the company—managing onboarding,
+                credentialing workflows, compliance, and day-to-day placement logistics. My hands-on leadership helps
+                ensure clinicians and partner facilities receive responsive, accurate, high-quality support.
+              </p>
+            </div>
           </div>
         </div>
       </label>
     </article>
-  </div>
+    </li>
+  </ul>
 </section>

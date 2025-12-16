@@ -21,7 +21,6 @@
     radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 55%),
     radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.08), transparent 55%),
     rgba(15, 23, 42, 0.9);
-  padding: 1.5rem 1.25rem;
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.5);
   color: var(--color-text-light);
   /* Text formatting inherited by children */
@@ -33,7 +32,10 @@
 .about-intro {
   max-width: 40rem;
   margin: 0 auto 1.5rem;
-  padding-bottom: 1.5rem;
+  padding:
+    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem)
+    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem)
+    1.5rem;
   border-bottom: 1px solid rgba(148, 163, 184, 0.15);
 }
 
@@ -64,6 +66,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding:
+    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem)
+    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem);
 }
 
 .leadership-title {
@@ -111,6 +116,16 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: 1.5rem;
+  align-items: start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.leadership-grid > li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* --------------------------------------------------------------------------
@@ -120,7 +135,10 @@
 .staff-card {
   position: relative;
   perspective: 1000px;
-  min-height: 22rem;
+  min-height: auto;
+  align-self: start;
+  --staff-card-front-height: auto; /* JS will set this based on content */
+  --staff-card-back-height: auto; /* JS will set this based on content */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -139,17 +157,18 @@
   }
 }
 
-.staff-card-toggle {
+.staff-card__toggle {
   position: absolute;
   inset: 0;
   opacity: 0;
   pointer-events: none;
 }
 
-.staff-card-inner {
+.staff-card__inner {
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: var(--staff-card-front-height, 20rem);
   border-radius: 1rem;
   border: 1px solid rgba(148, 163, 184, 0.25);
   background:
@@ -170,7 +189,7 @@
 }
 
 /* Hover: lift, glow, spotlight effect */
-.staff-card-inner:hover {
+.staff-card__toggle:not(:checked) + .staff-card__inner:hover {
   transform: translateY(-6px) scale(1.02);
   border-color: rgba(251, 191, 36, 0.5);
   box-shadow: 
@@ -183,22 +202,33 @@
     rgba(15, 23, 42, 0.92);
 }
 
-.staff-card-inner:focus-visible {
+.staff-card__inner:focus-visible {
   outline: 0.15rem solid var(--color-accent);
   outline-offset: 0.15rem;
 }
 
-.staff-card-toggle:checked + .staff-card-inner {
+.staff-card__toggle:focus-visible + .staff-card__inner {
+  outline: 0.15rem solid var(--color-accent);
+  outline-offset: 0.15rem;
+}
+
+.staff-card__close:focus-visible {
+  outline: 0.15rem solid var(--color-accent);
+  outline-offset: 0.15rem;
+}
+
+.staff-card__toggle:checked + .staff-card__inner {
   transform: rotateY(180deg);
+  min-height: var(--staff-card-back-height, 30rem);
   box-shadow: 0 22px 55px rgba(15, 23, 42, 0.7);
   border-color: rgba(251, 191, 36, 0.6);
 }
 
 /* Card faces */
-.staff-card-face {
+.staff-card__face {
   position: absolute;
   inset: 0;
-  padding: 1.4rem 1.25rem 1.25rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -208,32 +238,29 @@
   -webkit-backface-visibility: hidden;
 }
 
-.staff-card-front {
+.staff-card__face--front {
   transform: rotateY(0deg);
+  padding:
+    clamp(0.95rem, calc(2vw + 0.7rem), 1.4rem)
+    clamp(0.9rem, calc(1.6vw + 0.65rem), 1.25rem)
+    clamp(1.05rem, calc(2vw + 0.8rem), 1.25rem);
 }
 
-.staff-card-back {
+.staff-card__face--back {
   transform: rotateY(180deg);
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-primary) transparent;
+  overflow: hidden;
 }
 
-.staff-card-back::-webkit-scrollbar {
-  width: 0.35rem;
-}
-
-.staff-card-back::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.staff-card-back::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary);
-  border-radius: 999px;
+.staff-card__back-content {
+  min-height: 0;
+  padding:
+    clamp(0.9rem, calc(2vw + 0.75rem), 1.4rem)
+    clamp(0.85rem, calc(1.6vw + 0.65rem), 1.25rem)
+    clamp(1.05rem, calc(2.2vw + 0.8rem), 1.25rem);
 }
 
 /* Close button */
-.staff-card-close {
+.staff-card__close {
   position: absolute;
   top: 0.75rem;
   right: 0.85rem;
@@ -243,30 +270,30 @@
   line-height: 1;
   color: rgba(148, 163, 184, 0.9);
   cursor: pointer;
-  padding: 0.6rem;
+  padding: clamp(0.35rem, calc(0.6vw + 0.25rem), 0.6rem);
   transition: color 0.2s ease;
 }
 
-.staff-card-close:hover {
+.staff-card__close:hover {
   color: var(--color-accent);
 }
 
 /* Card header (used on both front and back) */
-.staff-card-header {
+.staff-card__header {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: clamp(0.65rem, calc(1vw + 0.4rem), 1rem);
   width: 100%;
 }
 
-.staff-card-info {
+.staff-card__info {
   flex: 1;
   min-width: 0;
 }
 
 /* Avatar (front card) */
-.staff-card-avatar {
+.staff-card__avatar {
   width: clamp(4.5rem, calc(7vw + 1rem), 6.5rem);
   height: clamp(4.5rem, calc(7vw + 1rem), 6.5rem);
   border-radius: 999px;
@@ -283,7 +310,7 @@
 }
 
 /* Thumbnail (back card) */
-.staff-card-thumb {
+.staff-card__thumb {
   width: clamp(4rem, calc(6vw + 1rem), 5rem);
   height: clamp(4rem, calc(6vw + 1rem), 5rem);
   border-radius: 999px;
@@ -293,34 +320,38 @@
 }
 
 /* Staff name and role */
-.staff-card-name {
+.staff-card__name {
   font-size: var(--font-size-xl);
   font-weight: 600;
   margin: 0 0 0.25rem 0;
   line-height: 1.3;
 }
 
-.staff-card-role {
+.staff-card__role {
   font-size: var(--font-size-xs);
   color: rgba(226, 232, 240, 0.85);
   margin: 0;
   line-height: 1.4;
 }
 
-/* Preview text (front card) */
-.staff-card-preview {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  overflow: hidden;
+/* Highlights list (front card) */
+.staff-card__highlights {
+  margin: 0;
+  padding-left: clamp(0.9rem, calc(1vw + 0.6rem), 1.1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
   font-size: var(--font-size-sm);
-  color: rgba(226, 232, 240, 0.9);
-  line-height: 2;
+  color: rgba(226, 232, 240, 0.92);
+  line-height: 1.7;
+}
+
+.staff-card__highlights li {
+  margin: 0;
 }
 
 /* CTA (front card) */
-.staff-card-cta {
+.staff-card__cta {
   font-size: 0.875rem;
   color: var(--color-accent);
   font-weight: 600;
@@ -328,15 +359,15 @@
 }
 
 /* Bio (back card) */
-.staff-card-bio {
+.staff-card__bio {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: clamp(0.75rem, calc(1vw + 0.45rem), 1rem);
   flex: 1;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
-.staff-card-bio p {
+.staff-card__bio p {
   font-size: var(--font-size-base);
   line-height: 1.7;
   margin: 0;
@@ -363,6 +394,9 @@
 
   .leadership-header {
     text-align: center;
+    padding:
+      clamp(0.6rem, calc(1vw + 0.35rem), 0.9rem)
+      clamp(0.6rem, calc(1vw + 0.35rem), 0.9rem);
   }
 
   .leadership-header-media {
@@ -388,8 +422,8 @@
 
 /* Staff cards tablet (426px - 1023px) */
 @media (min-width: 426px) and (max-width: 1023px) {
-  .staff-card-avatar,
-  .staff-card-thumb {
+  .staff-card__avatar,
+  .staff-card__thumb {
     width: clamp(4.75rem, 11vw, 6.75rem);
     height: clamp(4.75rem, 11vw, 6.75rem);
   }
@@ -403,28 +437,45 @@
   }
 
   .staff-card {
-    min-height: 20rem;
+    min-height: auto;
   }
 
-  .staff-card-face {
+  .staff-card__face {
     padding-bottom: 2rem;
   }
 
-  .staff-card-header {
+  .staff-card__header {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
-  .staff-card-info {
+  .staff-card__info {
     text-align: center;
+  }
+
+  .staff-card__close {
+    top: clamp(0.4rem, calc(0.6vw + 0.25rem), 0.6rem);
+    right: clamp(0.5rem, calc(0.6vw + 0.35rem), 0.7rem);
+  }
+
+  .staff-card__header {
+    margin-bottom: clamp(0.4rem, calc(0.6vw + 0.25rem), 0.6rem);
+  }
+
+  .staff-card__highlights {
+    padding-left: clamp(0.6rem, calc(0.8vw + 0.4rem), 0.9rem);
+  }
+
+  .staff-card__bio {
+    gap: clamp(0.5rem, calc(0.6vw + 0.35rem), 0.7rem);
   }
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .staff-card-inner,
-  .staff-card-toggle:checked + .staff-card-inner {
+  .staff-card__inner,
+  .staff-card__toggle:checked + .staff-card__inner {
     transition: none;
     transform: none;
   }
