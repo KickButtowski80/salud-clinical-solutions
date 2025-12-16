@@ -1,5 +1,5 @@
 .hero {
-  padding: var(--space-12) var(--space-16);
+  padding: var(--space-8) var(--space-16);
   background: linear-gradient(135deg, var(--color-primary-strong), var(--color-primary));
   color: var(--color-on-primary);
   display: grid;
@@ -112,7 +112,7 @@
 @media (min-width: 1024px) {
   .hero {
     grid-template-columns: 1fr 1.2fr;
-    /* gap: var(--space-16); */
+    gap: var(--space-16);
   }
 
   .hero-header {
@@ -133,7 +133,7 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: var(--space-16) 0;
+    padding: var(--space-12) 0;
     text-align: center;
     grid-template-columns: 1fr;
     justify-items: center;
