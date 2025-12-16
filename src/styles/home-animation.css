@@ -31,90 +31,54 @@
   max-width: 420px;
   margin: 0 auto;
   /* Aspect ratio roughly matches the CA map SVG viewBox */
-  aspect-ratio: 2/3; 
+  aspect-ratio: 2 / 3;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.hero-final-glass {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) scale(0.94);
-  width: min(360px, 86%);
-  aspect-ratio: 1;
-  border-radius: 999px;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 8;
-  overflow: hidden;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  box-shadow:
-    0 18px 46px rgba(0, 0, 0, 0.22),
-    0 0 28px rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  animation: heroFinalGlassIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.3) 19s forwards;
-}
-
-.hero-final-glass__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background:
-    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.36), transparent 52%),
-    radial-gradient(circle at 75% 78%, rgba(56, 189, 248, 0.16), transparent 56%),
-    rgba(255, 255, 255, 0.18);
-}
-
-.hero-final-glass__specular {
+.hero-map-layer {
   position: absolute;
   inset: 0;
   z-index: 1;
-  border-radius: inherit;
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.72),
-    inset 0 0 10px rgba(255, 255, 255, 0.24);
 }
 
-.hero-final-glass__content {
-  position: relative;
+.hero-overlay-layer {
+  position: absolute;
+  inset: 0;
   z-index: 2;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  pointer-events: none;
 }
 
-.hero-final-glass__logo {
-  width: 68%;
-  aspect-ratio: 1;
-  display: block;
-  background-image: url("../assets/images/active-logo-removebg-preview.webp");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+.hero-final-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(260px, 76%);
+  height: auto;
+  transform: translate(-50%, -50%) scale(0.96);
+  opacity: 0;
+  z-index: 8;
+  pointer-events: none;
+  animation: heroFinalLogoIn 0.6s ease-out 19s forwards;
 }
 
-@keyframes heroFinalGlassIn {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.92);
-  }
-  100% {
+@keyframes heroFinalLogoIn {
+  to {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
 }
 
+.hero-overlay-layer .hero-map-replay {
+  pointer-events: auto;
+}
+
 .ca-map {
   width: 100%;
   height: 100%;
+  display: block;
   overflow: visible;
-  /* Ensure it sits behind the handshake */
-  z-index: var(--z-layer-base);
   filter: drop-shadow(0 10px 20px color-mix(in srgb, var(--color-text-primary) 18%, transparent));
 }
 
@@ -530,6 +494,12 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .hero-final-logo {
+    animation: none;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 
   .hero-visual .ca-map .network-route {
