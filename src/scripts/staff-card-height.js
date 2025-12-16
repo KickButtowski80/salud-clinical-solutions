@@ -10,6 +10,25 @@ export function initStaffCardHeights() {
   const EXTRA_BOTTOM_PX = 12;
   const EXTRA_FRONT_PX = 8;
 
+  function initCloseButtons() {
+    document.querySelectorAll('.staff-card__close').forEach((btn) => {
+      if (!(btn instanceof HTMLButtonElement)) return;
+
+      btn.addEventListener('click', (e) => {
+        // Prevent the surrounding label click from re-toggling the checkbox.
+        e.preventDefault();
+        e.stopPropagation();
+
+        const card = btn.closest('.staff-card');
+        const toggle = card?.querySelector('.staff-card__toggle');
+        if (toggle instanceof HTMLInputElement) {
+          toggle.checked = false;
+          toggle.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      });
+    });
+  }
+
   function measureCard(card) {
     const backContent = card.querySelector('.staff-card__back-content');
     const frontFace = card.querySelector('.staff-card__face--front');
@@ -64,6 +83,7 @@ export function initStaffCardHeights() {
 
   // Run on load
   measureAndSet();
+  initCloseButtons();
 
   // Re-measure when content/layout changes (more precise than window resize)
   if ('ResizeObserver' in window) {
