@@ -22,33 +22,19 @@
 
   <figure class="hero-media">
     <div class="hero-visual">
-      <!-- Soft Map of California -->
-      <include src="./src/assets/images/usa-ca.svg"></include>
+      <div class="hero-overlay-layer">
+        <img class="hero-final-logo" src="./src/assets/images/active-logo-removebg-preview.webp" alt="" aria-hidden="true" />
 
-      <div class="hero-final-glass" aria-hidden="true">
-        <div class="hero-final-glass__overlay"></div>
-        <div class="hero-final-glass__specular"></div>
-        <div class="hero-final-glass__content">
-          <div class="hero-final-glass__logo" aria-hidden="true"></div>
-        </div>
+        <button class="hero-map-replay" type="button" data-hero-map-replay aria-label="Replay map animation">
+          Replay
+        </button>
       </div>
 
-      <button class="hero-map-replay" type="button" data-hero-map-replay aria-label="Replay map animation">
-        Replay
-      </button>
-      
-      <!-- Handshake Logo Overlay -->
-      <!-- <div class="handshake-container">
-        <svg class="handshake-u" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g class="hand-left">
-             <path d="M30 25 C 30 25, 25 55, 45 75 C 40 70, 35 65, 30 25 Z" fill="currentColor" />
-             <path d="M30 20 L30 60 Q30 85 50 85" stroke="currentColor" stroke-width="10" stroke-linecap="round" fill="none" />
-          </g>
-          <g class="hand-right">
-             <path d="M70 20 L70 60 Q70 85 50 85" stroke="currentColor" stroke-width="10" stroke-linecap="round" fill="none" />
-          </g>
-        </svg>
-      </div> -->
+      <div class="hero-map-layer">
+        <!-- Soft Map of California -->
+        <include src="./src/assets/images/usa-ca.svg"></include>
+      </div>
+
     </div>
   </figure>
 </section>
