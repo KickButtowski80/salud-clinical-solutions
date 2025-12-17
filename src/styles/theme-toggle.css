@@ -22,6 +22,7 @@
   padding: var(--space-2) var(--space-3);
   border-radius: 0.5rem;
   color: var(--color-on-primary);
+  --theme-toggle-knob-outline-color: rgba(0, 0, 0, 0.55);
   transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   margin-top: -0.25rem;
 }
@@ -101,14 +102,14 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .theme-toggle__side--night::after {
+  #theme-toggle:not(:checked) + .theme-toggle .theme-toggle__side--night::after {
     animation: moon-glow 3s ease-in-out infinite;
   }
 }
 
 @keyframes moon-glow {
-  0%, 100% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.08); opacity: 1; }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
 }
 
 /* Knob (the sliding logo image) */
@@ -120,7 +121,12 @@
   width: 2.15rem;
   height: 2.15rem;
   object-fit: contain;
-  filter: drop-shadow(0 0.2rem 0.45rem rgba(0, 0, 0, 0.35));
+  filter:
+    drop-shadow(1px 0 0 var(--theme-toggle-knob-outline-color))
+    drop-shadow(-1px 0 0 var(--theme-toggle-knob-outline-color))
+    drop-shadow(0 1px 0 var(--theme-toggle-knob-outline-color))
+    drop-shadow(0 -1px 0 var(--theme-toggle-knob-outline-color))
+    drop-shadow(0 0.2rem 0.45rem rgba(0, 0, 0, 0.35));
   transition: left 0.22s ease;
   z-index: 10;
 }
@@ -139,12 +145,16 @@
   left: calc(100% - 0.35rem - 2.15rem);
 }
 
+#theme-toggle:checked + .theme-toggle {
+  --theme-toggle-knob-outline-color: rgba(255, 255, 255, 0.85);
+}
+
 #theme-toggle:checked + .theme-toggle .theme-toggle__side--day::after {
   opacity: 0.95;
 }
 
 #theme-toggle:checked + .theme-toggle .theme-toggle__side--night::after {
-  opacity: 0;
+  opacity: 0;  
 }
 
 /* ==========================================================================
@@ -154,6 +164,12 @@
   .theme-toggle {
     min-height: 2.75rem;
     padding: var(--space-1) var(--space-2);
+  }
+
+  #theme-toggle:checked + .theme-toggle .theme-toggle__side--day::after,
+  #theme-toggle:not(:checked) + .theme-toggle .theme-toggle__side--night::after {
+    animation: none;
+    transform: none;
   }
 
   .theme-toggle__track {
