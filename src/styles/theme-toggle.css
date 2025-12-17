@@ -63,30 +63,52 @@
   pointer-events: none;
 }
 
-/* Day icon (wave/alert) - LEFT side
+/* Day icon (sun) - LEFT side
    DEFAULT: hidden (knob covers it when unchecked/left) */
 .theme-toggle__side--day::after {
   content: "";
   width: 1.4rem;
-  height: 1.1rem;
-  background-color: rgba(255, 255, 255, 0.9);
+  height: 1.4rem;
+  background-color: rgba(255, 255, 255, 0.95);
   opacity: 0;
   transition: opacity 0.2s ease;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 24'%3E%3Cpath d='M2 14 Q5 11 7 19 Q9 23 11 9 Q13 0 15 2 L16 2 L17 2 Q19 0 21 9 Q23 23 25 19 Q27 11 30 14' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 24'%3E%3Cpath d='M2 14 Q5 11 7 19 Q9 23 11 9 Q13 0 15 2 L16 2 L17 2 Q19 0 21 9 Q23 23 25 19 Q27 11 30 14' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
 }
 
-/* Night icon (crescent/calm) - RIGHT side
+@media (prefers-reduced-motion: no-preference) {
+  #theme-toggle:checked + .theme-toggle .theme-toggle__side--day::after {
+    animation: sun-spin 12s linear infinite;
+  }
+}
+
+@keyframes sun-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Night icon (moon) - RIGHT side
    DEFAULT: visible (knob is on left, so right side is exposed) */
 .theme-toggle__side--night::after {
   content: "";
-  width: 1.1rem;
-  height: 1.1rem;
-  background-color: rgba(255, 255, 255, 0.8);
+  width: 1.3rem;
+  height: 1.3rem;
+  background-color: rgba(255, 255, 255, 0.9);
   opacity: 0.9;
-  transition: opacity 0.2s ease;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 2 C10.2 3 6.5 7.7 6.5 13.2 c0 4.9 3 9 7.4 10.6 C7.9 22.7 3.5 18 3.5 12.4 3.5 6.7 8.2 2.1 13.9 2.1 c0.6 0 1.1 0 1.6 0.1z' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 2 C10.2 3 6.5 7.7 6.5 13.2 c0 4.9 3 9 7.4 10.6 C7.9 22.7 3.5 18 3.5 12.4 3.5 6.7 8.2 2.1 13.9 2.1 c0.6 0 1.1 0 1.6 0.1z' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  transition: opacity 0.2s ease, transform 0.3s ease;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .theme-toggle__side--night::after {
+    animation: moon-glow 3s ease-in-out infinite;
+  }
+}
+
+@keyframes moon-glow {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.08); opacity: 1; }
 }
 
 /* Knob (the sliding logo image) */
