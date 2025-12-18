@@ -8,21 +8,21 @@
 
 [data-component="IntroHero"] {
   border-radius: 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
   background:
-    radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 55%),
-    radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.16), transparent 55%),
-    rgba(15, 23, 42, 0.9);
+    radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 18%, transparent), transparent 55%),
+    radial-gradient(circle at bottom right, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 55%),
+    var(--color-background-light);
   box-shadow:
-    0 18px 45px rgba(15, 23, 42, 0.55),
-    0 6px 14px rgba(15, 23, 42, 0.35);
-  color: var(--color-text-light);
+    0 18px 45px rgba(0, 0, 0, 0.18),
+    0 6px 14px rgba(0, 0, 0, 0.1);
+  color: var(--color-text-primary);
   padding:
     clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem)
     clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem);
 }
 
 [data-component="IntroHero"] p {
-  color: rgba(226, 232, 240, 0.9);
+  color: var(--color-text-secondary);
   max-width: 46rem;
 }
