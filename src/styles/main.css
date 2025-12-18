@@ -9,14 +9,9 @@
 @import url('./desktop-nav.css');
 @import url('./mobile-nav.css');
 @import url('./about-leadership.css');
+@import url('./contact.css');
 
-/* TEMP: sections for IntersectionObserver testing (Issue #9) */
-.section-test {
-  padding: 4rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+
 
 .skip-link {
   position: absolute;
