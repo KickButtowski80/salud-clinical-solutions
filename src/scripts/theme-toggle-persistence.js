@@ -1,24 +1,23 @@
 function getSystemPrefersDark() {
-  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  return !!(
+    window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
 }
 
-// Helper to actually apply the theme to the HTML element
-function applyTheme(isDark) {
-  document.documentElement.classList.toggle('dark-mode', isDark);
-  // Or: document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-}
 
 export function initThemeTogglePersistence() {
   const toggle = document.getElementById('theme-toggle');
   if (!toggle) return;
 
-  const storageKey = 'salud.themeToggleChecked';
+  const storageKey = 'salud-theme';
   let didWarn = false;
 
   const warnOnce = (err) => {
     if (didWarn) return;
     const hostname = window.location?.hostname || '';
-    const isDevHost = ['localhost', '127.0.0.1', ''].includes(hostname) || hostname.endsWith('.local');
+    const isDevHost =
+      ['localhost', '127.0.0.1', ''].includes(hostname) || hostname.endsWith('.local');
 
     if (isDevHost) {
       console.warn('[theme-toggle] localStorage unavailable.', err);
@@ -26,29 +25,43 @@ export function initThemeTogglePersistence() {
     }
   };
 
-  // 1. Determine Initial State
-  let shouldBeDark = getSystemPrefersDark(); // Start with system preference
+  const getSystemTheme = () => (getSystemPrefersDark() ? 'dark' : 'light');
+  const invertTheme = (theme) => (theme === 'dark' ? 'light' : 'dark');
 
+  const setCheckboxForTheme = (theme) => {
+    const systemTheme = getSystemTheme();
+    toggle.checked = theme !== systemTheme;
+  };
+
+  const getThemeFromCheckbox = () => {
+    const systemTheme = getSystemTheme();
+    return toggle.checked ? invertTheme(systemTheme) : systemTheme;
+  };
+
+  // Init: if no saved preference, keep unchecked => follow system
   try {
     const stored = localStorage.getItem(storageKey);
-    if (stored !== null) {
-      shouldBeDark = stored === 'true'; // Override with saved user choice
+    if (stored === 'light' || stored === 'dark') {
+      setCheckboxForTheme(stored);
+    } else {
+      toggle.checked = false;
     }
   } catch (err) {
+    toggle.checked = false;
     warnOnce(err);
   }
 
-  // 2. Sync UI and Toggle
-  toggle.checked = shouldBeDark;
-  applyTheme(shouldBeDark);
-
-  // 3. Listen for changes
+  // Persist: store explicit theme when user overrides system; clear when back to system
   toggle.addEventListener('change', () => {
-    const isChecked = toggle.checked;
-    applyTheme(isChecked);
-    
     try {
-      localStorage.setItem(storageKey, String(isChecked));
+      const systemTheme = getSystemTheme();
+      const chosenTheme = getThemeFromCheckbox();
+
+      if (chosenTheme === systemTheme) {
+        localStorage.removeItem(storageKey);
+      } else {
+        localStorage.setItem(storageKey, chosenTheme);
+      }
     } catch (err) {
       warnOnce(err);
     }
