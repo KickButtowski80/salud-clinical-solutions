@@ -1,4 +1,38 @@
+#contact {
+  padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
+  gap: clamp(0.9rem, 2.2vw, 1.25rem);
+}
 
+#contact > header {
+  margin: 0;
+}
+
+[data-component="ContactLayout"] {
+  gap: clamp(1rem, 3vw, 1.75rem);
+}
+
+[data-component="ContactContent"] {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.4vw, 1.6rem);
+}
+
+[data-component="ContactForm"] {
+  align-self: start;
+}
+
+[data-component="ApplyFormCard"] {
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
+  background: var(--color-background-light);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.12),
+    0 6px 14px rgba(0, 0, 0, 0.08);
+  padding: clamp(0.9rem, 2.2vw, 1.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.6rem, 1.6vw, 0.9rem);
+}
 
 [data-component="IntroHero"] {
   border-radius: 1rem;
@@ -19,4 +53,46 @@
 [data-component="IntroHero"] p {
   color: var(--color-text-secondary);
   max-width: 46rem;
+}
+
+[data-component="TrustHighlights"] ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: clamp(0.5rem, 1.2vw, 0.9rem);
+}
+
+[data-component="TrustHighlights"] li {
+  border-radius: 0.85rem;
+  padding: clamp(0.55rem, 1vw, 0.75rem) clamp(0.7rem, 1.4vw, 1rem);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 24%, transparent);
+  background:
+    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 60%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 60%),
+    color-mix(in srgb, var(--color-background-light) 92%, transparent);
+  color: var(--color-text-primary);
+  box-shadow:
+    0 0.45rem 1.2rem rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+}
+
+[data-component="TrustHighlights"] li::before {
+  content: '';
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  margin-right: 0.55rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--color-background-light) 78%, transparent),
+    0 0.35rem 0.9rem rgba(0, 0, 0, 0.18);
+}
+
+[data-component="RoleChips"] ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
