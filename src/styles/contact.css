@@ -22,16 +22,7 @@
     clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem);
 }
 
-[data-component="IntroHero"] h3 {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  margin: 0 0 0.25rem;
-}
-
 [data-component="IntroHero"] p {
-  font-size: var(--font-size-lg);
   color: rgba(226, 232, 240, 0.9);
-  line-height: 1.9;
-  margin: 0;
   max-width: 46rem;
 }

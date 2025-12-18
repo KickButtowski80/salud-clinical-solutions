@@ -43,6 +43,9 @@
 .leading-normal { line-height: var(--line-height-normal); }
 .leading-relaxed { line-height: var(--line-height-relaxed); }
 
+.m-0 { margin: 0; }
+.mb-2 { margin-bottom: var(--space-2); }
+
 .container {
   width: 100%;
   max-width: var(--container-xl);
