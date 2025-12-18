@@ -1,38 +1,55 @@
-<section id="contact" aria-label="Contact section"
- class="flex flex-col">
-    <h2>Apply Now</h2>
+<section id="contact" aria-label="Contact section" class="flex flex-col">
+    <header>
+        <h2>Apply Now</h2>
+    </header>
 
-    <div data-component="ContactLayout grid grid-cols-2">
+    <div data-component="ContactLayout" class="grid grid-cols-2">
         <div data-component="ContactContent">
-            <div data-component="IntroHero">
+            <header data-component="IntroHero">
                 <h3>Connecting mental health providers with the roles that matter most.</h3>
-                <p>We specialize in locum tenens and long-term behavioral health staffing, linking psychiatrists, psychologists,
-                    and licensed clinical social workers with organizations that need reliable, compassionate care. From major
+                <p>We specialize in locum tenens and long-term behavioral health staffing, linking psychiatrists,
+                    psychologists,
+                    and licensed clinical social workers with organizations that need reliable, compassionate care. From
+                    major
                     metro areas to underserved communities, we help clinicians find the right fit fast.</p>
-            </div>
+            </header>
 
-            <div data-component="TrustHighlights">
+            <section data-component="TrustHighlights" aria-label="Highlights">
                 <h3>Highlights</h3>
-                <p>Locum + Long-term</p>
-                <p>Fast placement</p>
-                <p>Multi-state placements</p>
-            </div>
+                <ul>
+                    <li>Locum + Long-term</li>
+                    <li>Fast placement</li>
+                    <li>Multi-state placements</li>
+                </ul>
+            </section>
 
-            <div data-component="RoleChips">
+            <section data-component="RoleChips" aria-label="Choose your role">
                 <h3>Choose your role (chips placeholder)</h3>
-                <p>Psychiatrist | Psychologist | Licensed Clinical Social Worker | Licensed Marriage and Family Therapist</p>
-                <p>Primary Care Physician | Nurse Practitioner | Physician Assistant | CRNA | Nurse</p>
-                <p>Licensed Professional Clinical Counselor | Pharmacist | Dentist | Medical Facility or Clinic</p>
-            </div>
+                <ul>
+                    <li>Psychiatrist</li>
+                    <li>Psychologist</li>
+                    <li>Licensed Clinical Social Worker</li>
+                    <li>Licensed Marriage and Family Therapist</li>
+                    <li>Primary Care Physician</li>
+                    <li>Nurse Practitioner</li>
+                    <li>Physician Assistant</li>
+                    <li>CRNA</li>
+                    <li>Nurse</li>
+                    <li>Licensed Professional Clinical Counselor</li>
+                    <li>Pharmacist</li>
+                    <li>Dentist</li>
+                    <li>Medical Facility or Clinic</li>
+                </ul>
+            </section>
 
-            <div data-component="MatchMicrocopy">
+            <section data-component="MatchMicrocopy" aria-label="Match message">
                 <h3>Match message (placeholder)</h3>
                 <p>Great — we’ll prioritize roles that match your license and location.</p>
-            </div>
+            </section>
         </div>
 
-        <div data-component="ContactForm">
-            <div data-component="ApplyFormCard">
+        <aside data-component="ContactForm" aria-label="Application form">
+            <form data-component="ApplyFormCard">
                 <h3>Application form (placeholder)</h3>
                 <p>First Name + Last Name</p>
                 <p>Email</p>
@@ -41,7 +58,7 @@
                 <p>Active State License (text input, not dropdown)</p>
                 <p>License Number</p>
                 <p>CTA: Apply Now</p>
-            </div>
-        </div>
+            </form>
+        </aside>
     </div>
 </section>
