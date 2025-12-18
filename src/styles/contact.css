@@ -1,10 +1,4 @@
-[data-component="ContactLayout"] div  {
-  border: 2px solid blue;
-}
 
-[data-component="ContactLayout"] aside {
-    border: 2px solid green;
-}
 
 [data-component="IntroHero"] {
   border-radius: 1rem;
