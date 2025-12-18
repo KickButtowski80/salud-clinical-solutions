@@ -7,14 +7,18 @@
     2) remembers the checkbox state in localStorage
  
   localStorage key:
-  - 'salud.themeToggleChecked' stores 'true' or 'false'.
+  - 'salud-theme' stores 'dark' or 'light'.
  */
 
 export function initThemeTogglePersistence() {
+  const userThemePreference = !!(
+    window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
   const toggle = document.getElementById('theme-toggle');
   if (!toggle) return;
 
-  const storageKey = 'salud.themeToggleChecked';
+  const storageKey = 'salud-theme';
   let didWarn = false;
 
   const warnOnce = (err) => {
@@ -32,7 +36,14 @@ export function initThemeTogglePersistence() {
   // Init
   try {
     const stored = localStorage.getItem(storageKey);
-    toggle.checked = stored === 'true';
+
+    if (stored === 'dark') {
+      toggle.checked = true;
+    } else if (stored === 'light') {
+      toggle.checked = false;
+    } else {
+      toggle.checked = userThemePreference;
+    }
   } catch (err) {
     toggle.checked = false;
     warnOnce(err);
@@ -41,7 +52,7 @@ export function initThemeTogglePersistence() {
   // Persist
   toggle.addEventListener('change', () => {
     try {
-      localStorage.setItem(storageKey, String(toggle.checked));
+      localStorage.setItem(storageKey, toggle.checked ? 'dark' : 'light');
     } catch (err) {
       warnOnce(err);
     }
