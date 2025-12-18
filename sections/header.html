@@ -7,6 +7,16 @@
             <span class="brand-line-1 text-xs font-semibold" aria-hidden="true">CLINICAL SOLUTIONS</span>
             <span class="brand-line-2 text-xxs " aria-hidden="true">A HEALTHCARE TALENT ACQUISITION COMPANY</span>
         </div>
-        <include src="./components/desktop-navbar.html"></include>
+        <div class="header-actions flex items-center">
+            <include src="./components/desktop-navbar.html"></include>
+            <input id="theme-toggle" class="theme-toggle__input" type="checkbox" aria-label="Toggle color theme" />
+            <label class="theme-toggle" for="theme-toggle" aria-label="Toggle color theme">
+                <span class="theme-toggle__track" aria-hidden="true">
+                    <span class="theme-toggle__side theme-toggle__side--day"></span>
+                    <span class="theme-toggle__side theme-toggle__side--night"></span>
+                    <img src="./src/assets/images/active-logo-removebg-preview.webp" alt="" class="theme-toggle__knob" />
+                </span>
+            </label>
+        </div>
     </nav>
 </header>

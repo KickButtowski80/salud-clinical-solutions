@@ -5,11 +5,16 @@
   position: sticky;
   top: 0;
   z-index: var(--z-layer-sticky);
+  --logo-outline-color: rgba(0, 0, 0, 0.55);
   background: linear-gradient(to top, var(--color-primary-strong) 30%, #2d6a6cf2 100%);
   box-shadow:
     0 0.25rem 0.9rem rgba(0, 0, 0, 0.22),
     inset 0 -1px 0 rgba(255, 255, 255, 0.06);
   border-bottom: 0.0625rem solid var(--color-background-light);
+}
+
+body:has(#theme-toggle:checked) .header {
+  --logo-outline-color: rgba(255, 255, 255, 0.85);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,6 +26,13 @@
 .nav {
   min-height: 3.75rem;
   padding: 0 var(--space-3);
+}
+
+.header-actions {
+  margin-left: auto;
+  gap: var(--space-3);
+  flex-wrap: nowrap;
+  align-items: flex-start;
 }
 
 /* Brand block (logo + text) */
@@ -47,13 +59,24 @@
   width: auto;
   display: block;
   object-fit: contain;
+  filter:
+    drop-shadow(1px 0 0 var(--logo-outline-color))
+    drop-shadow(-1px 0 0 var(--logo-outline-color))
+    drop-shadow(0 1px 0 var(--logo-outline-color))
+    drop-shadow(0 -1px 0 var(--logo-outline-color))
+    drop-shadow(0 0.18rem 0.45rem rgba(0, 0, 0, 0.22));
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 @media (hover: hover) {
   .logo-img:hover {
     transform: scale(1.05);
-    filter: drop-shadow(0 0.18rem 0.45rem rgba(0, 0, 0, 0.32));
+    filter:
+      drop-shadow(1px 0 0 var(--logo-outline-color))
+      drop-shadow(-1px 0 0 var(--logo-outline-color))
+      drop-shadow(0 1px 0 var(--logo-outline-color))
+      drop-shadow(0 -1px 0 var(--logo-outline-color))
+      drop-shadow(0 0.18rem 0.45rem rgba(0, 0, 0, 0.32));
   }
 }
 

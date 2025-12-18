@@ -1,0 +1,247 @@
+/* ==========================================================================
+   Theme Toggle - CSS-only light/dark mode switch
+   ========================================================================== */
+
+/* Hidden checkbox (accessible but visually hidden) */
+.theme-toggle__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Toggle label wrapper */
+.theme-toggle {
+  cursor: pointer;
+  min-height: 3.25rem;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 0.5rem;
+  color: var(--color-on-primary);
+  --theme-toggle-knob-outline-color: rgba(0, 0, 0, 0.55);
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: -0.25rem;
+}
+
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+}
+
+/* Track (the pill-shaped container) */
+.theme-toggle__track {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 9.5rem;
+  height: 3.25rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background:
+    radial-gradient(circle at 20% 50%, rgba(255, 200, 87, 0.28), transparent 55%),
+    radial-gradient(circle at 80% 50%, rgba(88, 213, 204, 0.22), transparent 55%),
+    rgba(0, 0, 0, 0.14);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 10px 24px rgba(0, 0, 0, 0.22);
+  user-select: none;
+}
+
+/* Side containers (left = day, right = night) */
+.theme-toggle__side {
+  width: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Day icon (sun) - LEFT side
+   DEFAULT: hidden (knob covers it when unchecked/left) */
+.theme-toggle__side--day::after {
+  content: "";
+  width: 1.4rem;
+  height: 1.4rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #theme-toggle:checked + .theme-toggle .theme-toggle__side--day::after {
+    animation: sun-spin 12s linear infinite;
+  }
+}
+
+@keyframes sun-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Night icon (moon) - RIGHT side
+   DEFAULT: visible (knob is on left, so right side is exposed) */
+.theme-toggle__side--night::after {
+  content: "";
+  width: 1.3rem;
+  height: 1.3rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.3s ease;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #theme-toggle:not(:checked) + .theme-toggle .theme-toggle__side--night::after {
+    animation: moon-glow 3s ease-in-out infinite;
+  }
+}
+
+@keyframes moon-glow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* Knob (the sliding logo image) */
+.theme-toggle__knob {
+  position: absolute;
+  top: 50%;
+  left: 0.35rem;
+  transform: translateY(-50%);
+  width: 2.15rem;
+  height: 2.15rem;
+  object-fit: contain;
+  filter:
+    drop-shadow(1px 0 0 var(--theme-toggle-knob-outline-color))
+    drop-shadow(-1px 0 0 var(--theme-toggle-knob-outline-color))
+    drop-shadow(0 1px 0 var(--theme-toggle-knob-outline-color))
+    drop-shadow(0 -1px 0 var(--theme-toggle-knob-outline-color))
+    drop-shadow(0 0.2rem 0.45rem rgba(0, 0, 0, 0.35));
+  transition: left 0.22s ease;
+  z-index: 10;
+}
+
+/* Focus ring for accessibility */
+.theme-toggle__input:focus-visible + .theme-toggle {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   CHECKED STATE: Knob moves RIGHT, show DAY icon, hide NIGHT icon
+   Using sibling selector (checkbox + label are siblings in HTML)
+   ========================================================================== */
+#theme-toggle:checked + .theme-toggle .theme-toggle__knob {
+  left: calc(100% - 0.35rem - 2.15rem);
+}
+
+#theme-toggle:checked + .theme-toggle {
+  --theme-toggle-knob-outline-color: rgba(255, 255, 255, 0.85);
+}
+
+#theme-toggle:checked + .theme-toggle .theme-toggle__side--day::after {
+  opacity: 0.95;
+}
+
+#theme-toggle:checked + .theme-toggle .theme-toggle__side--night::after {
+  opacity: 0;  
+}
+
+/* ==========================================================================
+   Mobile responsive
+   ========================================================================== */
+@media (max-width: 767px) {
+  .theme-toggle {
+    min-height: 2.75rem;
+    padding: var(--space-1) var(--space-2);
+  }
+
+  #theme-toggle:checked + .theme-toggle .theme-toggle__side--day::after,
+  #theme-toggle:not(:checked) + .theme-toggle .theme-toggle__side--night::after {
+    animation: none;
+    transform: none;
+  }
+
+  .theme-toggle__track {
+    width: 7.25rem;
+    height: 2.75rem;
+    padding: 0.2rem;
+  }
+
+  .theme-toggle__knob {
+    left: 0.25rem;
+    width: 1.85rem;
+    height: 1.85rem;
+  }
+
+  #theme-toggle:checked + .theme-toggle .theme-toggle__knob {
+    left: calc(100% - 0.25rem - 1.85rem);
+  }
+
+  .theme-toggle__side--day::after {
+    width: 1.15rem;
+    height: 0.95rem;
+  }
+
+  .theme-toggle__side--night::after {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+}
+
+/* ==========================================================================
+   Theme variable overrides (dark mode when checked)
+   ========================================================================== */
+body:has(#theme-toggle:checked) {
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e2e8f0;
+  --color-background: #0f172a;
+  --color-background-light: #1e293b;
+  --color-header-bg: #020617;
+  --color-primary: #58d5cc;
+  --color-primary-strong: #3bb8b0;
+  --color-primary-soft: #8ee9e1;
+  --color-accent: #f4b860;
+  --color-accent-strong: #e0a94f;
+  --color-success: #48bb78;
+  --color-error: #f56565;
+  --color-warning: #ecc94b;
+  --color-on-primary: #0f172a;
+  --color-on-accent: #0f172a;
+  --color-on-success: #0f172a;
+  --color-on-warning: #0f172a;
+  --color-on-error: #0f172a;
+}
+
+@media (prefers-color-scheme: dark) {
+  body:has(#theme-toggle:checked) {
+    --color-text-primary: #2c3e50;
+    --color-text-secondary: #6c757d;
+    --color-background: #fdfdfd;
+    --color-background-light: #f8f9fa;
+    --color-header-bg: #e5e7eb;
+    --color-primary: #008080;
+    --color-primary-strong: #00545c;
+    --color-primary-soft: #009999;
+    --color-accent: #FFC857;
+    --color-accent-strong: #FFB84D;
+    --color-success: #28a745;
+    --color-error: #c82333;
+    --color-warning: #ffc107;
+    --color-on-primary: #ffffff;
+    --color-on-accent: #1f2933;
+    --color-on-success: #0f1f17;
+    --color-on-warning: #1f2933;
+    --color-on-error: #ffffff;
+  }
+}
