@@ -1,16 +1,20 @@
-function getSystemPrefersDark() {
-  return !!(
-    window.matchMedia &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-  );
-}
-
+/*
+  ELI5: How this theme toggle works
+ 
+  - CSS is the only thing that actually changes colors.
+  - This JS file does NOT turn dark mode on/off. It only:
+    1) sets the checkbox state on page load
+    2) remembers the checkbox state in localStorage
+ 
+  localStorage key:
+  - 'salud.themeToggleChecked' stores 'true' or 'false'.
+ */
 
 export function initThemeTogglePersistence() {
   const toggle = document.getElementById('theme-toggle');
   if (!toggle) return;
 
-  const storageKey = 'salud-theme';
+  const storageKey = 'salud.themeToggleChecked';
   let didWarn = false;
 
   const warnOnce = (err) => {
@@ -25,43 +29,19 @@ export function initThemeTogglePersistence() {
     }
   };
 
-  const getSystemTheme = () => (getSystemPrefersDark() ? 'dark' : 'light');
-  const invertTheme = (theme) => (theme === 'dark' ? 'light' : 'dark');
-
-  const setCheckboxForTheme = (theme) => {
-    const systemTheme = getSystemTheme();
-    toggle.checked = theme !== systemTheme;
-  };
-
-  const getThemeFromCheckbox = () => {
-    const systemTheme = getSystemTheme();
-    return toggle.checked ? invertTheme(systemTheme) : systemTheme;
-  };
-
-  // Init: if no saved preference, keep unchecked => follow system
+  // Init
   try {
     const stored = localStorage.getItem(storageKey);
-    if (stored === 'light' || stored === 'dark') {
-      setCheckboxForTheme(stored);
-    } else {
-      toggle.checked = false;
-    }
+    toggle.checked = stored === 'true';
   } catch (err) {
     toggle.checked = false;
     warnOnce(err);
   }
 
-  // Persist: store explicit theme when user overrides system; clear when back to system
+  // Persist
   toggle.addEventListener('change', () => {
     try {
-      const systemTheme = getSystemTheme();
-      const chosenTheme = getThemeFromCheckbox();
-
-      if (chosenTheme === systemTheme) {
-        localStorage.removeItem(storageKey);
-      } else {
-        localStorage.setItem(storageKey, chosenTheme);
-      }
+      localStorage.setItem(storageKey, String(toggle.checked));
     } catch (err) {
       warnOnce(err);
     }
