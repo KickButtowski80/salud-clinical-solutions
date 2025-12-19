@@ -19,34 +19,18 @@
                 </ul>
             </section>
 
-            <section data-component="RoleChips" aria-label="Choose your role">
-                <h3 class="text-lg font-semibold m-0 mb-2">Choose your role (chips placeholder)</h3>
-                <ul>
-                    <li>Psychiatrist</li>
-                    <li>Psychologist</li>
-                    <li>Licensed Clinical Social Worker</li>
-                    <li>Licensed Marriage and Family Therapist</li>
-                    <li>Primary Care Physician</li>
-                    <li>Nurse Practitioner</li>
-                    <li>Physician Assistant</li>
-                    <li>CRNA</li>
-                    <li>Nurse</li>
-                    <li>Licensed Professional Clinical Counselor</li>
-                    <li>Pharmacist</li>
-                    <li>Dentist</li>
-                    <li>Medical Facility or Clinic</li>
-                </ul>
-            </section>
+            <include src="./components/RoleChips.html"></include>
 
             <section data-component="MatchMicrocopy" aria-label="Match message">
                 <h3 class="text-lg font-semibold m-0 mb-2">Match message (placeholder)</h3>
-                <p class="m-0">Great — we’ll prioritize roles that match your license and location.</p>
+                <p id="match-microcopy" class="m-0">Great — we’ll prioritize roles that match your license and location.</p>
             </section>
         </div>
 
         <aside data-component="ContactForm" aria-label="Application form">
             <form data-component="ApplyFormCard">
                 <h3 class="text-lg font-semibold m-0">Application form (placeholder)</h3>
+                <input id="apply-role" name="role" type="hidden" value="" />
                 <p class="m-0">First Name + Last Name</p>
                 <p class="m-0">Email</p>
                 <p class="m-0">Phone</p>
