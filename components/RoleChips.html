@@ -20,46 +20,58 @@
         <h3 class="text-lg font-semibold m-0 mb-2">Choose your role</h3>
     </header>
 
+    <label class="role-select" aria-label="Choose your role">
+        <select data-role-select>
+            <option value="Psychiatrist">Psychiatrist</option>
+            <option value="Psychologist">Psychologist</option>
+            <option value="Licensed Clinical Social Worker">Licensed Clinical Social Worker</option>
+            <option value="Licensed Marriage and Family Therapist">Licensed Marriage and Family Therapist</option>
+            <option value="Primary Care Physician">Primary Care Physician</option>
+            <option value="Nurse Practitioner">Nurse Practitioner</option>
+            <option value="Physician Assistant">Physician Assistant</option>
+            <option value="CRNA">CRNA</option>
+            <option value="Nurse">Nurse</option>
+            <option value="Licensed Professional Clinical Counselor">Licensed Professional Clinical Counselor</option>
+            <option value="Medical Facility or Clinic">Medical Facility or Clinic</option>
+        </select>
+    </label>
+
     <ul class="flex flex-wrap m-0" data-role-chips>
         <li>
-            <button type="button" class="role-chip" data-role="Psychiatrist" aria-pressed="true">Psychiatrist</button>
+            <button type="button" class="role-chip" data-role="Psychiatrist" aria-label="Psychiatrist" title="Psychiatrist" aria-pressed="true">Psych MD</button>
         </li>
         <li>
-            <button type="button" class="role-chip" data-role="Psychologist" aria-pressed="false">Psychologist</button>
+            <button type="button" class="role-chip" data-role="Psychologist" aria-label="Psychologist" title="Psychologist" aria-pressed="false">Psych PhD</button>
         </li>
         <li>
             <button type="button" class="role-chip" data-role="Licensed Clinical Social Worker"
-                aria-pressed="false">Licensed Clinical Social Worker</button>
+                aria-label="Licensed Clinical Social Worker" title="Licensed Clinical Social Worker" aria-pressed="false">LCSW</button>
         </li>
         <li>
             <button type="button" class="role-chip" data-role="Licensed Marriage and Family Therapist"
-                aria-pressed="false">Licensed Marriage and Family Therapist</button>
+                aria-label="Licensed Marriage and Family Therapist" title="Licensed Marriage and Family Therapist" aria-pressed="false">LMFT</button>
         </li>
         <li>
-            <button type="button" class="role-chip" data-role="Primary Care Physician" aria-pressed="false">Primary Care
-                Physician</button>
+            <button type="button" class="role-chip" data-role="Primary Care Physician" aria-label="Primary Care Physician" title="Primary Care Physician" aria-pressed="false">PCP</button>
         </li>
         <li>
-            <button type="button" class="role-chip" data-role="Nurse Practitioner" aria-pressed="false">Nurse
-                Practitioner</button>
+            <button type="button" class="role-chip" data-role="Nurse Practitioner" aria-label="Nurse Practitioner" title="Nurse Practitioner" aria-pressed="false">NP</button>
         </li>
         <li>
-            <button type="button" class="role-chip" data-role="Physician Assistant" aria-pressed="false">Physician
-                Assistant</button>
+            <button type="button" class="role-chip" data-role="Physician Assistant" aria-label="Physician Assistant" title="Physician Assistant" aria-pressed="false">PA</button>
         </li>
         <li>
-            <button type="button" class="role-chip" data-role="CRNA" aria-pressed="false">CRNA</button>
+            <button type="button" class="role-chip" data-role="CRNA" title="CRNA" aria-pressed="false">CRNA</button>
         </li>
         <li>
-            <button type="button" class="role-chip" data-role="Nurse" aria-pressed="false">Nurse</button>
+            <button type="button" class="role-chip" data-role="Nurse" aria-label="Nurse" title="Nurse" aria-pressed="false">RN</button>
         </li>
         <li>
             <button type="button" class="role-chip" data-role="Licensed Professional Clinical Counselor"
-                aria-pressed="false">Licensed Professional Clinical Counselor</button>
+                aria-label="Licensed Professional Clinical Counselor" title="Licensed Professional Clinical Counselor" aria-pressed="false">LPCC</button>
         </li>
         <li>
-            <button type="button" class="role-chip" data-role="Medical Facility or Clinic" aria-pressed="false">Medical
-                Facility or Clinic</button>
+            <button type="button" class="role-chip" data-role="Medical Facility or Clinic" aria-label="Medical Facility or Clinic" title="Medical Facility or Clinic" aria-pressed="false">Facility</button>
         </li>
     </ul>
 </section>

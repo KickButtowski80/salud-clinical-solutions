@@ -341,6 +341,14 @@
   gap: clamp(0.5rem, 1.2vw, 0.9rem);
 }
 
+[data-component="RoleChips"] .role-select {
+  display: none;
+}
+
+[data-component="RoleChips"] [data-role-chips] {
+  display: flex;
+}
+
 .role-chip {
   border-radius: 0.85rem;
   padding: clamp(0.65rem, 1.2vw, 0.85rem) clamp(0.8rem, 1.6vw, 1.05rem);

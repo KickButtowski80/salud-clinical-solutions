@@ -22,7 +22,7 @@ form[data-component="ApplyFormCard"].is-stepper [data-stepper-controls] {
   content: '';
   display: block;
   height: 100%;
-  width: var(--progress, 33.333%);
+  width: var(--progress, 25%);
   background:
     linear-gradient(
       90deg,

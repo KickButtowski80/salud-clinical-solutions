@@ -10,13 +10,19 @@ export function initRoleChips() {
     const input = targetInputSelector ? document.querySelector(targetInputSelector) : null;
     const microcopy = targetMicrocopySelector ? document.querySelector(targetMicrocopySelector) : null;
 
+    const roleSelect = root.querySelector('select[data-role-select]');
+
     const chipsContainer = root.querySelector('[data-role-chips]');
-    if (!chipsContainer) return;
+    const buttons = chipsContainer
+      ? Array.from(chipsContainer.querySelectorAll('button[data-role]'))
+      : [];
 
-    const buttons = Array.from(chipsContainer.querySelectorAll('button[data-role]'));
-    if (!buttons.length) return;
-
-    const availableRoles = new Set(buttons.map((btn) => btn.getAttribute('data-role') || '').filter(Boolean));
+    const availableRoles = new Set([
+      ...buttons.map((btn) => btn.getAttribute('data-role') || ''),
+      ...(roleSelect instanceof HTMLSelectElement
+        ? Array.from(roleSelect.options).map((opt) => opt.value || '')
+        : []),
+    ].filter(Boolean));
 
     const defaultMicrocopyText = microcopy ? microcopy.textContent || '' : '';
 
@@ -29,6 +35,10 @@ export function initRoleChips() {
 
       if (input) input.value = role;
 
+      if (roleSelect instanceof HTMLSelectElement) {
+        if (role && roleSelect.value !== role) roleSelect.value = role;
+      }
+
       if (microcopy) {
         microcopy.textContent = role
           ? `Great — we’ll prioritize matches for ${role} that fit your license and location.`
@@ -37,7 +47,10 @@ export function initRoleChips() {
     };
 
     const defaultRoleProp = root.getAttribute('data-default-role') || '';
-    const firstRole = buttons[0].getAttribute('data-role') || '';
+    const firstRole =
+      (buttons[0] && (buttons[0].getAttribute('data-role') || '')) ||
+      (roleSelect instanceof HTMLSelectElement ? roleSelect.value || '' : '') ||
+      '';
 
     let initialRole = input && input.value ? input.value : '';
     if (!initialRole) initialRole = defaultRoleProp || firstRole;
@@ -45,15 +58,25 @@ export function initRoleChips() {
 
     if (initialRole) setSelectedRole(initialRole);
 
-    chipsContainer.addEventListener('click', (e) => {
-      const btn = e.target instanceof Element ? e.target.closest('button[data-role]') : null;
-      if (!btn) return;
+    if (roleSelect instanceof HTMLSelectElement) {
+      roleSelect.addEventListener('change', () => {
+        const role = roleSelect.value || '';
+        if (!role) return;
+        setSelectedRole(role);
+      });
+    }
 
-      const role = btn.getAttribute('data-role') || '';
-      if (!role) return;
+    if (chipsContainer) {
+      chipsContainer.addEventListener('click', (e) => {
+        const btn = e.target instanceof Element ? e.target.closest('button[data-role]') : null;
+        if (!btn) return;
 
-      // single + locked: clicking the selected chip keeps it selected.
-      setSelectedRole(role);
-    });
+        const role = btn.getAttribute('data-role') || '';
+        if (!role) return;
+
+        // single + locked: clicking the selected chip keeps it selected.
+        setSelectedRole(role);
+      });
+    }
   });
 }
