@@ -4,6 +4,7 @@ import { initScrollToTop } from './scroll-to-top.js';
 import { initHeroMapReplay } from './hero-map-replay.js';
 import { initStaffCardHeights } from './staff-card-height.js';
 import { initThemeTogglePersistence } from './theme-toggle-persistence.js';
+import { initRoleChips } from './role-chips.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavIntersectionObserver();
@@ -12,4 +13,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroMapReplay();
   initStaffCardHeights();
   initThemeTogglePersistence();
+  initRoleChips();
 });
