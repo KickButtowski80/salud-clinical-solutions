@@ -9,19 +9,20 @@
   - data-target-input: CSS selector for the hidden <input> receiving the selected role value
   - data-target-microcopy: CSS selector for the text element updated with role-specific messaging
   - data-selected-class: CSS class applied to the selected chip (keeps JS/CSS decoupled)
+  - data-default-role: Configurable default selection prop
 
   Accessibility
   - Each chip is a <button type="button"> with aria-pressed="true|false"
 -->
 <section data-component="RoleChips" data-target-input="#apply-role" data-target-microcopy="#match-microcopy"
-    data-selected-class="is-selected" aria-label="Choose your role">
+    data-selected-class="is-selected" data-default-role="Psychiatrist" aria-label="Choose your role">
     <header>
         <h3 class="text-lg font-semibold m-0 mb-2">Choose your role</h3>
     </header>
 
     <ul class="flex flex-wrap m-0" data-role-chips>
         <li>
-            <button type="button" class="role-chip" data-role="Psychiatrist" aria-pressed="false">Psychiatrist</button>
+            <button type="button" class="role-chip" data-role="Psychiatrist" aria-pressed="true">Psychiatrist</button>
         </li>
         <li>
             <button type="button" class="role-chip" data-role="Psychologist" aria-pressed="false">Psychologist</button>
