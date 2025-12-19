@@ -105,6 +105,30 @@
     0 0.35rem 0.9rem rgba(0, 0, 0, 0.18);
 }
 
+[data-component="MatchMicrocopy"] {
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 28%, transparent);
+  border-left: 0.35rem solid color-mix(in srgb, var(--color-primary) 85%, transparent);
+  background:
+    radial-gradient(circle at 15% 35%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 62%),
+    radial-gradient(circle at 90% 70%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 65%),
+    var(--color-background-light);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.16),
+    0 6px 16px rgba(0, 0, 0, 0.1);
+  padding: clamp(0.9rem, 2.2vw, 1.25rem);
+}
+
+[data-component="MatchMicrocopy"] h3 {
+  margin-bottom: clamp(0.4rem, 1vw, 0.6rem);
+}
+
+#match-microcopy {
+  font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
 [data-component="RoleChips"] {
   border-radius: 1rem;
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
