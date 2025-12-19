@@ -19,26 +19,13 @@
                 </ul>
             </section>
 
-            <include src="./components/RoleChips.html"></include>
-
-            <section data-component="MatchMicrocopy" aria-label="Match message">
-                <h3 class="sr-only">Match message</h3>
-                <p id="match-microcopy" class="m-0">Great — we’ll prioritize roles that match your license and location.</p>
-            </section>
+            <figure data-component="ApplyNowVisual" class="hidden md-block" aria-hidden="true">
+                <img src="./src/assets/images/apply-now.webp" alt="" loading="lazy" decoding="async" />
+            </figure>
         </div>
 
         <aside data-component="ContactForm" aria-label="Application form">
-            <form data-component="ApplyFormCard">
-                <h3 class="text-lg font-semibold m-0">Application form (placeholder)</h3>
-                <input id="apply-role" name="role" type="hidden" value="" />
-                <p class="m-0">First Name + Last Name</p>
-                <p class="m-0">Email</p>
-                <p class="m-0">Phone</p>
-                <p class="m-0">I am a licensed healthcare professional (select)</p>
-                <p class="m-0">Active State License (text input, not dropdown)</p>
-                <p class="m-0">License Number</p>
-                <p class="m-0">CTA: Apply Now</p>
-            </form>
+            <include src="./components/ApplyFormCard.html"></include>
         </aside>
     </div>
 </section>
