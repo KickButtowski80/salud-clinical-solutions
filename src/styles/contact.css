@@ -77,6 +77,17 @@
   display: inline-flex;
   align-items: center;
   line-height: 1.2;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+@media (hover: hover) {
+  [data-component="TrustHighlights"] li:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--color-text-primary) 26%, transparent);
+    box-shadow:
+      0 0.6rem 1.4rem rgba(0, 0, 0, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  }
 }
 
 [data-component="TrustHighlights"] li::before {
@@ -95,4 +106,55 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  gap: clamp(0.5rem, 1.2vw, 0.9rem);
+}
+
+.role-chip {
+  border-radius: 0.85rem;
+  padding: clamp(0.65rem, 1.2vw, 0.85rem) clamp(0.8rem, 1.6vw, 1.05rem);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 24%, transparent);
+  background:
+    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 60%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent) 8%, transparent), transparent 60%),
+    color-mix(in srgb, var(--color-background-light) 92%, transparent);
+  color: var(--color-text-primary);
+  box-shadow:
+    0 0.35rem 1rem rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+@media (hover: hover) {
+  .role-chip:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--color-text-primary) 26%, transparent);
+    box-shadow:
+      0 0.6rem 1.4rem rgba(0, 0, 0, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+}
+
+.role-chip.is-selected,
+.role-chip[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--color-primary) 85%, transparent);
+  border-width: 2px;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-primary) 28%, transparent),
+      color-mix(in srgb, var(--color-accent) 16%, transparent)
+    ),
+    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 18%, transparent), transparent 60%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 60%),
+    color-mix(in srgb, var(--color-background-light) 96%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--color-primary) 22%, transparent),
+    0 0.7rem 1.8rem rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.role-chip:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+  outline-offset: 3px;
 }
