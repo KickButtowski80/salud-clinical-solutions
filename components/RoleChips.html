@@ -1,3 +1,18 @@
+<!--
+  Why chips (not a dropdown)
+  - Faster selection (one click, no open/scroll/select)
+  - Clearer hierarchy: role selection is the primary interaction in this section
+  - Better tap targets on mobile
+  - Immediate feedback: JS updates selected state + form hidden input + match microcopy
+
+  JS props (data-attributes)
+  - data-target-input: CSS selector for the hidden <input> receiving the selected role value
+  - data-target-microcopy: CSS selector for the text element updated with role-specific messaging
+  - data-selected-class: CSS class applied to the selected chip (keeps JS/CSS decoupled)
+
+  Accessibility
+  - Each chip is a <button type="button"> with aria-pressed="true|false"
+-->
 <section data-component="RoleChips" data-target-input="#apply-role" data-target-microcopy="#match-microcopy"
     data-selected-class="is-selected" aria-label="Choose your role">
     <header>
