@@ -67,6 +67,41 @@ form[data-component="ApplyFormCard"].is-stepper [data-stepper-controls] {
   cursor: not-allowed;
 }
 
+.apply-step {
+  opacity: 0;
+  transform: scale(0.98);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+.apply-step:not([hidden]) {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+  pointer-events: auto;
+  animation: apply-step-pop 280ms var(--transition-base) both;
+}
+
+@keyframes apply-step-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+    filter: blur(6px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.005);
+    filter: blur(1px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
 @media (hover: hover) {
   .apply-stepper__btn:hover:not(:disabled) {
     transform: translate3d(1px, -1px, 0);
