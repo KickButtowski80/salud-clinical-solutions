@@ -3,6 +3,38 @@
   gap: clamp(0.9rem, 2.2vw, 1.25rem);
 }
 
+:root {
+  --card-radius: 1rem;
+  --card-border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
+  --card-border-strong: 1px solid color-mix(in srgb, var(--color-text-secondary) 28%, transparent);
+  --card-border-soft: 1px solid color-mix(in srgb, var(--color-text-secondary) 18%, transparent);
+  --card-shadow-lg:
+    0 18px 45px rgba(0, 0, 0, 0.12),
+    0 6px 14px rgba(0, 0, 0, 0.08);
+  --card-shadow-md:
+    0 16px 40px rgba(0, 0, 0, 0.16),
+    0 6px 16px rgba(0, 0, 0, 0.1);
+  --shadow-float-sm: 0 0.45rem 1.2rem rgba(0, 0, 0, 0.14);
+  --shadow-float-xs: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.08);
+  --shadow-inset-soft: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --surface-gradient-accent:
+    radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 58%),
+    radial-gradient(circle at 82% 78%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 60%),
+    var(--color-background-light);
+  --surface-gradient-highlight:
+    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 60%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 60%),
+    var(--color-background-light);
+  --surface-gradient-hero:
+    radial-gradient(circle at 15% 35%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 62%),
+    radial-gradient(circle at 90% 70%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 65%),
+    var(--color-background-light);
+  --card-surface: var(--color-background-light);
+  --card-padding: clamp(0.9rem, 2.2vw, 1.25rem);
+  --transition-base: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 #contact > header {
   margin: 0;
 }
@@ -22,13 +54,11 @@
 }
 
 [data-component="ApplyFormCard"] {
-  border-radius: 1rem;
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
-  background: var(--color-background-light);
-  box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.12),
-    0 6px 14px rgba(0, 0, 0, 0.08);
-  padding: clamp(0.9rem, 2.2vw, 1.25rem);
+  border-radius: var(--card-radius);
+  border: var(--card-border);
+  background: var(--card-surface);
+  box-shadow: var(--card-shadow-lg);
+  padding: var(--card-padding);
   display: flex;
   flex-direction: column;
   gap: clamp(0.6rem, 1.6vw, 0.9rem);
@@ -41,16 +71,11 @@
 }
 
 .apply-step {
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 18%, transparent);
+  border: var(--card-border-soft);
   border-radius: 0.95rem;
   padding: clamp(0.75rem, 2vw, 1.05rem);
-  background:
-    radial-gradient(circle at 15% 25%, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 55%),
-    radial-gradient(circle at 85% 80%, color-mix(in srgb, var(--color-accent) 8%, transparent), transparent 60%),
-    color-mix(in srgb, var(--color-background-light) 92%, transparent);
-  box-shadow:
-    0 0.4rem 1.2rem rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background: var(--surface-gradient-accent);
+  box-shadow: var(--shadow-float-xs), var(--shadow-inset-soft);
 }
 
 .apply-step__legend {
@@ -61,6 +86,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
+  font-size: var(--font-size-sm);
 }
 
 .apply-step__badge {
@@ -126,15 +152,18 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
     0 0.25rem 0.8rem rgba(0, 0, 0, 0.06);
   transition:
-    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .form-field textarea {
   resize: vertical;
   min-height: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .form-field input:focus-visible,
@@ -185,9 +214,9 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
   cursor: pointer;
   transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    filter var(--transition-base);
 }
 
 .apply-submit:focus-visible {
@@ -214,15 +243,10 @@
 }
 
 [data-component="IntroHero"] {
-  border-radius: 1rem;
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
-  background:
-    radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 18%, transparent), transparent 55%),
-    radial-gradient(circle at bottom right, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 55%),
-    var(--color-background-light);
-  box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.18),
-    0 6px 14px rgba(0, 0, 0, 0.1);
+  border-radius: var(--card-radius);
+  border: var(--card-border);
+  background: var(--surface-gradient-hero);
+  box-shadow: var(--card-shadow-md);
   color: var(--color-text-primary);
   padding:
     clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem)
@@ -244,31 +268,25 @@
 [data-component="TrustHighlights"] li {
   border-radius: 0.85rem;
   padding: clamp(0.55rem, 1vw, 0.75rem) clamp(0.7rem, 1.4vw, 1rem);
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 24%, transparent);
-  background:
-    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 60%),
-    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 60%),
-    color-mix(in srgb, var(--color-background-light) 92%, transparent);
+  border: var(--card-border);
+  background: var(--surface-gradient-highlight);
   color: var(--color-text-primary);
-  box-shadow:
-    0 0.45rem 1.2rem rgba(0, 0, 0, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-float-sm), var(--shadow-inset-soft);
   display: inline-flex;
   align-items: center;
   line-height: 1.2;
   transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
 }
 
 @media (hover: hover) {
   [data-component="TrustHighlights"] li:hover {
     transform: translate3d(2px, -2px, 0);
-    border-color: color-mix(in srgb, var(--color-text-primary) 26%, transparent);
     box-shadow:
-      0 0.6rem 1.4rem rgba(0, 0, 0, 0.16),
-      inset 0 1px 0 rgba(255, 255, 255, 0.09);
+      0 0 0 2px color-mix(in srgb, var(--color-background-light) 78%, transparent),
+      0 0.35rem 0.9rem rgba(0, 0, 0, 0.18);
   }
 }
 
@@ -286,13 +304,11 @@
 
 [data-component="ApplyNowVisual"] {
   margin: 0;
-  border-radius: 1rem;
+  border-radius: var(--card-radius);
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
-  background: var(--color-background-light);
-  box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.12),
-    0 6px 14px rgba(0, 0, 0, 0.08);
+  border: var(--card-border);
+  background: var(--card-surface);
+  box-shadow: var(--card-shadow-lg);
 }
 
 [data-component="ApplyNowVisual"] img {
@@ -302,16 +318,11 @@
 }
 
 [data-component="MatchMicrocopy"] {
-  border-radius: 1rem;
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 28%, transparent);
+  border-radius: var(--card-radius);
+  border: var(--card-border-strong);
   border-left: 0.35rem solid color-mix(in srgb, var(--color-primary) 85%, transparent);
-  background:
-    radial-gradient(circle at 15% 35%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 62%),
-    radial-gradient(circle at 90% 70%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 65%),
-    var(--color-background-light);
-  box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.16),
-    0 6px 16px rgba(0, 0, 0, 0.1);
+  background: var(--surface-gradient-hero);
+  box-shadow: var(--card-shadow-md);
   padding: clamp(0.9rem, 2.2vw, 1.25rem);
 }
 
@@ -323,11 +334,9 @@
 
 [data-component="RoleChips"] {
   border-radius: 1rem;
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
-  background: var(--color-background-light);
-  box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.1),
-    0 6px 14px rgba(0, 0, 0, 0.07);
+  border: var(--card-border);
+  background: var(--card-surface);
+  box-shadow: var(--card-shadow-lg);
   padding: clamp(0.8rem, 2vw, 1.2rem);
   display: flex;
   flex-direction: column;
@@ -341,10 +350,6 @@
   gap: clamp(0.5rem, 1.2vw, 0.9rem);
 }
 
-[data-component="RoleChips"] .role-select {
-  display: none;
-}
-
 [data-component="RoleChips"] [data-role-chips] {
   display: flex;
 }
@@ -352,26 +357,20 @@
 .role-chip {
   border-radius: 0.85rem;
   padding: clamp(0.65rem, 1.2vw, 0.85rem) clamp(0.8rem, 1.6vw, 1.05rem);
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 24%, transparent);
-  background:
-    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 60%),
-    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent) 8%, transparent), transparent 60%),
-    color-mix(in srgb, var(--color-background-light) 92%, transparent);
+  border: var(--card-border);
+  background: var(--surface-gradient-accent);
   color: var(--color-text-primary);
-  box-shadow:
-    0 0.35rem 1rem rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: var(--shadow-float-xs), var(--shadow-inset-soft);
   cursor: pointer;
   transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
 }
 
 @media (hover: hover) {
   .role-chip:hover {
     transform: translate3d(2px, -2px, 0);
-    border-color: color-mix(in srgb, var(--color-text-primary) 26%, transparent);
     box-shadow:
       0 0.6rem 1.4rem rgba(0, 0, 0, 0.16),
       inset 0 1px 0 rgba(255, 255, 255, 0.08);
