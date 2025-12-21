@@ -1,12 +1,50 @@
 #contact {
   padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
   gap: clamp(0.9rem, 2.2vw, 1.25rem);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-soft) 100%);
+  --card-surface: color-mix(in srgb, var(--color-background) 75%, var(--color-primary) 25%);
+  --surface-gradient-accent: color-mix(in srgb, var(--color-background) 80%, var(--color-primary) 20%);
+  --surface-gradient-highlight: color-mix(in srgb, var(--color-background) 70%, var(--color-primary-soft) 30%);
+  --surface-gradient-hero: color-mix(in srgb, var(--color-background) 65%, var(--color-primary) 35%);
+  --card-border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+  --card-border-strong: 1px solid color-mix(in srgb, var(--color-primary) 40%, transparent);
+  --card-border-soft: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+  --contact-heading-color: #000000;
+  --contact-text-primary: #000000;
+  --contact-text-secondary: #000000;
+  --contact-text-on-surface: #000000;
+  --form-input-bg: color-mix(in srgb, var(--color-background) 85%, var(--color-primary-soft) 15%);
+}
+
+body:has(#theme-toggle:checked) #contact {
+  background:
+    linear-gradient(150deg, #03161c 0%, #082c34 45%, #0b3f45 100%);
+  --card-surface: color-mix(in srgb, #0f172a 80%, #0b3640 20%);
+  --surface-gradient-accent:
+    radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--color-primary) 25%, #0b2430), transparent 60%),
+    radial-gradient(circle at 82% 78%, color-mix(in srgb, var(--color-primary-soft) 22%, #0b2430), transparent 70%),
+    #0f1f27;
+  --surface-gradient-highlight:
+    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 22%, #0c2733), transparent 60%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-primary-soft) 18%, #0c2733), transparent 70%),
+    #102731;
+  --surface-gradient-hero:
+    radial-gradient(circle at 12% 28%, color-mix(in srgb, var(--color-primary) 30%, #0c2733), transparent 70%),
+    radial-gradient(circle at 88% 72%, color-mix(in srgb, var(--color-primary-soft) 24%, #0c2733), transparent 72%),
+    #0f2632;
+  --card-border: 1px solid color-mix(in srgb, #ffffff 12%, transparent);
+  --card-border-strong: 1px solid color-mix(in srgb, #ffffff 18%, transparent);
+  --card-border-soft: 1px solid color-mix(in srgb, #ffffff 10%, transparent);
+  --contact-heading-color: var(--color-primary-soft);
+  --contact-text-primary: #ffffff;
+  --contact-text-secondary: #e2e8f0;
+  --contact-text-on-surface: #ffffff;
+  --form-input-bg: color-mix(in srgb, #0f172a 85%, #1e293b);
 }
 
 :root {
   --card-radius: 1rem;
   --card-border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
-  --card-border-strong: 1px solid color-mix(in srgb, var(--color-text-secondary) 28%, transparent);
   --card-border-soft: 1px solid color-mix(in srgb, var(--color-text-secondary) 18%, transparent);
   --card-shadow-lg:
     0 18px 45px rgba(0, 0, 0, 0.12),
@@ -37,6 +75,10 @@
 
 #contact > header {
   margin: 0;
+}
+
+#contact > header h2 {
+  color: var(--contact-heading-color);
 }
 
 [data-component="ContactLayout"] {
@@ -82,7 +124,7 @@
   padding: 0;
   margin: 0 0 0.75rem 0;
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
+  color: var(--contact-text-on-surface);
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
@@ -135,16 +177,16 @@
 .form-field label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
+  color: var(--contact-text-on-surface);
 }
 
 .form-field input,
 .form-field select,
 .form-field textarea {
   border-radius: 0.85rem;
-  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
-  background: color-mix(in srgb, var(--color-background) 75%, var(--color-background-light));
-  color: var(--color-text-primary);
+  border: 1px solid color-mix(in srgb, var(--contact-text-secondary) 22%, transparent);
+  background: var(--form-input-bg);
+  color: var(--contact-text-primary);
   padding: 0.75rem 0.85rem;
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
