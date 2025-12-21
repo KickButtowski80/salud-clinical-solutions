@@ -9,7 +9,7 @@ export function initApplyFormStepper() {
     const nextBtn = form.querySelector('[data-stepper-next]');
     const progress = form.querySelector('[data-stepper-progress]');
     const status = form.querySelector('[data-stepper-status]');
-    const submit = form.querySelector('button.apply-submit[type="submit"]');
+    const submit = form.querySelector('button.apply-submit');
 
     if (!(prevBtn instanceof HTMLButtonElement) || !(nextBtn instanceof HTMLButtonElement)) return;
 
@@ -36,7 +36,16 @@ export function initApplyFormStepper() {
       prevBtn.disabled = activeIndex === 0;
       nextBtn.hidden = activeIndex === steps.length - 1;
 
-      if (submit) submit.hidden = activeIndex !== steps.length - 1;
+      if (submit) {
+        const isFinalStep = activeIndex === steps.length - 1;
+        if (isFinalStep) {
+          submit.removeAttribute('hidden');
+          submit.removeAttribute('aria-hidden');
+        } else {
+          submit.setAttribute('hidden', '');
+          submit.setAttribute('aria-hidden', 'true');
+        }
+      }
 
       if (progress instanceof HTMLElement) {
         const pct = ((activeIndex + 1) / steps.length) * 100;
