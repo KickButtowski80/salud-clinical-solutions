@@ -37,7 +37,7 @@ body:has(#theme-toggle:checked) #contact {
   --card-border-soft: 1px solid color-mix(in srgb, #ffffff 10%, transparent);
   --contact-heading-color: var(--color-primary-soft);
   --contact-text-primary: #ffffff;
-  --contact-text-secondary: #e2e8f0;
+  --contact-text-secondary: #ffffff;
   --contact-text-on-surface: #ffffff;
   --form-input-bg: color-mix(in srgb, #0f172a 85%, #1e293b);
 }
@@ -73,11 +73,11 @@ body:has(#theme-toggle:checked) #contact {
   --transition-fast: 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-#contact > header {
+#contact>header {
   margin: 0;
 }
 
-#contact > header h2 {
+#contact>header h2 {
   color: var(--contact-heading-color);
 }
 
@@ -110,6 +110,13 @@ body:has(#theme-toggle:checked) #contact {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+  color: #ffffff;
+}
+
+#contact .apply-form__header h3,
+#contact .apply-form__header p,
+#contact .apply-form__header [data-stepper-status] {
+  color: #ffffff;
 }
 
 .apply-step {
@@ -142,11 +149,9 @@ body:has(#theme-toggle:checked) #contact {
   font-weight: var(--font-weight-bold);
   color: var(--color-on-primary);
   background:
-    linear-gradient(
-      135deg,
+    linear-gradient(135deg,
       color-mix(in srgb, var(--color-primary) 92%, transparent),
-      color-mix(in srgb, var(--color-primary-soft) 70%, transparent)
-    );
+      color-mix(in srgb, var(--color-primary-soft) 70%, transparent));
   box-shadow:
     0 0 0 3px color-mix(in srgb, var(--color-primary) 16%, transparent),
     0 0.45rem 1.1rem rgba(0, 0, 0, 0.12);
@@ -174,15 +179,15 @@ body:has(#theme-toggle:checked) #contact {
   gap: 0.35rem;
 }
 
-.form-field label {
+#contact .form-field label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--contact-text-on-surface);
 }
 
-.form-field input,
-.form-field select,
-.form-field textarea {
+#contact .form-field input,
+#contact .form-field select,
+#contact .form-field textarea {
   border-radius: 0.85rem;
   border: 1px solid color-mix(in srgb, var(--contact-text-secondary) 22%, transparent);
   background: var(--form-input-bg);
@@ -200,7 +205,7 @@ body:has(#theme-toggle:checked) #contact {
     background-color var(--transition-fast);
 }
 
-.form-field textarea {
+#contact .form-field textarea {
   resize: vertical;
   min-height: 7.5rem;
   display: flex;
@@ -208,9 +213,9 @@ body:has(#theme-toggle:checked) #contact {
   gap: 0.5rem;
 }
 
-.form-field input:focus-visible,
-.form-field select:focus-visible,
-.form-field textarea:focus-visible {
+#contact .form-field input:focus-visible,
+#contact .form-field select:focus-visible,
+#contact .form-field textarea:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--color-primary) 42%, transparent);
   outline-offset: 3px;
   border-color: color-mix(in srgb, var(--color-primary) 65%, transparent);
@@ -220,9 +225,10 @@ body:has(#theme-toggle:checked) #contact {
 }
 
 @media (hover: hover) {
-  .form-field input:hover,
-  .form-field select:hover,
-  .form-field textarea:hover {
+
+  #contact .form-field input:hover,
+  #contact .form-field select:hover,
+  #contact .form-field textarea:hover {
     transform: translate3d(1px, -1px, 0);
     border-color: color-mix(in srgb, var(--color-text-primary) 22%, transparent);
     box-shadow:
@@ -245,11 +251,9 @@ body:has(#theme-toggle:checked) #contact {
   font-size: var(--font-size-base);
   color: var(--color-on-primary);
   background:
-    linear-gradient(
-      135deg,
+    linear-gradient(135deg,
       color-mix(in srgb, var(--color-primary) 95%, transparent),
-      color-mix(in srgb, var(--color-primary-soft) 78%, transparent)
-    );
+      color-mix(in srgb, var(--color-primary-soft) 78%, transparent));
   box-shadow:
     0 0.85rem 2rem rgba(0, 0, 0, 0.16),
     0 0.35rem 0.9rem rgba(0, 0, 0, 0.12),
@@ -284,19 +288,18 @@ body:has(#theme-toggle:checked) #contact {
     inset 0 2px 10px rgba(0, 0, 0, 0.18);
 }
 
-[data-component="IntroHero"] {
+#contact [data-component="IntroHero"] {
   border-radius: var(--card-radius);
   border: var(--card-border);
   background: var(--surface-gradient-hero);
   box-shadow: var(--card-shadow-md);
-  color: var(--color-text-primary);
+  color: var(--contact-text-primary);
   padding:
-    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem)
-    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem);
+    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem) clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem);
 }
 
-[data-component="IntroHero"] p {
-  color: var(--color-text-secondary);
+#contact [data-component="IntroHero"] p {
+  color: var(--contact-text-on-surface);
   max-width: 46rem;
 }
 
@@ -307,12 +310,12 @@ body:has(#theme-toggle:checked) #contact {
   gap: clamp(0.5rem, 1.2vw, 0.9rem);
 }
 
-[data-component="TrustHighlights"] li {
+#contact [data-component="TrustHighlights"] li {
   border-radius: 0.85rem;
   padding: clamp(0.55rem, 1vw, 0.75rem) clamp(0.7rem, 1.4vw, 1rem);
   border: var(--card-border);
   background: var(--surface-gradient-highlight);
-  color: var(--color-text-primary);
+  color: var(--contact-text-on-surface);
   box-shadow: var(--shadow-float-sm), var(--shadow-inset-soft);
   display: inline-flex;
   align-items: center;
@@ -332,45 +335,9 @@ body:has(#theme-toggle:checked) #contact {
   }
 }
 
-[data-component="TrustHighlights"] li::before {
-  content: '';
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 999px;
-  margin-right: 0.55rem;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
-  box-shadow:
-    0 0 0 2px color-mix(in srgb, var(--color-background-light) 78%, transparent),
-    0 0.35rem 0.9rem rgba(0, 0, 0, 0.18);
-}
-
-[data-component="ApplyNowVisual"] {
-  margin: 0;
-  border-radius: var(--card-radius);
-  overflow: hidden;
-  border: var(--card-border);
-  background: var(--card-surface);
-  box-shadow: var(--card-shadow-lg);
-}
-
-[data-component="ApplyNowVisual"] img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-[data-component="MatchMicrocopy"] {
-  border-radius: var(--card-radius);
-  border: var(--card-border-strong);
-  border-left: 0.35rem solid color-mix(in srgb, var(--color-primary) 85%, transparent);
-  background: var(--surface-gradient-hero);
-  box-shadow: var(--card-shadow-md);
-  padding: clamp(0.9rem, 2.2vw, 1.25rem);
-}
-
-#match-microcopy {
+#contact #match-microcopy {
   font-size: clamp(0.98rem, 1.2vw, 1.08rem);
-  color: var(--color-text-primary);
+  color: var(--contact-text-on-surface);
   line-height: 1.5;
 }
 
@@ -385,23 +352,19 @@ body:has(#theme-toggle:checked) #contact {
   gap: clamp(0.75rem, 2vw, 1rem);
 }
 
-[data-component="RoleChips"] ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  gap: clamp(0.5rem, 1.2vw, 0.9rem);
-}
-
 [data-component="RoleChips"] [data-role-chips] {
   display: flex;
+  list-style: none;
+  gap: clamp(0.5rem, 1vw + 0.25rem, 0.75rem);
+  padding-inline-start: 0;
 }
 
-.role-chip {
+#contact .role-chip {
   border-radius: 0.85rem;
   padding: clamp(0.65rem, 1.2vw, 0.85rem) clamp(0.8rem, 1.6vw, 1.05rem);
   border: var(--card-border);
   background: var(--surface-gradient-accent);
-  color: var(--color-text-primary);
+  color: var(--contact-text-on-surface);
   box-shadow: var(--shadow-float-xs), var(--shadow-inset-soft);
   cursor: pointer;
   transition:
@@ -411,7 +374,7 @@ body:has(#theme-toggle:checked) #contact {
 }
 
 @media (hover: hover) {
-  .role-chip:hover {
+  #contact .role-chip:hover {
     transform: translate3d(2px, -2px, 0);
     box-shadow:
       0 0.6rem 1.4rem rgba(0, 0, 0, 0.16),
@@ -424,11 +387,9 @@ body:has(#theme-toggle:checked) #contact {
   border-color: color-mix(in srgb, var(--color-primary) 85%, transparent);
   border-width: 2px;
   background:
-    linear-gradient(
-      135deg,
+    linear-gradient(135deg,
       color-mix(in srgb, var(--color-primary) 28%, transparent),
-      color-mix(in srgb, var(--color-accent) 16%, transparent)
-    ),
+      color-mix(in srgb, var(--color-accent) 16%, transparent)),
     radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 18%, transparent), transparent 60%),
     radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 60%),
     color-mix(in srgb, var(--color-background-light) 96%, transparent);

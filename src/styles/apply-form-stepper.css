@@ -38,7 +38,7 @@ form[data-component="ApplyFormCard"].is-stepper [data-stepper-controls] {
   gap: 0.6rem;
 }
 
-.apply-stepper__btn {
+#contact .apply-stepper__btn {
   flex: 1;
   border-radius: 0.95rem;
   padding: 0.75rem 0.9rem;
@@ -57,12 +57,12 @@ form[data-component="ApplyFormCard"].is-stepper [data-stepper-controls] {
     box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.apply-stepper__btn:focus-visible {
+#contact .apply-stepper__btn:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--color-primary) 42%, transparent);
   outline-offset: 3px;
 }
 
-.apply-stepper__btn:disabled {
+#contact .apply-stepper__btn:disabled {
   opacity: 0.55;
   cursor: not-allowed;
 }
@@ -103,7 +103,7 @@ form[data-component="ApplyFormCard"].is-stepper [data-stepper-controls] {
 }
 
 @media (hover: hover) {
-  .apply-stepper__btn:hover:not(:disabled) {
+  #contact .apply-stepper__btn:hover:not(:disabled) {
     transform: translate3d(1px, -1px, 0);
     border-color: color-mix(in srgb, var(--color-text-primary) 22%, transparent);
     box-shadow:
