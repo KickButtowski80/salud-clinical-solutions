@@ -474,9 +474,52 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  .staff-card {
+    perspective: none;
+  }
+
+  .staff-card__toggle {
+    display: none;
+  }
+
   .staff-card__inner,
   .staff-card__toggle:checked + .staff-card__inner {
-    transition: none;
+    cursor: default;
     transform: none;
+    transition: none;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Show both faces stacked for reduced motion users */
+  .staff-card__face {
+    position: static;
+    transform: none;
+    opacity: 1;
+    display: block;
+  }
+
+  .staff-card__face--back {
+    border-top: 1px solid color-mix(in srgb, #ffffff 14%, transparent);
+    padding-top: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .staff-card__face--front,
+  .staff-card__face--back {
+    padding:
+      clamp(0.95rem, calc(2vw + 0.7rem), 1.4rem)
+      clamp(0.9rem, calc(1.6vw + 0.65rem), 1.25rem)
+      clamp(1.05rem, calc(2vw + 0.8rem), 1.25rem);
+  }
+
+  .staff-card__back-content {
+    padding: 0;
+  }
+
+  .staff-card__close {
+    display: none;
   }
 }

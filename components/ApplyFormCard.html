@@ -3,6 +3,7 @@
         <h3 class="text-lg font-semibold m-0">Application</h3>
         <p class="m-0 text-sm text-secondary">Share a few details and we’ll follow up with next steps.</p>
         <p class="m-0 text-xs text-secondary" data-stepper-status></p>
+        <p class="m-0 text-xs text-muted">* Required fields</p>
     </header>
 
     <div class="apply-progress" data-stepper-progress aria-hidden="true"></div>
@@ -31,18 +32,21 @@
 
         <div class="apply-step__grid">
             <div class="form-field">
-                <label for="apply-name">Full name</label>
-                <input id="apply-name" name="name" type="text" autocomplete="name" />
+                <label for="apply-name">Full name *</label>
+                <input id="apply-name" name="name" type="text" autocomplete="name" required aria-describedby="apply-name-error" />
+                <div id="apply-name-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-field">
-                <label for="apply-email">Email</label>
-                <input id="apply-email" name="email" type="email" autocomplete="email" />
+                <label for="apply-email">Email *</label>
+                <input id="apply-email" name="email" type="email" autocomplete="email" required aria-describedby="apply-email-error" />
+                <div id="apply-email-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-field">
-                <label for="apply-phone">Phone</label>
-                <input id="apply-phone" name="phone" type="tel" autocomplete="tel" />
+                <label for="apply-phone">Phone *</label>
+                <input id="apply-phone" name="phone" type="tel" autocomplete="tel" required aria-describedby="apply-phone-error" />
+                <div id="apply-phone-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
         </div>
     </fieldset>
@@ -55,8 +59,8 @@
 
         <div class="apply-step__grid">
             <div class="form-field">
-                <label for="apply-license-type">License type</label>
-                <select id="apply-license-type" name="licenseType">
+                <label for="apply-license-type">Profession *</label>
+                <select id="apply-license-type" name="licenseType" required aria-describedby="apply-license-type-error">
                     <option value="" selected>Select…</option>
                     <option value="psychiatrist">Psychiatrist (MD/DO)</option>
                     <option value="psychologist">Psychologist (PhD/PsyD)</option>
@@ -66,11 +70,12 @@
                     <option value="pmhnp">PMHNP</option>
                     <option value="other">Other</option>
                 </select>
+                <div id="apply-license-type-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-field">
-                <label for="apply-license-state">Active state license</label>
-                <select id="apply-license-state" name="licenseState" autocomplete="address-level1">
+                <label for="apply-license-state">Active state license *</label>
+                <select id="apply-license-state" name="licenseState" autocomplete="address-level1" required aria-describedby="apply-license-state-error">
                     <option value="" selected>Select…</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>

@@ -73,10 +73,6 @@ body:has(#theme-toggle:checked) #contact {
   --transition-fast: 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-#contact>header {
-  margin: 0;
-}
-
 #contact>header h2 {
   color: var(--contact-heading-color);
 }
@@ -177,6 +173,13 @@ body:has(#theme-toggle:checked) #contact {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+}
+
+.form-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-error, #dc2626);
+  min-height: 1.2em;
+  margin-top: 0.25rem;
 }
 
 #contact .form-field label {
