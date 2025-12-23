@@ -1,0 +1,73 @@
+<!--
+  Why chips (not a dropdown)
+  - Faster selection (one click, no open/scroll/select)
+  - Clearer hierarchy: role selection is the primary interaction in this section
+  - Better tap targets on mobile
+  - Immediate feedback: JS updates selected state + form hidden input + match microcopy
+
+  JS props (data-attributes)
+  - data-target-input: CSS selector for the hidden <input> receiving the selected role value
+  - data-target-microcopy: CSS selector for the text element updated with role-specific messaging
+  - data-selected-class: CSS class applied to the selected chip (keeps JS/CSS decoupled)
+  - data-default-role: Configurable default selection prop
+
+  Accessibility
+  - Each chip is a <button type="button"> with aria-pressed="true|false"
+-->
+<section data-component="RoleChips" data-target-input="#apply-role" data-target-microcopy="#match-microcopy"
+    data-selected-class="is-selected" data-default-role="Psychiatrist" aria-label="Choose your role">
+    <header>
+        <h3 class="text-lg font-semibold m-0 mb-2">Choose your role</h3>
+    </header>
+
+
+    <ul class="flex flex-wrap m-0" data-role-chips>
+        <li>
+            <button type="button" class="role-chip" data-role="Psychiatrist" aria-label="Psychiatrist"
+                title="Psychiatrist" aria-pressed="true">Psych</button>
+        </li>
+        <li>
+            <button type="button" class="role-chip" data-role="Psychologist" aria-label="Psychologist"
+                title="Psychologist" aria-pressed="false">Psych PhD</button>
+        </li>
+        <li>
+            <button type="button" class="role-chip" data-role="Licensed Clinical Social Worker"
+                aria-label="Licensed Clinical Social Worker" title="Licensed Clinical Social Worker"
+                aria-pressed="false">LCSW</button>
+        </li>
+        <li>
+            <button type="button" class="role-chip" data-role="Licensed Marriage and Family Therapist"
+                aria-label="Licensed Marriage and Family Therapist" title="Licensed Marriage and Family Therapist"
+                aria-pressed="false">LMFT</button>
+        </li>
+        <li>
+            <button type="button" class="role-chip" data-role="Primary Care Physician"
+                aria-label="Primary Care Physician" title="Primary Care Physician" aria-pressed="false">PCP</button>
+        </li>
+        <li>
+            <button type="button" class="role-chip" data-role="Nurse Practitioner" aria-label="Nurse Practitioner"
+                title="Nurse Practitioner" aria-pressed="false">NP</button>
+        </li>
+        <li>
+            <button type="button" class="role-chip" data-role="Physician Assistant" aria-label="Physician Assistant"
+                title="Physician Assistant" aria-pressed="false">PA</button>
+        </li>
+        <li>
+            <button type="button" class="role-chip" data-role="CRNA" title="CRNA" aria-pressed="false">CRNA</button>
+        </li>
+        <li>
+            <button type="button" class="role-chip" data-role="Nurse" aria-label="Nurse" title="Nurse"
+                aria-pressed="false">RN</button>
+        </li>
+        <li>
+            <button type="button" class="role-chip" data-role="Licensed Professional Clinical Counselor"
+                aria-label="Licensed Professional Clinical Counselor" title="Licensed Professional Clinical Counselor"
+                aria-pressed="false">LPCC</button>
+        </li>
+        <li>
+            <button type="button" class="role-chip" data-role="Medical Facility or Clinic"
+                aria-label="Medical Facility or Clinic" title="Medical Facility or Clinic"
+                aria-pressed="false">Facility</button>
+        </li>
+    </ul>
+</section>

@@ -1,0 +1,487 @@
+#contact {
+  padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
+  gap: clamp(0.9rem, 2.2vw, 1.25rem);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-soft) 100%);
+  --card-surface: color-mix(in srgb, var(--color-background) 90%, var(--color-primary) 10%);
+  --surface-gradient-accent: color-mix(in srgb, var(--color-background) 88%, var(--color-primary) 12%);
+  --surface-gradient-highlight: color-mix(in srgb, var(--color-background) 82%, var(--color-primary-soft) 18%);
+  --surface-gradient-hero: color-mix(in srgb, var(--color-background) 65%, var(--color-primary) 35%);
+
+  --card-border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+  --card-border-strong: 1px solid color-mix(in srgb, var(--color-primary) 40%, transparent);
+  --card-border-soft: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+  --contact-heading-color: #000000;
+  --contact-text-primary: #000000;
+  --contact-text-secondary: #000000;
+  --contact-text-on-surface: #000000;
+  --form-input-bg: color-mix(in srgb, var(--color-background) 92%, var(--color-primary-soft) 8%);
+}
+
+body:has(#theme-toggle:checked) #contact {
+  background:
+    linear-gradient(150deg, #03161c 0%, #082c34 45%, #0b3f45 100%);
+  --card-surface: color-mix(in srgb, #0f172a 80%, #0b3640 20%);
+  --surface-gradient-accent:
+    radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--color-primary) 25%, #0b2430), transparent 60%),
+    radial-gradient(circle at 82% 78%, color-mix(in srgb, var(--color-primary-soft) 22%, #0b2430), transparent 70%),
+    #0f1f27;
+  --surface-gradient-highlight:
+    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 22%, #0c2733), transparent 60%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-primary-soft) 18%, #0c2733), transparent 70%),
+    #102731;
+  --surface-gradient-hero:
+    radial-gradient(circle at 12% 28%, color-mix(in srgb, var(--color-primary) 30%, #0c2733), transparent 70%),
+    radial-gradient(circle at 88% 72%, color-mix(in srgb, var(--color-primary-soft) 24%, #0c2733), transparent 72%),
+    #0f2632;
+  --card-border: 1px solid color-mix(in srgb, #ffffff 12%, transparent);
+  --card-border-strong: 1px solid color-mix(in srgb, #ffffff 18%, transparent);
+  --card-border-soft: 1px solid color-mix(in srgb, #ffffff 10%, transparent);
+  --contact-heading-color: var(--color-primary-soft);
+  --contact-text-primary: #ffffff;
+  --contact-text-secondary: #cbd5f5;
+  --contact-text-on-surface: #f8fbff;
+  --form-input-bg: color-mix(in srgb, #08141b 84%, #112f3d);
+}
+
+body:has(#theme-toggle:checked) #contact .form-field input,
+body:has(#theme-toggle:checked) #contact .form-field select,
+body:has(#theme-toggle:checked) #contact .form-field textarea {
+  background: var(--form-input-bg);
+  border-color: color-mix(in srgb, #15bcbc 30%, transparent);
+  color: var(--contact-text-on-surface);
+}
+
+body:has(#theme-toggle:checked) #contact [data-component="RoleChips"] {
+  background: color-mix(in srgb, #08151b 84%, #0b3640);
+  border: 1px solid color-mix(in srgb, #0da9a9 35%, transparent);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body:has(#theme-toggle:checked) #contact .role-chip {
+  background: color-mix(in srgb, #0a1f29 78%, #13404d);
+  border-color: color-mix(in srgb, #15bcbc 32%, transparent);
+}
+
+body:has(#theme-toggle:checked) #contact .role-chip.is-selected,
+body:has(#theme-toggle:checked) #contact .role-chip[aria-pressed="true"] {
+  background: color-mix(in srgb, #15bcbc 22%, rgba(255, 255, 255, 0.04));
+  border-color: color-mix(in srgb, #36f0f0 55%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, #0da9a9 25%, transparent),
+    0 1rem 2.8rem rgba(0, 0, 0, 0.45);
+}
+
+:root {
+  --card-radius: 1rem;
+  --card-border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
+  --card-border-soft: 1px solid color-mix(in srgb, var(--color-text-secondary) 18%, transparent);
+  --card-shadow-lg:
+    0 18px 45px rgba(0, 0, 0, 0.12),
+    0 6px 14px rgba(0, 0, 0, 0.08);
+  --card-shadow-md:
+    0 16px 40px rgba(0, 0, 0, 0.16),
+    0 6px 16px rgba(0, 0, 0, 0.1);
+  --shadow-float-sm: 0 0.45rem 1.2rem rgba(0, 0, 0, 0.14);
+  --shadow-float-xs: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.08);
+  --shadow-inset-soft: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --surface-gradient-accent:
+    radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 58%),
+    radial-gradient(circle at 82% 78%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 60%),
+    var(--color-background-light);
+  --surface-gradient-highlight:
+    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 60%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 60%),
+    var(--color-background-light);
+  --surface-gradient-hero:
+    radial-gradient(circle at 15% 35%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 62%),
+    radial-gradient(circle at 90% 70%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 65%),
+    var(--color-background-light);
+  --card-surface: var(--color-background-light);
+  --card-padding: clamp(0.9rem, 2.2vw, 1.25rem);
+  --transition-base: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#contact>header h2 {
+  color: var(--contact-heading-color);
+}
+
+[data-component="ContactLayout"] {
+  gap: clamp(1rem, 3vw, 1.75rem);
+}
+
+[data-component="ContactContent"] {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.4vw, 1.6rem);
+}
+
+[data-component="ContactForm"] {
+  align-self: center;
+}
+
+[data-component="ApplyFormCard"] {
+  border-radius: var(--card-radius);
+  border: var(--card-border);
+  background: var(--surface-gradient-hero);
+  box-shadow: var(--card-shadow-lg);
+  padding: var(--card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.6rem, 1.6vw, 0.9rem);
+}
+
+.apply-form__header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: #ffffff;
+  padding-right: clamp(3rem, 6vw, 4.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+#contact .apply-form__header h3,
+#contact .apply-form__header p,
+#contact .apply-form__header [data-stepper-status] {
+  color: #ffffff;
+}
+
+.apply-form__emblem {
+  position: absolute;
+  width: clamp(5rem, 7vw + 0.25rem, 6rem);
+  height: clamp(5rem, 7vw + 0.25rem, 6rem);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--color-primary-soft) 65%, transparent), transparent 65%),
+    color-mix(in srgb, var(--color-primary) 35%, rgba(255, 255, 255, 0.2));
+  box-shadow:
+    0 0.45rem 1.1rem rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.apply-form__emblem--top-right {
+  top: -4.25rem;
+  right: -1rem;
+}
+
+.apply-form__emblem--bottom-right {
+  bottom: clamp(-2.25rem, calc(-1.25rem - 1vw), -1rem);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.apply-form__emblem img,
+.apply-form__emblem svg {
+  width: clamp(3rem, 4.5vw + 0.25rem, 3.8rem);
+  height: clamp(3rem, 4.5vw + 0.25rem, 3.8rem);
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.35));
+}
+
+.apply-step {
+  border: var(--card-border-soft);
+  border-radius: 0.95rem;
+  padding: clamp(0.75rem, 2vw, 1.05rem);
+  background: var(--surface-gradient-hero);
+  box-shadow: var(--shadow-float-xs), var(--shadow-inset-soft);
+}
+
+.apply-step__legend {
+  padding: 0;
+  margin: 0 0 0.75rem 0;
+  font-weight: var(--font-weight-semibold);
+  color: var(--contact-text-on-surface);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: var(--font-size-sm);
+}
+
+.apply-step__badge {
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-on-primary);
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--color-primary) 92%, transparent),
+      color-mix(in srgb, var(--color-primary-soft) 70%, transparent));
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--color-primary) 16%, transparent),
+    0 0.45rem 1.1rem rgba(0, 0, 0, 0.12);
+}
+
+.apply-step__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 520px) {
+  .apply-step__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .apply-step__grid .form-field:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-error, #dc2626);
+  min-height: 1.2em;
+  margin-top: 0.25rem;
+}
+
+#contact .form-field label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--contact-text-on-surface);
+}
+
+#contact .form-field input,
+#contact .form-field select,
+#contact .form-field textarea {
+  border-radius: 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--contact-text-secondary) 22%, transparent);
+  background: var(--color-background-light);
+  color: var(--contact-text-primary);
+  padding: 0.75rem 0.85rem;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0.25rem 0.8rem rgba(0, 0, 0, 0.06);
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+#contact .form-field textarea {
+  resize: vertical;
+  min-height: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#contact .form-field input:focus-visible,
+#contact .form-field select:focus-visible,
+#contact .form-field textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-primary) 42%, transparent);
+  outline-offset: 3px;
+  border-color: color-mix(in srgb, var(--color-primary) 65%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent),
+    0 0.5rem 1.4rem rgba(0, 0, 0, 0.1);
+}
+
+@media (hover: hover) {
+
+  #contact .form-field input:hover,
+  #contact .form-field select:hover,
+  #contact .form-field textarea:hover {
+    transform: translate3d(1px, -1px, 0);
+    border-color: color-mix(in srgb, var(--color-text-primary) 22%, transparent);
+    box-shadow:
+      0 0.55rem 1.3rem rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+}
+
+.apply-form__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  padding-bottom: clamp(2.75rem, 4vw, 3.75rem);
+}
+
+.apply-submit {
+  border: 0;
+  border-radius: 0.95rem;
+  padding: 0.9rem 1rem;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  color: var(--color-on-primary);
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--color-primary) 95%, transparent),
+      color-mix(in srgb, var(--color-primary-soft) 78%, transparent));
+  box-shadow:
+    0 0.85rem 2rem rgba(0, 0, 0, 0.16),
+    0 0.35rem 0.9rem rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    filter var(--transition-base);
+}
+
+.apply-submit:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .apply-submit:hover {
+    transform: translate3d(2px, -2px, 0);
+    box-shadow:
+      0 1rem 2.4rem rgba(0, 0, 0, 0.18),
+      0 0.45rem 1.05rem rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    filter: saturate(1.06);
+  }
+}
+
+.apply-submit:active {
+  transform: translate3d(0, 0, 0);
+  box-shadow:
+    0 0.5rem 1.2rem rgba(0, 0, 0, 0.14),
+    inset 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+
+#contact [data-component="IntroHero"] {
+  border-radius: var(--card-radius);
+  border: var(--card-border);
+  background: var(--surface-gradient-hero);
+  box-shadow: var(--card-shadow-md);
+  color: var(--contact-text-primary);
+  padding:
+    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem) clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem);
+}
+
+#contact [data-component="IntroHero"] p {
+  color: var(--contact-text-on-surface);
+  max-width: 46rem;
+}
+
+[data-component="TrustHighlights"] ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: clamp(0.5rem, 1.2vw, 0.9rem);
+}
+
+#contact [data-component="TrustHighlights"] h3 {
+  color: var(--contact-text-on-surface);
+}
+
+#contact [data-component="TrustHighlights"] li {
+  border-radius: 0.85rem;
+  padding: clamp(0.55rem, 1vw, 0.75rem) clamp(0.7rem, 1.4vw, 1rem);
+  border: var(--card-border);
+  background: var(--surface-gradient-hero);
+  color: var(--contact-text-on-surface);
+  box-shadow: var(--shadow-float-sm), var(--shadow-inset-soft);
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+}
+
+@media (hover: hover) {
+  [data-component="TrustHighlights"] li:hover {
+    transform: translate3d(2px, -2px, 0);
+    box-shadow:
+      0 0 0 2px color-mix(in srgb, var(--color-background-light) 78%, transparent),
+      0 0.35rem 0.9rem rgba(0, 0, 0, 0.18);
+  }
+}
+
+#contact #match-microcopy {
+  font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+  color: var(--contact-text-on-surface);
+  line-height: 1.5;
+}
+
+[data-component="RoleChips"] {
+  border-radius: 1rem;
+  border: var(--card-border);
+  background: var(--surface-gradient-hero);
+  box-shadow: var(--card-shadow-lg);
+  padding: clamp(0.8rem, 2vw, 1.2rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 2vw, 1rem);
+}
+
+[data-component="RoleChips"] [data-role-chips] {
+  display: flex;
+  list-style: none;
+  gap: clamp(0.5rem, 1vw + 0.25rem, 0.75rem);
+  padding-inline-start: 0;
+}
+
+#contact [data-component="RoleChips"] h3 {
+  color: var(--contact-text-on-surface);
+}
+
+#contact .role-chip {
+  border-radius: 0.85rem;
+  padding: clamp(0.65rem, 1.2vw, 0.85rem) clamp(0.8rem, 1.6vw, 1.05rem);
+  border: var(--card-border);
+  background: var(--surface-gradient-accent);
+  color: var(--contact-text-on-surface);
+  box-shadow: var(--shadow-float-xs), var(--shadow-inset-soft);
+  cursor: pointer;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+}
+
+@media (hover: hover) {
+  #contact .role-chip:hover {
+    transform: translate3d(2px, -2px, 0);
+    box-shadow:
+      0 0.6rem 1.4rem rgba(0, 0, 0, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+}
+
+#contact .role-chip.is-selected,
+#contact .role-chip[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--color-primary) 85%, transparent);
+  border-width: 2px;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--color-primary) 28%, transparent),
+      color-mix(in srgb, var(--color-accent) 16%, transparent)),
+    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 18%, transparent), transparent 60%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 60%),
+    color-mix(in srgb, var(--color-background-light) 96%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--color-primary) 22%, transparent),
+    0 0.7rem 1.8rem rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.role-chip:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+  outline-offset: 3px;
+}

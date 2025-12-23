@@ -1,0 +1,35 @@
+<section id="contact" aria-label="Contact section" class="flex flex-col">
+    <header>
+        <h2 class="text-3xl m-0">Start the Conversation</h2>
+    </header>
+
+    <div data-component="ContactLayout" class="grid grid-cols-1 md-grid-cols-2">
+        <div data-component="ContactContent">
+            <header data-component="IntroHero">
+                <h3 class="text-2xl font-bold m-0 mb-2">Find the right behavioral health role—fast.</h3>
+                <p class="text-lg leading-relaxed m-0">We connect psychiatrists, psychologists, and licensed clinical
+                    social workers with organizations looking for reliable, compassionate care. Whether you’re exploring
+                    locum tenens or long-term placements, we help you get matched to opportunities that fit your
+                    license, location, and schedule.</p>
+            </header>
+
+            <section data-component="TrustHighlights" aria-label="Highlights">
+                <h3 class="text-lg font-semibold m-0 mb-2 ">Highlights</h3>
+                <ul class="flex flex-wrap m-0">
+                    <li>Locum</li>
+                    <li>Long Term</li>
+                    <li>Fast placement</li>
+                    <li>Multi-state placements</li>
+                </ul>
+            </section>
+
+            <figure data-component="ApplyNowVisual" class="hidden md-block" aria-hidden="true">
+                <img src="./src/assets/images/apply-now.webp" alt="" loading="lazy" decoding="async" />
+            </figure>
+        </div>
+
+        <aside data-component="ContactForm" aria-label="Application form">
+            <include src="./components/ApplyFormCard.html"></include>
+        </aside>
+    </div>
+</section>
