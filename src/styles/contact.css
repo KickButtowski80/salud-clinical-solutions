@@ -2,10 +2,11 @@
   padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
   gap: clamp(0.9rem, 2.2vw, 1.25rem);
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-soft) 100%);
-  --card-surface: color-mix(in srgb, var(--color-background) 75%, var(--color-primary) 25%);
-  --surface-gradient-accent: color-mix(in srgb, var(--color-background) 80%, var(--color-primary) 20%);
-  --surface-gradient-highlight: color-mix(in srgb, var(--color-background) 70%, var(--color-primary-soft) 30%);
+  --card-surface: color-mix(in srgb, var(--color-background) 90%, var(--color-primary) 10%);
+  --surface-gradient-accent: color-mix(in srgb, var(--color-background) 88%, var(--color-primary) 12%);
+  --surface-gradient-highlight: color-mix(in srgb, var(--color-background) 82%, var(--color-primary-soft) 18%);
   --surface-gradient-hero: color-mix(in srgb, var(--color-background) 65%, var(--color-primary) 35%);
+
   --card-border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
   --card-border-strong: 1px solid color-mix(in srgb, var(--color-primary) 40%, transparent);
   --card-border-soft: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
@@ -13,7 +14,7 @@
   --contact-text-primary: #000000;
   --contact-text-secondary: #000000;
   --contact-text-on-surface: #000000;
-  --form-input-bg: color-mix(in srgb, var(--color-background) 85%, var(--color-primary-soft) 15%);
+  --form-input-bg: color-mix(in srgb, var(--color-background) 92%, var(--color-primary-soft) 8%);
 }
 
 body:has(#theme-toggle:checked) #contact {
@@ -94,7 +95,7 @@ body:has(#theme-toggle:checked) #contact {
 [data-component="ApplyFormCard"] {
   border-radius: var(--card-radius);
   border: var(--card-border);
-  background: var(--card-surface);
+  background: var(--surface-gradient-hero);
   box-shadow: var(--card-shadow-lg);
   padding: var(--card-padding);
   display: flex;
@@ -119,7 +120,7 @@ body:has(#theme-toggle:checked) #contact {
   border: var(--card-border-soft);
   border-radius: 0.95rem;
   padding: clamp(0.75rem, 2vw, 1.05rem);
-  background: var(--surface-gradient-accent);
+  background: var(--surface-gradient-hero);
   box-shadow: var(--shadow-float-xs), var(--shadow-inset-soft);
 }
 
@@ -321,7 +322,7 @@ body:has(#theme-toggle:checked) #contact {
   border-radius: 0.85rem;
   padding: clamp(0.55rem, 1vw, 0.75rem) clamp(0.7rem, 1.4vw, 1rem);
   border: var(--card-border);
-  background: var(--surface-gradient-highlight);
+  background: var(--surface-gradient-hero);
   color: var(--contact-text-on-surface);
   box-shadow: var(--shadow-float-sm), var(--shadow-inset-soft);
   display: inline-flex;
@@ -351,7 +352,7 @@ body:has(#theme-toggle:checked) #contact {
 [data-component="RoleChips"] {
   border-radius: 1rem;
   border: var(--card-border);
-  background: var(--card-surface);
+  background: var(--surface-gradient-hero);
   box-shadow: var(--card-shadow-lg);
   padding: clamp(0.8rem, 2vw, 1.2rem);
   display: flex;
@@ -364,6 +365,10 @@ body:has(#theme-toggle:checked) #contact {
   list-style: none;
   gap: clamp(0.5rem, 1vw + 0.25rem, 0.75rem);
   padding-inline-start: 0;
+}
+
+#contact [data-component="RoleChips"] h3 {
+  color: var(--contact-text-on-surface);
 }
 
 #contact .role-chip {
