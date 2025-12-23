@@ -33,9 +33,7 @@
   max-width: 40rem;
   margin: 0 auto 1.5rem;
   padding:
-    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem)
-    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem)
-    1.5rem;
+    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem) clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem) 1.5rem;
   border-bottom: 1px solid rgba(148, 163, 184, 0.15);
 }
 
@@ -67,8 +65,7 @@
   flex-direction: column;
   gap: 0.5rem;
   padding:
-    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem)
-    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem);
+    clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem) clamp(0.75rem, calc(1.2vw + 0.45rem), 1.1rem);
 }
 
 .leadership-title {
@@ -122,7 +119,7 @@
   margin: 0;
 }
 
-.leadership-grid > li {
+.leadership-grid>li {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -137,8 +134,10 @@
   perspective: 1000px;
   min-height: auto;
   align-self: start;
-  --staff-card-front-height: auto; /* JS will set this based on content */
-  --staff-card-back-height: auto; /* JS will set this based on content */
+  --staff-card-front-height: auto;
+  /* JS will set this based on content */
+  --staff-card-back-height: auto;
+  /* JS will set this based on content */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -181,18 +180,18 @@
   padding: 0;
   display: block;
   transform-style: preserve-3d;
-  transition: 
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), 
-    box-shadow 0.4s ease, 
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
     border-color 0.3s ease,
     background 0.4s ease;
 }
 
 /* Hover: lift, glow, spotlight effect */
-.staff-card__toggle:not(:checked) + .staff-card__inner:hover {
+.staff-card__toggle:not(:checked)+.staff-card__inner:hover {
   transform: translateY(-6px) scale(1.02);
   border-color: rgba(251, 191, 36, 0.5);
-  box-shadow: 
+  box-shadow:
     0 24px 50px rgba(15, 23, 42, 0.6),
     0 0 30px rgba(251, 191, 36, 0.15);
   background:
@@ -207,7 +206,7 @@
   outline-offset: 0.15rem;
 }
 
-.staff-card__toggle:focus-visible + .staff-card__inner {
+.staff-card__toggle:focus-visible+.staff-card__inner {
   outline: 0.15rem solid var(--color-accent);
   outline-offset: 0.15rem;
 }
@@ -217,7 +216,7 @@
   outline-offset: 0.15rem;
 }
 
-.staff-card__toggle:checked + .staff-card__inner {
+.staff-card__toggle:checked+.staff-card__inner {
   transform: rotateY(180deg);
   min-height: var(--staff-card-back-height, 30rem);
   box-shadow: 0 22px 55px rgba(15, 23, 42, 0.7);
@@ -241,9 +240,7 @@
 .staff-card__face--front {
   transform: rotateY(0deg);
   padding:
-    clamp(0.95rem, calc(2vw + 0.7rem), 1.4rem)
-    clamp(0.9rem, calc(1.6vw + 0.65rem), 1.25rem)
-    clamp(1.05rem, calc(2vw + 0.8rem), 1.25rem);
+    clamp(0.95rem, calc(2vw + 0.7rem), 1.4rem) clamp(0.9rem, calc(1.6vw + 0.65rem), 1.25rem) clamp(1.05rem, calc(2vw + 0.8rem), 1.25rem);
 }
 
 .staff-card__face--back {
@@ -254,9 +251,7 @@
 .staff-card__back-content {
   min-height: 0;
   padding:
-    clamp(0.9rem, calc(2vw + 0.75rem), 1.4rem)
-    clamp(0.85rem, calc(1.6vw + 0.65rem), 1.25rem)
-    clamp(1.05rem, calc(2.2vw + 0.8rem), 1.25rem);
+    clamp(0.9rem, calc(2vw + 0.75rem), 1.4rem) clamp(0.85rem, calc(1.6vw + 0.65rem), 1.25rem) clamp(1.05rem, calc(2.2vw + 0.8rem), 1.25rem);
 }
 
 /* Close button */
@@ -380,6 +375,7 @@
 
 /* Desktop text justification */
 @media (min-width: 768px) {
+
   .about-body,
   .leadership-subtitle {
     text-align: justify;
@@ -395,8 +391,7 @@
   .leadership-header {
     text-align: center;
     padding:
-      clamp(0.6rem, calc(1vw + 0.35rem), 0.9rem)
-      clamp(0.6rem, calc(1vw + 0.35rem), 0.9rem);
+      clamp(0.6rem, calc(1vw + 0.35rem), 0.9rem) clamp(0.6rem, calc(1vw + 0.35rem), 0.9rem);
   }
 
   .leadership-header-media {
@@ -422,6 +417,7 @@
 
 /* Staff cards tablet (426px - 1023px) */
 @media (min-width: 426px) and (max-width: 1023px) {
+
   .staff-card__avatar,
   .staff-card__thumb {
     width: clamp(4.75rem, 11vw, 6.75rem);
@@ -483,7 +479,7 @@
   }
 
   .staff-card__inner,
-  .staff-card__toggle:checked + .staff-card__inner {
+  .staff-card__toggle:checked+.staff-card__inner {
     cursor: default;
     transform: none;
     transition: none;
@@ -510,16 +506,15 @@
   .staff-card__face--front,
   .staff-card__face--back {
     padding:
-      clamp(0.95rem, calc(2vw + 0.7rem), 1.4rem)
-      clamp(0.9rem, calc(1.6vw + 0.65rem), 1.25rem)
-      clamp(1.05rem, calc(2vw + 0.8rem), 1.25rem);
+      clamp(0.95rem, calc(2vw + 0.7rem), 1.4rem) clamp(0.9rem, calc(1.6vw + 0.65rem), 1.25rem) clamp(1.05rem, calc(2vw + 0.8rem), 1.25rem);
   }
 
   .staff-card__back-content {
     padding: 0;
   }
 
-  .staff-card__close {
+  .staff-card__close,
+ .staff-card__face.staff-card__face--front {
     display: none;
   }
 }
