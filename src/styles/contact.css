@@ -104,6 +104,7 @@ body:has(#theme-toggle:checked) #contact {
 }
 
 .apply-form__header {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -114,6 +115,32 @@ body:has(#theme-toggle:checked) #contact {
 #contact .apply-form__header p,
 #contact .apply-form__header [data-stepper-status] {
   color: #ffffff;
+}
+
+.apply-form__emblem {
+  position: absolute;
+  top: -4.25rem;
+  right: -1rem;
+  width: clamp(5rem, 7vw + 0.25rem, 6rem);
+  height: clamp(5rem, 7vw + 0.25rem, 6rem);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--color-primary-soft) 65%, transparent), transparent 65%),
+    color-mix(in srgb, var(--color-primary) 35%, rgba(255, 255, 255, 0.2));
+  box-shadow:
+    0 0.45rem 1.1rem rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+ 
+.apply-form__emblem img {
+  width: clamp(3rem, 4.5vw + 0.25rem, 3.8rem);
+  height: clamp(3rem, 4.5vw + 0.25rem, 3.8rem);
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.35));
 }
 
 .apply-step {
