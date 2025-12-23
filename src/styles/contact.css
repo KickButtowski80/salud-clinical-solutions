@@ -139,6 +139,8 @@ body:has(#theme-toggle:checked) #contact .role-chip[aria-pressed="true"] {
   flex-direction: column;
   gap: 0.35rem;
   color: #ffffff;
+  padding-right: clamp(3rem, 6vw, 4.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 #contact .apply-form__header h3,
@@ -149,8 +151,6 @@ body:has(#theme-toggle:checked) #contact .role-chip[aria-pressed="true"] {
 
 .apply-form__emblem {
   position: absolute;
-  top: -4.25rem;
-  right: -1rem;
   width: clamp(5rem, 7vw + 0.25rem, 6rem);
   height: clamp(5rem, 7vw + 0.25rem, 6rem);
   border-radius: 999px;
@@ -165,8 +165,19 @@ body:has(#theme-toggle:checked) #contact .role-chip[aria-pressed="true"] {
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
- 
-.apply-form__emblem img {
+.apply-form__emblem--top-right {
+  top: -4.25rem;
+  right: -1rem;
+}
+
+.apply-form__emblem--bottom-right {
+  bottom: clamp(-2.25rem, calc(-1.25rem - 1vw), -1rem);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.apply-form__emblem img,
+.apply-form__emblem svg {
   width: clamp(3rem, 4.5vw + 0.25rem, 3.8rem);
   height: clamp(3rem, 4.5vw + 0.25rem, 3.8rem);
   display: block;
@@ -302,6 +313,8 @@ body:has(#theme-toggle:checked) #contact .role-chip[aria-pressed="true"] {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
+  padding-bottom: clamp(2.75rem, 4vw, 3.75rem);
 }
 
 .apply-submit {

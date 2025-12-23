@@ -1,12 +1,12 @@
 <form data-component="ApplyFormCard" method="post" action="">
     <header class="apply-form__header">
-        <span class="apply-form__emblem" aria-hidden="true">
-            <img src="./src/assets/images/apply-emblem.svg" alt="" loading="lazy" decoding="async" />
+        <span class="apply-form__emblem apply-form__emblem--top-right" aria-hidden="true">
+            <include src="./src/assets/images/apply-emblem.svg" />
         </span>
         <h3 class="text-2xl font-semibold m-0">Application</h3>
         <p class="m-0 text-lg text-secondary">Share a few details and we’ll follow up with next steps.</p>
         <p class="m-0 text-lg text-secondary" data-stepper-status></p>
-         
+       
     </header>
 
     <div class="apply-progress" data-stepper-progress aria-hidden="true"></div>
@@ -178,5 +178,9 @@
         <button class="apply-submit" hidden type="submit">Apply now</button>
         <p class="m-0 text-xs text-muted">Fields marked with <span aria-hidden="true">*</span> are required.</p>
         <p class="m-0 text-xs text-accent">No spam. Just next steps and relevant opportunities.</p>
+
+        <span class="apply-form__emblem apply-form__emblem--bottom-right" aria-hidden="true">
+            <include src="./src/assets/images/heart-beat.svg" />
+        </span>
     </footer>
 </form>
