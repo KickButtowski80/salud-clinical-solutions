@@ -313,6 +313,10 @@ body:has(#theme-toggle:checked) #contact {
   gap: clamp(0.5rem, 1.2vw, 0.9rem);
 }
 
+#contact [data-component="TrustHighlights"] h3 {
+  color: var(--contact-text-on-surface);
+}
+
 #contact [data-component="TrustHighlights"] li {
   border-radius: 0.85rem;
   padding: clamp(0.55rem, 1vw, 0.75rem) clamp(0.7rem, 1.4vw, 1rem);
