@@ -1,3 +1,5 @@
+import { createApplyFormValidator } from './apply-form-validation.js';
+
 export function initApplyFormStepper() {
   const forms = Array.from(document.querySelectorAll('form[data-component="ApplyFormCard"]'));
 
@@ -24,6 +26,8 @@ export function initApplyFormStepper() {
         candidate.focus();
       }
     };
+
+    const validator = createApplyFormValidator(form);
 
     const setActiveIndex = (nextIndex) => {
       activeIndex = Math.max(0, Math.min(nextIndex, steps.length - 1));
@@ -62,7 +66,10 @@ export function initApplyFormStepper() {
     form.classList.add('is-stepper');
 
     prevBtn.addEventListener('click', () => setActiveIndex(activeIndex - 1));
-    nextBtn.addEventListener('click', () => setActiveIndex(activeIndex + 1));
+    nextBtn.addEventListener('click', () => {
+      if (!validator.validateStep(activeIndex)) return;
+      setActiveIndex(activeIndex + 1);
+    });
 
     form.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter') return;
@@ -75,8 +82,25 @@ export function initApplyFormStepper() {
       if (tag === 'TEXTAREA') return;
 
       if (activeIndex < steps.length - 1) {
+        const stepValid = validator.validateStep(activeIndex);
+        if (!stepValid) return;
         e.preventDefault();
         setActiveIndex(activeIndex + 1);
+      }
+    });
+
+    form.addEventListener('submit', (event) => {
+      const { valid, firstInvalidStep } = validator.validateAll();
+      if (valid) return;
+
+      event.preventDefault();
+
+      if (typeof firstInvalidStep === 'number') {
+        setActiveIndex(firstInvalidStep);
+        // Temporarily comment out the follow-up validateStep call for debugging.
+        // requestAnimationFrame(() => {
+        //   validator.validateStep(firstInvalidStep);
+        // });
       }
     });
 
