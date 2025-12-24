@@ -83,6 +83,33 @@ export function initNavIntersectionObserver() {
   // eslint-disable-next-line no-underscore-dangle
   window.__showNavIoDebug = createDebugOverlay;
 
+  let suppressObserverUpdatesUntil = 0;
+
+  const suppressObserverUpdatesBriefly = () => {
+    // Use two nested requestAnimationFrame to wait for paint frames
+    suppressObserverUpdatesUntil = Date.now() + 50; // Brief guard
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        suppressObserverUpdatesUntil = 0;
+      });
+    });
+  };
+
+  // When you click the dark mode toggle, this code runs:
+  // 1. Theme toggle fires: "salud:theme-change"
+  // 2. We hear it and pause nav updates for ~2 paint frames (~32ms)
+  // 3. This stops the active menu from jumping while colors change
+  //
+  // It's like: button.addEventListener('click', () => console.log('button clicked!'));
+  window.addEventListener('salud:theme-change', suppressObserverUpdatesBriefly);
+  window.addEventListener(
+    'scroll',
+    () => {
+      suppressObserverUpdatesUntil = 0;
+    },
+    { passive: true }
+  );
+
   const sectionIds = ['home', 'services', 'about-us', 'contact'];
 
   const sections = sectionIds
@@ -92,6 +119,39 @@ export function initNavIntersectionObserver() {
   if (sections.length === 0) {
     return;
   }
+
+  const getSectionIdAtViewportCenter = () => {
+    const centerY = window.innerHeight / 2;
+    let best = null;
+
+    sections.forEach((section) => {
+      if (!(section instanceof HTMLElement)) return;
+      const rect = section.getBoundingClientRect();
+      const containsCenter = rect.top <= centerY && rect.bottom >= centerY;
+
+      if (containsCenter) {
+        const distanceToCenter = Math.abs((rect.top + rect.bottom) / 2 - centerY);
+        if (!best || distanceToCenter < best.distance) {
+          best = { id: section.id, distance: distanceToCenter };
+        }
+      }
+    });
+
+    if (best?.id) return best.id;
+
+    // Fallback: pick the section whose midpoint is closest to center.
+    sections.forEach((section) => {
+      if (!(section instanceof HTMLElement)) return;
+      const rect = section.getBoundingClientRect();
+      const mid = (rect.top + rect.bottom) / 2;
+      const distance = Math.abs(mid - centerY);
+      if (!best || distance < best.distance) {
+        best = { id: section.id, distance };
+      }
+    });
+
+    return best?.id || null;
+  };
 
   const desktopLinks = Array.from(
     document.querySelectorAll('.nav-menu .nav-link')
@@ -147,18 +207,6 @@ export function initNavIntersectionObserver() {
       }
     });
 
-    // Move the active badge/logo image under the currently active <li>
-    const activeBadge = document.querySelector('.nav-link-icon');
-    if (activeBadge) {
-      const activeDesktopLink = desktopById.get(sectionId);
-      if (activeDesktopLink && activeDesktopLink.parentElement) {
-        const targetLi = activeDesktopLink.parentElement;
-        if (activeBadge.parentElement !== targetLi) {
-          targetLi.appendChild(activeBadge);
-        }
-      }
-    }
-
     // Mobile: aria-current="page"
     mobileById.forEach((link, id) => {
       if (id === sectionId) {
@@ -187,22 +235,12 @@ export function initNavIntersectionObserver() {
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find the entry that is most visible / closest to center
-        let bestEntry = null;
+        if (Date.now() < suppressObserverUpdatesUntil) return;
 
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
-            bestEntry = entry;
-          }
-        });
-
-        if (!bestEntry) return;
-
-        const id = bestEntry.target.id;
-        if (id && sectionIds.includes(id)) {
-          updateNavForSection(id);
-        }
+        // Layout shifts (theme toggle, font swaps, etc.) can perturb intersectionRatio
+        // and cause nav to "jump". Use a deterministic viewport-center rule instead.
+        const id = getSectionIdAtViewportCenter();
+        if (id && sectionIds.includes(id)) updateNavForSection(id);
       },
       {
         // Treat a section as "current" when it's roughly in the middle third

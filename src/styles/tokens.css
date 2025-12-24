@@ -87,29 +87,45 @@
   --z-layer-tooltip: 600;      /* tooltips, skip-links, highest-priority overlays */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text-primary: #ffffff;
-    --color-text-secondary: #e2e8f0;
-    --color-background: #0f172a;       /* slightly lighter to harmonize with amber */
-    --color-background-light: #1e293b; /* band/background cards */
-    --color-header-bg: #020617;        /* darker band for header in dark mode */
-    /* Dark-mode adjustments for better contrast */
-    --color-primary: #58d5cc;   /* tuned teal for this neutral */
-    --color-primary-strong: #3bb8b0;
-    --color-primary-soft: #8ee9e1;
-    --color-accent: #f4b860;    /* muted amber to reduce clash */
-    --color-accent-strong: #e0a94f;
+/* Explicit theme tokens */
+html[data-theme="dark"] {
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e2e8f0;
+  --color-background: #0f172a;
+  --color-background-light: #1e293b;
+  --color-header-bg: #020617;
+  --color-primary: #58d5cc;
+  --color-primary-strong: #3bb8b0;
+  --color-primary-soft: #8ee9e1;
+  --color-accent: #f4b860;
+  --color-accent-strong: #e0a94f;
+  --color-success: #48bb78;
+  --color-error: #f56565;
+  --color-warning: #ecc94b;
+  --color-on-primary: #0f172a;
+  --color-on-accent: #0f172a;
+  --color-on-success: #0f172a;
+  --color-on-warning: #0f172a;
+  --color-on-error: #0f172a;
+}
 
-    --color-success: #48bb78;
-    --color-error: #f56565;
-    --color-warning: #ecc94b;
-
-    /* On-colors for dark mode (dark text on lighter semantic/brand bg) */
-    --color-on-primary: #0f172a;
-    --color-on-accent: #0f172a;
-    --color-on-success: #0f172a;
-    --color-on-warning: #0f172a;
-    --color-on-error: #0f172a;
-  }
+html[data-theme="light"] {
+  --color-text-primary: #2c3e50;
+  --color-text-secondary: #6c757d;
+  --color-background: #fdfdfd;
+  --color-background-light: #f8f9fa;
+  --color-header-bg: #e5e7eb;
+  --color-primary: #008080;
+  --color-primary-strong: #00545c;
+  --color-primary-soft: #009999;
+  --color-accent: #FFC857;
+  --color-accent-strong: #FFB84D;
+  --color-success: #28a745;
+  --color-error: #c82333;
+  --color-warning: #ffc107;
+  --color-on-primary: #ffffff;
+  --color-on-accent: #1f2933;
+  --color-on-success: #0f1f17;
+  --color-on-warning: #1f2933;
+  --color-on-error: #ffffff;
 }

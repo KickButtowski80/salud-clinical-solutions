@@ -17,7 +17,7 @@
   --form-input-bg: color-mix(in srgb, var(--color-background) 92%, var(--color-primary-soft) 8%);
 }
 
-body:has(#theme-toggle:checked) #contact {
+html[data-theme="dark"] #contact {
   background:
     linear-gradient(150deg, #03161c 0%, #082c34 45%, #0b3f45 100%);
   --card-surface: color-mix(in srgb, #0f172a 80%, #0b3640 20%);
@@ -43,15 +43,15 @@ body:has(#theme-toggle:checked) #contact {
   --form-input-bg: color-mix(in srgb, #08141b 84%, #112f3d);
 }
 
-body:has(#theme-toggle:checked) #contact .form-field input,
-body:has(#theme-toggle:checked) #contact .form-field select,
-body:has(#theme-toggle:checked) #contact .form-field textarea {
+html[data-theme="dark"] #contact .form-field input,
+html[data-theme="dark"] #contact .form-field select,
+html[data-theme="dark"] #contact .form-field textarea {
   background: var(--form-input-bg);
   border-color: color-mix(in srgb, #15bcbc 30%, transparent);
   color: var(--contact-text-on-surface);
 }
 
-body:has(#theme-toggle:checked) #contact [data-component="RoleChips"] {
+html[data-theme="dark"] #contact [data-component="RoleChips"] {
   background: color-mix(in srgb, #08151b 84%, #0b3640);
   border: 1px solid color-mix(in srgb, #0da9a9 35%, transparent);
   box-shadow:
@@ -59,13 +59,13 @@ body:has(#theme-toggle:checked) #contact [data-component="RoleChips"] {
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-body:has(#theme-toggle:checked) #contact .role-chip {
+html[data-theme="dark"] #contact .role-chip {
   background: color-mix(in srgb, #0a1f29 78%, #13404d);
   border-color: color-mix(in srgb, #15bcbc 32%, transparent);
 }
 
-body:has(#theme-toggle:checked) #contact .role-chip.is-selected,
-body:has(#theme-toggle:checked) #contact .role-chip[aria-pressed="true"] {
+html[data-theme="dark"] #contact .role-chip.is-selected,
+html[data-theme="dark"] #contact .role-chip[aria-pressed="true"] {
   background: color-mix(in srgb, #15bcbc 22%, rgba(255, 255, 255, 0.04));
   border-color: color-mix(in srgb, #36f0f0 55%, transparent);
   box-shadow:

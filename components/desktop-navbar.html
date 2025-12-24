@@ -1,4 +1,6 @@
 <ul class="nav-menu flex gap-6">
+   <!-- Each <li> owns its own indicator to avoid moving one node around.
+         This prevents layout shifts/repaints that caused the nav to "jump". -->
   <li>
     <a href="#home" class="nav-link nav-link--active">
       <img src="./src/assets/images/icon-home.svg" alt="" class="nav-link__icon" loading="lazy" />
@@ -13,17 +15,27 @@
       <img src="./src/assets/images/icon-services.svg" alt="" class="nav-link__icon" loading="lazy" />
       <span>Locums</span>
     </a>
+    <img src="./src/assets/images/active-logo-removebg-preview.webp"
+         alt="Active page indicator"
+         class="nav-link-icon" />
   </li>
   <li>
     <a href="#about-us" class="nav-link">
       <img src="./src/assets/images/icon-about.svg" alt="" class="nav-link__icon" loading="lazy" />
       <span>Learn Us</span>
     </a>
+   
+    <img src="./src/assets/images/active-logo-removebg-preview.webp"
+         alt="Active page indicator"
+         class="nav-link-icon" />
   </li>
   <li>
     <a href="#contact" class="nav-link">
       <img src="./src/assets/images/icon-contact.svg" alt="" class="nav-link__icon" loading="lazy" />
       <span>Contact</span>
     </a>
+    <img src="./src/assets/images/active-logo-removebg-preview.webp"
+         alt="Active page indicator"
+         class="nav-link-icon" />
   </li>
 </ul>
