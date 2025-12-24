@@ -17,13 +17,13 @@ export function initApplyFormStepper() {
 
     let activeIndex = 0;
 
-    const focusFirstField = ({ preventScroll = false } = {}) => {
+    const focusFirstField = () => {
       const activeStep = steps[activeIndex];
       if (!activeStep) return;
 
       const candidate = activeStep.querySelector('input, select, textarea, button');
       if (candidate instanceof HTMLElement) {
-        candidate.focus({ preventScroll });
+        candidate.focus();
       }
     };
 
