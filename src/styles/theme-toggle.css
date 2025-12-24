@@ -22,6 +22,8 @@
   padding: var(--space-2) var(--space-3);
   border-radius: 0.5rem;
   color: var(--color-on-primary);
+  --toggle-knob-size: 2.15rem;
+  --toggle-knob-offset: 0.35rem;
   --theme-toggle-knob-outline-color: rgba(0, 0, 0, 0.55);
   transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   margin-top: -0.25rem;
@@ -116,10 +118,10 @@
 .theme-toggle__knob {
   position: absolute;
   top: 50%;
-  left: 0.35rem;
+  left: var(--toggle-knob-offset);
   transform: translateY(-50%);
-  width: 2.15rem;
-  height: 2.15rem;
+  width: var(--toggle-knob-size);
+  height: var(--toggle-knob-size);
   object-fit: contain;
   filter:
     drop-shadow(1px 0 0 var(--theme-toggle-knob-outline-color))
@@ -142,7 +144,7 @@
    Using sibling selector (checkbox + label are siblings in HTML)
    ========================================================================== */
 #theme-toggle:checked + .theme-toggle .theme-toggle__knob {
-  left: calc(100% - 0.35rem - 2.15rem);
+  left: calc(100% - var(--toggle-knob-offset) - var(--toggle-knob-size));
 }
 
 #theme-toggle:checked + .theme-toggle {
@@ -164,6 +166,8 @@
   .theme-toggle {
     min-height: 2.75rem;
     padding: var(--space-1) var(--space-2);
+    --toggle-knob-size: 1.85rem;
+    --toggle-knob-offset: 0.25rem;
   }
 
   #theme-toggle:checked + .theme-toggle .theme-toggle__side--day::after,
@@ -179,13 +183,13 @@
   }
 
   .theme-toggle__knob {
-    left: 0.25rem;
-    width: 1.85rem;
-    height: 1.85rem;
+    left: var(--toggle-knob-offset);
+    width: var(--toggle-knob-size);
+    height: var(--toggle-knob-size);
   }
 
   #theme-toggle:checked + .theme-toggle .theme-toggle__knob {
-    left: calc(100% - 0.25rem - 1.85rem);
+    left: calc(100% - var(--toggle-knob-offset) - var(--toggle-knob-size));
   }
 
   .theme-toggle__side--day::after {
