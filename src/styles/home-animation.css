@@ -13,16 +13,14 @@
   --hub-label-stroke-width: 1.8px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --hub-dot-fill: var(--color-accent-strong);
-    --hub-ring-stroke: color-mix(in srgb, var(--color-primary-soft) 75%, var(--color-text-primary));
-    --hub-ring-glow: color-mix(in srgb, var(--color-primary-soft) 70%, transparent);
-    --hub-line-stroke: color-mix(in srgb, var(--color-primary-soft) 90%, var(--color-text-primary));
-    --hub-line-glow: color-mix(in srgb, var(--color-primary-soft) 85%, transparent);
-    --hub-label-fill: rgba(15, 23, 42, 0.98);
-    --hub-label-stroke: rgba(255, 255, 255, 0.88);
-  }
+html[data-theme="dark"] {
+  --hub-dot-fill: var(--color-accent-strong);
+  --hub-ring-stroke: color-mix(in srgb, var(--color-primary-soft) 75%, var(--color-text-primary));
+  --hub-ring-glow: color-mix(in srgb, var(--color-primary-soft) 70%, transparent);
+  --hub-line-stroke: color-mix(in srgb, var(--color-primary-soft) 90%, var(--color-text-primary));
+  --hub-line-glow: color-mix(in srgb, var(--color-primary-soft) 85%, transparent);
+  --hub-label-fill: rgba(15, 23, 42, 0.98);
+  --hub-label-stroke: rgba(255, 255, 255, 0.88);
 }
 
 .hero-visual {
