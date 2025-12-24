@@ -18,6 +18,8 @@ export function initThemeTogglePersistence() {
   const toggle = document.getElementById('theme-toggle');
   if (!toggle) return;
 
+  const root = document.documentElement;
+
   const storageKey = 'salud-theme';
   let didWarn = false;
 
@@ -49,12 +51,45 @@ export function initThemeTogglePersistence() {
     warnOnce(err);
   }
 
+  root.setAttribute('data-theme', toggle.checked ? 'dark' : 'light');
+
   // Persist
   toggle.addEventListener('change', () => {
+    const scrollX = window.scrollX || window.pageXOffset || 0;
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+
+    // Scroll prevention on theme toggle (commented out per request):
+    // Large style recalculations can cause the browser to scroll in order to keep
+    // the currently-focused element in view. Keeping focus on the toggle with
+    // preventScroll can avoid jumps, but it is disabled for now.
+    // try {
+    //   toggle.focus({ preventScroll: true });
+    // } catch {
+    //   // Older browsers may not support preventScroll.
+    //   toggle.focus();
+    // }
+
     try {
       localStorage.setItem(storageKey, toggle.checked ? 'dark' : 'light');
     } catch (err) {
       warnOnce(err);
     }
+
+    root.setAttribute('data-theme', toggle.checked ? 'dark' : 'light');
+
+    // Theme changes can cause layout recalculation that results in scroll jumps.
+    // Restore the user's scroll position after styles have applied.
+    requestAnimationFrame(() => {
+      window.scrollTo(scrollX, scrollY);
+      requestAnimationFrame(() => {
+        window.scrollTo(scrollX, scrollY);
+      });
+    });
+
+    window.dispatchEvent(
+      new CustomEvent('salud:theme-change', {
+        detail: { theme: toggle.checked ? 'dark' : 'light' },
+      })
+    );
   });
 }
