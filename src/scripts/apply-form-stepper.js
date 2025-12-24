@@ -17,19 +17,19 @@ export function initApplyFormStepper() {
 
     let activeIndex = 0;
 
-    const focusFirstField = () => {
+    const focusFirstField = ({ preventScroll = false } = {}) => {
       const activeStep = steps[activeIndex];
       if (!activeStep) return;
 
       const candidate = activeStep.querySelector('input, select, textarea, button');
       if (candidate instanceof HTMLElement) {
-        candidate.focus();
+        candidate.focus({ preventScroll });
       }
     };
 
     const validator = createApplyFormValidator(form);
 
-    const setActiveIndex = (nextIndex) => {
+    const setActiveIndex = (nextIndex, { focus = true } = {}) => {
       activeIndex = Math.max(0, Math.min(nextIndex, steps.length - 1));
 
       steps.forEach((step, idx) => {
@@ -60,7 +60,9 @@ export function initApplyFormStepper() {
         status.textContent = `Step ${activeIndex + 1} of ${steps.length}`;
       }
 
-      focusFirstField();
+      if (focus) {
+        focusFirstField();
+      }
     };
 
     form.classList.add('is-stepper');
@@ -104,6 +106,7 @@ export function initApplyFormStepper() {
       }
     });
 
-    setActiveIndex(0);
+    // Do not auto-focus on initial load; it can scroll the page to the contact section.
+    setActiveIndex(0, { focus: false });
   });
 }
