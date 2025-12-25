@@ -1,11 +1,18 @@
-/* Desktop header & navigation */
+/* ==========================================================================
+   Desktop header & navigation
+   
+   Theme-specific colors:
+   - Dark mode (default): Brand text is white, logo has white outline
+   - Light mode: Brand text is dark, logo has dark outline
+   ========================================================================== */
 
-/* Layout wrappers */
+/* -------------------------------------------------------------------------
+   Header container
+   ------------------------------------------------------------------------- */
 .header {
   position: sticky;
   top: 0;
   z-index: var(--z-layer-sticky);
-  --logo-outline-color: rgba(0, 0, 0, 0.55);
   background: linear-gradient(to top, var(--color-primary-strong) 30%, #2d6a6cf2 100%);
   box-shadow:
     0 0.25rem 0.9rem rgba(0, 0, 0, 0.22),
@@ -13,9 +20,25 @@
   border-bottom: 0.0625rem solid var(--color-background-light);
 }
 
+/* -------------------------------------------------------------------------
+   Theme-specific variables
+   ------------------------------------------------------------------------- */
+
+/* Dark mode (default) - white text and logo outline */
 html[data-theme="dark"] .header {
   --logo-outline-color: rgba(255, 255, 255, 0.85);
+  --brand-text-color: #ffffff;
 }
+
+/* Light mode - dark text and logo outline */
+html[data-theme="light"] .header {
+  --logo-outline-color: rgba(0, 0, 0, 0.55);
+  --brand-text-color: #2c3e50; /* Same as --color-text-primary in light mode */
+}
+
+/* -------------------------------------------------------------------------
+   Navigation layout
+   ------------------------------------------------------------------------- */
 
 .nav {
   min-height: 3.75rem;
@@ -29,11 +52,14 @@ html[data-theme="dark"] .header {
   align-items: flex-start;
 }
 
-/* Brand block (logo + text) */
+/* -------------------------------------------------------------------------
+   Brand block (logo + text)
+   ------------------------------------------------------------------------- */
 .brand {
   align-items: center;
 }
 
+/* Brand text - uses theme-specific color variable */
 .brand-line-1 {
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -47,7 +73,9 @@ html[data-theme="dark"] .header {
   padding-bottom: 0.5rem;
 }
 
-/* Logo image */
+/* -------------------------------------------------------------------------
+   Logo image - uses theme-specific outline color
+   ------------------------------------------------------------------------- */
 .logo-img {
   height: 4rem;
   width: auto;
@@ -62,6 +90,9 @@ html[data-theme="dark"] .header {
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
+/* -------------------------------------------------------------------------
+   Logo hover effects
+   ------------------------------------------------------------------------- */
 @media (hover: hover) {
   .logo-img:hover {
     transform: scale(1.05);
@@ -74,8 +105,9 @@ html[data-theme="dark"] .header {
   }
 }
 
-
-/* Media queries */
+/* -------------------------------------------------------------------------
+   Media queries for responsive adjustments
+   ------------------------------------------------------------------------- */
 @media (min-width: 768px) {
   .logo-img {
     height: 6.5rem;
