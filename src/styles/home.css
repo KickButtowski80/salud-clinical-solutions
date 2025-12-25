@@ -8,6 +8,7 @@
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.5);
   color: var(--color-text-light);
   padding: clamp(1rem, calc(2vw + 1rem), 2rem);
+  margin-bottom: clamp(1rem, calc(2vw + 1rem), 2rem);
   display: grid;
   gap: var(--space-8);
   align-items: center;

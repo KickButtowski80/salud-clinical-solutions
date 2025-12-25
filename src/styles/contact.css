@@ -235,6 +235,15 @@ html[data-theme="dark"] #contact .role-chip[aria-pressed="true"] {
   gap: 0.75rem;
 }
 
+[data-component="ApplyNowVisual"] {
+  margin-inline: 0px;
+
+  img {
+    border-radius: 0.75rem;
+  }
+
+}
+
 @media (min-width: 520px) {
   .apply-step__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
