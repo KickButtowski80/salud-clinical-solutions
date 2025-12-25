@@ -24,6 +24,46 @@
   --form-input-bg: color-mix(in srgb, var(--color-background) 92%, var(--color-primary-soft) 8%);
 }
 
+@media (max-width: 768px) {
+  #contact {
+    padding: clamp(1rem, calc(2vw + 1rem), 2rem);
+  }
+
+  #contact .form-field label {
+    font-size: var(--font-size-xs);
+  }
+
+  #contact .form-field input,
+  #contact .form-field select,
+  #contact .form-field textarea {
+    font-size: var(--font-size-sm);
+  }
+
+  #contact .apply-submit {
+    font-size: var(--font-size-sm);
+  }
+
+  #contact #match-microcopy {
+    font-size: var(--font-size-sm);
+  }
+
+  #contact [data-component="TrustHighlights"] li {
+    font-size: var(--font-size-xs);
+  }
+
+  #contact .role-chip {
+    font-size: var(--font-size-xs);
+  }
+
+  .apply-step__badge {
+    font-size: var(--font-size-xs);
+  }
+
+  .form-error {
+    font-size: var(--font-size-xs);
+  }
+}
+
 html[data-theme="dark"] #contact {
   background:
     linear-gradient(150deg, #03161c 0%, #082c34 45%, #0b3f45 100%);

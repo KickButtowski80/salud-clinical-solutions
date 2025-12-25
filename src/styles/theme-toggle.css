@@ -242,7 +242,7 @@
     min-height: 2.75rem;
     padding: var(--space-1) var(--space-2);
     --toggle-knob-size: 1.85rem;
-    --toggle-knob-offset: 0.25rem;
+    --toggle-knob-offset: 0.75rem;
   }
 
   #theme-toggle:checked + .theme-toggle .theme-toggle__side--day::after,
@@ -258,13 +258,13 @@
   }
 
   .theme-toggle__knob {
-    left: var(--toggle-knob-offset);
+    right: var(--toggle-knob-offset);
     width: var(--toggle-knob-size);
     height: var(--toggle-knob-size);
   }
 
   #theme-toggle:checked + .theme-toggle .theme-toggle__knob {
-    left: calc(100% - var(--toggle-knob-offset) - var(--toggle-knob-size));
+    right: calc(100% - var(--toggle-knob-offset) - var(--toggle-knob-size));
   }
 
   .theme-toggle__side--day::after {

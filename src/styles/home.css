@@ -132,7 +132,7 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: var(--space-12) 0;
+    padding: 0;
     text-align: center;
     grid-template-columns: 1fr;
     justify-items: center;
