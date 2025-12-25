@@ -23,6 +23,18 @@ export function initThemeTogglePersistence() {
   const storageKey = 'salud-theme';
   let didWarn = false;
 
+  const syncAria = (isDark) => {
+    const themeLabel = isDark ? 'Theme: dark' : 'Theme: light';
+    toggle.setAttribute('aria-checked', String(isDark));
+    toggle.setAttribute('aria-pressed', String(isDark));
+    toggle.setAttribute('aria-label', themeLabel);
+    const labelEl = document.querySelector('label[for="theme-toggle"].theme-toggle');
+    if (labelEl) {
+      labelEl.setAttribute('aria-pressed', String(isDark));
+      labelEl.setAttribute('aria-label', themeLabel);
+    }
+  };
+
   const warnOnce = (err) => {
     if (didWarn) return;
     const hostname = window.location?.hostname || '';
@@ -52,6 +64,7 @@ export function initThemeTogglePersistence() {
   }
 
   root.setAttribute('data-theme', toggle.checked ? 'dark' : 'light');
+  syncAria(toggle.checked);
 
   // Persist
   toggle.addEventListener('change', () => {
@@ -76,6 +89,7 @@ export function initThemeTogglePersistence() {
     }
 
     root.setAttribute('data-theme', toggle.checked ? 'dark' : 'light');
+    syncAria(toggle.checked);
 
     // Theme changes can cause layout recalculation that results in scroll jumps.
     // Restore the user's scroll position after styles have applied.
