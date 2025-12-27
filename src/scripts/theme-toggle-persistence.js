@@ -12,7 +12,7 @@
 
 export function initThemeTogglePersistence() {
 
-  const themeToggleWrapper = document.getElementById('theme-toggle-simplified');
+  const themeToggleWrapper = document.getElementById('theme-toggle');
   const themeToggleLabel = themeToggleWrapper?.querySelector('label');
   const themeToggleCheckbox = themeToggleWrapper?.querySelector('input[type="checkbox"]');
 
@@ -75,12 +75,5 @@ export function initThemeTogglePersistence() {
 
     root.setAttribute('data-theme', themeToggleCheckbox.checked ? 'dark' : 'light');
     syncAria(themeToggleCheckbox.checked);
-
-    // XXX: this shouldn't be needed anymore and you can get rid of the relevant code in the nav-intersection-observer
-    // window.dispatchEvent(
-    //   new CustomEvent('salud:theme-change', {
-    //     detail: { theme: themeToggleCheckbox.checked ? 'dark' : 'light' },
-    //   })
-    // );
   });
 }

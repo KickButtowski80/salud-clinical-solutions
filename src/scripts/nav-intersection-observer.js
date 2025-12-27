@@ -85,23 +85,6 @@ export function initNavIntersectionObserver() {
 
   let suppressObserverUpdatesUntil = 0;
 
-  // const suppressObserverUpdatesBriefly = () => {
-  //   // Use two nested requestAnimationFrame to wait for paint frames
-  //   suppressObserverUpdatesUntil = Date.now() + 50; // Brief guard
-  //   requestAnimationFrame(() => {
-  //     requestAnimationFrame(() => {
-  //       suppressObserverUpdatesUntil = 0;
-  //     });
-  //   });
-  // };
-
-  // When you click the dark mode toggle, this code runs:
-  // 1. Theme toggle fires: "salud:theme-change"
-  // 2. We hear it and pause nav updates for ~2 paint frames (~32ms)
-  // 3. This stops the active menu from jumping while colors change
-  //
-  // It's like: button.addEventListener('click', () => console.log('button clicked!'));
-  // window.addEventListener('salud:theme-change', suppressObserverUpdatesBriefly);
   window.addEventListener(
     'scroll',
     () => {
