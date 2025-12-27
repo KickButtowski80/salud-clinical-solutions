@@ -26,13 +26,7 @@ export function initThemeTogglePersistence() {
   const syncAria = (isDark) => {
     const themeLabel = isDark ? 'Theme: dark' : 'Theme: light';
     toggle.setAttribute('aria-checked', String(isDark));
-    toggle.setAttribute('aria-pressed', String(isDark));
     toggle.setAttribute('aria-label', themeLabel);
-    const labelEl = document.querySelector('label[for="theme-toggle"].theme-toggle');
-    if (labelEl) {
-      labelEl.setAttribute('aria-pressed', String(isDark));
-      labelEl.setAttribute('aria-label', themeLabel);
-    }
   };
 
   const warnOnce = (err) => {
