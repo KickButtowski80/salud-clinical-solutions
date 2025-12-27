@@ -88,12 +88,7 @@ export function initThemeTogglePersistence() {
     // Theme changes can cause layout recalculation that results in scroll jumps.
     // Restore the user's scroll position after styles have applied.
     // Use two rAF passes to anchor after the next two paint frames.
-    requestAnimationFrame(() => {
-      window.scrollTo(scrollX, scrollY);
-      requestAnimationFrame(() => {
-        window.scrollTo(scrollX, scrollY);
-      });
-    });
+    // Removed: layout shifts fixed in CSS, so scroll restore is no longer needed.
 
     // Notify other scripts (e.g., nav observer) that the theme just changed.
     // They can listen for this to delay reactions during repaint and avoid jumps.
