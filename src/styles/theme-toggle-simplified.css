@@ -1,0 +1,155 @@
+#theme-toggle-simplified {
+    /* unset all styles so the styles apply only to this component */
+    /* this is here to prevent .logo, etc, styles from bleeding through */
+    all: unset;
+    padding: 0.5rem;
+
+    & * {
+        all: unset;
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+
+    --toggle-track-bg: radial-gradient(circle at 20% 50%, rgba(255, 200, 87, 0.22), transparent 55%),
+    radial-gradient(circle at 80% 50%, rgba(88, 213, 204, 0.18), transparent 55%),
+    rgba(0, 0, 0, 0.08);
+    --toggle-track-border: rgba(255, 255, 255, 0.35);
+    --toggle-knob-size: 2.15rem;
+    --toggle-knob-offset: 0.35rem;
+    --theme-toggle-knob-outline-color: rgba(0, 0, 0, 0.55);
+    --sun-opacity: .95;
+    --moon-opacity: 0;
+    --logo-transition: translateX(-0.7rem);
+
+    margin-top: -0.25rem;
+
+    & label {
+        width: 9.26rem;
+        height: 2.73rem;
+        padding: 0.2rem;
+        margin-left: 0.2rem;
+        padding-right: 0rem;
+        position: relative;
+        display: block;
+        border-radius: 200px;
+        cursor: pointer;
+        background: var(--toggle-track-bg);
+        border: 1px solid var(--toggle-track-border);
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-0.125rem);
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+        }
+
+        /* DARK MODE STYLES GO HERE */
+        &:has(input:checked) {
+            --toggle-track-bg:
+                radial-gradient(circle at 20% 50%, rgba(255, 200, 87, 0.32), transparent 55%),
+                radial-gradient(circle at 80% 50%, rgba(88, 213, 204, 0.32), transparent 55%),
+                rgba(4, 12, 32, 0.62);
+            --logo-transition: translateX(-5.5rem);
+            --sun-opacity: 0;
+            --moon-opacity: 0.95;
+            --theme-toggle-knob-outline-color: rgba(255, 255, 255, 0.55);
+
+        }
+
+        /* DARK MODE STYLES END HERE */
+
+        & input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            visibility: hidden;
+        }
+
+        & .icon {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: block;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            pointer-events: none;
+            margin-top: -0.2rem;
+
+            &:after {
+                content: "";
+                top: 50%;
+                transform: translateY(-50%);
+                width: 2rem;
+                height: 1.4rem;
+                background-color: rgba(255, 255, 255, 0.95);
+                transition: opacity 0.2s ease;
+                position: absolute;
+            }
+
+            &.sun {
+                &:after {
+                    left: 0.5rem;
+                    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
+                    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
+                    left: 0.5rem;
+                    opacity: var(--sun-opacity);
+                }
+            }
+
+            &.moon {
+                &:after {
+                    right: 0.5rem;
+                    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+                    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+                    opacity: var(--moon-opacity);
+                }
+
+            }
+        }
+
+        & .logo {
+            height: 2rem;
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%) var(--logo-transition);
+            transition: transform 0.3s ease;
+            filter:
+                drop-shadow(1px 0 0 var(--theme-toggle-knob-outline-color)) 
+                drop-shadow(-1px 0 0 var(--theme-toggle-knob-outline-color)) 
+                drop-shadow(0 1px 0 var(--theme-toggle-knob-outline-color)) 
+                drop-shadow(0 -1px 0 var(--theme-toggle-knob-outline-color)) 
+                drop-shadow(0 0.2rem 0.45rem rgba(0, 0, 0, 0.35));
+        }
+    }
+}
+
+@media (width <=767px) {
+    #theme-toggle-simplified {
+        --toggle-padding: 0.25rem;
+
+        & label {
+            --toggle-height: 1.75rem;
+            --toggle-width: 7.25rem;
+            --toggle-padding: 0.2rem;
+            --toggle-margin: 0.1rem;
+        }
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    #theme-toggle-simplified {
+        --animation: sun-spin 12s linear infinite;
+    }
+}
+
+@keyframes sun-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
