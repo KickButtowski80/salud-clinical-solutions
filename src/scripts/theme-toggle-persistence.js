@@ -11,12 +11,9 @@
  */
 
 export function initThemeTogglePersistence() {
-  const userThemePreference = !!(
-    window.matchMedia &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-  );
   const toggle = document.getElementById('theme-toggle');
   if (!toggle) return;
+  let userThemePreference = false;
 
   const root = document.documentElement;
 
@@ -50,6 +47,8 @@ export function initThemeTogglePersistence() {
     } else if (stored === 'light') {
       toggle.checked = false;
     } else {
+      userThemePreference =
+        !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
       toggle.checked = userThemePreference;
     }
   } catch (err) {
@@ -62,39 +61,22 @@ export function initThemeTogglePersistence() {
 
   // Persist
   toggle.addEventListener('change', () => {
-    const scrollX = window.scrollX || window.pageXOffset || 0;
-    const scrollY = window.scrollY || window.pageYOffset || 0;
-
-    // Scroll prevention on theme toggle (commented out per request):
-    // Large style recalculations can cause the browser to scroll in order to keep
-    // the currently-focused element in view. Keeping focus on the toggle with
-    // preventScroll can avoid jumps, but it is disabled for now.
-    // try {
-    //   toggle.focus({ preventScroll: true });
-    // } catch {
-    //   // Older browsers may not support preventScroll.
-    //   toggle.focus();
-    // }
+    const theme = toggle.checked ? 'dark' : 'light';
 
     try {
-      localStorage.setItem(storageKey, toggle.checked ? 'dark' : 'light');
+      localStorage.setItem(storageKey, theme);
     } catch (err) {
       warnOnce(err);
     }
 
-    root.setAttribute('data-theme', toggle.checked ? 'dark' : 'light');
+    root.setAttribute('data-theme', theme);
     syncAria(toggle.checked);
-
-    // Theme changes can cause layout recalculation that results in scroll jumps.
-    // Restore the user's scroll position after styles have applied.
-    // Use two rAF passes to anchor after the next two paint frames.
-    // Removed: layout shifts fixed in CSS, so scroll restore is no longer needed.
 
     // Notify other scripts (e.g., nav observer) that the theme just changed.
     // They can listen for this to delay reactions during repaint and avoid jumps.
     window.dispatchEvent(
       new CustomEvent('salud:theme-change', {
-        detail: { theme: toggle.checked ? 'dark' : 'light' },
+        detail: { theme },
       })
     );
   });
