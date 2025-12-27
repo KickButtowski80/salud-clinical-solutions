@@ -83,17 +83,17 @@ export function initNavIntersectionObserver() {
   // eslint-disable-next-line no-underscore-dangle
   window.__showNavIoDebug = createDebugOverlay;
 
-  let suppressObserverUpdatesUntil = 0;
+  // let suppressObserverUpdatesUntil = 0;
 
-  const suppressObserverUpdatesBriefly = () => {
-    // Use two nested requestAnimationFrame to wait for paint frames
-    suppressObserverUpdatesUntil = Date.now() + 50; // Brief guard
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        suppressObserverUpdatesUntil = 0;
-      });
-    });
-  };
+  // const suppressObserverUpdatesBriefly = () => {
+  //   // Use two nested requestAnimationFrame to wait for paint frames
+  //   suppressObserverUpdatesUntil = Date.now() + 50; // Brief guard
+  //   requestAnimationFrame(() => {
+  //     requestAnimationFrame(() => {
+  //       suppressObserverUpdatesUntil = 0;
+  //     });
+  //   });
+  // };
 
   // When you click the dark mode toggle, this code runs:
   // 1. Theme toggle fires: "salud:theme-change"
@@ -101,14 +101,14 @@ export function initNavIntersectionObserver() {
   // 3. This stops the active menu from jumping while colors change
   //
   // It's like: button.addEventListener('click', () => console.log('button clicked!'));
-  window.addEventListener('salud:theme-change', suppressObserverUpdatesBriefly);
-  window.addEventListener(
-    'scroll',
-    () => {
-      suppressObserverUpdatesUntil = 0;
-    },
-    { passive: true }
-  );
+  // window.addEventListener('salud:theme-change', suppressObserverUpdatesBriefly);
+  // window.addEventListener(
+  //   'scroll',
+  //   () => {
+  //     suppressObserverUpdatesUntil = 0;
+  //   },
+  //   { passive: true }
+  // );
 
   const sectionIds = ['home', 'services', 'about-us', 'contact'];
 
@@ -235,8 +235,6 @@ export function initNavIntersectionObserver() {
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (Date.now() < suppressObserverUpdatesUntil) return;
-
         // Layout shifts (theme toggle, font swaps, etc.) can perturb intersectionRatio
         // and cause nav to "jump". Use a deterministic viewport-center rule instead.
         const id = getSectionIdAtViewportCenter();
