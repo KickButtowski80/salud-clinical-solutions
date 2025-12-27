@@ -126,30 +126,14 @@
 }
 
 @media (width <=767px) {
-    #theme-toggle-simplified {
-        --toggle-padding: 0.25rem;
-
-        & label {
-            --toggle-height: 1.75rem;
-            --toggle-width: 7.25rem;
-            --toggle-padding: 0.2rem;
-            --toggle-margin: 0.1rem;
-        }
-    }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    #theme-toggle-simplified {
-        --animation: sun-spin 12s linear infinite;
-    }
-}
-
-@keyframes sun-spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
+    #theme-toggle {
+        /* if you need different sizes for mobile, use variables and set them. 
+           make sure you add them to the section above and modify the styles accordingly 
+           These styles are only for examples and are not used anywhere. 
+        */
+        --label-height: 1.75rem;
+        --label-width: 7.25rem;
+        --label-padding: 0.2rem;
+        --label-margin: 0.1rem;
     }
 }
