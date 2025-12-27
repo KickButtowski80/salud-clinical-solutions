@@ -5,6 +5,8 @@
   - This JS file does NOT turn dark mode on/off. It only:
     1) sets the checkbox state on page load
     2) remembers the checkbox state in localStorage
+    3) syncs ARIA on the input
+    4) dispatches a custom event: 'salud:theme-change' with { theme }
  
   localStorage key:
   - 'salud-theme' stores 'dark' or 'light'.
