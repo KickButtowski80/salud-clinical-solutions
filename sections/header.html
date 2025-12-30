@@ -10,21 +10,20 @@
         <div class="header-actions flex items-center">
             <include src="./components/desktop-navbar.html"></include>
    
-            <label class="theme-toggle">
-                <input
-                id="theme-toggle"
-                class="theme-toggle__input"
-                type="checkbox"
-                role="switch"
-                aria-label="Theme: light"
-                aria-checked="false"
-                />
-                <span class="theme-toggle__track" aria-hidden="true">
-                    <span class="theme-toggle__side theme-toggle__side--day"></span>
-                    <span class="theme-toggle__side theme-toggle__side--night"></span>
-                    <img src="./src/assets/images/active-logo-removebg-preview.webp" alt="" class="theme-toggle__knob" />
-                </span>
-            </label>
+            <div id="theme-toggle">
+                <label class="toggle" aria-label="Theme: light" aria-pressed="false">
+                    <input
+                        type="checkbox"
+                        role="switch"
+                        aria-label="Theme: light"
+                        aria-pressed="false"
+                        aria-checked="false"
+                    />
+                    <span class="sun"></span>
+                    <span class="moon"></span>
+                    <img src="./src/assets/images/active-logo-removebg-preview.webp" alt="" class="logo" />
+                </label>
+            </div>
         </div>
     </nav>
 </header>

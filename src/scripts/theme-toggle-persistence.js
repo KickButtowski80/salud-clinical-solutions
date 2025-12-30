@@ -1,21 +1,22 @@
 /*
   ELI5: How this theme toggle works
- 
+
   - CSS is the only thing that actually changes colors.
   - This JS file does NOT turn dark mode on/off. It only:
     1) sets the checkbox state on page load
     2) remembers the checkbox state in localStorage
-    3) syncs ARIA on the input
-    4) dispatches a custom event: 'salud:theme-change' with { theme }
- 
+
   localStorage key:
   - 'salud-theme' stores 'dark' or 'light'.
  */
 
 export function initThemeTogglePersistence() {
-  const toggle = document.getElementById('theme-toggle');
-  if (!toggle) return;
-  let userThemePreference = false;
+
+  const themeToggleWrapper = document.getElementById('theme-toggle');
+  const themeToggleLabel = themeToggleWrapper?.querySelector('label');
+  const themeToggleCheckbox = themeToggleWrapper?.querySelector('input[type="checkbox"]');
+
+  if (!themeToggleWrapper || !themeToggleLabel || !themeToggleCheckbox) return;
 
   const root = document.documentElement;
 
@@ -23,9 +24,9 @@ export function initThemeTogglePersistence() {
   let didWarn = false;
 
   const syncAria = (isDark) => {
-    const themeLabel = isDark ? 'Theme: dark' : 'Theme: light';
-    toggle.setAttribute('aria-checked', String(isDark));
-    toggle.setAttribute('aria-label', themeLabel);
+    const ariaLabel = isDark ? 'Theme: dark' : 'Theme: light';
+    themeToggleCheckbox.setAttribute('aria-checked', String(isDark));
+    themeToggleCheckbox.setAttribute('aria-label', ariaLabel);
   };
 
   const warnOnce = (err) => {
@@ -45,41 +46,33 @@ export function initThemeTogglePersistence() {
     const stored = localStorage.getItem(storageKey);
 
     if (stored === 'dark') {
-      toggle.checked = true;
+      themeToggleCheckbox.checked = true;
     } else if (stored === 'light') {
-      toggle.checked = false;
+      themeToggleCheckbox.checked = false;
     } else {
-      userThemePreference =
-        !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      toggle.checked = userThemePreference;
+      const userThemePreference = !!(
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      );
+      themeToggleCheckbox.checked = userThemePreference;
     }
   } catch (err) {
-    toggle.checked = false;
+    themeToggleCheckbox.checked = false;
     warnOnce(err);
   }
 
-  root.setAttribute('data-theme', toggle.checked ? 'dark' : 'light');
-  syncAria(toggle.checked);
+  root.setAttribute('data-theme', themeToggleCheckbox.checked ? 'dark' : 'light');
+  syncAria(themeToggleCheckbox.checked);
 
   // Persist
-  toggle.addEventListener('change', () => {
-    const theme = toggle.checked ? 'dark' : 'light';
-
+  themeToggleCheckbox.addEventListener('change', () => {
     try {
-      localStorage.setItem(storageKey, theme);
+      localStorage.setItem(storageKey, themeToggleCheckbox.checked ? 'dark' : 'light');
     } catch (err) {
       warnOnce(err);
     }
 
-    root.setAttribute('data-theme', theme);
-    syncAria(toggle.checked);
-
-    // Notify other scripts (e.g., nav observer) that the theme just changed.
-    // They can listen for this to delay reactions during repaint and avoid jumps.
-    window.dispatchEvent(
-      new CustomEvent('salud:theme-change', {
-        detail: { theme },
-      })
-    );
+    root.setAttribute('data-theme', themeToggleCheckbox.checked ? 'dark' : 'light');
+    syncAria(themeToggleCheckbox.checked);
   });
 }
