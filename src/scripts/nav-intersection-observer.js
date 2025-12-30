@@ -18,8 +18,8 @@
 // Green band = active zone where sections can become "current".
 function createDebugOverlay() {
   // Keep this description in sync with the observer options below.
-  // Root margin is: -20% 0px -60% 0px (top, right, bottom, left)
-  // This means the "active zone" is roughly the middle 20% of the viewport
+  // Root margin is: -33% 0px -33% 0px (top, right, bottom, left)
+  // This means the "active zone" is roughly the middle third of the viewport
   const overlay = document.createElement('div');
   overlay.id = 'io-debug-overlay';
   overlay.innerHTML = `
@@ -28,14 +28,14 @@ function createDebugOverlay() {
       top: 0;
       left: 0;
       right: 0;
-      height: 20vh;
+      height: 33vh;
       background: rgba(255, 0, 0, 0.15);
       pointer-events: none;
       z-index: 9999;
       border-bottom: 2px dashed red;
     ">
       <span style="position: absolute; bottom: 4px; left: 8px; color: red; font-size: 12px; font-weight: bold;">
-        ↑ IGNORED (top 20%)
+        ↑ IGNORED (top 33%)
       </span>
     </div>
     <div style="
@@ -43,20 +43,20 @@ function createDebugOverlay() {
       bottom: 0;
       left: 0;
       right: 0;
-      height: 60vh;
+      height: 33vh;
       background: rgba(255, 0, 0, 0.15);
       pointer-events: none;
       z-index: 9999;
       border-top: 2px dashed red;
     ">
       <span style="position: absolute; top: 4px; left: 8px; color: red; font-size: 12px; font-weight: bold;">
-        ↓ IGNORED (bottom 60%)
+        ↓ IGNORED (bottom 33%)
       </span>
     </div>
     <div style="
       position: fixed;
-      top: 20vh;
-      bottom: 60vh;
+      top: 33vh;
+      bottom: 33vh;
       left: 0;
       right: 0;
       background: rgba(0, 255, 0, 0.1);
@@ -65,12 +65,12 @@ function createDebugOverlay() {
       border: 2px solid green;
     ">
       <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: green; font-size: 14px; font-weight: bold;">
-        ACTIVE ZONE (middle 20% of viewport)
+        ACTIVE ZONE (middle ~34% of viewport)
       </span>
     </div>
   `;
   document.body.appendChild(overlay);
-  console.log('[IO Debug] Overlay created. Active zone is the middle 20% of the viewport (rootMargin -20% 0px -60% 0px).');
+  console.log('[IO Debug] Overlay created. Active zone is roughly the middle third of the viewport (rootMargin -33% 0px -33% 0px).');
 }
 
 export function initNavIntersectionObserver() {
@@ -184,9 +184,9 @@ export function initNavIntersectionObserver() {
         });
       },
       {
-        // Focus on the middle portion of viewport for more stable navigation
-        // Top 20% and bottom 60% are ignored, middle 20% is the active zone
-        rootMargin: '-20% 0px -60% 0px',
+        // Focus on the middle portion of viewport for stable navigation
+        // Top 33% and bottom 33% are ignored, middle ~34% is the active zone
+        rootMargin: '-33% 0px -33% 0px',
         threshold: [0.1, 0.25, 0.5, 0.75],
       }
     );
