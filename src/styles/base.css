@@ -18,11 +18,13 @@ body {
 
 main {
   padding: clamp(1rem, calc(2vw + 1rem), 2rem);
+  padding-top: 10rem;
 }
 
 @media (max-width: 768px) {
   main {
     padding: 0;
+    padding-top: 5rem;
   }
 }
 
