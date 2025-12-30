@@ -16,7 +16,7 @@
     ]
   },
   "engines": {
-    "node": ">=20 <21"
+    "node": ">=20"
   },
   "scripts": {
     "clean": "rm -rf .parcel-cache dist",
@@ -31,5 +31,10 @@
     "parcel": "^2.16.1",
     "posthtml": "^0.16.7",
     "posthtml-include": "^2.0.1"
+  },
+  "@parcel/transformer-css": {
+    "drafts": {
+      "nesting": true
+    }
   }
 }
