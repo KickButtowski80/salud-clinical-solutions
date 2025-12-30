@@ -18,8 +18,8 @@
 // Green band = active zone where sections can become "current".
 function createDebugOverlay() {
   // Keep this description in sync with the observer options below.
-  // Root margin is: -33% 0px -33% 0px (top, right, bottom, left)
-  // This means the "active zone" is roughly the middle third of the viewport
+  // Root margin is: -20% 0px -60% 0px (top, right, bottom, left)
+  // This means the "active zone" is roughly the middle 20% of the viewport
   const overlay = document.createElement('div');
   overlay.id = 'io-debug-overlay';
   overlay.innerHTML = `
@@ -28,14 +28,14 @@ function createDebugOverlay() {
       top: 0;
       left: 0;
       right: 0;
-      height: 33vh;
+      height: 20vh;
       background: rgba(255, 0, 0, 0.15);
       pointer-events: none;
       z-index: 9999;
       border-bottom: 2px dashed red;
     ">
       <span style="position: absolute; bottom: 4px; left: 8px; color: red; font-size: 12px; font-weight: bold;">
-        ↑ IGNORED (top 33%)
+        ↑ IGNORED (top 20%)
       </span>
     </div>
     <div style="
@@ -43,20 +43,20 @@ function createDebugOverlay() {
       bottom: 0;
       left: 0;
       right: 0;
-      height: 33vh;
+      height: 60vh;
       background: rgba(255, 0, 0, 0.15);
       pointer-events: none;
       z-index: 9999;
       border-top: 2px dashed red;
     ">
       <span style="position: absolute; top: 4px; left: 8px; color: red; font-size: 12px; font-weight: bold;">
-        ↓ IGNORED (bottom 33%)
+        ↓ IGNORED (bottom 60%)
       </span>
     </div>
     <div style="
       position: fixed;
-      top: 33vh;
-      bottom: 33vh;
+      top: 20vh;
+      bottom: 60vh;
       left: 0;
       right: 0;
       background: rgba(0, 255, 0, 0.1);
@@ -65,12 +65,12 @@ function createDebugOverlay() {
       border: 2px solid green;
     ">
       <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: green; font-size: 14px; font-weight: bold;">
-        ACTIVE ZONE (middle ~34% of viewport)
+        ACTIVE ZONE (middle 20% of viewport)
       </span>
     </div>
   `;
   document.body.appendChild(overlay);
-  console.log('[IO Debug] Overlay created. Active zone is roughly the middle third of the viewport (rootMargin -33% 0px -33% 0px).');
+  console.log('[IO Debug] Overlay created. Active zone is the middle 20% of the viewport (rootMargin -20% 0px -60% 0px).');
 }
 
 export function initNavIntersectionObserver() {
@@ -92,39 +92,6 @@ export function initNavIntersectionObserver() {
   if (sections.length === 0) {
     return;
   }
-
-  const getSectionIdAtViewportCenter = () => {
-    const centerY = window.innerHeight / 2;
-    let best = null;
-
-    sections.forEach((section) => {
-      if (!(section instanceof HTMLElement)) return;
-      const rect = section.getBoundingClientRect();
-      const containsCenter = rect.top <= centerY && rect.bottom >= centerY;
-
-      if (containsCenter) {
-        const distanceToCenter = Math.abs((rect.top + rect.bottom) / 2 - centerY);
-        if (!best || distanceToCenter < best.distance) {
-          best = { id: section.id, distance: distanceToCenter };
-        }
-      }
-    });
-
-    if (best?.id) return best.id;
-
-    // Fallback: pick the section whose midpoint is closest to center.
-    sections.forEach((section) => {
-      if (!(section instanceof HTMLElement)) return;
-      const rect = section.getBoundingClientRect();
-      const mid = (rect.top + rect.bottom) / 2;
-      const distance = Math.abs(mid - centerY);
-      if (!best || distance < best.distance) {
-        best = { id: section.id, distance };
-      }
-    });
-
-    return best?.id || null;
-  };
 
   const desktopLinks = Array.from(
     document.querySelectorAll('.nav-menu .nav-link')
@@ -208,17 +175,17 @@ export function initNavIntersectionObserver() {
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
-        // Layout shifts (theme toggle, font swaps, etc.) can perturb intersectionRatio
-        // and cause nav to "jump". Use a deterministic viewport-center rule instead.
-        const id = getSectionIdAtViewportCenter();
-        if (id && sectionIds.includes(id)) updateNavForSection(id);
+        // Use simple intersection - update when section enters the active zone
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            updateNavForSection(entry.target.id);
+          }
+        });
       },
       {
-        // Treat a section as "current" when it's roughly in the middle third
-        // of the viewport. This is less aggressive than the previous
-        // configuration and makes it easier for shorter sections to register.
-        root: null,
-        rootMargin: '-33% 0px -33% 0px',
+        // Focus on the middle portion of viewport for more stable navigation
+        // Top 20% and bottom 60% are ignored, middle 20% is the active zone
+        rootMargin: '-20% 0px -60% 0px',
         threshold: [0.1, 0.25, 0.5, 0.75],
       }
     );
