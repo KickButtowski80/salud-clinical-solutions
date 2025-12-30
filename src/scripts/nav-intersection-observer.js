@@ -78,10 +78,11 @@ export function initNavIntersectionObserver() {
   //   window.__showNavIoDebug && window.__showNavIoDebug();
   // to draw the red/green overlay that visualizes the current
   // IntersectionObserver root margin (see `createDebugOverlay`).
-  // We intentionally *do not* run this by default so the nav behaves
-  // normally unless you're explicitly debugging.
+  // Only expose in development environments to keep production clean.
   // eslint-disable-next-line no-underscore-dangle
-  window.__showNavIoDebug = createDebugOverlay;
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    window.__showNavIoDebug = createDebugOverlay;
+  }
 
   const sectionIds = ['home', 'services', 'about-us', 'contact'];
 
