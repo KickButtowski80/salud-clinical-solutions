@@ -78,10 +78,11 @@ export function initNavIntersectionObserver() {
   //   window.__showNavIoDebug && window.__showNavIoDebug();
   // to draw the red/green overlay that visualizes the current
   // IntersectionObserver root margin (see `createDebugOverlay`).
-  // We intentionally *do not* run this by default so the nav behaves
-  // normally unless you're explicitly debugging.
+  // Only expose in development environments to keep production clean.
   // eslint-disable-next-line no-underscore-dangle
-  window.__showNavIoDebug = createDebugOverlay;
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    window.__showNavIoDebug = createDebugOverlay;
+  }
 
   const sectionIds = ['home', 'services', 'about-us', 'contact'];
 
@@ -92,39 +93,6 @@ export function initNavIntersectionObserver() {
   if (sections.length === 0) {
     return;
   }
-
-  const getSectionIdAtViewportCenter = () => {
-    const centerY = window.innerHeight / 2;
-    let best = null;
-
-    sections.forEach((section) => {
-      if (!(section instanceof HTMLElement)) return;
-      const rect = section.getBoundingClientRect();
-      const containsCenter = rect.top <= centerY && rect.bottom >= centerY;
-
-      if (containsCenter) {
-        const distanceToCenter = Math.abs((rect.top + rect.bottom) / 2 - centerY);
-        if (!best || distanceToCenter < best.distance) {
-          best = { id: section.id, distance: distanceToCenter };
-        }
-      }
-    });
-
-    if (best?.id) return best.id;
-
-    // Fallback: pick the section whose midpoint is closest to center.
-    sections.forEach((section) => {
-      if (!(section instanceof HTMLElement)) return;
-      const rect = section.getBoundingClientRect();
-      const mid = (rect.top + rect.bottom) / 2;
-      const distance = Math.abs(mid - centerY);
-      if (!best || distance < best.distance) {
-        best = { id: section.id, distance };
-      }
-    });
-
-    return best?.id || null;
-  };
 
   const desktopLinks = Array.from(
     document.querySelectorAll('.nav-menu .nav-link')
@@ -208,16 +176,16 @@ export function initNavIntersectionObserver() {
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
-        // Layout shifts (theme toggle, font swaps, etc.) can perturb intersectionRatio
-        // and cause nav to "jump". Use a deterministic viewport-center rule instead.
-        const id = getSectionIdAtViewportCenter();
-        if (id && sectionIds.includes(id)) updateNavForSection(id);
+        // Use simple intersection - update when section enters the active zone
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            updateNavForSection(entry.target.id);
+          }
+        });
       },
       {
-        // Treat a section as "current" when it's roughly in the middle third
-        // of the viewport. This is less aggressive than the previous
-        // configuration and makes it easier for shorter sections to register.
-        root: null,
+        // Focus on the middle portion of viewport for stable navigation
+        // Top 33% and bottom 33% are ignored, middle ~34% is the active zone
         rootMargin: '-33% 0px -33% 0px',
         threshold: [0.1, 0.25, 0.5, 0.75],
       }

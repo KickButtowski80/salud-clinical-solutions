@@ -1,6 +1,6 @@
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--scroll-margin, 9.5rem);
+  scroll-padding-top: var(--scroll-margin, 4rem);
 }
 
 body {
@@ -24,7 +24,7 @@ main {
 @media (max-width: 768px) {
   main {
     padding: 0;
-    padding-top: 5rem;
+    padding-top: 4rem;
   }
 }
 
