@@ -20,8 +20,8 @@
   border-bottom: 0.0625rem solid var(--color-background-light);
   transform: translateZ(0); /* Promote to GPU layer */
   will-change: transform;
-  user-select: none;
-  -webkit-user-select: none;
+  /* user-select: none;
+  -webkit-user-select: none; */
 }
 
 /* -------------------------------------------------------------------------
