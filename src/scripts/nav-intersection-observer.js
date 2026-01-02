@@ -34,7 +34,7 @@ function createDebugOverlay() {
       z-index: 9999;
       border-bottom: 2px dashed red;
     ">
-      <span style="position: absolute; bottom: 4px; left: 8px; color: red; font-size: 12px; font-weight: bold;">
+      <span style="position: absolute; bottom: 4px; left: 8px; color: red; font-size: var(--font-size-xs); font-weight: bold;">
         ↑ IGNORED (top 33%)
       </span>
     </div>
@@ -49,7 +49,7 @@ function createDebugOverlay() {
       z-index: 9999;
       border-top: 2px dashed red;
     ">
-      <span style="position: absolute; top: 4px; left: 8px; color: red; font-size: 12px; font-weight: bold;">
+      <span style="position: absolute; top: 4px; left: 8px; color: red; font-size: var(--font-size-xs); font-weight: bold;">
         ↓ IGNORED (bottom 33%)
       </span>
     </div>
@@ -64,7 +64,7 @@ function createDebugOverlay() {
       z-index: 9998;
       border: 2px solid green;
     ">
-      <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: green; font-size: 14px; font-weight: bold;">
+      <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: green; font-size: var(--font-size-sm); font-weight: bold;">
         ACTIVE ZONE (middle ~34% of viewport)
       </span>
     </div>
