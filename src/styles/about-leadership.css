@@ -42,15 +42,31 @@
 }
 
 .about-intro {
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto 1.5rem;
+}
+
+.about-body {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
   max-width: 40rem;
   margin: 0 auto 1.5rem;
   border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  padding-bottom: 1.5rem;
 }
 
 .about-title {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-3xl);
   font-weight: 700;
   margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.about-title .text-lg {
+  font-size: var(--font-size-lg) !important;
+  opacity: 0.9;
+  margin-top: 0.5rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -292,7 +308,7 @@
   right: 0.85rem;
   background: none;
   border: none;
-  font-size: 1.4rem;
+  font-size: clamp(1.2rem, 1.1rem + 0.5vw, 1.4rem);
   line-height: 1;
   color: rgba(148, 163, 184, 0.9);
   cursor: pointer;
@@ -328,7 +344,7 @@
   justify-content: center;
   flex-shrink: 0;
   font-weight: 700;
-  font-size: 1.35rem;
+  font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.35rem);
   letter-spacing: 0.06em;
   background: linear-gradient(135deg, var(--color-accent), #facc15);
   color: var(--color-on-primary);
@@ -378,7 +394,7 @@
 
 /* CTA (front card) */
 .staff-card__cta {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   color: var(--color-accent);
   font-weight: 600;
   margin-top: auto;

@@ -29,6 +29,61 @@
     padding: clamp(1rem, calc(2vw + 1rem), 2rem);
   }
 
+  #contact > header {
+    margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  #contact > header h2 {
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  [data-component="ContactLayout"] {
+    gap: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  [data-component="ContactContent"] {
+    gap: clamp(1.2rem, 2.5vw, 1.8rem);
+  }
+
+  #contact [data-component="IntroHero"] {
+    padding: clamp(1rem, calc(1.5vw + 0.5rem), 1.5rem);
+    text-align: center;
+  }
+
+  #contact [data-component="IntroHero"] h3 {
+    font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    line-height: 1.3;
+    margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+  }
+
+  #contact [data-component="IntroHero"] p {
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    max-width: none;
+  }
+
+  #contact [data-component="TrustHighlights"] {
+    margin-top: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  #contact [data-component="TrustHighlights"] h3 {
+    font-size: var(--font-size-base);
+    margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+    text-align: center;
+  }
+
+  #contact [data-component="TrustHighlights"] ul {
+    justify-content: center;
+    gap: clamp(0.4rem, 1vw, 0.6rem);
+  }
+
+  #contact [data-component="TrustHighlights"] li {
+    font-size: var(--font-size-xs);
+    padding: clamp(0.4rem, 0.8vw, 0.6rem) clamp(0.5rem, 1vw, 0.75rem);
+    line-height: 1.3;
+  }
+
   #contact .form-field label {
     font-size: var(--font-size-xs);
   }
@@ -44,10 +99,10 @@
   }
 
   #contact #match-microcopy {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
   }
 
-  #contact [data-component="TrustHighlights"] li {
+  #contact [data-component="RoleChips"] li {
     font-size: var(--font-size-xs);
   }
 
@@ -257,7 +312,7 @@ html[data-theme="dark"] #contact .role-chip[aria-pressed="true"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   color: var(--color-on-primary);
   background:
