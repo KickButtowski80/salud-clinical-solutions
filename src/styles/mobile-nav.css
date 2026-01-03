@@ -139,7 +139,11 @@
     display: none;
   }
 
+  body {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 5.5rem);
+  }
+
   main {
-    padding-bottom: 5rem;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 5.5rem);
   }
 }
