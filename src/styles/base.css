@@ -103,7 +103,7 @@ main {
     height: 4.25rem;
     right: var(--space-4);
     /* Lift above the fixed mobile navbar (which sits at the very bottom) */
-    bottom: calc(var(--space-16) + var(--space-5));
+    bottom: calc(env(safe-area-inset-bottom) + 9rem);
   }
 
   .scroll-top__svg {

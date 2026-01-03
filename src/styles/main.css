@@ -11,8 +11,7 @@
 @import url('./about-leadership.css');
 @import url('./contact.css');
 @import url('./apply-form-stepper.css');
-
-
+@import url('./footer.css');
 
 .skip-link {
   position: absolute;
