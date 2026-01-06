@@ -91,18 +91,42 @@ export function initApplyFormStepper() {
       }
     });
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       const { valid, firstInvalidStep } = validator.validateAll();
-      if (valid) return;
+      
+      if (valid) {
+        event.preventDefault();
+        
+        try {
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData);
+          
+        const response = await fetch('http://localhost:3000/api/send-email', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(data)
+});
+          
+          const result = await response.json();
+          
+          if (result.success) {
+            console.log('✅ Email sent:', result.messageId);
+            // TODO: Show success popover
+          } else {
+            console.error('❌ Email failed:', result.error);
+            // TODO: Show error popover
+          }
+        } catch (error) {
+          console.error('❌ Network error:', error);
+          // TODO: Show error popover
+        }
+        return;
+      }
 
       event.preventDefault();
 
       if (typeof firstInvalidStep === 'number') {
         setActiveIndex(firstInvalidStep);
-        // Temporarily comment out the follow-up validateStep call for debugging.
-        // requestAnimationFrame(() => {
-        //   validator.validateStep(firstInvalidStep);
-        // });
       }
     });
 
