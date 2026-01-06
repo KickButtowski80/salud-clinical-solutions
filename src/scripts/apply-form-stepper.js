@@ -11,7 +11,7 @@ export function initApplyFormStepper() {
     const nextBtn = form.querySelector('[data-stepper-next]');
     const progress = form.querySelector('[data-stepper-progress]');
     const status = form.querySelector('[data-stepper-status]');
-    const submit = form.querySelector('button.apply-submit');
+    const submitBtn = form.querySelector('button.apply-submit');
 
     if (!(prevBtn instanceof HTMLButtonElement) || !(nextBtn instanceof HTMLButtonElement)) return;
 
@@ -40,14 +40,13 @@ export function initApplyFormStepper() {
       prevBtn.disabled = activeIndex === 0;
       nextBtn.hidden = activeIndex === steps.length - 1;
 
-      if (submit) {
-        const isFinalStep = activeIndex === steps.length - 1;
-        if (isFinalStep) {
-          submit.removeAttribute('hidden');
-          submit.removeAttribute('aria-hidden');
+      if (submitBtn) {
+        if (activeIndex === steps.length - 1) {
+          submitBtn.removeAttribute('hidden');
+          submitBtn.removeAttribute('aria-hidden');
         } else {
-          submit.setAttribute('hidden', '');
-          submit.setAttribute('aria-hidden', 'true');
+          submitBtn.setAttribute('hidden', '');
+          submitBtn.setAttribute('aria-hidden', 'true');
         }
       }
 
@@ -93,22 +92,22 @@ export function initApplyFormStepper() {
 
     form.addEventListener('submit', async (event) => {
       const { valid, firstInvalidStep } = validator.validateAll();
-      
+
       if (valid) {
         event.preventDefault();
-        
+
         try {
           const formData = new FormData(form);
           const data = Object.fromEntries(formData);
-          
-        const response = await fetch('http://localhost:3000/api/send-email', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(data)
-});
-          
+
+          const response = await fetch('http://localhost:3000/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+
           const result = await response.json();
-          
+
           if (result.success) {
             console.log('✅ Email sent:', result.messageId);
             // TODO: Show success popover
@@ -128,7 +127,8 @@ export function initApplyFormStepper() {
       if (typeof firstInvalidStep === 'number') {
         setActiveIndex(firstInvalidStep);
       }
-    });
+
+      });
 
     // Do not auto-focus on initial load; it can scroll the page to the contact section.
     setActiveIndex(0, { focus: false });
