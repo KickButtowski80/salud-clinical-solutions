@@ -447,7 +447,18 @@ html[data-theme="dark"] #contact .role-chip[aria-pressed="true"] {
   transition:
     transform var(--transition-base),
     box-shadow var(--transition-base),
-    filter var(--transition-base);
+    filter var(--transition-base),
+    opacity var(--transition-base);
+}
+
+.apply-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(50%);
+  transform: none !important;
+  box-shadow: 
+    0 0.25rem 0.5rem rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 
 .apply-submit:focus-visible {
