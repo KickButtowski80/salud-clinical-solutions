@@ -67,13 +67,13 @@ export function createSubmitHandler(form, submitBtn) {
       // Update button state
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
-
-      const response = await fetch('http://localhost:3000/api/send-email', {
+      const baseUrl = process.env?.vercel_deploy ? '' : 'http://localhost:3000';
+      const response = await fetch(`${baseUrl}/api/send-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-
+      console.log(response);
       const result = await response.json();
       if (result.success) {
         console.log('✅ Email sent:', result.messageId);
