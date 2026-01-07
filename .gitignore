@@ -31,3 +31,6 @@ Thumbs.db
 *Zone.Identifier
 .vercel
 .env*.local
+
+
+.env
