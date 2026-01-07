@@ -67,15 +67,36 @@ export function createSubmitHandler(form, submitBtn) {
       // Update button state
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
-      const baseUrl = process.env?.vercel_deploy ? '' : 'http://localhost:3000';
-      const response = await fetch(`${baseUrl}/api/send-email`, {
+      const response = await fetch(`/api/send-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      console.log(response);
-      const result = await response.json();
-      if (result.success) {
+
+      const responseText = await response.text();
+      let result = null;
+      try {
+        result = responseText ? JSON.parse(responseText) : null;
+      } catch {
+        result = null;
+      }
+
+      if (!response.ok) {
+        const errorMessage =
+          (result && (result.error || result.message)) ||
+          responseText ||
+          `Request failed with status ${response.status}`;
+        console.error('❌ Email failed:', { status: response.status, errorMessage });
+
+        submitBtn.textContent = 'Submission Failed ❌';
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Application';
+        }, 2000);
+        return;
+      }
+
+      if (result && result.success) {
         console.log('✅ Email sent:', result.messageId);
         // TODO: Show success popover (ticket created)
         
@@ -86,7 +107,8 @@ export function createSubmitHandler(form, submitBtn) {
           submitBtn.textContent = 'Submit Application';
         }, 2000);
       } else {
-        console.error('❌ Email failed:', result.error);
+        const errorMessage = (result && result.error) || 'Unknown error';
+        console.error('❌ Email failed:', errorMessage);
         // TODO: Show error popover (ticket created)
         
         // Show error state briefly before reset

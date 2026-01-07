@@ -3,29 +3,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Allowed domains for CORS
-const allowedDomains = [
-  'http://localhost:1234',
-  'http://localhost:3000',
-  'https://saludclinical.com',
-  'https://www.saludclinical.com',
-  'https://saludclinical.vercel.app',
-  'https://www.saludclinical.vercel.app'
-];
-
 export default async function handler(req, res) {
-  // Set CORS headers based on origin
-  const origin = req.headers.origin;
-  if (allowedDomains.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  } else {
-    res.setHeader('Access-Control-Allow-Origin', allowedDomains[0]); // Default to localhost
-  }
-
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle CORS preflight request
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
