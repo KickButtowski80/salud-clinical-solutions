@@ -111,7 +111,7 @@ export default async function handler(req, res) {
     // Create email options
     const mailOptions = {
       from: 'salud-test@mailtrap.io',
-      to: process.env.RECIPIENT_EMAIL,
+      to: process.env.RECIPIENT_EMAIL.split(',').map(email => email.trim()).join(','),
       subject: `🏥 New Application: ${sanitizedData.name} - ${sanitizedData.role}`,
       text: `
               New Application Received:
