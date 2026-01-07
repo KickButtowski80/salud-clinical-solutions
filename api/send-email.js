@@ -8,7 +8,9 @@ const allowedDomains = [
   'http://localhost:1234',
   'http://localhost:3000',
   'https://saludclinical.com',
-  'https://www.saludclinical.com'
+  'https://www.saludclinical.com',
+  'https://saludclinical.vercel.app',
+  'https://www.saludclinical.vercel.app'
 ];
 
 export default async function handler(req, res) {
