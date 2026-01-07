@@ -1,7 +1,7 @@
 export function createApplyFormValidator(form) {
   const steps = Array.from(form.querySelectorAll('.apply-step'));
   const fields = Array.from(
-    form.querySelectorAll('input:not([type="hidden"]), select, textarea')
+    form.querySelectorAll('input, select, textarea')
   );
 
   const textLikeTypes = new Set(['text', 'email', 'tel', 'url', 'search', 'password']);
@@ -23,7 +23,11 @@ export function createApplyFormValidator(form) {
   const getErrorElement = (field) => {
     const errorId = field.getAttribute('aria-describedby');
     if (!errorId) return null;
-    return form.querySelector(`#${errorId}`);
+    try {
+      return form.querySelector(`#${CSS.escape(errorId)}`);
+    } catch {
+      return document.getElementById(errorId);
+    }
   };
 
   const clearFieldError = (field) => {
@@ -37,15 +41,52 @@ export function createApplyFormValidator(form) {
   const showFieldError = (field, message) => {
     const errorEl = getErrorElement(field);
     if (errorEl) {
-      errorEl.textContent = message;
+      // Use custom messages based on field name/id
+      const customMessage = getCustomErrorMessage(field);
+      errorEl.textContent = customMessage || message;
     }
     field.setAttribute('aria-invalid', 'true');
   };
 
+  const getCustomErrorMessage = (field) => {
+    const fieldName = field.name || field.id || '';
+    
+    // Custom messages for specific fields
+    const messages = {
+      'name': 'Please enter your full name',
+      'email': 'Please enter a valid email address',
+      'phone': 'Please enter your phone number',
+      'licenseType': 'Please select your profession',
+      'licenseState': 'Please choose your licensed state',
+      'role': 'Please select your role'
+    };
+    
+    return messages[fieldName] || null;
+  };
+
   const shouldValidateField = (field) => {
+    // Don't validate disabled fields
     if (field.disabled) return false;
+    
+    // Always validate required fields
     if (field.hasAttribute('required')) return true;
+    
+    // For hidden fields, only validate if they have a value (like role selection)
+    if (field.type === 'hidden') {
+      return Boolean(field.value);
+    }
+    
     const value = typeof field.value === 'string' ? field.value.trim() : field.value;
+
+    if (field instanceof HTMLSelectElement) {
+      const firstOptionValue = field.options.length ? field.options[0].value : '';
+      return value !== '' && value !== firstOptionValue;
+    }
+
+    if (field instanceof HTMLInputElement && (field.type === 'checkbox' || field.type === 'radio')) {
+      return field.checked;
+    }
+
     return Boolean(value);
   };
 
@@ -73,9 +114,20 @@ export function createApplyFormValidator(form) {
       }
     });
 
+    if (
+      field instanceof HTMLSelectElement ||
+      (field instanceof HTMLInputElement && (field.type === 'checkbox' || field.type === 'radio'))
+    ) {
+      field.addEventListener('change', () => {
+        validateField(field);
+      });
+    }
+
     field.addEventListener('blur', () => {
       validateField(field);
     });
+
+
   });
 
   /**
@@ -94,17 +146,20 @@ export function createApplyFormValidator(form) {
     if (!step) return true;
 
     const stepFields = Array.from(
-      step.querySelectorAll('input:not([type="hidden"]), select, textarea')
+      step.querySelectorAll('input, select, textarea, input[type="hidden"]')
     );
 
     let firstInvalidField = null;
-    const isStepValid = stepFields.reduce((acc, field) => {
+    let isStepValid = true;
+    stepFields.forEach((field) => {
       const validField = validateField(field);
-      if (!validField && !firstInvalidField) {
-        firstInvalidField = field;
+      if (!validField) {
+        isStepValid = false;
+        if (!firstInvalidField) {
+          firstInvalidField = field;
+        }
       }
-      return acc && validField;
-    }, true);
+    });
 
     if (!isStepValid && focus && firstInvalidField instanceof HTMLElement) {
       firstInvalidField.focus();
@@ -113,24 +168,7 @@ export function createApplyFormValidator(form) {
     return isStepValid;
   };
 
-  const validateAll = () => {
-    let firstInvalidStep = null;
-
-    steps.forEach((_, index) => {
-      const stepValid = validateStep(index, { focus: false });
-      if (!stepValid && firstInvalidStep === null) {
-        firstInvalidStep = index;
-      }
-    });
-
-    return {
-      valid: firstInvalidStep === null,
-      firstInvalidStep,
-    };
-  };
-
   return {
     validateStep,
-    validateAll,
   };
 }

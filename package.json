@@ -15,6 +15,7 @@
       "last 1 safari version"
     ]
   },
+  "type": "module",
   "engines": {
     "node": ">=20"
   },
@@ -36,5 +37,9 @@
     "drafts": {
       "nesting": true
     }
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "nodemailer": "^7.0.12"
   }
 }
