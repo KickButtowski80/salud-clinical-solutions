@@ -30,7 +30,6 @@ Thumbs.db
 *.Zone.Identifier
 *Zone.Identifier
 .vercel
+
 .env*.local
-
-
 .env
