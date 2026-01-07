@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   } else {
     res.setHeader('Access-Control-Allow-Origin', allowedDomains[0]); // Default to localhost
   }
-  
+
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -50,71 +50,116 @@ export default async function handler(req, res) {
     console.log('✅ Mailtrap SMTP connection verified');
 
     // Get form data from request
-    const { 
-      name, 
-      email, 
-      phone, 
-      role, 
-      licenseType, 
-      licenseState, 
-      licenseNumber, 
-      placementType, 
-      startDate, 
-      notes 
+    const {
+      name,
+      email,
+      phone,
+      role,
+      licenseType,
+      licenseState,
+      licenseNumber,
+      placementType,
+      startDate,
+      notes
     } = req.body;
+
+    // Server-side validation
+    const requiredFields = ['name', 'email', 'phone', 'role'];
+    const missingFields = requiredFields.filter(field => !req.body[field]);
+    if (missingFields.length > 0) {
+      return res.status(400).json({
+        error: 'Missing required fields',
+        missingFields
+      });
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        error: 'Invalid email format'
+      });
+    }
+
+    // Validate phone format (basic check)
+    const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+    if (!phoneRegex.test(phone) || phone.length < 10) {
+      return res.status(400).json({
+        error: 'Invalid phone format'
+      });
+    }
+
+    // Sanitize input to prevent XSS
+    const sanitizeString = (str) => {
+      if (typeof str !== 'string') return str;
+      return str.trim().replace(/[<>]/g, '');
+    };
+
+    const sanitizedData = {
+      name: sanitizeString(name),
+      email: sanitizeString(email),
+      phone: sanitizeString(phone),
+      role: sanitizeString(role),
+      licenseType: sanitizeString(licenseType),
+      licenseState: sanitizeString(licenseState),
+      licenseNumber: sanitizeString(licenseNumber),
+      placementType: sanitizeString(placementType),
+      startDate: sanitizeString(startDate),
+      notes: sanitizeString(notes)
+    };
 
     // Create email options
     const mailOptions = {
       from: 'salud-test@mailtrap.io',
       to: process.env.RECIPIENT_EMAIL,
-      subject: `🏥 New Application: ${name} - ${role}`,
+      subject: `🏥 New Application: ${sanitizedData.name} - ${sanitizedData.role}`,
       text: `
-New Application Received:
+              New Application Received:
 
-Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Role: ${role}
-License Type: ${licenseType || 'Secret Agent License 🎫'}
-License State: ${licenseState || 'State of Confusion 🤔'}
-License Number: ${licenseNumber || '123-ABRACADABRA 🪄'}
-Placement Type: ${placementType || 'Wherever the wind takes me 🌬️'}
-Start Date: ${startDate || 'When the stars align ⭐'}
-Notes: ${notes || 'No notes - just pure talent! ✨'}
+              Name: ${sanitizedData.name}
+              Email: ${sanitizedData.email}
+              Phone: ${sanitizedData.phone}
+              Role: ${sanitizedData.role}
+              License Type: ${sanitizedData.licenseType || 'Secret Agent License 🎫'}
+              License State: ${sanitizedData.licenseState || 'State of Confusion 🤔'}
+              License Number: ${sanitizedData.licenseNumber || '123-ABRACADABRA 🪄'}
+              Placement Type: ${sanitizedData.placementType || 'Wherever the wind takes me 🌬️'}
+              Start Date: ${sanitizedData.startDate || 'When the stars align ⭐'}
+              Notes: ${sanitizedData.notes || 'No notes - just pure talent! ✨'}
 
----
-Sent from Salud Clinical Solutions Website
-      `,
-      html: `
-<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-  <div style="background: #2563eb; color: white; padding: 20px; text-align: center;">
-    <h1>🏥 New Application Received</h1>
-    <p>Salud Clinical Solutions</p>
-  </div>
-  
-  <div style="padding: 20px; background: #f9fafb;">
-    <h2>Applicant Information</h2>
-    
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phone}</p>
-    <p><strong>Role:</strong> ${role}</p>
-    
-    <h3>📋 Licensing Information</h3>
-    <p><strong>License Type:</strong> ${licenseType || 'Secret Agent License 🎫'}</p>
-    <p><strong>License State:</strong> ${licenseState || 'State of Confusion 🤔'}</p>
-    <p><strong>License Number:</strong> ${licenseNumber || '123-ABRACADABRA 🪄'}</p>
-    
-    <h3>🎯 Preferences</h3>
-    <p><strong>Placement Type:</strong> ${placementType || 'Wherever the wind takes me 🌬️'}</p>
-    <p><strong>Preferred Start Date:</strong> ${startDate || 'When the stars align ⭐'}</p>
-    ${notes ? `<p><strong>Notes:</strong> ${notes}</p>` : '<p><strong>Notes:</strong> No notes - just pure talent! ✨</p>'}
-  </div>
-  
-  <div style="padding: 20px; text-align: center; color: #6b7280; font-size: 14px;">
-    <p>Sent from Salud Clinical Solutions Website</p>
-  </div>
-</div>
+              ---
+              Sent from Salud Clinical Solutions Website
+                    `,
+                    html: `
+              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <div style="background: #2563eb; color: white; padding: 20px; text-align: center;">
+                  <h1>🏥 New Application Received</h1>
+                  <p>Salud Clinical Solutions</p>
+                </div>
+                
+                <div style="padding: 20px; background: #f9fafb;">
+                  <h2>Applicant Information</h2>
+                  
+                  <p><strong>Name:</strong> ${sanitizedData.name}</p>
+                  <p><strong>Email:</strong> ${sanitizedData.email}</p>
+                  <p><strong>Phone:</strong> ${sanitizedData.phone}</p>
+                  <p><strong>Role:</strong> ${sanitizedData.role}</p>
+                  
+                  <h3>📋 Licensing Information</h3>
+                  <p><strong>License Type:</strong> ${sanitizedData.licenseType || 'Secret Agent License 🎫'}</p>
+                  <p><strong>License State:</strong> ${sanitizedData.licenseState || 'State of Confusion 🤔'}</p>
+                  <p><strong>License Number:</strong> ${sanitizedData.licenseNumber || '123-ABRACADABRA 🪄'}</p>
+                  
+                  <h3>🎯 Preferences</h3>
+                  <p><strong>Placement Type:</strong> ${sanitizedData.placementType || 'Wherever the wind takes me 🌬️'}</p>
+                  <p><strong>Preferred Start Date:</strong> ${sanitizedData.startDate || 'When the stars align ⭐'}</p>
+                  ${sanitizedData.notes ? `<p><strong>Notes:</strong> ${sanitizedData.notes}</p>` : '<p><strong>Notes:</strong> No notes - just pure talent! ✨</p>'}
+                </div>
+                
+                <div style="padding: 20px; text-align: center; color: #6b7280; font-size: 14px;">
+                  <p>Sent from Salud Clinical Solutions Website</p>
+                </div>
+              </div>
       `
     };
 
@@ -123,17 +168,17 @@ Sent from Salud Clinical Solutions Website
     console.log('✅ Email sent successfully:', result.messageId);
 
     // Return success response
-    res.status(200).json({ 
-      success: true, 
+    res.status(200).json({
+      success: true,
       message: 'Email sent successfully',
-      messageId: result.messageId 
+      messageId: result.messageId
     });
 
   } catch (error) {
     console.error('❌ Error sending email:', error);
-    res.status(500).json({ 
-      success: false, 
-      error: error.message 
+    res.status(500).json({
+      success: false,
+      error: error.message
     });
   }
 };
