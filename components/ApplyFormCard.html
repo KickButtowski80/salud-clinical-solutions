@@ -36,19 +36,19 @@
         <div class="apply-step__grid">
             <div class="form-field">
                 <label for="apply-name">Full name *</label>
-                <input id="apply-name" name="name" type="text" autocomplete="name" required aria-describedby="apply-name-error" />
+                <input id="apply-name" name="name" type="text" autocomplete="name" required maxlength="120" aria-describedby="apply-name-error" />
                 <div id="apply-name-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-field">
                 <label for="apply-email">Email *</label>
-                <input id="apply-email" name="email" type="email" autocomplete="email" required aria-describedby="apply-email-error" />
+                <input id="apply-email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="apply-email-error" />
                 <div id="apply-email-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-field">
                 <label for="apply-phone">Phone *</label>
-                <input id="apply-phone" name="phone" type="tel" autocomplete="tel" required aria-describedby="apply-phone-error" />
+                <input id="apply-phone" name="phone" type="tel" autocomplete="tel" required maxlength="40" aria-describedby="apply-phone-error" />
                 <div id="apply-phone-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
         </div>
@@ -132,11 +132,13 @@
                     <option value="WI">Wisconsin</option>
                     <option value="WY">Wyoming</option>
                 </select>
+                <div id="apply-license-state-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-field">
                 <label for="apply-license-number">License number</label>
-                <input id="apply-license-number" name="licenseNumber" type="text" />
+                <input id="apply-license-number" name="licenseNumber" type="text" maxlength="50" aria-describedby="apply-license-number-error" />
+                <div id="apply-license-number-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
         </div>
     </fieldset>
@@ -150,22 +152,25 @@
         <div class="apply-step__grid">
             <div class="form-field">
                 <label for="apply-placement">Placement type</label>
-                <select id="apply-placement" name="placementType">
+                <select id="apply-placement" name="placementType" aria-describedby="apply-placement-error">
                     <option value="" selected>Select…</option>
                     <option value="locum">Locum tenens</option>
                     <option value="long-term">Long-term</option>
                     <option value="either">Either</option>
                 </select>
+                <div id="apply-placement-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-field">
                 <label for="apply-start">Preferred start date</label>
-                <input id="apply-start" name="startDate" type="date" />
+                <input id="apply-start" name="startDate" type="date" aria-describedby="apply-start-error" />
+                <div id="apply-start-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-field">
                 <label for="apply-notes">Notes</label>
-                <textarea id="apply-notes" name="notes" rows="4" placeholder="Anything we should know to match you faster?"></textarea>
+                <textarea id="apply-notes" name="notes" rows="4" maxlength="500" aria-describedby="apply-notes-error" placeholder="Anything we should know to match you faster?"></textarea>
+                <div id="apply-notes-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
         </div>
     </fieldset>
