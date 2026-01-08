@@ -7,6 +7,7 @@ dotenv.config();
 const allowedDomains = [
   'http://localhost:1234',
   'http://localhost:3000',
+  'http://localhost:3001',
   'https://saludclinical.com',
   'https://www.saludclinical.com',
   'https://saludclinical.vercel.app',
@@ -21,11 +22,9 @@ export default async function handler(req, res) {
   } else {
     res.setHeader('Access-Control-Allow-Origin', allowedDomains[0]); // Default to localhost
   }
-
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle CORS preflight request
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -49,7 +48,6 @@ export default async function handler(req, res) {
 
     // Test connection
     await transporter.verify();
-    console.log('✅ Mailtrap SMTP connection verified');
 
     // Get form data from request
     const {
@@ -167,7 +165,6 @@ export default async function handler(req, res) {
 
     // Send email
     const result = await transporter.sendMail(mailOptions);
-    console.log('✅ Email sent successfully:', result.messageId);
 
     // Return success response
     res.status(200).json({
