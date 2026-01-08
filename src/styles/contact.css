@@ -360,6 +360,29 @@ html[data-theme="dark"] #contact .role-chip[aria-pressed="true"] {
   color: var(--color-error, #dc2626);
   min-height: 1.2em;
   margin-top: 0.25rem;
+  padding: 0;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.form-error:not(:empty) {
+  padding: 0.45rem 0.6rem;
+  border-color: color-mix(in srgb, var(--color-error, #dc2626) 28%, transparent);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-error, #dc2626) 14%, transparent),
+      color-mix(in srgb, var(--color-error, #dc2626) 6%, transparent)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0.6rem 1.4rem rgba(0, 0, 0, 0.12);
 }
 
 #contact .form-field label {
