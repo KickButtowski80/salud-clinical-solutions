@@ -21,7 +21,7 @@
   },
   "scripts": {
     "clean": "rm -rf .parcel-cache dist",
-    "dev": "parcel index.html --open",
+    "dev": "parcel index.html --open --no-cache",
     "build": "parcel build index.html --no-cache --public-url ./",
     "serve": "parcel serve index.html --no-cache"
   },
