@@ -28,6 +28,7 @@ export function createStatusUpdater(statusEl) {
 }
 
 export function createButtonUpdater(prevBtn, nextBtn, submitBtn, totalSteps) {
+ 
   return (activeIndex) => {
     // Update prev button
     prevBtn.disabled = activeIndex === 0;
@@ -48,17 +49,33 @@ export function createButtonUpdater(prevBtn, nextBtn, submitBtn, totalSteps) {
   };
 }
 
-export function createSubmitHandler(form, submitBtn) {
+export function createSubmitHandler(form, submitBtn, setActiveIndex) {
   return async (event, validator, steps) => {
-    // Submit button only appears on the last step, so we validate the final step
-    const lastStepIndex = steps.length - 1;
-    const stepValid = validator.validateStep(lastStepIndex);
-    if (!stepValid) {
-      event.preventDefault();
-      return;
+    event.preventDefault();
+
+    // Validate all steps before submit (prevents skipping required fields)
+    for (let stepIndex = 0; stepIndex < steps.length; stepIndex += 1) {
+      const stepValid = validator.validateStep(stepIndex, { focus: false });
+      if (!stepValid) {
+        if (typeof setActiveIndex === 'function') {
+          setActiveIndex(stepIndex, { focus: false });
+        }
+        return;
+      }
     }
 
-    event.preventDefault();
+    const statusEl = form.querySelector('[data-apply-form-status]');
+    const setStatus = (status, message) => {
+      if (status) {
+        form.dataset.submitStatus = status;
+      } else {
+        delete form.dataset.submitStatus;
+      }
+
+      if (statusEl instanceof HTMLElement) {
+        statusEl.textContent = message || '';
+      }
+    };
 
     try {
       const formData = new FormData(form);
@@ -67,6 +84,7 @@ export function createSubmitHandler(form, submitBtn) {
       // Update button state
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
+      setStatus('pending', 'Submitting your application…');
       const response = await fetch(`/api/send-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -88,46 +106,56 @@ export function createSubmitHandler(form, submitBtn) {
           `Request failed with status ${response.status}`;
         console.error('❌ Email failed:', { status: response.status, errorMessage });
 
+        setStatus('error', errorMessage);
+
         submitBtn.textContent = 'Submission Failed ❌';
         setTimeout(() => {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Application';
+          setStatus(null, '');
         }, 2000);
         return;
       }
 
       if (result && result.success) {
         console.log('✅ Email sent:', result.messageId);
-        // TODO: Show success popover (ticket created)
+        setStatus('success', 'Application sent! We’ll follow up soon.');
         
         // Show success state briefly before reset
         submitBtn.textContent = 'Application Sent! ✅';
         setTimeout(() => {
+          form.reset();
+          if (typeof setActiveIndex === 'function') {
+            setActiveIndex(0, { focus: false });
+          }
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Application';
+          setStatus(null, '');
         }, 2000);
       } else {
         const errorMessage = (result && result.error) || 'Unknown error';
         console.error('❌ Email failed:', errorMessage);
-        // TODO: Show error popover (ticket created)
+        setStatus('error', errorMessage);
         
         // Show error state briefly before reset
         submitBtn.textContent = 'Submission Failed ❌';
         setTimeout(() => {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Application';
+          setStatus(null, '');
         }, 2000);
       }
       return;
     } catch (error) {
       console.error('❌ Network error:', error);
-      // TODO: Show error popover (ticket created)
+      setStatus('error', 'Network error. Please try again.');
       
       // Show network error state briefly before reset
       submitBtn.textContent = 'Network Error 🌐';
       setTimeout(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit Application';
+        setStatus(null, '');
       }, 2000);
     }
   };
