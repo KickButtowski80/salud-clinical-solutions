@@ -31,7 +31,6 @@ export function initApplyFormStepper() {
     const updateProgress = createProgressUpdater(progress);
     const updateStatus = createStatusUpdater(status);
     const updateButtons = createButtonUpdater(prevBtn, nextBtn, submitBtn, steps.length);
-    const handleSubmit = createSubmitHandler(form, submitBtn);
 
     const setActiveIndex = (nextIndex, { focus = true } = {}) => {
       activeIndex = Math.max(0, Math.min(nextIndex, steps.length - 1));
@@ -51,11 +50,13 @@ export function initApplyFormStepper() {
       }
     };
 
+    const handleSubmit = createSubmitHandler(form, submitBtn, setActiveIndex);
+
     form.classList.add('is-stepper');
 
     prevBtn.addEventListener('click', () => setActiveIndex(activeIndex - 1));
     nextBtn.addEventListener('click', () => {
-      if (!validator.validateStep(activeIndex)) return;
+      if (!validator.validateStep(activeIndex, { focus: false })) return;
       setActiveIndex(activeIndex + 1);
     });
 
@@ -71,7 +72,7 @@ export function initApplyFormStepper() {
 
       if (activeIndex < steps.length - 1) {
         e.preventDefault();
-        const stepValid = validator.validateStep(activeIndex);
+        const stepValid = validator.validateStep(activeIndex, { focus: false });
         if (!stepValid) return;
         setActiveIndex(activeIndex + 1);
       }
