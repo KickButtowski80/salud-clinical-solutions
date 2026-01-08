@@ -7,17 +7,20 @@ export function createApplyFormValidator(form) {
   const textLikeTypes = new Set(['text', 'email', 'tel', 'url', 'search', 'password']);
 
   const sanitizeFieldValue = (field) => {
-    if (field instanceof HTMLInputElement && textLikeTypes.has(field.type)) {
-      const trimmed = field.value.trim();
-      if (trimmed !== field.value) {
-        field.value = trimmed;
-      }
-    } else if (field instanceof HTMLTextAreaElement) {
-      const trimmed = field.value.trim();
-      if (trimmed !== field.value) {
-        field.value = trimmed;
-      }
+    const isTrimmableInput = field instanceof HTMLInputElement && textLikeTypes.has(field.type);
+    const isTrimmableTextarea = field instanceof HTMLTextAreaElement;
+    if (!isTrimmableInput && !isTrimmableTextarea) return;
+
+    const trimmed = field.value.trim();
+    if (trimmed !== field.value) {
+      field.value = trimmed;
     }
+  };
+
+  const getMaxLength = (field) => {
+    if (!field.hasAttribute('maxlength')) return null;
+    const parsed = parseInt(field.getAttribute('maxlength'), 10);
+    return Number.isFinite(parsed) ? parsed : null;
   };
 
   const getErrorElement = (field) => {
@@ -50,7 +53,7 @@ export function createApplyFormValidator(form) {
 
   const getCustomErrorMessage = (field) => {
     const fieldName = field.name || field.id || '';
-    
+
     // Custom messages for specific fields
     const messages = {
       'name': 'Please enter your full name',
@@ -60,22 +63,22 @@ export function createApplyFormValidator(form) {
       'licenseState': 'Please choose your licensed state',
       'role': 'Please select your role'
     };
-    
+
     return messages[fieldName] || null;
   };
 
   const shouldValidateField = (field) => {
     // Don't validate disabled fields
     if (field.disabled) return false;
-    
+
     // Always validate required fields
     if (field.hasAttribute('required')) return true;
-    
+
     // For hidden fields, only validate if they have a value (like role selection)
     if (field.type === 'hidden') {
       return Boolean(field.value);
     }
-    
+
     const value = typeof field.value === 'string' ? field.value.trim() : field.value;
 
     if (field instanceof HTMLSelectElement) {
@@ -92,6 +95,32 @@ export function createApplyFormValidator(form) {
 
   const validateField = (field) => {
     sanitizeFieldValue(field);
+    const maxLen = getMaxLength(field);
+
+    // For optional fields with maxlength:
+    // - Empty is fine
+    // - At/over the limit: show a message (warning/error)
+    const isOptional = !field.hasAttribute('required');
+    if (isOptional && maxLen !== null) {
+      const len = field.value.length;
+      if (len > maxLen) {
+        showFieldError(field, `Please enter no more than ${maxLen} characters.`);
+        return false;
+      }
+
+      if (len >= maxLen && len !== 0) {
+        const errorEl = getErrorElement(field);
+        if (errorEl) {
+          errorEl.textContent = `You’ve reached the ${maxLen}-character limit.`;
+        }
+        field.removeAttribute('aria-invalid');
+        return true;
+      }
+
+      clearFieldError(field);
+      return true;
+    }
+
     if (!shouldValidateField(field)) {
       clearFieldError(field);
       return true;
@@ -103,20 +132,29 @@ export function createApplyFormValidator(form) {
       return true;
     }
 
-    showFieldError(field, field.validationMessage || 'Please complete this field.');
+    const message = field.validationMessage || 'Please complete this field.';
+    showFieldError(field, message);
     return false;
   };
 
   fields.forEach((field) => {
     field.addEventListener('input', () => {
-      if (field.checkValidity()) {
-        clearFieldError(field);
+      // For optional fields with maxlength, show live limit feedback
+      const isOptional = !field.hasAttribute('required');
+      if (isOptional && getMaxLength(field) !== null) {
+        validateField(field);
+      } else {
+        // For other fields, clear error if now valid
+        if (field.checkValidity()) {
+          clearFieldError(field);
+        }
       }
     });
 
     if (
       field instanceof HTMLSelectElement ||
-      (field instanceof HTMLInputElement && (field.type === 'checkbox' || field.type === 'radio'))
+      (field instanceof HTMLInputElement &&
+        (field.type === 'checkbox' || field.type === 'radio'))
     ) {
       field.addEventListener('change', () => {
         validateField(field);
@@ -126,8 +164,6 @@ export function createApplyFormValidator(form) {
     field.addEventListener('blur', () => {
       validateField(field);
     });
-
-
   });
 
   /**
@@ -145,21 +181,17 @@ export function createApplyFormValidator(form) {
     const step = steps[stepIndex];
     if (!step) return true;
 
-    const stepFields = Array.from(
-      step.querySelectorAll('input, select, textarea, input[type="hidden"]')
-    );
+    const stepFields = Array.from(step.querySelectorAll('input, select, textarea'));
 
     let firstInvalidField = null;
     let isStepValid = true;
-    stepFields.forEach((field) => {
-      const validField = validateField(field);
-      if (!validField) {
+    for (const field of stepFields) {
+      const isFieldValid = validateField(field);
+      if (!isFieldValid) {
         isStepValid = false;
-        if (!firstInvalidField) {
-          firstInvalidField = field;
-        }
+        if (!firstInvalidField) firstInvalidField = field;
       }
-    });
+    }
 
     if (!isStepValid && focus && firstInvalidField instanceof HTMLElement) {
       firstInvalidField.focus();
