@@ -48,7 +48,6 @@ export default async function handler(req, res) {
 
     // Test connection
     await transporter.verify();
-    console.log('✅ Mailtrap SMTP connection verified');
 
     // Get form data from request
     const {
@@ -166,7 +165,6 @@ export default async function handler(req, res) {
 
     // Send email
     const result = await transporter.sendMail(mailOptions);
-    console.log('✅ Email sent successfully:', result.messageId);
 
     // Return success response
     res.status(200).json({
