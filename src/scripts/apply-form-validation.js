@@ -141,7 +141,6 @@ export function createApplyFormValidator(form) {
     const field = event.target;  // Which field did the user type in?
     const step = field.closest('fieldset[data-step]');  // Which step is this field in?
     const activeStep = steps[currentStepIndex];  // Which step is currently visible?
-    
     // Only validate if field is in current step (don't validate hidden fields)
     if (!step || !activeStep || step !== activeStep) return;
     
