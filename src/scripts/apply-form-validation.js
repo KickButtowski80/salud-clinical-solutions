@@ -1,9 +1,7 @@
 export function createApplyFormValidator(form) {
   const steps = Array.from(form.querySelectorAll('fieldset[data-step]'));
   let isNextClick = false; // Flag to track Next button clicks
-  const fields = Array.from(
-    form.querySelectorAll('input, select, textarea')
-  );
+  let currentStepIndex = 0; // Track current step for delegation
 
   const textLikeTypes = new Set(['text', 'email', 'tel', 'url', 'search', 'password']);
 
@@ -137,36 +135,66 @@ export function createApplyFormValidator(form) {
     return false;
   };
 
-  fields.forEach((field) => {
-    field.addEventListener('input', () => {
-      // For optional fields with maxlength, show live limit feedback
-      const isOptional = !field.hasAttribute('required');
-      if (isOptional && getMaxLength(field) !== null) {
-        validateField(field);
-      } else {
-        // For other fields, clear error if now valid
-        if (field.checkValidity()) {
-          clearFieldError(field);
-        }
+  // Event delegation: single listener handles all field events
+  // This is like putting one helper on the whole form instead of many helpers on each field
+  form.addEventListener('input', (event) => {
+    const field = event.target;  // Which field did the user type in?
+    const step = field.closest('fieldset[data-step]');  // Which step is this field in?
+    const activeStep = steps[currentStepIndex];  // Which step is currently visible?
+    
+    // Only validate if field is in current step (don't validate hidden fields)
+    if (!step || !activeStep || step !== activeStep) return;
+    
+    // For optional fields with maxlength, show live limit feedback
+    const isOptional = !field.hasAttribute('required');
+    console.log('field validation', field.name);
+    if (isOptional && getMaxLength(field) !== null) {
+      validateField(field);
+    } else {
+      // For other fields, clear error if now valid
+      if (field.checkValidity()) {
+        console.log('Field is valid:', field.name);
+        clearFieldError(field);
       }
-    });
+    }
+  });
 
+  form.addEventListener('change', (event) => {
+    const field = event.target;  // Which field did the user change?
+    const step = field.closest('fieldset[data-step]');  // Which step is this field in?
+    const activeStep = steps[currentStepIndex];  // Which step is currently visible?
+    
+    // Only validate if field is in current step and is select/checkbox/radio
+    if (!step || !activeStep || step !== activeStep) return;
     if (
       field instanceof HTMLSelectElement ||
       (field instanceof HTMLInputElement &&
         (field.type === 'checkbox' || field.type === 'radio'))
     ) {
-      field.addEventListener('change', () => {
-        validateField(field);
-      });
+      validateField(field);
     }
-
-    field.addEventListener('blur', () => {
-      if (!isNextClick) {
-        validateField(field);
-      }
-    });
   });
+
+  form.addEventListener('blur', (event) => {
+    const field = event.target;  // Which field did the user leave?
+    const step = field.closest('fieldset[data-step]');  // Which step is this field in?
+    const activeStep = steps[currentStepIndex];  // Which step is currently visible?
+    
+    // Only validate if field is in current step
+    if (!step || !activeStep || step !== activeStep) return;
+    if (!isNextClick) {
+      validateField(field);
+    }
+  }, true); // Use capture to ensure we get the blur event
+
+  /**
+   * Update the current step index for event delegation.
+   * Call this when switching between steps.
+   */
+  const setCurrentStep = (stepIndex) => {
+    currentStepIndex = stepIndex;
+  };
+
   /**
    * Validate every field inside a given step.
    *
@@ -216,5 +244,6 @@ export function createApplyFormValidator(form) {
 
   return {
     validateStep,
+    setCurrentStep,
   };
 }
