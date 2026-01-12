@@ -1,0 +1,162 @@
+/* Dialog component styles */
+/* Theme-aware using CSS tokens from tokens.css */
+/* Inspired by Cicero Pizzeria layout + Salud brand "dazzle" */
+
+.dialog {
+  border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+  border-radius: 1.25rem;
+  padding: 0;
+  max-width: 90vw;
+  width: 100%;
+  max-height: 90vh;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: 
+    radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 15%, transparent), transparent 60%),
+    radial-gradient(circle at bottom right, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 60%),
+    var(--color-background-light);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-primary);
+  z-index: var(--z-layer-overlay);
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .dialog {
+    max-width: 28rem;
+  }
+}
+
+.dialog::backdrop {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-8);
+}
+
+.dialog__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+}
+
+.dialog__icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dialog--success .dialog__icon-container {
+  background: linear-gradient(135deg, var(--color-success), color-mix(in srgb, var(--color-success) 80%, transparent));
+  color: var(--color-on-error);
+}
+
+.dialog--error .dialog__icon-container {
+  background: linear-gradient(135deg, var(--color-error), color-mix(in srgb, var(--color-error) 80%, transparent));
+  color: var(--color-on-error);
+}
+
+.dialog--info .dialog__icon-container {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-soft));
+  color: var(--color-on-primary);
+}
+
+.dialog__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.dialog__title {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+.dialog__main {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.dialog__message {
+  margin: 0;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.dialog__footer {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.dialog__menu {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.dialog__btn {
+  width: 100%;
+  border: 0;
+  border-radius: 0.95rem;
+  padding: 0.9rem 1.5rem;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  color: var(--color-on-primary);
+  background: 
+    linear-gradient(135deg, 
+      color-mix(in srgb, var(--color-primary) 95%, transparent), 
+      color-mix(in srgb, var(--color-primary-soft) 78%, transparent));
+  box-shadow: 
+    0 0.85rem 2rem rgba(0, 0, 0, 0.16),
+    0 0.35rem 0.9rem rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.dialog__btn:hover {
+  filter: saturate(1.1) brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.dialog__btn:active {
+  transform: scale(0.98);
+}
+
+/* Dark Theme Adjustments */
+html[data-theme="dark"] .dialog {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: 
+    radial-gradient(circle at top left, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 60%),
+    radial-gradient(circle at bottom right, color-mix(in srgb, var(--color-accent) 8%, transparent), transparent 60%),
+    var(--color-background-light);
+}
+
+html[data-theme="dark"] .dialog::backdrop {
+  background: rgba(2, 6, 23, 0.85);
+}
+
+html[data-theme="dark"] .dialog__icon-container {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}

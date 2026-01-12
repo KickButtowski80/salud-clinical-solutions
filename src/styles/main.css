@@ -12,6 +12,7 @@
 @import url('./contact.css');
 @import url('./apply-form-stepper.css');
 @import url('./footer.css');
+@import url('./dialog.css');
 
 .skip-link {
   position: absolute;

@@ -49,6 +49,8 @@ export function createButtonUpdater(prevBtn, nextBtn, submitBtn, totalSteps) {
   };
 }
 
+import { dialog } from '../components/Dialog.js';
+
 export function createSubmitHandler(form, submitBtn, setActiveIndex) {
   return async (event, validator, steps) => {
     event.preventDefault();
@@ -64,19 +66,6 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
       }
     }
 
-    const statusEl = form.querySelector('[data-apply-form-status]');
-    const setStatus = (status, message) => {
-      if (status) {
-        form.dataset.submitStatus = status;
-      } else {
-        delete form.dataset.submitStatus;
-      }
-
-      if (statusEl instanceof HTMLElement) {
-        statusEl.textContent = message || '';
-      }
-    };
-
     try {
       const formData = new FormData(form);
       const data = Object.fromEntries(formData);
@@ -84,7 +73,6 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
       // Update button state
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
-      setStatus('pending', 'Submitting your application…');
       const response = await fetch(`/api/send-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -106,20 +94,19 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
           `Request failed with status ${response.status}`;
         console.error('❌ Email failed:', { status: response.status, errorMessage });
 
-        setStatus('error', errorMessage);
+        dialog.error('Submission Failed', errorMessage);
 
         submitBtn.textContent = 'Submission Failed ❌';
         setTimeout(() => {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Application';
-          setStatus(null, '');
         }, 2000);
         return;
       }
 
       if (result && result.success) {
         console.log('✅ Email sent:', result.messageId);
-        setStatus('success', 'Application sent! We’ll follow up soon.');
+        dialog.success('Application Sent', 'Application sent! We’ll follow up soon.');
         
         // Show success state briefly before reset
         submitBtn.textContent = 'Application Sent! ✅';
@@ -130,32 +117,29 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
           }
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Application';
-          setStatus(null, '');
         }, 2000);
       } else {
         const errorMessage = (result && result.error) || 'Unknown error';
         console.error('❌ Email failed:', errorMessage);
-        setStatus('error', errorMessage);
+        dialog.error('Submission Failed', errorMessage);
         
         // Show error state briefly before reset
         submitBtn.textContent = 'Submission Failed ❌';
         setTimeout(() => {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Application';
-          setStatus(null, '');
         }, 2000);
       }
       return;
     } catch (error) {
       console.error('❌ Network error:', error);
-      setStatus('error', 'Network error. Please try again.');
+      dialog.error('Network Error', 'Network error. Please try again.');
       
       // Show network error state briefly before reset
       submitBtn.textContent = 'Network Error 🌐';
       setTimeout(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit Application';
-        setStatus(null, '');
       }, 2000);
     }
   };

@@ -202,14 +202,14 @@ export function createApplyFormValidator(form) {
     // Reset flag after a short delay to allow any pending blur events.
     // Using requestAnimationFrame (~16.67ms at 60Hz) to align with the next display frame.
     // Alternative: setTimeout(..., 100) for a more conservative buffer if rAF proves too tight.
-    requestAnimationFrame(() => {
-      isNextClick = false;
-    });
+    // requestAnimationFrame(() => {
+    //   isNextClick = false;
+    // });
 
     // Alternative approach (commented out):
-    // setTimeout(() => {
-    //   isNextClick = false;
-    // }, 100);
+    setTimeout(() => {
+      isNextClick = false;
+    }, 100);
 
     return isStepValid;
   };
