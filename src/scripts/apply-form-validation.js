@@ -1,5 +1,6 @@
 export function createApplyFormValidator(form) {
-  const steps = Array.from(form.querySelectorAll('.apply-step'));
+  const steps = Array.from(form.querySelectorAll('fieldset[data-step]'));
+  let isNextClick = false; // Flag to track Next button clicks
   const fields = Array.from(
     form.querySelectorAll('input, select, textarea')
   );
@@ -61,7 +62,6 @@ export function createApplyFormValidator(form) {
       'phone': 'Please enter your phone number',
       'licenseType': 'Please select your profession',
       'licenseState': 'Please choose your licensed state',
-      'role': 'Please select your role'
     };
 
     return messages[fieldName] || null;
@@ -162,10 +162,11 @@ export function createApplyFormValidator(form) {
     }
 
     field.addEventListener('blur', () => {
-      validateField(field);
+      if (!isNextClick) {
+        validateField(field);
+      }
     });
   });
-
   /**
    * Validate every field inside a given step.
    *
@@ -178,6 +179,7 @@ export function createApplyFormValidator(form) {
    *    decide whether to continue or halt.
    */
   const validateStep = (stepIndex, { focus = true } = {}) => {
+    isNextClick = true; // Set flag when Next is clicked
     const step = steps[stepIndex];
     if (!step) return true;
 
@@ -196,6 +198,11 @@ export function createApplyFormValidator(form) {
     if (!isStepValid && focus && firstInvalidField instanceof HTMLElement) {
       firstInvalidField.focus();
     }
+    
+    // Reset flag after a short delay to allow any pending blur events
+    setTimeout(() => {
+      isNextClick = false;
+    }, 0);
 
     return isStepValid;
   };
