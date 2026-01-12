@@ -35,6 +35,9 @@ export function initApplyFormStepper() {
     const setActiveIndex = (nextIndex, { focus = true } = {}) => {
       activeIndex = Math.max(0, Math.min(nextIndex, steps.length - 1));
 
+      // Update validator's current step for event delegation
+      validator.setCurrentStep(activeIndex);
+
       steps.forEach((step, idx) => {
         const isActive = idx === activeIndex;
         step.toggleAttribute('hidden', !isActive);
