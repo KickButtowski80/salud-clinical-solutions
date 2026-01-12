@@ -163,7 +163,6 @@ export function createApplyFormValidator(form) {
 
     field.addEventListener('blur', () => {
       if (!isNextClick) {
-        console.log('blur', field);
         validateField(field);
       }
     });
