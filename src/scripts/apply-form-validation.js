@@ -163,6 +163,7 @@ export function createApplyFormValidator(form) {
 
     field.addEventListener('blur', () => {
       if (!isNextClick) {
+        console.log('blur', field);
         validateField(field);
       }
     });
@@ -199,10 +200,17 @@ export function createApplyFormValidator(form) {
       firstInvalidField.focus();
     }
     
-    // Reset flag after a short delay to allow any pending blur events
-    setTimeout(() => {
+    // Reset flag after a short delay to allow any pending blur events.
+    // Using requestAnimationFrame (~16.67ms at 60Hz) to align with the next display frame.
+    // Alternative: setTimeout(..., 100) for a more conservative buffer if rAF proves too tight.
+    requestAnimationFrame(() => {
       isNextClick = false;
-    }, 0);
+    });
+
+    // Alternative approach (commented out):
+    // setTimeout(() => {
+    //   isNextClick = false;
+    // }, 100);
 
     return isStepValid;
   };
