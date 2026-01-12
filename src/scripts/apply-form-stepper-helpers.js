@@ -52,6 +52,9 @@ export function createButtonUpdater(prevBtn, nextBtn, submitBtn, totalSteps) {
 import { dialog } from '../components/Dialog.js';
 
 export function createSubmitHandler(form, submitBtn, setActiveIndex) {
+  let failedAttempts = 0;
+  const MAX_ATTEMPTS = 3;
+  
   return async (event, validator, steps) => {
     event.preventDefault();
 
@@ -88,15 +91,14 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
       }
 
       if (!response.ok) {
-        const errorMessage =
-          (result && (result.error || result.message)) ||
-          responseText ||
-          `Request failed with status ${response.status}`;
-        console.error('❌ Email failed:', { status: response.status, errorMessage });
+        failedAttempts++;
+        const baseError = result?.error || responseText || `Status ${response.status}`;
+        const errorMessage = 
+          failedAttempts >= MAX_ATTEMPTS
+            ? `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\n${baseError}\n\nPlease contact info@saludclinical.com for help`
+            : `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\n${baseError}`;
 
         dialog.error('Submission Failed', errorMessage);
-
-        submitBtn.textContent = 'Submission Failed ❌';
         setTimeout(() => {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Application';
@@ -119,12 +121,14 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
           submitBtn.textContent = 'Submit Application';
         }, 2000);
       } else {
-        const errorMessage = (result && result.error) || 'Unknown error';
-        console.error('❌ Email failed:', errorMessage);
+        failedAttempts++;
+        const baseError = (result && result.error) || 'Unknown error';
+        const errorMessage = 
+          failedAttempts >= MAX_ATTEMPTS
+            ? `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\n${baseError}\n\nPlease contact support@example.com for help`
+            : `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\n${baseError}`;
+
         dialog.error('Submission Failed', errorMessage);
-        
-        // Show error state briefly before reset
-        submitBtn.textContent = 'Submission Failed ❌';
         setTimeout(() => {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Application';
@@ -133,10 +137,13 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
       return;
     } catch (error) {
       console.error('❌ Network error:', error);
-      dialog.error('Network Error', 'Network error. Please try again.');
+      failedAttempts++;
+      const errorMessage = 
+        failedAttempts >= MAX_ATTEMPTS
+          ? `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\nNetwork error. Please check your connection.\n\nPlease contact support@example.com for help`
+          : `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\nNetwork error. Please try again.`;
       
-      // Show network error state briefly before reset
-      submitBtn.textContent = 'Network Error 🌐';
+      dialog.error('Network Error', errorMessage);
       setTimeout(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit Application';
