@@ -1,3 +1,10 @@
+/**
+ * Creates a form validator for the multi-step application form.
+ * Uses event delegation to efficiently validate fields only in the active step.
+ *
+ * @param {HTMLFormElement} form - The form element to validate
+ * @returns {Object} Validator object with methods for validation
+ */
 export function createApplyFormValidator(form) {
   const steps = Array.from(form.querySelectorAll('fieldset[data-step]'));
   let isNextClick = false; // Flag to track Next button clicks
@@ -143,16 +150,14 @@ export function createApplyFormValidator(form) {
     const activeStep = steps[currentStepIndex];  // Which step is currently visible?
     // Only validate if field is in current step (don't validate hidden fields)
     if (!step || !activeStep || step !== activeStep) return;
-    
+
     // For optional fields with maxlength, show live limit feedback
     const isOptional = !field.hasAttribute('required');
-    console.log('field validation', field.name);
     if (isOptional && getMaxLength(field) !== null) {
       validateField(field);
     } else {
       // For other fields, clear error if now valid
       if (field.checkValidity()) {
-        console.log('Field is valid:', field.name);
         clearFieldError(field);
       }
     }
@@ -162,7 +167,7 @@ export function createApplyFormValidator(form) {
     const field = event.target;  // Which field did the user change?
     const step = field.closest('fieldset[data-step]');  // Which step is this field in?
     const activeStep = steps[currentStepIndex];  // Which step is currently visible?
-    
+
     // Only validate if field is in current step and is select/checkbox/radio
     if (!step || !activeStep || step !== activeStep) return;
     if (
@@ -178,7 +183,7 @@ export function createApplyFormValidator(form) {
     const field = event.target;  // Which field did the user leave?
     const step = field.closest('fieldset[data-step]');  // Which step is this field in?
     const activeStep = steps[currentStepIndex];  // Which step is currently visible?
-    
+
     // Only validate if field is in current step
     if (!step || !activeStep || step !== activeStep) return;
     if (!isNextClick) {
@@ -189,9 +194,19 @@ export function createApplyFormValidator(form) {
   /**
    * Update the current step index for event delegation.
    * Call this when switching between steps.
+   *
+   * @param {number} stepIndex - The new active step index
    */
   const setCurrentStep = (stepIndex) => {
     currentStepIndex = stepIndex;
+  };
+
+  /**
+   * Reset the isNextClick flag.
+   * Call this after successful step validation to re-enable blur validation.
+   */
+  const resetNextClick = () => {
+    isNextClick = false;
   };
 
   /**
@@ -204,7 +219,13 @@ export function createApplyFormValidator(form) {
    *    keyboard and screen reader users land exactly where they need to fix data.
    * 5. Return a boolean so callers (Next button, Enter key handler, submit) can
    *    decide whether to continue or halt.
+   *
+   * @param {number} stepIndex - The index of the step to validate
+   * @param {Object} options - Validation options
+   * @param {boolean} options.focus - Whether to focus the first invalid field
+   * @returns {boolean} True if step is valid, false otherwise
    */
+
   const validateStep = (stepIndex, { focus = true } = {}) => {
     isNextClick = true; // Set flag when Next is clicked
     const step = steps[stepIndex];
@@ -225,24 +246,25 @@ export function createApplyFormValidator(form) {
     if (!isStepValid && focus && firstInvalidField instanceof HTMLElement) {
       firstInvalidField.focus();
     }
-    
-    // Reset flag after a short delay to allow any pending blur events.
-    // Using requestAnimationFrame (~16.67ms at 60Hz) to align with the next display frame.
-    // Alternative: setTimeout(..., 100) for a more conservative buffer if rAF proves too tight.
-    // requestAnimationFrame(() => {
-    //   isNextClick = false;
-    // });
-
-    // Alternative approach (commented out):
-    setTimeout(() => {
-      isNextClick = false;
-    }, 100);
 
     return isStepValid;
   };
 
   return {
+    /** 
+     * Validate all fields in a specific step
+     * @type {typeof validateStep}
+     */
     validateStep,
+    /** 
+     * Update the current active step for event delegation
+     * @type {typeof setCurrentStep}
+     */
     setCurrentStep,
+    /** 
+     * Reset the isNextClick flag
+     * @type {typeof resetNextClick}
+     */
+    resetNextClick,
   };
 }
