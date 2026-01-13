@@ -60,6 +60,7 @@ export function initApplyFormStepper() {
     prevBtn.addEventListener('click', () => setActiveIndex(activeIndex - 1));
     nextBtn.addEventListener('click', () => {
       if (!validator.validateStep(activeIndex, { focus: false })) return;
+      validator.resetNextClick(); // Reset flag after successful validation
       setActiveIndex(activeIndex + 1);
     });
 
@@ -70,13 +71,14 @@ export function initApplyFormStepper() {
       const target = e.target;
       if (!(target instanceof HTMLElement)) return;
 
-      const tag = target.tagName;
-      if (tag === 'TEXTAREA') return;
+      const step = target.closest('fieldset[data-step]');
+      const stepIndex = step ? Array.from(steps).indexOf(step) : -1;
 
-      if (activeIndex < steps.length - 1) {
+      if (stepIndex === activeIndex) {
         e.preventDefault();
         const stepValid = validator.validateStep(activeIndex, { focus: false });
         if (!stepValid) return;
+        validator.resetNextClick(); // Reset flag after successful validation
         setActiveIndex(activeIndex + 1);
       }
     });
