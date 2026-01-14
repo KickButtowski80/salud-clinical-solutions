@@ -7,7 +7,7 @@
  */
 export function createApplyFormValidator(form) {
   const steps = Array.from(form.querySelectorAll('fieldset[data-step]'));
-  let isNextClick = false; // Flag to track Next button clicks
+  let isNavigationHappening = false; // Flag to track Next button clicks
   let currentStepIndex = 0; // Track current step for delegation
 
   const textLikeTypes = new Set(['text', 'email', 'tel', 'url', 'search', 'password']);
@@ -186,9 +186,12 @@ export function createApplyFormValidator(form) {
 
     // Only validate if field is in current step
     if (!step || !activeStep || step !== activeStep) return;
-    if (!isNextClick) {
-      validateField(field);
-    }
+    
+    // If Next was just clicked, let step validator handle all fields together
+    if (isNavigationHappening) return;
+    
+    // Otherwise, validate this individual field
+    validateField(field);
   }, true); // Use capture to ensure we get the blur event
 
   /**
@@ -201,12 +204,12 @@ export function createApplyFormValidator(form) {
     currentStepIndex = stepIndex;
   };
 
-  /**
-   * Reset the isNextClick flag.
-   * Call this after successful step validation to re-enable blur validation.
-   */
-  const resetNextClick = () => {
-    isNextClick = false;
+  const beginNavigation = () => {
+    isNavigationHappening = true;
+  };
+
+  const endNavigation = () => {
+    isNavigationHappening = false;
   };
 
   /**
@@ -227,7 +230,6 @@ export function createApplyFormValidator(form) {
    */
 
   const validateStep = (stepIndex, { focus = true } = {}) => {
-    isNextClick = true; // Set flag when Next is clicked
     const step = steps[stepIndex];
     if (!step) return true;
 
@@ -261,10 +263,7 @@ export function createApplyFormValidator(form) {
      * @type {typeof setCurrentStep}
      */
     setCurrentStep,
-    /** 
-     * Reset the isNextClick flag
-     * @type {typeof resetNextClick}
-     */
-    resetNextClick,
+    beginNavigation,
+    endNavigation,
   };
 }
