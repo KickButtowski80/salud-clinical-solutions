@@ -58,10 +58,26 @@ export function initApplyFormStepper() {
     form.classList.add('is-stepper');
 
     prevBtn.addEventListener('click', () => setActiveIndex(activeIndex - 1));
+
+    nextBtn.addEventListener('pointerdown', () => {
+      validator.beginNavigation();
+    });
+
+    nextBtn.addEventListener('pointerup', () => {
+      validator.endNavigation();
+    });
+
     nextBtn.addEventListener('click', () => {
-      if (!validator.validateStep(activeIndex, { focus: false })) return;
-      validator.resetNextClick(); // Reset flag after successful validation
+      validator.beginNavigation();
+      const stepValid = validator.validateStep(activeIndex, { focus: false });
+      if (!stepValid) {
+        setTimeout(() => validator.endNavigation(), 0);
+        return;
+      }
       setActiveIndex(activeIndex + 1);
+
+      // End the navigation suppression after focus/blur settles.
+      setTimeout(() => validator.endNavigation(), 0);
     });
 
     form.addEventListener('keydown', (e) => {
@@ -76,14 +92,36 @@ export function initApplyFormStepper() {
 
       if (stepIndex === activeIndex) {
         e.preventDefault();
+        validator.beginNavigation();
         const stepValid = validator.validateStep(activeIndex, { focus: false });
-        if (!stepValid) return;
-        validator.resetNextClick(); // Reset flag after successful validation
+        if (!stepValid) {
+          setTimeout(() => validator.endNavigation(), 0);
+          return;
+        }
         setActiveIndex(activeIndex + 1);
+
+        // End the navigation suppression after focus/blur settles.
+        setTimeout(() => validator.endNavigation(), 0);
       }
     });
 
-    form.addEventListener('submit', (event) => handleSubmit(event, validator, steps));
+    if (submitBtn instanceof HTMLButtonElement) {
+      submitBtn.addEventListener('pointerdown', () => {
+        validator.beginNavigation();
+      });
+
+      submitBtn.addEventListener('pointerup', () => {
+        validator.endNavigation();
+      });
+    }
+
+    form.addEventListener('submit', (event) => {
+      validator.beginNavigation();
+      Promise.resolve(handleSubmit(event, validator, steps))
+      .finally(() => {
+        setTimeout(() => validator.endNavigation(), 0);
+      });
+    });
 
     // Do not auto-focus on initial load; it can scroll the page to the contact section.
     setActiveIndex(0, { focus: false });
