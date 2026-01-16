@@ -70,7 +70,6 @@ function createDebugOverlay() {
     </div>
   `;
   document.body.appendChild(overlay);
-  console.log('[IO Debug] Overlay created. Active zone is roughly the middle third of the viewport (rootMargin -33% 0px -33% 0px).');
 }
 
 export function initNavIntersectionObserver() {

@@ -15,14 +15,6 @@ const allowedDomains = [
 ];
 
 export default async function handler(req, res) {
-  console.log('🔍 Request method:', req.method);
-  console.log('🔍 Request headers:', req.headers);
-  console.log('🔍 Environment check:', {
-    SMTP_HOST: process.env.SMTP_HOST ? '✅ Set' : '❌ Missing',
-    SMTP_PORT: process.env.SMTP_PORT ? '✅ Set' : '❌ Missing',
-    SMTP_USER: process.env.SMTP_USER ? '✅ Set' : '❌ Missing',
-    SMTP_PASS: process.env.SMTP_PASS ? '✅ Set' : '❌ Missing'
-  });
   // Set CORS headers based on origin
   const origin = req.headers.origin;
   if (allowedDomains.includes(origin)) {

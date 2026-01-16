@@ -107,7 +107,6 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
       }
 
       if (result && result.success) {
-        console.log('✅ Email sent:', result.messageId);
         dialog.success('Application Sent', 'Application sent! We’ll follow up soon.');
         
         // Show success state briefly before reset

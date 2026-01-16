@@ -19,42 +19,33 @@ export default async function handler(req, res) {
   try {
     const events = req.body.events || [req.body]; // Mailtrap sends events array
     
-    console.log('📧 Mailtrap Events Received:');
-    
     for (const event of events) {
       const { event_type, timestamp, message_id, recipient, metadata } = event;
-      
-      console.log(`\n🔔 Event: ${event_type}`);
-      console.log(`📅 Timestamp: ${new Date(timestamp * 1000).toISOString()}`);
-      console.log(`📧 Message ID: ${message_id}`);
-      console.log(`👤 Recipient: ${recipient}`);
       
       // Handle different event types
       switch (event_type) {
         case 'delivered':
-          console.log('✅ Email successfully delivered');
+          // Email successfully delivered
           break;
           
         case 'opened':
-          console.log('👁️ Email opened by recipient');
+          // Email opened by recipient
           break;
           
         case 'clicked':
-          console.log('🖱️ Link clicked in email');
-          console.log(`🔗 Click URL: ${metadata?.click_url || 'N/A'}`);
+          // Link clicked in email
           break;
           
         case 'bounced':
-          console.log('❌ Email bounced');
-          console.log(`💬 Bounce reason: ${metadata?.bounce_reason || 'N/A'}`);
+          // Email bounced
           break;
           
         case 'spam_complaint':
-          console.log('🚩 Recipient marked as spam');
+          // Recipient marked as spam
           break;
           
         default:
-          console.log(`ℹ️ Unknown event type: ${event_type}`);
+          // Unknown event type
       }
     }
 
