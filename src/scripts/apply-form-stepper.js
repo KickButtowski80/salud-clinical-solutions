@@ -31,10 +31,12 @@ export function initApplyFormStepper() {
     const updateProgress = createProgressUpdater(progress);
     const updateStatus = createStatusUpdater(status);
     const updateButtons = createButtonUpdater(prevBtn, nextBtn, submitBtn, steps.length);
-    const handleSubmit = createSubmitHandler(form, submitBtn);
 
     const setActiveIndex = (nextIndex, { focus = true } = {}) => {
       activeIndex = Math.max(0, Math.min(nextIndex, steps.length - 1));
+
+      // Update validator's current step for event delegation
+      validator.setCurrentStep(activeIndex);
 
       steps.forEach((step, idx) => {
         const isActive = idx === activeIndex;
@@ -51,12 +53,31 @@ export function initApplyFormStepper() {
       }
     };
 
+    const handleSubmit = createSubmitHandler(form, submitBtn, setActiveIndex);
+
     form.classList.add('is-stepper');
 
     prevBtn.addEventListener('click', () => setActiveIndex(activeIndex - 1));
+
+    nextBtn.addEventListener('pointerdown', () => {
+      validator.beginNavigation();
+    });
+
+    nextBtn.addEventListener('pointerup', () => {
+      validator.endNavigation();
+    });
+
     nextBtn.addEventListener('click', () => {
-      if (!validator.validateStep(activeIndex)) return;
+      validator.beginNavigation();
+      const stepValid = validator.validateStep(activeIndex, { focus: false });
+      if (!stepValid) {
+        setTimeout(() => validator.endNavigation(), 0);
+        return;
+      }
       setActiveIndex(activeIndex + 1);
+
+      // End the navigation suppression after focus/blur settles.
+      setTimeout(() => validator.endNavigation(), 0);
     });
 
     form.addEventListener('keydown', (e) => {
@@ -66,18 +87,41 @@ export function initApplyFormStepper() {
       const target = e.target;
       if (!(target instanceof HTMLElement)) return;
 
-      const tag = target.tagName;
-      if (tag === 'TEXTAREA') return;
+      const step = target.closest('fieldset[data-step]');
+      const stepIndex = step ? Array.from(steps).indexOf(step) : -1;
 
-      if (activeIndex < steps.length - 1) {
+      if (stepIndex === activeIndex) {
         e.preventDefault();
-        const stepValid = validator.validateStep(activeIndex);
-        if (!stepValid) return;
+        validator.beginNavigation();
+        const stepValid = validator.validateStep(activeIndex, { focus: false });
+        if (!stepValid) {
+          setTimeout(() => validator.endNavigation(), 0);
+          return;
+        }
         setActiveIndex(activeIndex + 1);
+
+        // End the navigation suppression after focus/blur settles.
+        setTimeout(() => validator.endNavigation(), 0);
       }
     });
 
-    form.addEventListener('submit', (event) => handleSubmit(event, validator, steps));
+    if (submitBtn instanceof HTMLButtonElement) {
+      submitBtn.addEventListener('pointerdown', () => {
+        validator.beginNavigation();
+      });
+
+      submitBtn.addEventListener('pointerup', () => {
+        validator.endNavigation();
+      });
+    }
+
+    form.addEventListener('submit', (event) => {
+      validator.beginNavigation();
+      Promise.resolve(handleSubmit(event, validator, steps))
+      .finally(() => {
+        setTimeout(() => validator.endNavigation(), 0);
+      });
+    });
 
     // Do not auto-focus on initial load; it can scroll the page to the contact section.
     setActiveIndex(0, { focus: false });

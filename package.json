@@ -21,9 +21,12 @@
   },
   "scripts": {
     "clean": "rm -rf .parcel-cache dist",
-    "dev": "parcel index.html --open",
+    "dev": "parcel index.html --open --no-cache",
     "build": "parcel build index.html --no-cache --public-url ./",
-    "serve": "parcel serve index.html --no-cache"
+    "serve": "parcel serve index.html --no-cache",
+    "test-email": "node test-email.js",
+    "local-server": "node local-test-server.js",
+    "test-direct": "node direct-email-test.js"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +44,8 @@
   },
   "dependencies": {
     "dotenv": "^17.2.3",
-    "nodemailer": "^7.0.12"
+    "nodemailer": "^7.0.12",
+    "node-fetch": "^3.3.2",
+    "express": "^4.18.2"
   }
 }

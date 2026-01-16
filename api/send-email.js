@@ -15,6 +15,14 @@ const allowedDomains = [
 ];
 
 export default async function handler(req, res) {
+  console.log('🔍 Request method:', req.method);
+  console.log('🔍 Request headers:', req.headers);
+  console.log('🔍 Environment check:', {
+    SMTP_HOST: process.env.SMTP_HOST ? '✅ Set' : '❌ Missing',
+    SMTP_PORT: process.env.SMTP_PORT ? '✅ Set' : '❌ Missing',
+    SMTP_USER: process.env.SMTP_USER ? '✅ Set' : '❌ Missing',
+    SMTP_PASS: process.env.SMTP_PASS ? '✅ Set' : '❌ Missing'
+  });
   // Set CORS headers based on origin
   const origin = req.headers.origin;
   if (allowedDomains.includes(origin)) {
@@ -38,7 +46,7 @@ export default async function handler(req, res) {
     // Create Mailtrap SMTP transporter
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
+      port: process.env.SMTP_PORT, 
       secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.SMTP_USER,
@@ -63,9 +71,42 @@ export default async function handler(req, res) {
       notes
     } = req.body;
 
-    // Server-side validation
+    const trimString = (value) => {
+      if (typeof value !== 'string') return '';
+      return value.trim();
+    };
+
+    const enforceMaxLength = (value, max) => {
+      if (typeof value !== 'string') return '';
+      return value.length > max ? value.slice(0, max) : value;
+    };
+
+    const escapeHtml = (value) => {
+      if (typeof value !== 'string') return '';
+      return value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    };
+
+    const trimmedData = {
+      name: trimString(name),
+      email: trimString(email),
+      phone: trimString(phone),
+      role: trimString(role),
+      licenseType: trimString(licenseType),
+      licenseState: trimString(licenseState),
+      licenseNumber: trimString(licenseNumber),
+      placementType: trimString(placementType),
+      startDate: trimString(startDate),
+      notes: trimString(notes)
+    };
+
+    // Server-side validation (on trimmed values)
     const requiredFields = ['name', 'email', 'phone', 'role'];
-    const missingFields = requiredFields.filter(field => !req.body[field]);
+    const missingFields = requiredFields.filter((field) => !trimmedData[field]);
     if (missingFields.length > 0) {
       return res.status(400).json({
         error: 'Missing required fields',
@@ -73,9 +114,28 @@ export default async function handler(req, res) {
       });
     }
 
+    const maxLengths = {
+      name: 120,
+      email: 254,
+      phone: 40,
+      licenseNumber: 50,
+      notes: 500
+    };
+
+    const tooLongFields = Object.entries(maxLengths)
+      .filter(([key, max]) => trimmedData[key] && trimmedData[key].length > max)
+      .map(([key]) => key);
+
+    if (tooLongFields.length > 0) {
+      return res.status(400).json({
+        error: 'One or more fields are too long',
+        tooLongFields
+      });
+    }
+
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(trimmedData.email)) {
       return res.status(400).json({
         error: 'Invalid email format'
       });
@@ -83,35 +143,30 @@ export default async function handler(req, res) {
 
     // Validate phone format (basic check)
     const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-    if (!phoneRegex.test(phone) || phone.length < 10) {
+    if (!phoneRegex.test(trimmedData.phone) || trimmedData.phone.length < 10) {
       return res.status(400).json({
         error: 'Invalid phone format'
       });
     }
 
-    // Sanitize input to prevent XSS
-    const sanitizeString = (str) => {
-      if (typeof str !== 'string') return str;
-      return str.trim().replace(/[<>]/g, '');
-    };
-
     const sanitizedData = {
-      name: sanitizeString(name),
-      email: sanitizeString(email),
-      phone: sanitizeString(phone),
-      role: sanitizeString(role),
-      licenseType: sanitizeString(licenseType),
-      licenseState: sanitizeString(licenseState),
-      licenseNumber: sanitizeString(licenseNumber),
-      placementType: sanitizeString(placementType),
-      startDate: sanitizeString(startDate),
-      notes: sanitizeString(notes)
+      name: escapeHtml(trimmedData.name),
+      email: escapeHtml(trimmedData.email),
+      phone: escapeHtml(trimmedData.phone),
+      role: escapeHtml(trimmedData.role),
+      licenseType: escapeHtml(trimmedData.licenseType),
+      licenseState: escapeHtml(trimmedData.licenseState),
+      licenseNumber: escapeHtml(trimmedData.licenseNumber),
+      placementType: escapeHtml(trimmedData.placementType),
+      startDate: escapeHtml(trimmedData.startDate),
+      notes: escapeHtml(trimmedData.notes)
     };
 
     // Create email options
     const mailOptions = {
-      from: 'salud-test@mailtrap.io',
-      to: process.env.RECIPIENT_EMAIL.split(',').map(email => email.trim()).join(','),
+      from: '"Salud Clinical Solutions" <info@saludclinical.com>',
+      to: 'info@saludclinical.com',
+      replyTo: sanitizedData.email, // Let you reply directly to applicant
       subject: `🏥 New Application: ${sanitizedData.name} - ${sanitizedData.role}`,
       text: `
               New Application Received:
