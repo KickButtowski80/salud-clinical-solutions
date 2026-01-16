@@ -10,10 +10,10 @@ export function createApplyFormValidator(form) {
   let isNavigationHappening = false; // Flag to track Next button clicks
   let currentStepIndex = 0; // Track current step for delegation
 
-  const textLikeTypes = new Set(['text', 'email', 'tel', 'url']);
+  const textLikeTypes = ['email', 'url']; // Only trim fields that can't have spaces
 
   const sanitizeFieldValue = (field) => {
-    const isTrimmableInput = field instanceof HTMLInputElement && textLikeTypes.has(field.type);
+    const isTrimmableInput = field instanceof HTMLInputElement && textLikeTypes.includes(field.type);
     // Don't trim textareas at all - they should allow free-form text including spaces
     if (!isTrimmableInput) return;
 
