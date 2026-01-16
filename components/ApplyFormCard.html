@@ -48,7 +48,7 @@
 
             <div class="form-field">
                 <label for="apply-phone">Phone *</label>
-                <input id="apply-phone" name="phone" type="tel" autocomplete="tel" required maxlength="40" aria-describedby="apply-phone-error" />
+                <input id="apply-phone" name="phone" type="tel" autocomplete="tel" required maxlength="40" pattern="^[\d\s\-\+\(\)]+$" title="Phone number can contain digits, spaces, dashes, plus, and parentheses" aria-describedby="apply-phone-error" />
                 <div id="apply-phone-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
         </div>
