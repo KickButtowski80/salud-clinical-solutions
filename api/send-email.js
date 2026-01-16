@@ -15,6 +15,14 @@ const allowedDomains = [
 ];
 
 export default async function handler(req, res) {
+  console.log('🔍 Request method:', req.method);
+  console.log('🔍 Request headers:', req.headers);
+  console.log('🔍 Environment check:', {
+    SMTP_HOST: process.env.SMTP_HOST ? '✅ Set' : '❌ Missing',
+    SMTP_PORT: process.env.SMTP_PORT ? '✅ Set' : '❌ Missing',
+    SMTP_USER: process.env.SMTP_USER ? '✅ Set' : '❌ Missing',
+    SMTP_PASS: process.env.SMTP_PASS ? '✅ Set' : '❌ Missing'
+  });
   // Set CORS headers based on origin
   const origin = req.headers.origin;
   if (allowedDomains.includes(origin)) {
@@ -38,7 +46,7 @@ export default async function handler(req, res) {
     // Create Mailtrap SMTP transporter
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
+      port: process.env.SMTP_PORT, 
       secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.SMTP_USER,
@@ -156,8 +164,9 @@ export default async function handler(req, res) {
 
     // Create email options
     const mailOptions = {
-      from: 'salud-test@mailtrap.io',
-      to: process.env.RECIPIENT_EMAIL.split(',').map(email => email.trim()).join(','),
+      from: '"Salud Clinical Solutions" <info@saludclinical.com>',
+      to: 'info@saludclinical.com',
+      replyTo: sanitizedData.email, // Let you reply directly to applicant
       subject: `🏥 New Application: ${sanitizedData.name} - ${sanitizedData.role}`,
       text: `
               New Application Received:
