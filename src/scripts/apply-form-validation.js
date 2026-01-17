@@ -60,6 +60,10 @@ export function createApplyFormValidator(form) {
   const getCustomErrorMessage = (field) => {
     const fieldName = field.name || field.id || '';
 
+    if (fieldName === 'phone' && typeof field.value === 'string' && field.value.trim() !== '') {
+      return null;
+    }
+
     // Custom messages for specific fields
     const messages = {
       'name': 'Please enter your full name',
@@ -102,6 +106,19 @@ export function createApplyFormValidator(form) {
     sanitizeFieldValue(field);
     const maxLen = getMaxLength(field);
 
+    // Custom phone validation for tel fields
+    if (field.type === 'tel' && field.value) {
+      const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+      if (!phoneRegex.test(field.value)) {
+        showFieldError(field, 'Phone number can only contain digits, spaces, dashes, plus, and parentheses');
+        return false;
+      }
+      if (field.value.replace(/\D/g, '').length < 10) {
+        showFieldError(field, 'Phone number must have at least 10 digits');
+        return false;
+      }
+    }
+
     // For optional fields with maxlength:
     // - Empty is fine
     // - At/over the limit: show a message (warning/error)
@@ -116,7 +133,7 @@ export function createApplyFormValidator(form) {
       if (len >= maxLen && len !== 0) {
         const errorEl = getErrorElement(field);
         if (errorEl) {
-          errorEl.textContent = `You’ve reached the ${maxLen}-character limit.`;
+          errorEl.textContent = `You've reached the ${maxLen}-character limit.`;
         }
         field.removeAttribute('aria-invalid');
         return true;
@@ -153,14 +170,19 @@ export function createApplyFormValidator(form) {
 
     // For optional fields with maxlength, show live limit feedback
     const isOptional = !field.hasAttribute('required');
-    if (isOptional && getMaxLength(field) !== null) {
-      validateField(field);
-    } else {
-      // For other fields, clear error if now valid
-      if (field.checkValidity()) {
-        clearFieldError(field);
-      }
+    const hasContent = field.value.trim() !== '';
+
+    // 1. Optional field with no content → skip
+    if (isOptional && !hasContent) return;
+
+    // 2. If the field is valid now → clear errors and skip validation
+    if (field.checkValidity()) {
+      clearFieldError(field);
+      return;
     }
+
+    // 3. Otherwise validate (handles invalid fields: required empty, optional invalid, etc.)
+    validateField(field);
   });
 
   form.addEventListener('change', (event) => {
