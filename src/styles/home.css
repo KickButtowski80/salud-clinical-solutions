@@ -1,11 +1,11 @@
 .hero {
   border-radius: 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border: 0.0625rem solid rgba(148, 163, 184, 0.25);
   background:
     radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 55%),
     radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.08), transparent 55%),
     var(--color-primary-strong);
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.5);
+  box-shadow: 0 1rem 2.5rem rgba(15, 23, 42, 0.5);
   color: var(--color-text-light);
   padding: clamp(1rem, calc(2vw + 1rem), 2rem);
   margin-bottom: clamp(1rem, calc(2vw + 1rem), 2rem);
@@ -45,7 +45,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-3) var(--space-6);
-  border-radius: 999px;
+  border-radius: 9999px;
   text-decoration: none;
   font-weight: var(--font-weight-medium);
   transition: filter 0.2s ease, background-color 0.2s ease;
@@ -59,7 +59,7 @@
 .btn-secondary {
   background-color: transparent;
   color: var(--color-on-primary);
-  border: 2px solid var(--color-on-primary);
+  border: 0.125rem solid var(--color-on-primary);
 }
 
 .btn-primary:hover,
@@ -86,8 +86,8 @@
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  width: 1px;
-  height: 1px;
+  width: 0.0625rem;
+  height: 0.0625rem;
   opacity: 0;
   pointer-events: none;
 }
@@ -107,14 +107,14 @@
   justify-content: center;
   width: clamp(2rem, 2vw + 0.5rem, 3.5rem);
   height: clamp(2rem, 2vw + 0.5rem, 3.5rem);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.35);
   background: rgba(15, 23, 42, 0.35);
   border-radius: 50%;
   color: var(--color-on-primary);
   text-decoration: none;
   pointer-events: auto;
   transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, filter 0.2s ease;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(0.25rem);
 }
 
 /* Modern CSS @scope for browsers that support it (88.23% support) */
@@ -129,14 +129,14 @@
     justify-content: center;
     width: clamp(2rem, 2vw + 0.5rem, 3.5rem);
     height: clamp(2rem, 2vw + 0.5rem, 3.5rem);
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 0.0625rem solid rgba(255, 255, 255, 0.35);
     background: rgba(15, 23, 42, 0.35);
     border-radius: 50%;
     color: var(--color-on-primary);
     text-decoration: none;
     pointer-events: auto;
     transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, filter 0.2s ease;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(0.25rem);
   }
 }
 
