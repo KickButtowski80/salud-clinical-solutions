@@ -21,14 +21,11 @@ function initContentReveal() {
     return;
   }
 
-  // Find the main content area to hide
-  const mainContent = document.getElementById('main-content') || document.querySelector('main') || document.body;
-  console.log('Hiding content in:', mainContent.tagName || mainContent.id);
-  
-  // Initially hide content
-  mainContent.style.opacity = '0';
-  mainContent.style.transition = 'opacity 0.5s ease-in-out';
-  console.log('Content hidden with opacity 0');
+  // Hide the entire body
+  console.log('Hiding entire body');
+  document.body.style.opacity = '0';
+  document.body.style.transition = 'opacity 0.5s ease-in-out';
+  console.log('Body hidden with opacity 0');
 
   function revealContent() {
     console.log('Reveal function called');
@@ -40,11 +37,11 @@ function initContentReveal() {
     console.log('Toggled state to:', newState);
     
     if (newState) {
-      mainContent.style.opacity = '1';
-      console.log('Content revealed with opacity 1');
+      document.body.style.opacity = '1';
+      console.log('Body revealed with opacity 1');
     } else {
-      mainContent.style.opacity = '0';
-      console.log('Content hidden with opacity 0');
+      document.body.style.opacity = '0';
+      console.log('Body hidden with opacity 0');
     }
   }
 
