@@ -36,7 +36,6 @@
   padding: clamp(1rem, calc(2vw + 1rem), 2rem);
   margin-bottom: clamp(1rem, calc(2vw + 1rem), 2rem);
   /* Text formatting inherited by children */
-  text-justify: inter-word;
   hyphens: auto;
   overflow-wrap: break-word;
 }
@@ -425,7 +424,7 @@
 
   .about-body,
   .leadership-subtitle {
-    text-align: justify;
+    text-align: left;
   }
 }
 
