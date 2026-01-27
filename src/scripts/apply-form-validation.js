@@ -106,6 +106,15 @@ export function createApplyFormValidator(form) {
     sanitizeFieldValue(field);
     const maxLen = getMaxLength(field);
 
+    // Custom email validation
+    if (field.type === 'email' && field.value) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(field.value)) {
+        showFieldError(field, 'Please enter a valid email address (example@domain.com)');
+        return false;
+      }
+    }
+
     // Custom phone validation for tel fields
     if (field.type === 'tel' && field.value) {
       const phoneRegex = /^[\d\s\-\+\(\)]+$/;
