@@ -60,8 +60,18 @@ export function createApplyFormValidator(form) {
   const getCustomErrorMessage = (field) => {
     const fieldName = field.name || field.id || '';
 
-    if (fieldName === 'phone' && typeof field.value === 'string' && field.value.trim() !== '') {
-      return null;
+    if (
+      fieldName === 'phone' &&
+      field instanceof HTMLInputElement &&
+      field.type === 'tel' &&
+      typeof field.value === 'string' &&
+      field.value.trim() !== ''
+    ) {
+      const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+      const digitsCount = field.value.replace(/\D/g, '').length;
+      if (phoneRegex.test(field.value) && digitsCount >= 10) {
+        return null;
+      }
     }
 
     // Custom messages for specific fields
@@ -184,13 +194,7 @@ export function createApplyFormValidator(form) {
     // 1. Optional field with no content → skip
     if (isOptional && !hasContent) return;
 
-    // 2. If the field is valid now → clear errors and skip validation
-    if (field.checkValidity()) {
-      clearFieldError(field);
-      return;
-    }
-
-    // 3. Otherwise validate (handles invalid fields: required empty, optional invalid, etc.)
+    // Validate on input so custom validators (email/phone) are enforced.
     validateField(field);
   });
 
