@@ -14,16 +14,6 @@
   line-height: 1.9;
 }
 
-@media (max-width: 768px) {
-  .about {
-    padding: 0;
-  }
-
-  .card.card--about {
-    padding: var(--space-3) var(--space-2);
-  }
-}
-
 .about-intro {
   text-align: center;
   max-width: 40rem;
