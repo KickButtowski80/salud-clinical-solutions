@@ -60,8 +60,18 @@ export function createApplyFormValidator(form) {
   const getCustomErrorMessage = (field) => {
     const fieldName = field.name || field.id || '';
 
-    if (fieldName === 'phone' && typeof field.value === 'string' && field.value.trim() !== '') {
-      return null;
+    if (
+      fieldName === 'phone' &&
+      field instanceof HTMLInputElement &&
+      field.type === 'tel' &&
+      typeof field.value === 'string' &&
+      field.value.trim() !== ''
+    ) {
+      const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+      const digitsCount = field.value.replace(/\D/g, '').length;
+      if (phoneRegex.test(field.value) && digitsCount >= 10) {
+        return null;
+      }
     }
 
     // Custom messages for specific fields
@@ -106,6 +116,18 @@ export function createApplyFormValidator(form) {
     sanitizeFieldValue(field);
     const maxLen = getMaxLength(field);
 
+    // Custom email validation
+    if (field.type === 'email' && field.value) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(field.value)) {
+        showFieldError(field, 'Please enter a valid email address (example@domain.com)');
+        return false;
+      }
+      // Skip browser validation for email fields - we validated above
+      clearFieldError(field);
+      return true;
+    }
+
     // Custom phone validation for tel fields
     if (field.type === 'tel' && field.value) {
       const phoneRegex = /^[\d\s\-\+\(\)]+$/;
@@ -117,6 +139,9 @@ export function createApplyFormValidator(form) {
         showFieldError(field, 'Phone number must have at least 10 digits');
         return false;
       }
+      // Skip browser validation for phone fields - we validated above
+      clearFieldError(field);
+      return true;
     }
 
     // For optional fields with maxlength:
@@ -175,13 +200,7 @@ export function createApplyFormValidator(form) {
     // 1. Optional field with no content → skip
     if (isOptional && !hasContent) return;
 
-    // 2. If the field is valid now → clear errors and skip validation
-    if (field.checkValidity()) {
-      clearFieldError(field);
-      return;
-    }
-
-    // 3. Otherwise validate (handles invalid fields: required empty, optional invalid, etc.)
+    // Validate on input so custom validators (email/phone) are enforced.
     validateField(field);
   });
 
