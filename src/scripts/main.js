@@ -9,39 +9,30 @@ import { initApplyFormStepper } from './apply-form-stepper.js';
 
 // ==================== CONTENT REVEAL SYSTEM ====================
 // Customer requested content hiding until site meets standards
-// Mobile: Touch bottom-left corner, then bottom-right corner
-// Desktop: Ctrl + > key combination
+// Mobile: Touch screen 5 times
+// Desktop: Ctrl + . (period) key combination
 
 function initContentReveal() {
-  console.log('🔧 initContentReveal function called!');
-  
   // Check if content is already revealed
   if (localStorage.getItem('contentRevealed') === 'true') {
-    console.log('Content already revealed');
     return;
   }
 
   // Hide the entire body
-  console.log('Hiding entire body');
   document.body.style.opacity = '0';
   document.body.style.transition = 'opacity 0.5s ease-in-out';
-  console.log('Body hidden with opacity 0');
 
   function revealContent() {
-    console.log('Reveal function called');
     // Toggle the localStorage value
     const currentState = localStorage.getItem('contentRevealed') === 'true';
     const newState = !currentState;
     
     localStorage.setItem('contentRevealed', newState.toString());
-    console.log('Toggled state to:', newState);
     
     if (newState) {
       document.body.style.opacity = '1';
-      console.log('Body revealed with opacity 1');
     } else {
       document.body.style.opacity = '0';
-      console.log('Body hidden with opacity 0');
     }
   }
 
@@ -68,23 +59,17 @@ function initContentReveal() {
 
   // Desktop: Ctrl + . (period) key combination
   document.addEventListener('keydown', (e) => {
-    console.log('Key pressed:', e.key, 'Ctrl:', e.ctrlKey);
     if (e.ctrlKey && e.key === '.') {
-      console.log('🎯 Ctrl+. detected!');
       e.preventDefault();
       revealContent();
     }
   });
-  
-  console.log('✅ Keyboard event listener attached');
 }
 
 // ==================== MAIN INITIALIZATION ====================
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🚀 Main initialization starting...');
   initContentReveal(); // Initialize content reveal system first
-  console.log('✅ Content reveal initialized');
   initNavIntersectionObserver();
   initStaffCardScrollAnimations();
   initScrollToTop();
@@ -93,5 +78,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initThemeTogglePersistence();
   initRoleChips();
   initApplyFormStepper();
-  console.log('🎉 All systems initialized');
 });
