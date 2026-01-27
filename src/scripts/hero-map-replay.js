@@ -9,10 +9,11 @@
  * - CSS animations on the map (including the hover-disable timing) also restart.
  */
 export const initHeroMapReplay = () => {
-  const replayButton = document.querySelector('[data-hero-map-replay]');
+  const replayButton = document.querySelector('[data-hero-replay]');
   if (!replayButton) return;
 
-  replayButton.addEventListener('click', () => {
+  replayButton.addEventListener('click', (e) => {
+    e.preventDefault();
     const container = replayButton.closest('.hero-visual');
     if (!container) return;
 
