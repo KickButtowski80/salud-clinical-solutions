@@ -1,40 +1,49 @@
 <section id="home" class="hero" aria-labelledby="hero-title">
   <header class="hero-header">
     <h1 id="hero-title" class="hero-title">
-      Connecting mental health providers with the roles that matter most.
+      Connecting Behavioral and Mental Health providers with the roles that matter most.
     </h1>
-    <p class="hero-subtitle">
-      We specialize in locum tenens and long-term behavioral health staffing across California, linking
-      psychiatrists, psychologists, and licensed clinical social workers with organizations that need
-      reliable, compassionate care.
-      From major metro areas to underserved communities, we help clinicians find the right fit fast.
-    </p>
-  </header>
 
-  <nav class="hero-actions" aria-label="Hero actions">
-    <a class="btn btn-primary" href="#contact" rel="nofollow noreferrer">
-      Find Your Next Role
-    </a>
-    <a class="btn btn-secondary" href="#about" rel="nofollow noreferrer">
-      Learn About Us
-    </a>
-  </nav>
+    <div class="card card--hero">
+      <p class="hero-subtitle">
+        We specialize in locum tenens and long-term behavioral health staffing placements across California,
+        linking psychiatrists, psychologists, licensed clinical social workers, and additional disciplines with
+        organizations that need reliable, compassionate care. From major metro areas to underserved communities,
+        we help clinicians find the right fit fast.
+      </p>
+
+      <nav class="hero-actions" aria-label="Hero actions">
+        <a class="btn btn-primary" href="#contact" rel="nofollow noreferrer">
+          Find Your Next Role
+        </a>
+        <a class="btn btn-secondary" href="#about" rel="nofollow noreferrer">
+          Learn About Us
+        </a>
+      </nav>
+    </div>
+  </header>
 
   <figure class="hero-media">
     <div class="hero-visual">
       <div class="hero-overlay-layer">
-        <img class="hero-final-logo" src="./src/assets/images/active-logo-removebg-preview.webp" alt="" aria-hidden="true" />
+        <img
+          class="hero-final-logo"
+          src="./src/assets/images/active-logo-removebg-preview.webp"
+          alt="Salud Clinical Solutions logo"
+        />
 
-        <button class="hero-map-replay" type="button" data-hero-map-replay aria-label="Replay map animation">
-          Replay
-        </button>
+        <div class="hero-map-anchor" id="hero-replay-anchor"></div>
+        <a href="#" class="hero-replay-button" data-hero-replay aria-label="Replay animation">
+          <svg class="hero-replay-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+          </svg>
+        </a>
       </div>
 
       <div class="hero-map-layer">
         <!-- Soft Map of California -->
         <include src="./src/assets/images/usa-ca.svg"></include>
       </div>
-
     </div>
   </figure>
 </section>

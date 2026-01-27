@@ -87,7 +87,7 @@ html[data-theme="dark"] {
   }
 }
 
-.hero-overlay-layer .hero-map-replay {
+.hero-overlay-layer .hero-replay-button {
   pointer-events: auto;
 }
 

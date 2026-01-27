@@ -82,30 +82,164 @@
   position: relative;
 }
 
-.hero-map-replay {
+.hero-map-anchor {
   position: absolute;
-  top: auto;
-  bottom: -3.5rem;
-  right: 6.75rem;
-  z-index: 10;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(15, 23, 42, 0.35);
-  color: var(--color-on-primary);
-  border-radius: 999px;
-  padding: 0.65rem 1rem;
-  font-weight: var(--font-weight-medium);
-  font-size: clamp(0.85rem, 0.8rem + 0.25vw, 0.95rem);
-  line-height: 1;
-  min-height: 42px;
-  min-width: 96px;
-  cursor: pointer;
-  transition: filter 0.2s ease, background-color 0.2s ease;
+  bottom: 1rem;
+  right: 1rem;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.hero-map-replay:hover,
-.hero-map-replay:focus-visible {
+/* ==========================================================================
+  HERO STYLES
+  ========================================================================== */
+
+/* Fallback for browsers that don't support @scope */
+.hero-replay-button {
+  position: absolute;
+  bottom: clamp(0.5rem, 1vw + 0.25rem, 1rem);
+  right: clamp(0.5rem, 1vw + 0.25rem, 1rem);
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(2rem, 2vw + 0.5rem, 3.5rem);
+  height: clamp(2rem, 2vw + 0.5rem, 3.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(15, 23, 42, 0.35);
+  border-radius: 50%;
+  color: var(--color-on-primary);
+  text-decoration: none;
+  pointer-events: auto;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+/* Modern CSS @scope for browsers that support it (88.23% support) */
+@scope (.hero-visual) {
+  .hero-replay-button {
+    position: absolute;
+    bottom: clamp(0.5rem, 1vw + 0.25rem, 1rem);
+    right: clamp(0.5rem, 1vw + 0.25rem, 1rem);
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(2rem, 2vw + 0.5rem, 3.5rem);
+    height: clamp(2rem, 2vw + 0.5rem, 3.5rem);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(15, 23, 42, 0.35);
+    border-radius: 50%;
+    color: var(--color-on-primary);
+    text-decoration: none;
+    pointer-events: auto;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, filter 0.2s ease;
+    backdrop-filter: blur(4px);
+  }
+}
+
+/* Modern browsers with position-anchor support */
+@supports (position-anchor: auto) or (position-anchor: --hero-replay-anchor) {
+  .hero-map-anchor {
+    position-anchor: --hero-replay-anchor;
+  }
+  
+  .hero-replay-button {
+    position-anchor: --hero-replay-anchor;
+    bottom: anchor(bottom);
+    right: anchor(right);
+  }
+}
+
+.hero-replay-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.hero-replay-button:hover,
+.hero-replay-button:focus-visible {
   background: rgba(15, 23, 42, 0.48);
-  filter: brightness(1.05);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.hero-replay-button:hover .hero-replay-icon,
+.hero-replay-button:focus-visible .hero-replay-icon {
+  transform: rotate(90deg);
+}
+
+/* Responsive design for different screen sizes */
+@media (max-width: 1024px) {
+  .hero-map-anchor {
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+  
+  .hero-replay-button {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .hero-replay-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-map-anchor {
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+  
+  .hero-replay-button {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  
+  .hero-replay-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-map-anchor {
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+  
+  .hero-replay-button {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .hero-replay-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+/* Extra small screens - ensure button doesn't get cut off */
+@media (max-width: 320px) {
+  .hero-map-anchor {
+    bottom: 0.25rem;
+    right: 0.25rem;
+  }
+  
+  .hero-replay-button {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .hero-replay-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
 }
 
 @media (min-width: 1024px) {

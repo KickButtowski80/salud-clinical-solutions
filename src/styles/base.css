@@ -156,3 +156,45 @@ main {
     scroll-behavior: auto;
   }
 }
+
+/* ==========================================================================
+   UNIVERSAL CARD COMPONENT
+   Reusable card styling for consistent design across the site
+   ========================================================================== */
+
+.card {
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: clamp(1rem, calc(2vw + 0.5rem), 1.5rem);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Card variants for different contexts */
+.card--hero {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.card--about {
+  background: 
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.08), transparent 55%),
+    var(--color-primary-strong);
+  border-color: rgba(148, 163, 184, 0.25);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.5);
+}
+
+.card--light {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-text-primary);
+  border-color: rgba(0, 0, 0, 0.1);
+}
