@@ -123,6 +123,9 @@ export function createApplyFormValidator(form) {
         showFieldError(field, 'Please enter a valid email address (example@domain.com)');
         return false;
       }
+      // Skip browser validation for email fields - we validated above
+      clearFieldError(field);
+      return true;
     }
 
     // Custom phone validation for tel fields
@@ -136,6 +139,9 @@ export function createApplyFormValidator(form) {
         showFieldError(field, 'Phone number must have at least 10 digits');
         return false;
       }
+      // Skip browser validation for phone fields - we validated above
+      clearFieldError(field);
+      return true;
     }
 
     // For optional fields with maxlength:
