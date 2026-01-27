@@ -193,6 +193,16 @@ main {
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.5);
 }
 
+.card--services {
+  background: 
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.10), transparent 60%),
+    var(--color-primary-strong);
+  border-color: rgba(148, 163, 184, 0.20);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.4);
+  padding: var(--space-4) var(--space-3);
+}
+
 .card--light {
   background: rgba(255, 255, 255, 0.95);
   color: var(--color-text-primary);
