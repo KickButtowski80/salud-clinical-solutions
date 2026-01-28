@@ -12,27 +12,25 @@ import { initApplyFormStepper } from './apply-form-stepper.js';
 // Mobile: Touch screen 5 times
 // Desktop: Ctrl + Alt + . (period) key combination
 
+function setContentVisibility(isRevealed) {
+  localStorage.setItem('contentRevealed', isRevealed.toString());
+  document.body.style.display = isRevealed ? 'block' : 'none';
+}
+
 function initContentReveal() {
-  // Always start with content hidden
-  document.body.style.display = 'none';
-  
   // Initialize localStorage to false if not set
   if (localStorage.getItem('contentRevealed') === null) {
     localStorage.setItem('contentRevealed', 'false');
   }
 
+  // Set initial visibility based on localStorage
+  const isRevealed = localStorage.getItem('contentRevealed') === 'true';
+  setContentVisibility(isRevealed);
+
   function revealContent() {
-    // Toggle the localStorage value
+    // Toggle the current state
     const currentState = localStorage.getItem('contentRevealed') === 'true';
-    const newState = !currentState;
-    
-    localStorage.setItem('contentRevealed', newState.toString());
-    
-    if (newState) {
-      document.body.style.display = 'block';
-    } else {
-      document.body.style.display = 'none';
-    }
+    setContentVisibility(!currentState);
   }
 
   // Mobile: Touch screen 5 times to toggle content
@@ -57,6 +55,7 @@ function initContentReveal() {
   // Desktop: Ctrl + Alt + . (period) key combination
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.altKey && e.key === '.') {
+      console.log('Content revealed');
       e.preventDefault();
       revealContent();
     }
