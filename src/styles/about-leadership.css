@@ -43,17 +43,6 @@
   margin-top: 0.5rem;
 }
 
-/* Increase about section font sizes */
-html[data-theme="light"] .about-title,
-html[data-theme="dark"] .about-title {
-  font-size: clamp(2.25rem, calc(3.5vw + 1rem), 3.5rem); /* Increased from 3xl */
-}
-
-html[data-theme="light"] .about-body,
-html[data-theme="dark"] .about-body {
-  font-size: clamp(1.125rem, calc(1.25vw + 0.75rem), 1.375rem); /* Increased from base */
-}
-
 /* Light mode white text for about section */
 html[data-theme="light"] .about-title {
   color: #ffffff;
@@ -61,20 +50,6 @@ html[data-theme="light"] .about-title {
 
 html[data-theme="light"] .about-body {
   color: #f8fafc; /* Slightly off-white for better readability */
-}
-
-/* Dark mode black text for about section */
-html[data-theme="dark"] .about-title {
-  color: #000000;
-}
-
-html[data-theme="dark"] .about-body {
-  color: #1a1a1a; /* Slightly off-black for better readability */
-}
-
-/* Dark mode black text for leadership subtitle */
-html[data-theme="dark"] .leadership-subtitle {
-  color: #000000;
 }
 
 /* --------------------------------------------------------------------------
@@ -127,7 +102,7 @@ html[data-theme="dark"] .leadership-subtitle {
 }
 
 .leadership-subtitle {
-  font-size: clamp(1.125rem, calc(1.25vw + 0.75rem), 1.375rem); /* Increased from lg */
+  font-size: var(--font-size-lg);
   color: rgba(226, 232, 240, 0.9);
   line-height: 1.9;
   max-width: 46rem;
