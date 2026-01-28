@@ -99,6 +99,7 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
             : `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\n${baseError}`;
 
         dialog.error('Submission Failed', errorMessage);
+        submitBtn.textContent = 'Submission Failed ❌';
         setTimeout(() => {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Application';
@@ -128,6 +129,7 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
             : `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\n${baseError}`;
 
         dialog.error('Submission Failed', errorMessage);
+        submitBtn.textContent = 'Submission Failed ❌';
         setTimeout(() => {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Application';
@@ -143,6 +145,7 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
           : `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\nNetwork error. Please try again.`;
       
       dialog.error('Network Error', errorMessage);
+      submitBtn.textContent = 'Network Error ❌';
       setTimeout(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit Application';
