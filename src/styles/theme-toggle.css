@@ -10,28 +10,33 @@
 
   padding: 0.5rem;
   margin-top: -0.25rem;
-  position: relative;
+
+  --toggle-width: clamp(7.25rem, 20vw + 3rem, 9.26rem);
+  --toggle-height: clamp(2.73rem, 0.5vw + 2.6rem, 2.75rem);
+  --toggle-margin-left: clamp(0.1rem, 0.4vw, 0.2rem);
+
+  --icon-width: clamp(1.3rem, 2.8vw + 0.5rem, 2.2rem);
+  --icon-height: clamp(1.3rem, 2.0vw + 0.5rem, 1.6rem);
 
   --toggle-track-bg: radial-gradient(circle at 20% 50%, rgba(255, 200, 87, 0.22), transparent 55%),
     radial-gradient(circle at 80% 50%, rgba(88, 213, 204, 0.18), transparent 55%),
     rgba(0, 0, 0, 0.08);
   --toggle-track-border: rgba(255, 255, 255, 0.35);
-  --toggle-knob-size: 2.15rem;
+  --toggle-knob-size: clamp(1.85rem, 1.2vw + 1.5rem, 2.15rem);
   --toggle-knob-offset: 0.35rem;
   --theme-toggle-knob-outline-color: rgba(0, 0, 0, 0.55);
   --sun-opacity: .95;
   --moon-opacity: 0;
   --logo-x: 0;
   /* Unified spacing for edge offsets (icons + logo) */
-  --edge-gap: clamp(0.6rem, 1.5vw, 0.9rem);
+  --edge-gap: clamp(0.5rem, 1.8vw, 0.9rem);
 }
 
 #theme-toggle .toggle {
-  width: 9.26rem;
-  height: 2.73rem;
+  width: var(--toggle-width);
+  height: var(--toggle-height);
   padding: 0.2rem;
-  margin-left: 0.2rem;
-  padding-right: 0rem;
+  margin-left: var(--toggle-margin-left);
   position: relative;
   display: block;
   border-radius: 200px;
@@ -54,24 +59,10 @@
     radial-gradient(circle at 80% 50%, rgba(88, 213, 204, 0.32), transparent 55%),
     rgba(4, 12, 32, 0.62);
   /* Make slide distance responsive; tuned to sit closer to the left curve */
-  --logo-x: clamp(-5.2rem, -34vw, -4.3rem);
+  --logo-x: clamp(-5.2rem, -25vw, -4.3rem);
   --sun-opacity: 0;
   --moon-opacity: 0.95;
   --theme-toggle-knob-outline-color: rgba(255, 255, 255, 0.55);
-}
-
-/* On very small screens, further reduce slide distance */
-@media (max-width: 480px) {
-  #theme-toggle .toggle:has(input:checked) {
-    --logo-x: -4.9rem;
-  }
-  #theme-toggle {
-    /* Slightly tighter edge spacing on very small screens */
-    --edge-gap: clamp(0rem, 1.8vw + 0.1rem, 0.75rem);
-  }
-  #theme-toggle .toggle .logo {
-    height: clamp(1.2rem, 2.2vw + 0.5rem, 1.8rem);
-  }
 }
 
 #theme-toggle .toggle input {
@@ -93,8 +84,8 @@
 #theme-toggle .moon:after {
   content: "";
   display: block;
-  width: clamp(1rem, 2.5vw + 0.5rem, 2.2rem);
-  height: clamp(1rem, 1.8vw + 0.5rem, 1.6rem);
+  width: var(--icon-width);
+  height: var(--icon-height);
   transition: opacity 0.2s ease;
   position: absolute;
   top: 50%;
@@ -133,20 +124,4 @@
   transition: translate 0.3s ease;
   filter:
     drop-shadow(1px 0 0 var(--theme-toggle-knob-outline-color)) drop-shadow(-1px 0 0 var(--theme-toggle-knob-outline-color)) drop-shadow(0 1px 0 var(--theme-toggle-knob-outline-color)) drop-shadow(0 -1px 0 var(--theme-toggle-knob-outline-color)) drop-shadow(0 0.2rem 0.45rem rgba(0, 0, 0, 0.35));
-}
-
-@media (max-width: 767px) {
-  #theme-toggle {
-    --toggle-knob-size: 1.85rem;
-    --toggle-knob-offset: 0.35rem;
-  }
-
-  #theme-toggle .toggle {
-    width: 7.25rem;
-    height: 2.75rem;
-    padding: 0.2rem;
-    margin-left: 0.1rem;
-  }
-
-
 }
