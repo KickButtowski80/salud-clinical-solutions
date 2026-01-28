@@ -31,7 +31,7 @@ export function createButtonUpdater(prevBtn, nextBtn, submitBtn, totalSteps) {
  
   return (activeIndex) => {
     // Update prev button
-    prevBtn.disabled = activeIndex === 0;
+    prevBtn.hidden = activeIndex === 0;
     
     // Update next button
     nextBtn.hidden = activeIndex === totalSteps - 1;
@@ -54,6 +54,14 @@ import { dialog } from '../components/Dialog.js';
 export function createSubmitHandler(form, submitBtn, setActiveIndex) {
   let failedAttempts = 0;
   const MAX_ATTEMPTS = 3;
+  
+  // Reusable function to reset button state
+  const resetSubmitButton = () => {
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Application';
+    }, 2000);
+  };
   
   return async (event, validator, steps) => {
     event.preventDefault();
@@ -99,10 +107,8 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
             : `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\n${baseError}`;
 
         dialog.error('Submission Failed', errorMessage);
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Submit Application';
-        }, 2000);
+        submitBtn.textContent = 'Submission Failed ❌';
+        resetSubmitButton();
         return;
       }
 
@@ -128,10 +134,8 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
             : `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\n${baseError}`;
 
         dialog.error('Submission Failed', errorMessage);
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Submit Application';
-        }, 2000);
+        submitBtn.textContent = 'Submission Failed ❌';
+        resetSubmitButton();
       }
       return;
     } catch (error) {
@@ -143,10 +147,8 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
           : `⚠️ Attempt ${failedAttempts}/${MAX_ATTEMPTS}\n\nNetwork error. Please try again.`;
       
       dialog.error('Network Error', errorMessage);
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Application';
-      }, 2000);
+      submitBtn.textContent = 'Network Error ❌';
+      resetSubmitButton();
     }
   };
 }
