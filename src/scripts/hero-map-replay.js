@@ -13,7 +13,7 @@ export const initHeroMapReplay = () => {
   if (!replayButton) return;
 
   replayButton.addEventListener('click', (e) => {
-    e.preventDefault();
+    if (replayButton.tagName.toLowerCase() === 'a') e.preventDefault();
     const container = replayButton.closest('.hero-visual');
     if (!container) return;
 

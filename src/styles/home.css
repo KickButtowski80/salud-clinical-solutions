@@ -134,11 +134,13 @@
   z-index: 2; /* Ensure button is above the container */
 }
 
-/* Tooltip styling */
-.replay-tooltip {
+/* CSS Tooltip */
+.hero-replay-tooltip {
   position: absolute;
-  right: 100%;
-  margin-right: 0.75rem;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%) translateX(0.5rem);
+  margin-left: 0.75rem;
   padding: 0.5rem 0.75rem;
   background: rgba(15, 23, 42, 0.95);
   color: white;
@@ -146,39 +148,34 @@
   font-size: 0.875rem;
   font-weight: 500;
   white-space: nowrap;
-  pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  z-index: 20;
-  top: 50%;
-  transform: translateY(-50%) translateX(0.5rem);
-  min-width: 120px;
-  text-align: center;
+  pointer-events: none;
+  z-index: 10;
 }
 
-/* Show tooltip on hover */
-.hero-replay-button:hover .replay-tooltip {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
-  pointer-events: auto;
-}
-
-/* Arrow for the tooltip */
-.replay-tooltip::after {
+.hero-replay-tooltip::after {
   content: '';
   position: absolute;
   top: 50%;
-  right: -0.25rem;
+  left: -0.25rem;
   width: 0.5rem;
   height: 0.5rem;
   background: inherit;
-  transform: translateY(-50%) rotate(45deg);
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  z-index: -1;
+  transform: translateY(-50%) rotate(-135deg);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-replay-button:hover .hero-replay-tooltip,
+.hero-replay-button:focus-visible .hero-replay-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
 }
 
 /* Modern CSS @scope for browsers that support it (88.23% support) */
@@ -254,9 +251,8 @@
     height: 1.25rem;
   }
   
-  .replay-tooltip {
-    font-size: 0.8125rem;
-    padding: 0.375rem 0.625rem;
+  .hero-replay-tooltip {
+    display: none; /* Hide tooltip on mobile */
   }
 }
 
