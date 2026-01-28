@@ -31,7 +31,7 @@ export function createButtonUpdater(prevBtn, nextBtn, submitBtn, totalSteps) {
  
   return (activeIndex) => {
     // Update prev button
-    prevBtn.disabled = activeIndex === 0;
+    prevBtn.hidden = activeIndex === 0;
     
     // Update next button
     nextBtn.hidden = activeIndex === totalSteps - 1;
