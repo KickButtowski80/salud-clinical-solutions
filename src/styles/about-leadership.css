@@ -34,12 +34,22 @@
   font-weight: 700;
   margin-bottom: 0.75rem;
   line-height: 1.2;
+  color: var(--color-text-primary);
 }
 
 .about-title .text-lg {
   font-size: var(--font-size-lg) !important;
   opacity: 0.9;
   margin-top: 0.5rem;
+}
+
+/* Light mode white text for about section */
+html[data-theme="light"] .about-title {
+  color: #ffffff;
+}
+
+html[data-theme="light"] .about-body {
+  color: #f8fafc; /* Slightly off-white for better readability */
 }
 
 /* --------------------------------------------------------------------------
