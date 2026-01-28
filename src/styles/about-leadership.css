@@ -52,6 +52,24 @@ html[data-theme="light"] .about-body {
   color: #f8fafc; /* Slightly off-white for better readability */
 }
 
+/* Dark mode black/gray text for about section */
+html[data-theme="dark"] .about-title {
+  color: #1a1a1a; /* Dark gray */
+}
+
+html[data-theme="dark"] .about-body {
+  color: #2d2d2d; /* Medium gray */
+}
+
+/* Dark mode black/gray text for leadership section */
+html[data-theme="dark"] .leadership-title {
+  color: #1a1a1a; /* Dark gray */
+}
+
+html[data-theme="dark"] .leadership-subtitle {
+  color: #2d2d2d; /* Medium gray */
+}
+
 /* --------------------------------------------------------------------------
    LEADERSHIP SECTION
    -------------------------------------------------------------------------- */
