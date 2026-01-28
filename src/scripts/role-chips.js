@@ -40,8 +40,23 @@ export function initRoleChips() {
       }
 
       if (microcopy) {
-        microcopy.textContent = role
-          ? `Great — we'll prioritize matches for Psychiatrist Providers that fit your license and location.`
+        const roleDisplayNames = {
+          'Psychiatrist': 'Psychiatrist',
+          'Psychologist': 'Psychologist', 
+          'Licensed Clinical Social Worker': 'LCSW',
+          'Licensed Marriage and Family Therapist': 'LMFT',
+          'Primary Care Physician': 'PCP',
+          'Nurse Practitioner': 'NP',
+          'Physician Assistant': 'PA',
+          'CRNA': 'CRNA',
+          'Nurse': 'RN',
+          'Licensed Professional Clinical Counselor': 'LPCC',
+          'Medical Facility or Clinic': 'Facility'
+        };
+        
+        const displayName = roleDisplayNames[role] || role;
+        microcopy.innerHTML = role
+          ? `Great — we'll prioritize matches for <span class="role-chip">${displayName}</span> Providers that fit your license and location.`
           : defaultMicrocopyText;
       }
     };
