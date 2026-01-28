@@ -55,6 +55,14 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
   let failedAttempts = 0;
   const MAX_ATTEMPTS = 3;
   
+  // Reusable function to reset button state
+  const resetSubmitButton = () => {
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Application';
+    }, 2000);
+  };
+  
   return async (event, validator, steps) => {
     event.preventDefault();
 
@@ -100,10 +108,7 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
 
         dialog.error('Submission Failed', errorMessage);
         submitBtn.textContent = 'Submission Failed ❌';
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Submit Application';
-        }, 2000);
+        resetSubmitButton();
         return;
       }
 
@@ -130,10 +135,7 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
 
         dialog.error('Submission Failed', errorMessage);
         submitBtn.textContent = 'Submission Failed ❌';
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Submit Application';
-        }, 2000);
+        resetSubmitButton();
       }
       return;
     } catch (error) {
@@ -146,10 +148,7 @@ export function createSubmitHandler(form, submitBtn, setActiveIndex) {
       
       dialog.error('Network Error', errorMessage);
       submitBtn.textContent = 'Network Error ❌';
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Application';
-      }, 2000);
+      resetSubmitButton();
     }
   };
 }
