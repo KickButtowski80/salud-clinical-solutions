@@ -35,7 +35,7 @@ main {
 .scroll-top {
   position: fixed;
   right: clamp(0.75rem, 1vw + 0.25rem, 1.5rem);
-  bottom: clamp(2rem, 3vw + 1rem, var(--space-16));
+  bottom: clamp(6rem, 4vw + 2rem, var(--space-16));
   width: clamp(3.5rem, 2vw + 2.5rem, 5.5rem);
   height: clamp(3.5rem, 2vw + 2.5rem, 5.5rem);
   border-radius: 9999px;
