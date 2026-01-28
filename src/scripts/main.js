@@ -18,7 +18,16 @@ function setContentVisibility(isRevealed) {
 }
 
 function initContentReveal() {
-  // Initialize localStorage to false if not set
+  // Check if this is a page refresh (not first load)
+  const navigationEntries = performance.getEntriesByType('navigation');
+  const isRefresh = navigationEntries.length > 0 && navigationEntries[0].type === 'reload';
+  
+  // Reset to false on page refresh
+  if (isRefresh) {
+    localStorage.setItem('contentRevealed', 'false');
+  }
+
+  // Initialize localStorage to false if not set (first visit)
   if (localStorage.getItem('contentRevealed') === null) {
     localStorage.setItem('contentRevealed', 'false');
   }
