@@ -564,6 +564,11 @@ html[data-theme="dark"] #contact .role-chip[aria-pressed="true"] {
   line-height: 1.5;
 }
 
+#contact #match-microcopy .role-chip {
+  margin: 0.25rem 0;
+  display: inline-block;
+}
+
 [data-component="RoleChips"] {
   border-radius: 1rem;
   border: var(--card-border);

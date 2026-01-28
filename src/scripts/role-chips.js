@@ -24,8 +24,6 @@ export function initRoleChips() {
         : []),
     ].filter(Boolean));
 
-    const defaultMicrocopyText = microcopy ? microcopy.textContent || '' : '';
-
     const setSelectedRole = (role) => {
       buttons.forEach((btn) => {
         const isSelected = btn.getAttribute('data-role') === role;
@@ -39,10 +37,23 @@ export function initRoleChips() {
         if (role && roleSelect.value !== role) roleSelect.value = role;
       }
 
-      if (microcopy) {
-        microcopy.textContent = role
-          ? `Great — we’ll prioritize matches for ${role} that fit your license and location.`
-          : defaultMicrocopyText;
+      if (microcopy && role) {
+        const roleDisplayNames = {
+          'Psychiatrist': 'Psychiatrist',
+          'Psychologist': 'Psychologist', 
+          'Licensed Clinical Social Worker': 'LCSW',
+          'Licensed Marriage and Family Therapist': 'LMFT',
+          'Primary Care Physician': 'PCP',
+          'Nurse Practitioner': 'NP',
+          'Physician Assistant': 'PA',
+          'CRNA': 'CRNA',
+          'Nurse': 'RN',
+          'Licensed Professional Clinical Counselor': 'LPCC',
+          'Medical Facility or Clinic': 'Facility'
+        };
+        
+        const displayName = roleDisplayNames[role] || role;
+        microcopy.innerHTML = `Great — we'll prioritize matches for <span class="role-chip">${displayName}</span> Providers that fit your license and location.`;
       }
     };
 
