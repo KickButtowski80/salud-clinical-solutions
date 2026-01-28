@@ -46,25 +46,31 @@ function initContentReveal() {
   let touchCount = 0;
   let touchTimeout;
 
-  document.addEventListener('touchstart', (e) => {
-    touchCount++;
+  document.addEventListener('touchend', (e) => {
+    // Only count quick taps (not drags/scrolls)
+    const touch = e.changedTouches[0];
+    const touchDuration = Date.now() - (touch.startTime || Date.now());
     
-    clearTimeout(touchTimeout);
-    touchTimeout = setTimeout(() => {
-      touchCount = 0;
-    }, 2000); // Reset after 2 seconds of no touches
-    
-    if (touchCount === 5) {
-      revealContent();
-      touchCount = 0;
+    // Only count if it was a quick tap (less than 200ms)
+    if (touchDuration < 200) {
+      touchCount++;
+      
       clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(() => {
+        touchCount = 0;
+      }, 2000); // Reset after 2 seconds of no touches
+      
+      if (touchCount === 5) {
+        revealContent();
+        touchCount = 0;
+        clearTimeout(touchTimeout);
+      }
     }
   });
 
   // Desktop: Ctrl + Alt + . (period) key combination
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.altKey && e.key === '.') {
-      console.log('Content revealed');
       e.preventDefault();
       revealContent();
     }
