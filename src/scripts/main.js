@@ -10,17 +10,16 @@ import { initApplyFormStepper } from './apply-form-stepper.js';
 // ==================== CONTENT REVEAL SYSTEM ====================
 // Customer requested content hiding until site meets standards
 // Mobile: Touch screen 5 times
-// Desktop: Ctrl + . (period) key combination
+// Desktop: Ctrl + Alt + . (period) key combination
 
 function initContentReveal() {
-  // Check if content is already revealed
-  if (localStorage.getItem('contentRevealed') === 'true') {
-    return;
+  // Always start with content hidden
+  document.body.style.display = 'none';
+  
+  // Initialize localStorage to false if not set
+  if (localStorage.getItem('contentRevealed') === null) {
+    localStorage.setItem('contentRevealed', 'false');
   }
-
-  // Hide the entire body
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity 0.5s ease-in-out';
 
   function revealContent() {
     // Toggle the localStorage value
@@ -30,9 +29,9 @@ function initContentReveal() {
     localStorage.setItem('contentRevealed', newState.toString());
     
     if (newState) {
-      document.body.style.opacity = '1';
+      document.body.style.display = 'block';
     } else {
-      document.body.style.opacity = '0';
+      document.body.style.display = 'none';
     }
   }
 
@@ -55,11 +54,9 @@ function initContentReveal() {
     }
   });
 
-
-
-  // Desktop: Ctrl + . (period) key combination
+  // Desktop: Ctrl + Alt + . (period) key combination
   document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.key === '.') {
+    if (e.ctrlKey && e.altKey && e.key === '.') {
       e.preventDefault();
       revealContent();
     }
