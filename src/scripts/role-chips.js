@@ -24,8 +24,6 @@ export function initRoleChips() {
         : []),
     ].filter(Boolean));
 
-    const defaultMicrocopyText = microcopy ? microcopy.textContent || '' : '';
-
     const setSelectedRole = (role) => {
       buttons.forEach((btn) => {
         const isSelected = btn.getAttribute('data-role') === role;
@@ -39,7 +37,7 @@ export function initRoleChips() {
         if (role && roleSelect.value !== role) roleSelect.value = role;
       }
 
-      if (microcopy) {
+      if (microcopy && role) {
         const roleDisplayNames = {
           'Psychiatrist': 'Psychiatrist',
           'Psychologist': 'Psychologist', 
@@ -55,9 +53,7 @@ export function initRoleChips() {
         };
         
         const displayName = roleDisplayNames[role] || role;
-        microcopy.innerHTML = role
-          ? `Great — we'll prioritize matches for <span class="role-chip">${displayName}</span> Providers that fit your license and location.`
-          : defaultMicrocopyText;
+        microcopy.innerHTML = `Great — we'll prioritize matches for <span class="role-chip">${displayName}</span> Providers that fit your license and location.`;
       }
     };
 
