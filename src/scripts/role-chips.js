@@ -41,7 +41,7 @@ export function initRoleChips() {
 
       if (microcopy) {
         microcopy.textContent = role
-          ? `Great — we’ll prioritize matches for ${role} that fit your license and location.`
+          ? `Great — we'll prioritize matches for Psychiatrist Providers that fit your license and location.`
           : defaultMicrocopyText;
       }
     };
