@@ -137,10 +137,10 @@
 /* CSS Tooltip */
 .hero-replay-tooltip {
   position: absolute;
-  left: 100%;
+  right: 100%;
   top: 50%;
-  transform: translateY(-50%) translateX(0.5rem);
-  margin-left: 0.75rem;
+  transform: translateY(-50%) translateX(-0.5rem);
+  margin-right: 0.75rem;
   padding: 0.5rem 0.75rem;
   background: rgba(15, 23, 42, 0.95);
   color: white;
@@ -162,13 +162,13 @@
   content: '';
   position: absolute;
   top: 50%;
-  left: -0.25rem;
+  right: -0.25rem;
   width: 0.5rem;
   height: 0.5rem;
   background: inherit;
-  transform: translateY(-50%) rotate(-135deg);
-  border-left: 1px solid rgba(255, 255, 255, 0.15);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  transform: translateY(-50%) rotate(45deg);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .hero-replay-button:hover .hero-replay-tooltip,
