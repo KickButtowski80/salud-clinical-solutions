@@ -49,7 +49,7 @@ export function initRoleChips() {
           'CRNA': 'CRNA',
           'Nurse': 'RN',
           'Licensed Professional Clinical Counselor': 'LPCC',
-          'Medical Facility or Clinic': 'Facility'
+          'Others': 'Others'
         };
         
         const displayName = roleDisplayNames[role] || role;
