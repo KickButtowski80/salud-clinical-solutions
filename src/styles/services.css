@@ -184,8 +184,58 @@ html[data-theme="dark"] .service-description {
   font-size: clamp(1rem, calc(1.5vw + 0.5rem), 1.125rem);
   line-height: 1.6;
   color: var(--color-text-secondary);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   text-align: center;
+}
+
+/* CTA Note Component */
+.cta-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  margin: 0 auto 2rem;
+  max-width: 42rem;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 8%, var(--color-background)) 0%, color-mix(in srgb, var(--color-primary) 4%, var(--color-background)) 100%);
+  border: 0.0625rem solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+  border-radius: 0.75rem;
+  backdrop-filter: blur(0.5rem);
+}
+
+.note-icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, color-mix(in srgb, var(--color-primary) 85%, black) 100%);
+  border-radius: 50%;
+  color: #ffffff;
+  margin-top: 0.125rem;
+}
+
+.note-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.note-text {
+  font-size: clamp(0.9rem, calc(1.2vw + 0.4rem), 1rem);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 0;
+  font-style: italic;
+}
+
+/* Dark mode note styling */
+html[data-theme="dark"] .cta-note {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 12%, var(--color-background)) 0%, color-mix(in srgb, var(--color-primary) 6%, var(--color-background)) 100%);
+  border-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+html[data-theme="dark"] .note-text {
+  color: #d1d5db;
 }
 
 .cta-actions {
