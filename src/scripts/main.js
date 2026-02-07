@@ -13,7 +13,7 @@ import { initFooterYear } from './footer-year.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initContentReveal(); // Initialize content reveal system first
-  initFooterYear(); // Initialize footer year
+  // initFooterYear(); // Initialize footer year
   initNavIntersectionObserver();
   initStaffCardScrollAnimations();
   initScrollToTop();
