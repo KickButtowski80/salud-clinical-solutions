@@ -133,6 +133,27 @@ export function initNavIntersectionObserver() {
   });
 
   let currentSectionId = null;
+  let clickCooldown = false;
+  let cooldownTimer = 0;
+
+  const pauseIntersectionObserver = () => {
+    clickCooldown = true;
+    // Cancel any previous pause timer to handle rapid clicks
+    cancelAnimationFrame(cooldownTimer);
+    
+    // Use rAF to count ~90 frames (~1.5s at 60fps)
+    // This covers the longest animation (drop-down-bounce / background-drop-bounce)
+    let frames = 0;
+    const tick = () => {
+      frames++;
+      if (frames < 90) {
+        cooldownTimer = requestAnimationFrame(tick);
+      } else {
+        clickCooldown = false;  // Resume IntersectionObserver
+      }
+    };
+    cooldownTimer = requestAnimationFrame(tick);
+  };
 
   const updateNavForSection = (sectionId) => {
     if (!sectionId || sectionId === currentSectionId) return;
@@ -163,6 +184,9 @@ export function initNavIntersectionObserver() {
     const id = idFromHref(link.getAttribute('href'));
     if (!id || !sectionIds.includes(id)) return;
 
+    // Pause IntersectionObserver to prevent animation conflicts during navigation
+    pauseIntersectionObserver();
+
     // Let the browser handle the actual anchor scrolling,
     // but update nav state right away.
     updateNavForSection(id);
@@ -175,7 +199,9 @@ export function initNavIntersectionObserver() {
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
-        // Use simple intersection - update when section enters the active zone
+        // Only update if IntersectionObserver is not paused
+        if (clickCooldown) return;
+
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             updateNavForSection(entry.target.id);
