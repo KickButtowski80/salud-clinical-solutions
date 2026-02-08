@@ -133,26 +133,37 @@ export function initNavIntersectionObserver() {
   });
 
   let currentSectionId = null;
-  let clickCooldown = false;
-  let cooldownTimer = 0;
+  let isIntersectionObserverPaused = false;
+  let pauseAnimationFrameId = 0;
 
-  const pauseIntersectionObserver = () => {
-    clickCooldown = true;
+  const waitForAnimationEnd = (element) => {
+    return new Promise(resolve => {
+      // Listen for actual animation to finish on this element
+      // { once: true } automatically removes the listener after first use
+      const handleAnimationEnd = () => {
+        resolve();  // No need for manual cleanup - { once: true } handles it!
+      };
+      
+      // { once: true } automatically removes the event listener after first use
+      // This prevents memory leaks and eliminates need for manual removeEventListener()
+      element.addEventListener('animationend', handleAnimationEnd, { once: true });
+      
+      // Fallback: if no animation fires, resolve after 2 seconds
+      setTimeout(resolve, 2000);
+    });
+  };
+
+  const pauseIntersectionObserver = async (element) => {
+    isIntersectionObserverPaused = true;
     // Cancel any previous pause timer to handle rapid clicks
-    cancelAnimationFrame(cooldownTimer);
+    cancelAnimationFrame(pauseAnimationFrameId);
     
-    // Use rAF to count ~90 frames (~1.5s at 60fps)
-    // This covers the longest animation (drop-down-bounce / background-drop-bounce)
-    let frames = 0;
-    const tick = () => {
-      frames++;
-      if (frames < 90) {
-        cooldownTimer = requestAnimationFrame(tick);
-      } else {
-        clickCooldown = false;  // Resume IntersectionObserver
-      }
-    };
-    cooldownTimer = requestAnimationFrame(tick);
+    // Wait for the actual animation on the element to finish
+    if (element) {
+      await waitForAnimationEnd(element);
+    }
+    
+    isIntersectionObserverPaused = false;  // Resume IntersectionObserver
   };
 
   const updateNavForSection = (sectionId) => {
@@ -185,7 +196,8 @@ export function initNavIntersectionObserver() {
     if (!id || !sectionIds.includes(id)) return;
 
     // Pause IntersectionObserver to prevent animation conflicts during navigation
-    pauseIntersectionObserver();
+    // Pass the link element so we can detect when its animation finishes
+    pauseIntersectionObserver(link);
 
     // Let the browser handle the actual anchor scrolling,
     // but update nav state right away.
@@ -200,7 +212,7 @@ export function initNavIntersectionObserver() {
     const observer = new IntersectionObserver(
       (entries) => {
         // Only update if IntersectionObserver is not paused
-        if (clickCooldown) return;
+        if (isIntersectionObserverPaused) return;
 
         entries.forEach(entry => {
           if (entry.isIntersecting) {
