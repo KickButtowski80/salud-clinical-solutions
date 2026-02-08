@@ -23,10 +23,12 @@ export function initStaffCardScrollAnimations() {
       entries.forEach((entry) => {
         const card = entry.target;
         const index = Number(card.dataset.scrollIndex || '0');
-        const delay = Math.min(index * 220, 880); // cap at ~0.9s extra
+        // Calculate staggered animation delay for smooth card appearance
+        // Formula: index * 220ms = 0ms, 220ms, 440ms, 660ms, 880ms (capped)
+        // This creates a deliberate, elegant stagger effect without being too fast or slow
+        const delay = Math.min(index * 220, 880);
 
         if (entry.isIntersecting) {
-          // Slower stagger so cards feel more deliberate
           window.setTimeout(() => {
             card.classList.add('staff-card--visible');
           }, delay);
