@@ -137,20 +137,22 @@ export function initNavIntersectionObserver() {
   let pauseAnimationFrameId = 0;
 
   const waitForAnimationEnd = (element) => {
-    return new Promise(resolve => {
-      // Listen for actual animation to finish on this element
-      // { once: true } automatically removes the listener after first use
+    // Promise 1: Animation end (fast path)
+    const animationPromise = new Promise(resolve => {
       const handleAnimationEnd = () => {
-        resolve();  // No need for manual cleanup - { once: true } handles it!
+        resolve('animation');
       };
-      
-      // { once: true } automatically removes the event listener after first use
-      // This prevents memory leaks and eliminates need for manual removeEventListener()
       element.addEventListener('animationend', handleAnimationEnd, { once: true });
-      
-      // Fallback: if no animation fires, resolve after 2 seconds
+    });
+    
+    // Promise 2: Timeout fallback (safety net)
+    const timeoutPromise = new Promise(resolve => {
       setTimeout(resolve, 2000);
     });
+    
+    // Promise.race() returns the first promise to settle
+    // This is exactly the use case shown in MDN examples for request timeouts
+    return Promise.race([animationPromise, timeoutPromise]);
   };
 
   const pauseIntersectionObserver = async (element) => {
