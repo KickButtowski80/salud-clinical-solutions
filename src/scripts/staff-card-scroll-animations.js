@@ -1,5 +1,5 @@
 export function initStaffCardScrollAnimations() {
-  const cards = Array.from(document.querySelectorAll('.staff-card'));
+  const cards = Array.from(document.querySelectorAll('.staff-card, .services-grid .card--services'));
 
   if (cards.length === 0) return;
 
@@ -22,25 +22,28 @@ export function initStaffCardScrollAnimations() {
     (entries, obs) => {
       entries.forEach((entry) => {
         const card = entry.target;
+        const index = Number(card.dataset.scrollIndex || '0');
+        // Calculate staggered animation delay for smooth card appearance
+        // Formula: index * 220ms = 0ms, 220ms, 440ms, 660ms, 880ms (capped)
+        // This creates a deliberate, elegant stagger effect without being too fast or slow
+        const delay = Math.min(index * 220, 880);
 
         if (entry.isIntersecting) {
-          const index = Number(card.dataset.scrollIndex || '0');
-
-          // Slower stagger so cards feel more deliberate
-          const delay = Math.min(index * 220, 880); // cap at ~0.9s extra
-
           window.setTimeout(() => {
             card.classList.add('staff-card--visible');
           }, delay);
         } else {
           // When card leaves the viewport, reset so it can animate again next time
-          card.classList.remove('staff-card--visible');
+          // Use the same staggered delay for removal
+          window.setTimeout(() => {
+            card.classList.remove('staff-card--visible');
+          }, delay);
         }
       });
     },
     {
       root: null,
-      threshold: 0.2,
+      threshold: [0.05, 0.15, 0.3, 0.5],
     }
   );
 

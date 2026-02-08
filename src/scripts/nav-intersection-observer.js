@@ -133,6 +133,40 @@ export function initNavIntersectionObserver() {
   });
 
   let currentSectionId = null;
+  let isIntersectionObserverPaused = false;
+  let pauseAnimationFrameId = 0;
+
+  const waitForAnimationEnd = (element) => {
+    // Promise 1: Animation end (fast path)
+    const animationPromise = new Promise(resolve => {
+      const handleAnimationEnd = () => {
+        resolve('animation');
+      };
+      element.addEventListener('animationend', handleAnimationEnd, { once: true });
+    });
+    
+    // Promise 2: Timeout fallback (safety net)
+    const timeoutPromise = new Promise(resolve => {
+      setTimeout(resolve, 2000);
+    });
+    
+    // Promise.race() returns the first promise to settle
+    // This is exactly the use case shown in MDN examples for request timeouts
+    return Promise.race([animationPromise, timeoutPromise]);
+  };
+
+  const pauseIntersectionObserver = async (element) => {
+    isIntersectionObserverPaused = true;
+    // Cancel any previous pause timer to handle rapid clicks
+    cancelAnimationFrame(pauseAnimationFrameId);
+    
+    // Wait for the actual animation on the element to finish
+    if (element) {
+      await waitForAnimationEnd(element);
+    }
+    
+    isIntersectionObserverPaused = false;  // Resume IntersectionObserver
+  };
 
   const updateNavForSection = (sectionId) => {
     if (!sectionId || sectionId === currentSectionId) return;
@@ -163,6 +197,10 @@ export function initNavIntersectionObserver() {
     const id = idFromHref(link.getAttribute('href'));
     if (!id || !sectionIds.includes(id)) return;
 
+    // Pause IntersectionObserver to prevent animation conflicts during navigation
+    // Pass the link element so we can detect when its animation finishes
+    pauseIntersectionObserver(link);
+
     // Let the browser handle the actual anchor scrolling,
     // but update nav state right away.
     updateNavForSection(id);
@@ -175,7 +213,9 @@ export function initNavIntersectionObserver() {
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
-        // Use simple intersection - update when section enters the active zone
+        // Only update if IntersectionObserver is not paused
+        if (isIntersectionObserverPaused) return;
+
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             updateNavForSection(entry.target.id);
