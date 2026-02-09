@@ -125,13 +125,14 @@
 .apply-info-title {
   color: var(--apply-heading-color);
   font-weight: 700;
+  font-size: var(--font-size-3xl);
   margin: 0;
   line-height: 1.2;
 }
 
 .apply-info-body {
   color: var(--apply-text-on-surface);
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-lg);
   line-height: 1.6;
   margin: 0;
 }
