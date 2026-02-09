@@ -87,6 +87,8 @@
 .apply-visual-box {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: clamp(1rem, 2vw + 0.5rem, 1.5rem);
   border-radius: 1.25rem;
   overflow: hidden;
 }
@@ -112,11 +114,12 @@
     linear-gradient(135deg, 
       rgba(15, 23, 42, 0.3) 0%, 
       rgba(15, 23, 42, 0.5) 100%);
-  border: 1px solid rgba(148, 163, 184, 0.15);
+  border: 50% solid rgba(148, 163, 184, 0.15);
   box-shadow: 
     0 0.5rem 1.5rem rgba(15, 23, 42, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
   text-align: center;
+  
 }
 
 .apply-info-title {
