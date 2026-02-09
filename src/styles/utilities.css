@@ -46,6 +46,8 @@
 .m-0 { margin: 0; }
 .mb-2 { margin-bottom: var(--space-2); }
 
+.pt-6 { padding-top: var(--space-6); }
+
 .container {
   width: 100%;
   max-width: var(--container-xl);
