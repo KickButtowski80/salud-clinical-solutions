@@ -1,0 +1,650 @@
+/* ==========================================================================
+   APPLY SECTION STYLES
+   ========================================================================== */
+
+#apply {
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.08), transparent 55%),
+    var(--color-primary-strong);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.5);
+  color: var(--color-text-light);
+  padding: clamp(1rem, calc(2vw + 1rem), 2rem);
+  gap: clamp(0.9rem, 2.2vw, 1.25rem);
+  --card-surface: color-mix(in srgb, var(--color-background) 90%, var(--color-primary) 10%);
+  --surface-gradient-accent: color-mix(in srgb, var(--color-background) 88%, var(--color-primary) 12%);
+  --surface-gradient-highlight: color-mix(in srgb, var(--color-background) 82%, var(--color-primary-soft) 18%);
+  --surface-gradient-hero: color-mix(in srgb, var(--color-background) 65%, var(--color-primary) 35%);
+
+  --card-border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+  --card-border-strong: 1px solid color-mix(in srgb, var(--color-primary) 40%, transparent);
+  --card-border-soft: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+  --apply-heading-color: #000000;
+  --apply-text-primary: #000000;
+  --apply-text-secondary: #000000;
+  --apply-text-on-surface: #000000;
+  --form-input-bg: color-mix(in srgb, var(--color-background) 92%, var(--color-primary-soft) 8%);
+}
+
+/* Apply section header */
+.apply-section-header {
+  text-align: center;
+  max-width: 50rem;
+  margin: 0 auto clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.apply-section-title {
+  color: var(--apply-heading-color);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.apply-title-main {
+  display: block;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.apply-title-sub {
+  display: block;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.3;
+  margin-top: 0.5rem;
+}
+
+.apply-section-body {
+  color: var(--apply-text-on-surface);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  max-width: 50rem;
+  margin: 0 auto;
+  border-bottom: 0.0625rem solid rgba(148, 163, 184, 0.15);
+  padding-bottom: 1.5rem;
+}
+
+/* Two-box grid layout: form left, visual content right */
+.apply-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 3vw, 3rem);
+  align-items: stretch;
+}
+
+/* Form box */
+.apply-form-box {
+  display: flex;
+  justify-content: center;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+/* Visual box - contains image and info stacked */
+.apply-visual-box {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+/* Image container */
+.apply-image-container {
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.2);
+}
+
+/* Image fills container without cropping */
+.apply-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Info section below image */
+.apply-info-overlay {
+  padding: clamp(1.5rem, 2vw, 2rem);
+  background: 
+    linear-gradient(135deg, 
+      rgba(15, 23, 42, 0.3) 0%, 
+      rgba(15, 23, 42, 0.5) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: 
+    0 0.5rem 1.5rem rgba(15, 23, 42, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  text-align: center;
+}
+
+.apply-info-title {
+  color: var(--apply-heading-color);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.apply-info-body {
+  color: var(--apply-text-on-surface);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Mobile: stacked layout */
+@media (max-width: 768px) {
+  #apply {
+    padding: clamp(1rem, calc(2vw + 1rem), 2rem);
+  }
+
+  .apply-section-header {
+    margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .apply-section-title {
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .apply-content-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 3vw, 2.5rem);
+  }
+
+  .apply-visual-box img {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .apply-form-box {
+    width: 100%;
+  }
+}
+
+html[data-theme="dark"] #apply {
+  background:
+    linear-gradient(150deg, #03161c 0%, #082c34 45%, #0b3f45 100%);
+  --card-surface: color-mix(in srgb, #0f172a 80%, #0b3640 20%);
+  --surface-gradient-accent:
+    radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--color-primary) 25%, #0b2430), transparent 60%),
+    radial-gradient(circle at 82% 78%, color-mix(in srgb, var(--color-primary-soft) 22%, #0b2430), transparent 70%),
+    #0f1f27;
+  --surface-gradient-highlight:
+    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 22%, #0c2733), transparent 60%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-primary-soft) 18%, #0c2733), transparent 70%),
+    #102731;
+  --surface-gradient-hero:
+    radial-gradient(circle at 12% 28%, color-mix(in srgb, var(--color-primary) 30%, #0c2733), transparent 70%),
+    radial-gradient(circle at 88% 72%, color-mix(in srgb, var(--color-primary-soft) 24%, #0c2733), transparent 72%),
+    #0f2632;
+  --card-border: 1px solid color-mix(in srgb, #ffffff 12%, transparent);
+  --card-border-strong: 1px solid color-mix(in srgb, #ffffff 18%, transparent);
+  --card-border-soft: 1px solid color-mix(in srgb, #ffffff 10%, transparent);
+  --apply-heading-color: var(--color-primary-soft);
+  --apply-text-primary: #ffffff;
+  --apply-text-secondary: #cbd5f5;
+  --apply-text-on-surface: #f8fbff;
+  --form-input-bg: color-mix(in srgb, #08141b 84%, #112f3d);
+}
+
+html[data-theme="dark"] #apply .form-field input,
+html[data-theme="dark"] #apply .form-field select,
+html[data-theme="dark"] #apply .form-field textarea {
+  background: var(--form-input-bg);
+  border-color: color-mix(in srgb, #15bcbc 30%, transparent);
+  color: var(--apply-text-on-surface);
+}
+
+html[data-theme="dark"] #apply [data-component="RoleChips"] {
+  background: color-mix(in srgb, #08151b 84%, #0b3640);
+  border: 1px solid color-mix(in srgb, #0da9a9 35%, transparent);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] #apply .role-chip {
+  background: color-mix(in srgb, #0a1f29 78%, #13404d);
+  border-color: color-mix(in srgb, #15bcbc 32%, transparent);
+}
+
+html[data-theme="dark"] #apply .role-chip.is-selected,
+html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
+  background: color-mix(in srgb, #15bcbc 22%, rgba(255, 255, 255, 0.04));
+  border-color: color-mix(in srgb, #36f0f0 55%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, #0da9a9 25%, transparent),
+    0 1rem 2.8rem rgba(0, 0, 0, 0.45);
+}
+
+#apply > header h2 {
+  color: var(--apply-heading-color);
+}
+
+[data-component="ApplyFormCard"] {
+  border-radius: var(--card-radius);
+  border: var(--card-border);
+  background: var(--surface-gradient-hero);
+  box-shadow: var(--card-shadow-lg);
+  padding: var(--card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.6rem, 1.6vw, 0.9rem);
+  max-width: 45rem;
+  margin: 0 auto;
+}
+
+.apply-form__header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: #ffffff;
+  padding-right: clamp(3rem, 6vw, 4.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+#apply .apply-form__header h3,
+#apply .apply-form__header p,
+#apply .apply-form__header [data-stepper-status] {
+  color: #ffffff;
+}
+
+.apply-form__emblem {
+  position: absolute;
+  width: clamp(5rem, 7vw + 0.25rem, 6rem);
+  height: clamp(5rem, 7vw + 0.25rem, 6rem);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--color-primary-soft) 65%, transparent), transparent 65%),
+    color-mix(in srgb, var(--color-primary) 35%, rgba(255, 255, 255, 0.2));
+  box-shadow:
+    0 0.45rem 1.1rem rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.apply-form__emblem--top-right {
+  top: -4.25rem;
+  right: -1rem;
+}
+
+.apply-form__emblem--bottom-right {
+  bottom: clamp(-2.25rem, calc(-1.25rem - 1vw), -1rem);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.apply-form__emblem img,
+.apply-form__emblem svg {
+  width: clamp(3rem, 4.5vw + 0.25rem, 3.8rem);
+  height: clamp(3rem, 4.5vw + 0.25rem, 3.8rem);
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.35));
+}
+
+.apply-step {
+  border: var(--card-border-soft);
+  border-radius: 0.95rem;
+  padding: clamp(0.75rem, 2vw, 1.05rem);
+  background: var(--surface-gradient-hero);
+  box-shadow: var(--shadow-float-xs), var(--shadow-inset-soft);
+}
+
+.apply-step__legend {
+  padding: 0;
+  margin: 0 0 0.75rem 0;
+  font-weight: var(--font-weight-semibold);
+  color: var(--apply-text-on-surface);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: var(--font-size-sm);
+}
+
+.apply-step__badge {
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-on-primary);
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--color-primary) 92%, transparent),
+      color-mix(in srgb, var(--color-primary-soft) 70%, transparent));
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--color-primary) 16%, transparent),
+    0 0.45rem 1.1rem rgba(0, 0, 0, 0.12);
+}
+
+.apply-step__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 520px) {
+  .apply-step__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .apply-step__grid .form-field:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-error, #dc2626);
+  min-height: 1.2em;
+  margin-top: 0.25rem;
+  padding: 0;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.form-error:not(:empty) {
+  padding: 0.45rem 0.6rem;
+  border-color: color-mix(in srgb, var(--color-error, #dc2626) 28%, transparent);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-error, #dc2626) 14%, transparent),
+      color-mix(in srgb, var(--color-error, #dc2626) 6%, transparent)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0.6rem 1.4rem rgba(0, 0, 0, 0.12);
+}
+
+#apply .form-field label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--apply-text-on-surface);
+}
+
+#apply .form-field input,
+#apply .form-field select,
+#apply .form-field textarea {
+  border-radius: 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--apply-text-secondary) 22%, transparent);
+  background: var(--color-background-light);
+  color: var(--apply-text-primary);
+  padding: 0.75rem 0.85rem;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0.25rem 0.8rem rgba(0, 0, 0, 0.06);
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+#apply .form-field textarea {
+  resize: vertical;
+  min-height: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#apply .form-field input:focus-visible,
+#apply .form-field select:focus-visible,
+#apply .form-field textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-primary) 42%, transparent);
+  outline-offset: 3px;
+  border-color: color-mix(in srgb, var(--color-primary) 65%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent),
+    0 0.5rem 1.4rem rgba(0, 0, 0, 0.1);
+}
+
+@media (hover: hover) {
+  #apply .form-field input:hover,
+  #apply .form-field select:hover,
+  #apply .form-field textarea:hover {
+    transform: translate3d(1px, -1px, 0);
+    border-color: color-mix(in srgb, var(--apply-text-primary) 22%, transparent);
+    box-shadow:
+      0 0.55rem 1.3rem rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+}
+
+.apply-form__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  padding-bottom: clamp(2.75rem, 4vw, 3.75rem);
+}
+
+.apply-submit {
+  border: 0;
+  border-radius: 0.95rem;
+  padding: 0.9rem 1rem;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  color: var(--color-on-primary);
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--color-primary) 95%, transparent),
+      color-mix(in srgb, var(--color-primary-soft) 78%, transparent));
+  box-shadow:
+    0 0.85rem 2rem rgba(0, 0, 0, 0.16),
+    0 0.35rem 0.9rem rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    filter var(--transition-base),
+    opacity var(--transition-base);
+}
+
+.apply-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(50%);
+  transform: none !important;
+  box-shadow: 
+    0 0.25rem 0.5rem rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.apply-submit:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .apply-submit:hover {
+    transform: translate3d(2px, -2px, 0);
+    box-shadow:
+      0 1rem 2.4rem rgba(0, 0, 0, 0.18),
+      0 0.45rem 1.05rem rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    filter: saturate(1.06);
+  }
+}
+
+.apply-submit:active {
+  transform: translate3d(0, 0, 0);
+  box-shadow:
+    0 0.5rem 1.2rem rgba(0, 0, 0, 0.14),
+    inset 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+
+#apply [data-component="RoleChips"] {
+  border-radius: 1rem;
+  border: var(--card-border);
+  background: var(--surface-gradient-hero);
+  box-shadow: var(--card-shadow-lg);
+  padding: clamp(0.8rem, 2vw, 1.2rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 2vw, 1rem);
+}
+
+#apply [data-component="RoleChips"] [data-role-chips] {
+  display: flex;
+  list-style: none;
+  gap: clamp(0.5rem, 1vw + 0.25rem, 0.75rem);
+  padding-inline-start: 0;
+}
+
+#apply [data-component="RoleChips"] h3 {
+  color: var(--apply-text-on-surface);
+}
+
+#apply .role-chip {
+  border-radius: 0.85rem;
+  padding: clamp(0.65rem, 1.2vw, 0.85rem) clamp(0.8rem, 1.6vw, 1.05rem);
+  border: var(--card-border);
+  background: var(--surface-gradient-accent);
+  color: var(--apply-text-on-surface);
+  box-shadow: var(--shadow-float-xs), var(--shadow-inset-soft);
+  cursor: pointer;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+}
+
+@media (hover: hover) {
+  #apply .role-chip:hover {
+    transform: translate3d(2px, -2px, 0);
+    box-shadow:
+      0 0.6rem 1.4rem rgba(0, 0, 0, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+}
+
+#apply .role-chip.is-selected,
+#apply .role-chip[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--color-primary) 85%, transparent);
+  border-width: 2px;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--color-primary) 28%, transparent),
+      color-mix(in srgb, var(--color-accent) 16%, transparent)),
+    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 18%, transparent), transparent 60%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 60%),
+    color-mix(in srgb, var(--color-background-light) 96%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--color-primary) 22%, transparent),
+    0 0.7rem 1.8rem rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.role-chip:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+  outline-offset: 3px;
+}
+
+/* Navigation buttons (Next/Back) */
+.apply-step__nav {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.apply-step__nav button {
+  border: 1px solid color-mix(in srgb, var(--color-primary) 45%, transparent);
+  border-radius: 0.85rem;
+  padding: 0.7rem 1.2rem;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  color: var(--apply-text-on-surface);
+  background: var(--surface-gradient-accent);
+  box-shadow: var(--shadow-float-xs), var(--shadow-inset-soft);
+  cursor: pointer;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base),
+    background-color var(--transition-base);
+}
+
+.apply-step__nav button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.apply-step__nav button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-primary) 42%, transparent);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .apply-step__nav button:hover:not(:disabled) {
+    transform: translate3d(1px, -1px, 0);
+    border-color: color-mix(in srgb, var(--color-primary) 65%, transparent);
+    box-shadow:
+      0 0.6rem 1.4rem rgba(0, 0, 0, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+}
+
+.apply-step__nav button:active:not(:disabled) {
+  transform: translate3d(0, 0, 0);
+  box-shadow:
+    0 0.3rem 0.8rem rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 768px) {
+  #apply .form-field label {
+    font-size: var(--font-size-xs);
+  }
+
+  #apply .form-field input,
+  #apply .form-field select,
+  #apply .form-field textarea {
+    font-size: var(--font-size-sm);
+  }
+
+  #apply .apply-submit {
+    font-size: var(--font-size-sm);
+  }
+
+  #apply [data-component="RoleChips"] li {
+    font-size: var(--font-size-xs);
+  }
+
+  #apply .role-chip {
+    font-size: var(--font-size-xs);
+  }
+
+  .apply-step__badge {
+    font-size: var(--font-size-xs);
+  }
+
+  .form-error {
+    font-size: var(--font-size-xs);
+  }
+}
