@@ -80,7 +80,6 @@
   display: flex;
   justify-content: center;
   border-radius: 1.25rem;
-  overflow: hidden;
 }
 
 /* Visual box - contains image and info stacked */
@@ -256,35 +255,38 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
   color: #ffffff;
 }
 
-.apply-form__emblem {
+.apply-emblem {
   position: absolute;
   width: clamp(5rem, 7vw + 0.25rem, 6rem);
   height: clamp(5rem, 7vw + 0.25rem, 6rem);
-  border-radius: 999px;
-  display: inline-flex;
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
   background:
-    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--color-primary-soft) 65%, transparent), transparent 65%),
-    color-mix(in srgb, var(--color-primary) 35%, rgba(255, 255, 255, 0.2));
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent 60%),
+    linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(56, 189, 248, 0.1));
+  border: 1px solid rgba(148, 163, 184, 0.2);
   box-shadow:
-    0 0.45rem 1.1rem rgba(0, 0, 0, 0.35),
+    0 0.5rem 1rem rgba(15, 23, 42, 0.3),
+    0 0.25rem 0.5rem rgba(15, 23, 42, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  /* z-index: 10 !important; */
 }
 
-.apply-form__emblem--top-right {
-  top: -4.25rem;
-  right: -1rem;
+.apply-emblem-top-right {
+  top: -2.5rem;
+  right: 1rem;
 }
 
-.apply-form__emblem--bottom-right {
+.apply-emblem-bottom-right {
   bottom: clamp(-2.25rem, calc(-1.25rem - 1vw), -1rem);
   left: 50%;
   transform: translateX(-50%);
 }
 
-.apply-form__emblem img,
-.apply-form__emblem svg {
+.apply-emblem img,
+.apply-emblem svg {
   width: clamp(3rem, 4.5vw + 0.25rem, 3.8rem);
   height: clamp(3rem, 4.5vw + 0.25rem, 3.8rem);
   display: block;
