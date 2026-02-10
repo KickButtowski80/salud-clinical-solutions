@@ -1,12 +1,12 @@
 <form data-component="ApplyFormCard" method="post" action="">
-    <header class="apply-form__header">
+    <header class="apply-form-header">
         <span class="apply-emblem apply-emblem-top-right" aria-hidden="true">
             <include src="./src/assets/images/apply-emblem.svg" />
         </span>
         <h3 class="text-2xl font-semibold m-0">Application</h3>
         <p class="m-0 text-lg text-secondary">Share a few details and we’ll follow up with next steps.</p>
         <p class="m-0 text-lg text-secondary" data-stepper-status></p>
-       
+
     </header>
 
     <div class="apply-progress" data-stepper-progress aria-hidden="true"></div>
@@ -14,8 +14,8 @@
     <input id="apply-role" name="role" type="hidden" value="" />
 
     <fieldset class="apply-step" data-step="1">
-        <legend class="apply-step__legend">
-            <span class="apply-step__badge" aria-hidden="true">1</span>
+        <legend class="apply-step-legend">
+            <span class="apply-step-badge" aria-hidden="true">1</span>
             Role
         </legend>
 
@@ -23,44 +23,50 @@
 
         <section data-component="MatchMicrocopy" aria-label="Match message">
             <h3 class="sr-only">Match message</h3>
-            <p id="match-microcopy" class="m-0 pt-6">Great — we’ll prioritize roles that match your license and location.</p>
+            <p id="match-microcopy" class="m-0 pt-6">Great — we’ll prioritize roles that match your license and
+                location.</p>
         </section>
     </fieldset>
 
     <fieldset class="apply-step" data-step="2">
-        <legend class="apply-step__legend">
-            <span class="apply-step__badge" aria-hidden="true">2</span>
+        <legend class="apply-step-legend">
+            <span class="apply-step-badge" aria-hidden="true">2</span>
             Contact
         </legend>
 
-        <div class="apply-step__grid">
+        <div class="apply-step-grid">
             <div class="form-field">
                 <label for="apply-name">Full name *</label>
-                <input id="apply-name" name="name" type="text" autocomplete="name" required maxlength="120" aria-describedby="apply-name-error" />
+                <input id="apply-name" name="name" type="text" autocomplete="name" required maxlength="120"
+                    aria-describedby="apply-name-error" />
                 <div id="apply-name-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-field">
                 <label for="apply-email">Email *</label>
-                <input id="apply-email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="apply-email-error" />
+                <input id="apply-email" name="email" type="email" autocomplete="email" required maxlength="254"
+                    aria-describedby="apply-email-error" />
                 <div id="apply-email-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="form-field">
                 <label for="apply-phone">Phone *</label>
-                <input id="apply-phone" name="phone" type="tel" autocomplete="tel" required maxlength="40" pattern="^[\d\s\-\+\(\)]+$" title="Phone number can contain digits, spaces, dashes, plus, and parentheses" aria-describedby="apply-phone-error" />
+                <input id="apply-phone" name="phone" type="tel" autocomplete="tel" required maxlength="40"
+                    pattern="^[\d\s\-\+\(\)]+$"
+                    title="Phone number can contain digits, spaces, dashes, plus, and parentheses"
+                    aria-describedby="apply-phone-error" />
                 <div id="apply-phone-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
         </div>
     </fieldset>
 
     <fieldset class="apply-step" data-step="3">
-        <legend class="apply-step__legend">
-            <span class="apply-step__badge" aria-hidden="true">3</span>
+        <legend class="apply-step-legend">
+            <span class="apply-step-badge" aria-hidden="true">3</span>
             Licensing
         </legend>
 
-        <div class="apply-step__grid">
+        <div class="apply-step-grid">
             <div class="form-field">
                 <label for="apply-license-type">Profession *</label>
                 <select id="apply-license-type" name="licenseType" required aria-describedby="apply-license-type-error">
@@ -78,7 +84,8 @@
 
             <div class="form-field">
                 <label for="apply-license-state">Active state license *</label>
-                <select id="apply-license-state" name="licenseState" autocomplete="address-level1" required aria-describedby="apply-license-state-error">
+                <select id="apply-license-state" name="licenseState" autocomplete="address-level1" required
+                    aria-describedby="apply-license-state-error">
                     <option value="" selected>Select…</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -137,19 +144,20 @@
 
             <div class="form-field">
                 <label for="apply-license-number">License number</label>
-                <input id="apply-license-number" name="licenseNumber" type="text" maxlength="50" aria-describedby="apply-license-number-error" />
+                <input id="apply-license-number" name="licenseNumber" type="text" maxlength="50"
+                    aria-describedby="apply-license-number-error" />
                 <div id="apply-license-number-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
         </div>
     </fieldset>
 
     <fieldset class="apply-step" data-step="4">
-        <legend class="apply-step__legend">
-            <span class="apply-step__badge" aria-hidden="true">4</span>
+        <legend class="apply-step-legend">
+            <span class="apply-step-badge" aria-hidden="true">4</span>
             Preferences / Notes
         </legend>
 
-        <div class="apply-step__grid">
+        <div class="apply-step-grid apply-step-grid-three-columns">
             <div class="form-field">
                 <label for="apply-placement">Placement type</label>
                 <select id="apply-placement" name="placementType" aria-describedby="apply-placement-error">
@@ -166,23 +174,28 @@
                 <input id="apply-start" name="startDate" type="date" aria-describedby="apply-start-error" />
                 <div id="apply-start-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
-              <div class="form-field">
+            <div class="form-field">
                 <label for="apply-preferred-locations">What is your preferred location/s?</label>
-                <input id="apply-preferred-locations" name="preferredLocations" type="text" aria-describedby="apply-preferred-locations-error" placeholder="e.g., Los Angeles, San Francisco, Remote" />
+                <input id="apply-preferred-locations" name="preferredLocations" type="text"
+                    aria-describedby="apply-preferred-locations-error"
+                    placeholder="e.g., Los Angeles, San Francisco, Remote" />
                 <div id="apply-preferred-locations-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
+        </div>
+        <div class="apply-step-grid">
             <div class="form-field">
                 <label for="apply-notes">Notes</label>
-                <textarea id="apply-notes" name="notes" rows="4" maxlength="500" aria-describedby="apply-notes-error" placeholder="Anything we should know to match you faster?"></textarea>
+                <textarea id="apply-notes" name="notes" rows="4" maxlength="500" aria-describedby="apply-notes-error"
+                    placeholder="Anything we should know to match you faster?"></textarea>
                 <div id="apply-notes-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
         </div>
     </fieldset>
 
-    <footer class="apply-form__footer">
+    <footer class="apply-form-footer">
         <div class="apply-stepper" data-stepper-controls>
-            <button class="apply-stepper__btn" type="button" data-stepper-prev>Back</button>
-            <button class="apply-stepper__btn" type="button" data-stepper-next>Next</button>
+            <button class="apply-stepper-btn" type="button" data-stepper-prev>Back</button>
+            <button class="apply-stepper-btn" type="button" data-stepper-next>Next</button>
         </div>
         <button class="apply-submit" hidden type="submit">Apply now</button>
         <p class="m-0 text-xs text-muted">Fields marked with <span aria-hidden="true">*</span> are required.</p>
