@@ -136,7 +136,7 @@
 
 
 /* Mobile: clean stacked layout */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   #contact {
     padding: clamp(1rem, calc(2vw + 1rem), 2rem);
   }
