@@ -211,7 +211,7 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
   gap: clamp(0.6rem, 1.6vw, 0.9rem);
 }
 
-.apply-form__header {
+.apply-form-header {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -221,9 +221,9 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
   padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
 }
 
-#apply .apply-form__header h3,
-#apply .apply-form__header p,
-#apply .apply-form__header [data-stepper-status] {
+#apply .apply-form-header h3,
+#apply .apply-form-header p,
+#apply .apply-form-header [data-stepper-status] {
   color: #ffffff;
 }
 
@@ -273,7 +273,7 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
   box-shadow: var(--shadow-float-xs), var(--shadow-inset-soft);
 }
 
-.apply-step__legend {
+.apply-step-legend {
   padding: 0;
   margin: 0 0 0.75rem 0;
   font-weight: var(--font-weight-semibold);
@@ -284,7 +284,7 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
   font-size: var(--font-size-sm);
 }
 
-.apply-step__badge {
+.apply-step-badge {
   width: 1.65rem;
   height: 1.65rem;
   border-radius: 999px;
@@ -303,19 +303,27 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
     0 0.45rem 1.1rem rgba(0, 0, 0, 0.12);
 }
 
-.apply-step__grid {
+.apply-step-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.75rem;
 }
 
 @media (min-width: 520px) {
-  .apply-step__grid {
+  .apply-step-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .apply-step__grid .form-field:last-child {
+  .apply-step-grid .form-field:last-child {
     grid-column: 1 / -1;
+  }
+
+  .apply-step-grid-three-columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .apply-step-grid-three-columns .form-field:last-child {
+    grid-column: auto;
   }
 }
 
@@ -412,7 +420,7 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
   }
 }
 
-.apply-form__footer {
+.apply-form-footer {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -544,13 +552,13 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
 }
 
 /* Navigation buttons (Next/Back) */
-.apply-step__nav {
+.apply-step-nav {
   display: flex;
   gap: 0.75rem;
   margin-top: 1rem;
 }
 
-.apply-step__nav button {
+.apply-step-nav button {
   border: 1px solid color-mix(in srgb, var(--color-primary) 45%, transparent);
   border-radius: 0.85rem;
   padding: 0.7rem 1.2rem;
@@ -567,19 +575,19 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
     background-color var(--transition-base);
 }
 
-.apply-step__nav button:disabled {
+.apply-step-nav button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none !important;
 }
 
-.apply-step__nav button:focus-visible {
+.apply-step-nav button:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--color-primary) 42%, transparent);
   outline-offset: 3px;
 }
 
 @media (hover: hover) {
-  .apply-step__nav button:hover:not(:disabled) {
+  .apply-step-nav button:hover:not(:disabled) {
     transform: translate3d(1px, -1px, 0);
     border-color: color-mix(in srgb, var(--color-primary) 65%, transparent);
     box-shadow:
@@ -588,7 +596,7 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
   }
 }
 
-.apply-step__nav button:active:not(:disabled) {
+.apply-step-nav button:active:not(:disabled) {
   transform: translate3d(0, 0, 0);
   box-shadow:
     0 0.3rem 0.8rem rgba(0, 0, 0, 0.12),
@@ -618,7 +626,7 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
     font-size: var(--font-size-xs);
   }
 
-  .apply-step__badge {
+  .apply-step-badge {
     font-size: var(--font-size-xs);
   }
 

@@ -1,6 +1,6 @@
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--scroll-margin, 4rem);
+  scroll-padding-top:  5rem;
 }
 
 body {
