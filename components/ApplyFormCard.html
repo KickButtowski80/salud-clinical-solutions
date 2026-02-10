@@ -53,6 +53,7 @@
                 <label for="apply-phone">Phone *</label>
                 <input id="apply-phone" name="phone" type="tel" autocomplete="tel" required maxlength="40"
                     pattern="^[\d\s\-\+\(\)]+$"
+                    placeholder="(XXX) XXX-XXXX"
                     title="Phone number can contain digits, spaces, dashes, plus, and parentheses"
                     aria-describedby="apply-phone-error" />
                 <div id="apply-phone-error" class="form-error" role="alert" aria-live="polite"></div>
@@ -145,7 +146,8 @@
             <div class="form-field">
                 <label for="apply-license-number">License number</label>
                 <input id="apply-license-number" name="licenseNumber" type="text" maxlength="50"
-                    aria-describedby="apply-license-number-error" />
+                    aria-describedby="apply-license-number-error"
+                    placeholder="e.g., PSY12345 or LCSW789012" />
                 <div id="apply-license-number-error" class="form-error" role="alert" aria-live="polite"></div>
             </div>
         </div>
