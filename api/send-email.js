@@ -61,6 +61,7 @@ export default async function handler(req, res) {
       licenseNumber,
       placementType,
       startDate,
+      preferredLocations,
       notes
     } = req.body;
 
@@ -94,6 +95,7 @@ export default async function handler(req, res) {
       licenseNumber: trimString(licenseNumber),
       placementType: trimString(placementType),
       startDate: trimString(startDate),
+      preferredLocations: trimString(preferredLocations),
       notes: trimString(notes)
     };
 
@@ -152,6 +154,7 @@ export default async function handler(req, res) {
       licenseNumber: escapeHtml(trimmedData.licenseNumber),
       placementType: escapeHtml(trimmedData.placementType),
       startDate: escapeHtml(trimmedData.startDate),
+      preferredLocations: escapeHtml(trimmedData.preferredLocations),
       notes: escapeHtml(trimmedData.notes)
     };
 
@@ -172,6 +175,7 @@ export default async function handler(req, res) {
               License State: ${sanitizedData.licenseState || 'State of Confusion 🤔'}
               License Number: ${sanitizedData.licenseNumber || '123-ABRACADABRA 🪄'}
               Placement Type: ${sanitizedData.placementType || 'Wherever the wind takes me 🌬️'}
+              Preferred Locations: ${sanitizedData.preferredLocations || 'Wherever the opportunities are! 🗺️'}
               Start Date: ${sanitizedData.startDate || 'When the stars align ⭐'}
               Notes: ${sanitizedData.notes || 'No notes - just pure talent! ✨'}
 
@@ -200,6 +204,7 @@ export default async function handler(req, res) {
                   
                   <h3>🎯 Preferences</h3>
                   <p><strong>Placement Type:</strong> ${sanitizedData.placementType || 'Wherever the wind takes me 🌬️'}</p>
+                  <p><strong>Preferred Locations:</strong> ${sanitizedData.preferredLocations || 'Wherever the opportunities are! 🗺️'}</p>
                   <p><strong>Preferred Start Date:</strong> ${sanitizedData.startDate || 'When the stars align ⭐'}</p>
                   ${sanitizedData.notes ? `<p><strong>Notes:</strong> ${sanitizedData.notes}</p>` : '<p><strong>Notes:</strong> No notes - just pure talent! ✨</p>'}
                 </div>
