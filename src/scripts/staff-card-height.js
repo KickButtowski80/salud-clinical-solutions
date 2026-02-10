@@ -53,8 +53,8 @@ export function initStaffCardHeights() {
    * - When the checkbox is checked: close button gets tabIndex = 0.
    */
   function syncCloseTabIndex(card) {
-    const toggle = card.querySelector('.staff-card__toggle');
-    const closeBtn = card.querySelector('.staff-card__close');
+    const toggle = card.querySelector('.staff-card__toggle, .staff-card-toggle');
+    const closeBtn = card.querySelector('.staff-card__close, .staff-card-close');
 
     if (!(toggle instanceof HTMLInputElement)) return;
     if (!(closeBtn instanceof HTMLButtonElement)) return;
@@ -70,7 +70,7 @@ export function initStaffCardHeights() {
    */
   function initCloseTabIndex() {
     cards.forEach((card) => {
-      const toggle = card.querySelector('.staff-card__toggle');
+      const toggle = card.querySelector('.staff-card__toggle, .staff-card-toggle');
       if (!(toggle instanceof HTMLInputElement)) return;
 
       syncCloseTabIndex(card);
@@ -102,7 +102,7 @@ export function initStaffCardHeights() {
    * - dispatch a 'change' event so any listeners update.
    */
   function initCloseButtons() {
-    document.querySelectorAll('.staff-card__close').forEach((btn) => {
+    document.querySelectorAll('.staff-card__close, .staff-card-close').forEach((btn) => {
       if (!(btn instanceof HTMLButtonElement)) return;
 
       btn.addEventListener('click', (e) => {
@@ -111,7 +111,7 @@ export function initStaffCardHeights() {
         e.stopPropagation();
 
         const card = btn.closest('.staff-card');
-        const toggle = card?.querySelector('.staff-card__toggle');
+        const toggle = card?.querySelector('.staff-card__toggle, .staff-card-toggle');
         if (toggle instanceof HTMLInputElement) {
           toggle.checked = false;
           toggle.dispatchEvent(new Event('change', { bubbles: true }));
@@ -135,9 +135,9 @@ export function initStaffCardHeights() {
    * content height.
    */
   function measureCard(card) {
-    const backContent = card.querySelector('.staff-card__back-content');
-    const frontFace = card.querySelector('.staff-card__face--front');
-    const backFace = card.querySelector('.staff-card__face--back');
+    const backContent = card.querySelector('.staff-card__back-content, .staff-card-back-content');
+    const frontFace = card.querySelector('.staff-card__face--front, .staff-card-face-front');
+    const backFace = card.querySelector('.staff-card__face--back, .staff-card-face-back');
 
     if (frontFace) {
       const originalFacePosition = frontFace.style.position;
@@ -213,10 +213,14 @@ export function initStaffCardHeights() {
     });
 
     cards.forEach((card) => {
-      const backContent = card.querySelector('.staff-card__back-content');
+      const backContent = card.querySelector(
+        '.staff-card__back-content, .staff-card-back-content'
+      );
       if (backContent) ro.observe(backContent);
 
-      const frontFace = card.querySelector('.staff-card__face--front');
+      const frontFace = card.querySelector(
+        '.staff-card__face--front, .staff-card-face-front'
+      );
       if (frontFace) ro.observe(frontFace);
     });
   } else {
