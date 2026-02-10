@@ -122,8 +122,6 @@
 
 /* Right visual side */
 .contact-visual-side {
-  background: #0f172a33;
-  border-radius: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
