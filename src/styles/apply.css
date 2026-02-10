@@ -70,9 +70,9 @@
 /* Two-box grid layout: form left, visual content right */
 .apply-content-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 3vw, 3rem);
-  align-items: stretch;
+  grid-template-columns: 2fr 1fr;
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+  justify-items: start;
 }
 
 /* Form box */
