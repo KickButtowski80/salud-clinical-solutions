@@ -1,49 +1,55 @@
 <section id="contact" aria-label="Contact section" class="flex flex-col">
-    <header>
-        <h2 class="text-3xl m-0">Start the Conversation</h2>
+    <header class="contact-section-header">
+        <h2 class="contact-section-title text-3xl m-0">Start the Conversation</h2>
     </header>
 
-    <div data-component="ContactLayout" class="grid grid-cols-1 md-grid-cols-2">
-        <div data-component="ContactContent">
-            <header data-component="IntroHero">
-                <h3 class="text-2xl font-bold m-0 mb-2">Find the right behavioral health role—fast.</h3>
-                <p class="text-lg leading-relaxed m-0">We connect psychiatrists, psychologists, and licensed clinical
-                    social workers with organizations looking for reliable, compassionate care. Whether you’re exploring
-                    locum tenens or long-term placements, we help you get matched to opportunities that fit your
-                    license, location, and availability.</p>
-            </header>
+    <div class="contact-elegant-layout">
+        <!-- Left side: Content -->
+        <div class="contact-content-side">
+            <div class="contact-content-card">
+                <header data-component="IntroHero">
+                    <h3 class="text-2xl font-bold m-0 mb-2">Find the right behavioral health role—fast.</h3>
+                    <p class="text-lg leading-relaxed m-0">We connect psychiatrists, psychologists, and licensed clinical
+                        social workers with organizations looking for reliable, compassionate care. Whether you're exploring
+                        locum tenens or long-term placements, we help you get matched to opportunities that fit your
+                        license, location, and availability.</p>
+                </header>
+            </div>
 
-            <section data-component="TrustHighlights" aria-label="Highlights">
-                <h3 class="text-lg font-semibold m-0 mb-2 ">Highlights</h3>
-                <ul class="flex flex-wrap m-0">
-                    <li>Locum</li>
-                    <li>Long Term</li>
-                    <li>Fast placement</li>
-                    <li>Multi-state placements</li>
-                </ul>
-            </section>
+            <div class="contact-info-row">
+                <div class="contact-highlights">
+                    <h3 class="text-lg font-semibold m-0 mb-2">Highlights</h3>
+                    <ul class="contact-highlights-list">
+                        <li class="highlight-chip">Locum</li>
+                        <li class="highlight-chip">Long Term</li>
+                        <li class="highlight-chip">Fast placement</li>
+                        <li class="highlight-chip">Multi-state placements</li>
+                    </ul>
+                </div>
 
-            <figure data-component="ApplyNowVisual" class="hidden md-block" aria-hidden="true">
-                <img src="./src/assets/images/apply-now.webp" alt="" loading="lazy" decoding="async" />
-            </figure>
-        </div>
-
-        <aside data-component="ContactForm" aria-label="Application form">
-            <div class="business-contact-info">
-                <h3 class="text-lg font-semibold m-0 mb-3">📞 Contact Information</h3>
-                <p class="text-sm m-0 mb-3 text-secondary">Reach out for rate sheet and current openings</p>
-                <div class="contact-details">
-                    <a href="mailto:info@saludclinical.com" rel="nofollow noreferrer" class="contact-item">
-                        <span class="contact-icon">📧</span>
-                        info@saludclinical.com
-                    </a>
-                    <a href="tel:+12134443284" class="contact-item">
-                        <span class="contact-icon">📱</span>
-                        213-444-3284
-                    </a>
+                <div class="contact-direct">
+                    <h3 class="text-lg font-semibold m-0 mb-3">📞 Contact Information</h3>
+                    <p class="text-sm m-0 mb-3 text-secondary">Reach out for rate sheet and current openings</p>
+                    <div class="contact-details">
+                        <a href="mailto:info@saludclinical.com" rel="nofollow noreferrer" class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            info@saludclinical.com
+                        </a>
+                        <a href="tel:+12134443284" class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            213-444-3284
+                        </a>
+                    </div>
                 </div>
             </div>
-            <include src="./components/ApplyFormCard.html"></include>
-        </aside>
+        </div>
+
+        <!-- Right side: Image with decorative element -->
+        <div class="contact-visual-side">
+          
+               <img src="./src/assets/images/salud-contact.webp" alt="Contact Us section at Salud Clinical Solutions, we are here to help you find the right behavioral health role">
+            
+            
+        </div>
     </div>
 </section>
