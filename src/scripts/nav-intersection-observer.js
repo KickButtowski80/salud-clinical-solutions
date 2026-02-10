@@ -83,7 +83,7 @@ export function initNavIntersectionObserver() {
     window.__showNavIoDebug = createDebugOverlay;
   }
 
-  const sectionIds = ['home', 'services', 'about-us', 'contact'];
+  const sectionIds = ['home', 'services', 'about-us', 'apply', 'contact'];
 
   const sections = sectionIds
     .map((id) => document.getElementById(id))

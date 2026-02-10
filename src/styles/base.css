@@ -238,6 +238,15 @@ main {
   padding: var(--space-4) var(--space-3);
 }
 
+.card--apply {
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.08), transparent 55%),
+    var(--color-primary-strong);
+  border-color: rgba(148, 163, 184, 0.25);
+  box-shadow: 0 1rem 2.5rem rgba(15, 23, 42, 0.5);
+}
+
 .card--light {
   background: rgba(255, 255, 255, 0.95);
   color: var(--color-text-primary);
