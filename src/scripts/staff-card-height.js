@@ -131,7 +131,7 @@ export function initStaffCardHeights() {
    *   - transform: none
    *   Then we read offsetHeight, and finally restore the original styles.
    *
-   * This keeps layout stable (no visible jump), but lets us get the true
+   * This keeps layout stable(no visible jump), but lets us get the true
    * content height.
    */
   function measureCard(card) {

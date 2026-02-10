@@ -7,7 +7,7 @@ import { initThemeTogglePersistence } from './theme-toggle-persistence.js';
 import { initRoleChips } from './role-chips.js';
 import { initApplyFormStepper } from './apply-form-stepper.js';
 import { initContentReveal } from './content-reveal.js';
-import { initFooterYear } from './footer-year.js';
+// import { initFooterYear } from './footer-year.js';
 
 // ==================== MAIN INITIALIZATION ====================
 
