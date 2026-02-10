@@ -85,6 +85,27 @@
   --z-layer-overlay: 400;      /* overlays: modal dialogs, backdrops, drawers */
   --z-layer-notification: 500; /* transient notifications: toasts, banners */
   --z-layer-tooltip: 600;      /* tooltips, skip-links, highest-priority overlays */
+
+  /* Card System */
+  --card-radius: 1rem;
+  --card-padding: clamp(0.9rem, 2.2vw, 1.25rem);
+  --card-border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
+  --card-border-soft: 1px solid color-mix(in srgb, var(--color-text-secondary) 18%, transparent);
+  --card-shadow-lg:
+    0 18px 45px rgba(0, 0, 0, 0.12),
+    0 6px 14px rgba(0, 0, 0, 0.08);
+  --card-shadow-md:
+    0 16px 40px rgba(0, 0, 0, 0.16),
+    0 6px 16px rgba(0, 0, 0, 0.1);
+
+  /* Shadow Utilities */
+  --shadow-float-sm: 0 0.45rem 1.2rem rgba(0, 0, 0, 0.14);
+  --shadow-float-xs: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.08);
+  --shadow-inset-soft: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  /* Transitions */
+  --transition-base: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Explicit theme tokens */
