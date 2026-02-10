@@ -71,8 +71,8 @@
 .apply-content-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: clamp(0.75rem, 1.5vw, 1rem);
-  justify-items: start;
+  gap: clamp(0.25rem, 1.5vw + 0.25rem, 0.5rem);
+  justify-items: center;
 }
 
 /* Form box */
