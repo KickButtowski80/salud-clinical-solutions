@@ -213,37 +213,6 @@ html[data-theme="dark"] #contact {
 
 
 
-:root {
-  --card-radius: 1rem;
-  --card-border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
-  --card-border-soft: 1px solid color-mix(in srgb, var(--color-text-secondary) 18%, transparent);
-  --card-shadow-lg:
-    0 18px 45px rgba(0, 0, 0, 0.12),
-    0 6px 14px rgba(0, 0, 0, 0.08);
-  --card-shadow-md:
-    0 16px 40px rgba(0, 0, 0, 0.16),
-    0 6px 16px rgba(0, 0, 0, 0.1);
-  --shadow-float-sm: 0 0.45rem 1.2rem rgba(0, 0, 0, 0.14);
-  --shadow-float-xs: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.08);
-  --shadow-inset-soft: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  --surface-gradient-accent:
-    radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 58%),
-    radial-gradient(circle at 82% 78%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 60%),
-    var(--color-background-light);
-  --surface-gradient-highlight:
-    radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 60%),
-    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent) 12%, transparent), transparent 60%),
-    var(--color-background-light);
-  --surface-gradient-hero:
-    radial-gradient(circle at 15% 35%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 62%),
-    radial-gradient(circle at 90% 70%, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 65%),
-    var(--color-background-light);
-  --card-surface: var(--color-background-light);
-  --card-padding: clamp(0.9rem, 2.2vw, 1.25rem);
-  --transition-base: 220ms cubic-bezier(0.22, 1, 0.36, 1);
-  --transition-fast: 180ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 #contact>header h2 {
   color: var(--contact-heading-color);
 }
