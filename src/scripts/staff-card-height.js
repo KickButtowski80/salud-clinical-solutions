@@ -121,23 +121,16 @@ export function initStaffCardHeights() {
   }
 
   /**
-   * Measure a single card and update its CSS variables.
-   *
-   * Key trick:
-   * - The faces are absolutely positioned and transformed.
-   * - For reliable measurements we temporarily set:
-   *   - position: static
-   *   - visibility: hidden
-   *   - transform: none
-   *   Then we read offsetHeight, and finally restore the original styles.
-   *
-   * This keeps layout stable (no visible jump), but lets us get the true
-   * content height.
+   * Measure a single card and return its heights (without setting CSS variables).
+   * This allows us to find the maximum height across all cards first.
    */
   function measureCard(card) {
     const backContent = card.querySelector('.staff-card__back-content');
     const frontFace = card.querySelector('.staff-card__face--front');
     const backFace = card.querySelector('.staff-card__face--back');
+
+    let frontHeight = 0;
+    let backHeight = 0;
 
     if (frontFace) {
       const originalFacePosition = frontFace.style.position;
@@ -148,45 +141,52 @@ export function initStaffCardHeights() {
       frontFace.style.visibility = 'hidden';
       frontFace.style.transform = 'none';
 
-      const frontHeight = frontFace.offsetHeight + EXTRA_FRONT_PX;
+      frontHeight = frontFace.offsetHeight + EXTRA_FRONT_PX;
 
       frontFace.style.position = originalFacePosition;
       frontFace.style.visibility = originalFaceVisibility;
       frontFace.style.transform = originalFaceTransform;
-
-      card.style.setProperty('--staff-card-front-height', `${frontHeight}px`);
     }
 
-    if (!backContent || !backFace) return;
+    if (backContent && backFace) {
+      // Temporarily make backContent measurable (position: static, visibility: hidden)
+      // Store original styles
+      const originalFacePosition = backFace.style.position;
+      const originalFaceVisibility = backFace.style.visibility;
+      const originalFaceTransform = backFace.style.transform;
 
-    // Temporarily make backContent measurable (position: static, visibility: hidden)
-    // Store original styles
-    const originalFacePosition = backFace.style.position;
-    const originalFaceVisibility = backFace.style.visibility;
-    const originalFaceTransform = backFace.style.transform;
+      // Make it measurable without showing it
+      backFace.style.position = 'static';
+      backFace.style.visibility = 'hidden';
+      backFace.style.transform = 'none';
 
-    // Make it measurable without showing it
-    backFace.style.position = 'static';
-    backFace.style.visibility = 'hidden';
-    backFace.style.transform = 'none';
+      // Measure
+      backHeight = backContent.offsetHeight + EXTRA_BOTTOM_PX;
 
-    // Measure
-    const height = backContent.offsetHeight + EXTRA_BOTTOM_PX;
+      // Restore
+      backFace.style.position = originalFacePosition;
+      backFace.style.visibility = originalFaceVisibility;
+      backFace.style.transform = originalFaceTransform;
+    }
 
-    // Restore
-    backFace.style.position = originalFacePosition;
-    backFace.style.visibility = originalFaceVisibility;
-    backFace.style.transform = originalFaceTransform;
-
-    // Set CSS variable on the card
-    card.style.setProperty('--staff-card-back-height', `${height}px`);
+    return { frontHeight, backHeight };
   }
 
   /**
-   * Convenience wrapper to measure all cards.
+   * Measure all cards and find the maximum heights, then apply to all cards.
    */
   function measureAndSet() {
-    cards.forEach((card) => measureCard(card));
+    // Measure all cards first to find max heights
+    const measurements = Array.from(cards).map(card => measureCard(card));
+    
+    const maxFrontHeight = Math.max(...measurements.map(m => m.frontHeight));
+    const maxBackHeight = Math.max(...measurements.map(m => m.backHeight));
+
+    // Apply the maximum heights to all cards
+    cards.forEach((card) => {
+      card.style.setProperty('--staff-card-front-height', `${maxFrontHeight}px`);
+      card.style.setProperty('--staff-card-back-height', `${maxBackHeight}px`);
+    });
   }
 
   // Run on load
