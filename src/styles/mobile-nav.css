@@ -128,22 +128,18 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1163px) {
   .mobile-nav {
     display: none;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1162px) {
   .nav-menu {
     display: none;
   }
 
   body {
-    padding-bottom: calc(env(safe-area-inset-bottom) + 5.5rem);
-  }
-
-  main {
     padding-bottom: calc(env(safe-area-inset-bottom) + 5.5rem);
   }
 }
