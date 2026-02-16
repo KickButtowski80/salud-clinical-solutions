@@ -635,6 +635,8 @@ html[data-theme="light"] #apply .form-field input[type="date"]::-webkit-calendar
 
   #apply .role-chip {
     font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    padding: 0.5rem clamp(0.8rem, 1.2rem + 0.4vw, 1.05rem);
   }
 
   .apply-step-badge {
