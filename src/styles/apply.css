@@ -28,6 +28,25 @@
   --form-input-bg: color-mix(in srgb, var(--color-background) 92%, var(--color-primary-soft) 8%);
 }
 
+/* Light theme tuning: map Apply variables to design tokens for better contrast */
+html[data-theme="light"] #apply {
+  --apply-heading-color: var(--color-text-primary);
+  --apply-text-primary: var(--color-text-primary);
+  --apply-text-secondary: var(--color-text-primary);
+  --apply-text-on-surface: var(--color-text-primary);
+  --form-input-bg: color-mix(in srgb, var(--color-background-light) 85%, var(--color-primary) 15%);
+  /* Borders reference neutral token in light mode for clarity */
+  --card-border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
+  --card-border-strong: 1px solid color-mix(in srgb, var(--color-text-secondary) 32%, transparent);
+  --card-border-soft: 1px solid color-mix(in srgb, var(--color-text-secondary) 16%, transparent);
+  /* Significantly darker background in light mode */
+  background:
+    radial-gradient(circle at 14% 10%, color-mix(in srgb, var(--color-primary) 36%, transparent), transparent 55%),
+    radial-gradient(circle at 86% 90%, color-mix(in srgb, var(--color-accent) 34%, transparent), transparent 55%),
+    color-mix(in srgb, var(--color-background-light) 62%, var(--color-primary) 38%);
+  box-shadow: 0 20px 44px rgba(15, 23, 42, 0.34);
+}
+
 /* Apply section header */
 .apply-section-header {
   text-align: center;
@@ -55,6 +74,15 @@
   font-weight: 500;
   line-height: 1.3;
   margin-top: 0.5rem;
+}
+
+/* Light theme: explicit title colors for better hierarchy */
+html[data-theme="light"] #apply .apply-title-main {
+  color: var(--color-text-primary);
+}
+
+html[data-theme="light"] #apply .apply-title-sub {
+  color: var(--color-text-secondary);
 }
 
 /* Two-box grid layout: form left, visual content right */
@@ -104,6 +132,14 @@
   text-align: center;
 }
 
+/* Darker overlay in light theme for better text contrast */
+html[data-theme="light"] #apply .apply-info-overlay {
+  background:
+    linear-gradient(135deg,
+      rgba(15, 23, 42, 0.12) 0%,
+      rgba(15, 23, 42, 0.20) 100%);
+}
+
 .apply-info-title {
   color: var(--apply-heading-color);
   font-weight: 700;
@@ -117,6 +153,29 @@
   font-size: var(--font-size-lg);
   line-height: 1.6;
   margin: 0;
+}
+
+/* Light theme: increase readability of side card text */
+html[data-theme="light"] #apply .apply-info-title {
+  color: var(--color-text-primary);
+}
+
+/* Light mode: improve readability of match microcopy line under role chips */
+html[data-theme="light"] #apply #match-microcopy {
+  color: var(--color-text-primary);
+  opacity: 0.9;
+}
+
+/* Light mode: footer helper texts inside Apply card */
+html[data-theme="light"] #apply .text-muted {
+  color: color-mix(in srgb, var(--color-text-primary) 78%, transparent);
+  font-size: clamp(0.875rem, 0.5rem + 2vw, 1rem);
+}
+
+html[data-theme="light"] #apply .text-accent {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  font-size: clamp(0.875rem, 0.5rem + 2vw, 1rem);
 }
 
 /* Mobile: stacked layout */
@@ -219,6 +278,17 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
   color: #ffffff;
 }
 
+/* Light theme: ensure header text uses proper light theme tokens for contrast */
+html[data-theme="light"] #apply .apply-form-header h3,
+html[data-theme="light"] #apply .apply-form-header p,
+html[data-theme="light"] #apply .apply-form-header [data-stepper-status] {
+  color: var(--color-text-primary);
+}
+
+html[data-theme="light"] #apply .apply-form-header .text-secondary {
+  color: var(--color-text-secondary);
+}
+
 .apply-emblem {
   position: absolute;
   width: clamp(5rem, 7vw + 0.25rem, 6rem);
@@ -262,6 +332,12 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
   padding: clamp(0.75rem, 2vw, 1.05rem);
   background: var(--surface-gradient-hero);
   box-shadow: var(--shadow-float-xs), var(--shadow-inset-soft);
+}
+
+/* Darker step cards in light mode for better contrast */
+html[data-theme="light"] #apply .apply-step {
+  background: color-mix(in srgb, var(--color-background-light) 72%, var(--color-primary) 28%);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 32%, transparent);
 }
 
 .apply-step-legend {
@@ -387,21 +463,25 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
 
 #apply .form-field input[type="date"] {
   padding-right: 2.6rem;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23111827' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.9rem center;
-  background-size: 1.05rem 1.05rem;
+  position: relative;
 }
 
-html[data-theme="dark"] #apply .form-field input[type="date"] {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
-}
 
 #apply .form-field input[type="date"]::-webkit-calendar-picker-indicator {
-  opacity: 0;
-  width: 2.6rem;
-  height: 100%;
+  opacity: 1;
+  width: 1.8rem;
+  height: 1.8rem;
   cursor: pointer;
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  color-scheme: light dark;
+}
+
+html[data-theme="light"] #apply .form-field input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
 
 #apply .form-field input:focus-visible,
@@ -502,6 +582,11 @@ html[data-theme="dark"] #apply .form-field input[type="date"] {
   gap: clamp(0.75rem, 2vw, 1rem);
 }
 
+/* Light theme: role chips container with more noticeable tint */
+html[data-theme="light"] #apply [data-component="RoleChips"] {
+  background: color-mix(in srgb, var(--color-background-light) 92%, var(--color-primary) 8%);
+}
+
 #apply [data-component="RoleChips"] [data-role-chips] {
   display: flex;
   list-style: none;
@@ -525,6 +610,12 @@ html[data-theme="dark"] #apply .form-field input[type="date"] {
     transform var(--transition-base),
     box-shadow var(--transition-base),
     border-color var(--transition-base);
+}
+
+/* Light theme: role chips with more noticeable background */
+html[data-theme="light"] #apply .role-chip {
+  background: color-mix(in srgb, var(--color-background-light) 88%, var(--color-primary) 12%);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
 }
 
 @media (hover: hover) {
@@ -551,6 +642,14 @@ html[data-theme="dark"] #apply .form-field input[type="date"] {
     0 0 0 3px color-mix(in srgb, var(--color-primary) 22%, transparent),
     0 0.7rem 1.8rem rgba(0, 0, 0, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Light theme: selected role chips with stronger background */
+html[data-theme="light"] #apply .role-chip.is-selected,
+html[data-theme="light"] #apply .role-chip[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--color-primary) 18%, var(--color-background-light) 82%);
+  border-color: color-mix(in srgb, var(--color-primary) 75%, transparent);
+  color: var(--color-text-primary);
 }
 
 .role-chip:focus-visible {
@@ -631,6 +730,8 @@ html[data-theme="dark"] #apply .form-field input[type="date"] {
 
   #apply .role-chip {
     font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    padding: 0.5rem clamp(0.8rem, 1.2rem + 0.4vw, 1.05rem);
   }
 
   .apply-step-badge {
