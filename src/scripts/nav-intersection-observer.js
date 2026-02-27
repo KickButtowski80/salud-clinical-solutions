@@ -209,7 +209,7 @@ export function initNavIntersectionObserver() {
     if (!id || !sectionIds.includes(id)) return;
     
     // Set flag to temporarily ignore IntersectionObserver events
-    // This prevents the nav highlights from dancing during smooth scroll
+    // This prevents the nav highlights from dancing during smooth scroll effects
     userClickedNavItem = true;
     
     // Reset flag after 800ms - carefully chosen timing:
