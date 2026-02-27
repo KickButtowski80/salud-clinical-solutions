@@ -1,49 +1,40 @@
 export function initScrollToTop() {
   const button = document.querySelector('[data-scroll-top]');
-  if (!button) return;
+  if (!button) console.log('hello i am hot here ');
 
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  );
-  const main = document.getElementById('main-content');
-
-  const showClass = 'scroll-top--visible';
-
-  // Show after user scrolls ~300px (18.75rem based on root font size)
-  const rootFontSize = parseFloat(
-    getComputedStyle(document.documentElement).fontSize || '16'
-  );
-  const thresholdPx = 18.75 * rootFontSize;
-
-  const updateVisibility = () => {
-    const y = window.scrollY || window.pageYOffset;
-    if (y > thresholdPx) {
-      button.classList.add(showClass);
-    } else {
-      button.classList.remove(showClass);
-    }
-  };
-
-  // Click / keyboard activation
-  button.addEventListener('click', (event) => {
-    event.preventDefault();
-
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    // Accessibility: ensure main-content is focusable and focus it
+    const main = document.getElementById('main-content');
     if (main) {
       if (!main.hasAttribute('tabindex')) {
         main.setAttribute('tabindex', '-1');
       }
       main.focus({ preventScroll: true });
     }
-
-    const reduceMotion = prefersReducedMotion.matches;
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: reduceMotion ? 'auto' : 'smooth',
-    });
+   
+    // Reduced motion handled by CSS scroll-behavior
+ document.getElementById("main-content").scrollIntoView({ 
+  behavior: 'smooth',
+  block: 'start'  // 'start', 'center', 'end', 'nearest'
+});
   });
 
-  // Toggle button on scroll
-  window.addEventListener('scroll', updateVisibility, { passive: true });
-  updateVisibility();
+  const handleScroll = () => {
+    console.log('Scroll position:', window.scrollY);
+    if (window.scrollY > 300) {
+      console.log('Adding scroll-top--visible class');
+      button.classList.add('scroll-top--visible');
+    } else {
+      console.log('Removing scroll-top--visible class');
+      button.classList.remove('scroll-top--visible');
+    }
+    console.log('Button classes:', button.className);
+  };
+
+  
+    console.log('DOMContentLoaded event triggered');
+    window.addEventListener('scroll', handleScroll);
+  
 }
