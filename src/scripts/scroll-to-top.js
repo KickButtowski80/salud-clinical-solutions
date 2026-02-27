@@ -1,33 +1,12 @@
 export function initScrollToTop() {
   const button = document.querySelector('[data-scroll-top]');
-  if (!button) return;
+  if (!button) console.log('hello i am hot here ');
 
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  );
-  const main = document.getElementById('main-content');
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
 
-  const showClass = 'scroll-top--visible';
-
-  // Show after user scrolls ~300px (18.75rem based on root font size)
-  const rootFontSize = parseFloat(
-    getComputedStyle(document.documentElement).fontSize || '16'
-  );
-  const thresholdPx = 18.75 * rootFontSize;
-
-  const updateVisibility = () => {
-    const y = window.scrollY || window.pageYOffset;
-    if (y > thresholdPx) {
-      button.classList.add(showClass);
-    } else {
-      button.classList.remove(showClass);
-    }
-  };
-
-  // Click / keyboard activation
-  button.addEventListener('click', (event) => {
-    event.preventDefault();
-
+    // Accessibility: ensure main-content is focusable and focus it
+    const main = document.getElementById('main-content');
     if (main) {
       if (!main.hasAttribute('tabindex')) {
         main.setAttribute('tabindex', '-1');
@@ -35,15 +14,27 @@ export function initScrollToTop() {
       main.focus({ preventScroll: true });
     }
 
-    const reduceMotion = prefersReducedMotion.matches;
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: reduceMotion ? 'auto' : 'smooth',
+    // Reduced motion handled by CSS scroll-behavior
+    document.getElementById("main-content").scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'  // 'start', 'center', 'end', 'nearest'
     });
   });
 
-  // Toggle button on scroll
-  window.addEventListener('scroll', updateVisibility, { passive: true });
-  updateVisibility();
+  const handleScroll = () => {
+
+    if (window.scrollY > 300) {
+
+      button.classList.add('scroll-top--visible');
+    } else {
+
+      button.classList.remove('scroll-top--visible');
+    }
+
+  };
+
+
+
+  window.addEventListener('scroll', handleScroll);
+
 }
