@@ -163,12 +163,12 @@ export function initNavIntersectionObserver() {
 
   // Navigation state management
   let currentSectionId = null;
-  
+
   // Core function: Update navigation active states
   // Updates both desktop (CSS classes) and mobile (ARIA attributes)
   const updateNavForSection = (sectionId) => {
     if (!sectionId || sectionId === currentSectionId) return;
-    
+
     // Debug logging (remove in production)
     console.log(`🧭 Nav update: ${currentSectionId} → ${sectionId}`);
     currentSectionId = sectionId;
@@ -201,17 +201,17 @@ export function initNavIntersectionObserver() {
   // events during user-initiated navigation. This is more reliable than complex
   // Promise.race() with animation events, which have browser compatibility issues.
   let userClickedNavItem = false;
-  
+
   // Handle navigation clicks with anti-dancing protection
   const handleNavClick = (event) => {
     const link = event.currentTarget;
     const id = idFromHref(link.getAttribute('href'));
     if (!id || !sectionIds.includes(id)) return;
-    
+
     // Set flag to temporarily ignore IntersectionObserver events
     // This prevents the nav highlights from dancing during smooth scroll effects
     userClickedNavItem = true;
-    
+
     // Reset flag after 800ms - carefully chosen timing:
     // - Smooth scroll animation: ~500-600ms (depends on scroll distance)
     // - CSS transitions: 200ms (nav-link transitions)
@@ -219,7 +219,7 @@ export function initNavIntersectionObserver() {
     setTimeout(() => {
       userClickedNavItem = false;
     }, 800);
-    
+
     // Update navigation state immediately for instant visual feedback
     // User sees the correct highlight right away, then scroll animates smoothly
     updateNavForSection(id);
@@ -229,6 +229,17 @@ export function initNavIntersectionObserver() {
     link.addEventListener('click', handleNavClick);
   });
 
+  // Choose thresholds based on viewport height to better support small mobiles
+  const getThresholdsForViewport = () => {
+    const h = window.innerHeight || document.documentElement.clientHeight || 0;
+    // Very small heights (e.g., landscape phones)
+    if (h <= 400) return [0.05, 0.15, 0.25];
+    // Small mobiles (e.g., iPhone SE portrait and similar)
+    if (h <= 667) return [0.1, 0.3, 0.5, 0.7, 0.9];
+    // Default for larger mobile/tablet/desktop
+    return [0.2, 0.4, 0.6, 0.8];
+  };
+
   // IntersectionObserver configuration
   // Creates an "active zone" in the middle 40% of the viewport
   // Ignores top 30% and bottom 30% to prevent rapid switching
@@ -236,8 +247,8 @@ export function initNavIntersectionObserver() {
     const observer = new IntersectionObserver(
       (entries) => {
         // Skip updates during user-initiated navigation (anti-dancing)
-        if(userClickedNavItem) return;
-        
+        if (userClickedNavItem) return;
+
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             updateNavForSection(entry.target.id);
@@ -248,16 +259,16 @@ export function initNavIntersectionObserver() {
         // Focus on middle portion of viewport for stable navigation
         // Top 30% and bottom 30% are ignored, middle ~40% is the active zone
         rootMargin: '-30% 0px -30% 0px',
-        
-        // Multiple thresholds for robust detection
-        // Works with different section heights and scroll speeds
-        threshold: [0.2, 0.4, 0.6, 0.8],
+
+        // Multiple thresholds tuned per viewport height for robust detection
+        // Helps small mobile viewports correctly detect the top section
+        threshold: getThresholdsForViewport(),
       }
     );
 
     // Start observing all sections
     sections.forEach((section) => observer.observe(section));
-    
+
   } else {
     // Fallback for very old browsers without IntersectionObserver support
     // Default to the first available section or 'home'
