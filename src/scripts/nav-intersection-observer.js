@@ -109,7 +109,7 @@ export function initNavIntersectionObserver() {
   }
 
   // Sections to observe for navigation updates
-  const sectionIds = ['home', 'services', 'about-us', 'apply', 'contact'];
+  const sectionIds = ['home', 'locums', 'about', 'contact', 'connect'];
 
   const sections = sectionIds
     .map((id) => document.getElementById(id))
