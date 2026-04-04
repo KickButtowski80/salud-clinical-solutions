@@ -14,10 +14,32 @@ export function initScrollToTop() {
       main.focus({ preventScroll: true });
     }
 
-    // Reduced motion handled by CSS scroll-behavior
+    // Navigate to home page with clean URL
+    window.history.pushState({}, '', '/');
+    
+    // Scroll to top
     document.getElementById("main-content").scrollIntoView({
       behavior: 'smooth',
       block: 'start'  // 'start', 'center', 'end', 'nearest'
+    });
+    
+    // Update navigation active state
+    const desktopLinks = document.querySelectorAll('.nav-link');
+    desktopLinks.forEach(link => {
+      if (link.getAttribute('href') === '/') {
+        link.classList.add('nav-link--active');
+      } else {
+        link.classList.remove('nav-link--active');
+      }
+    });
+    
+    const mobileLinks = document.querySelectorAll('.mobile-nav__link');
+    mobileLinks.forEach(link => {
+      if (link.getAttribute('href') === '/') {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
     });
   });
 

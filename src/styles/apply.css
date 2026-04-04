@@ -2,7 +2,7 @@
    APPLY SECTION STYLES
    ========================================================================== */
 
-#apply {
+#connect {
   border-radius: 1rem;
   border: 1px solid rgba(148, 163, 184, 0.25);
   background:
@@ -29,7 +29,7 @@
 }
 
 /* Light theme tuning: map Apply variables to design tokens for better contrast */
-html[data-theme="light"] #apply {
+html[data-theme="light"] #connect {
   --apply-heading-color: var(--color-text-primary);
   --apply-text-primary: var(--color-text-primary);
   --apply-text-secondary: var(--color-text-primary);
@@ -77,11 +77,11 @@ html[data-theme="light"] #apply {
 }
 
 /* Light theme: explicit title colors for better hierarchy */
-html[data-theme="light"] #apply .apply-title-main {
+html[data-theme="light"] #connect .apply-title-main {
   color: var(--color-text-primary);
 }
 
-html[data-theme="light"] #apply .apply-title-sub {
+html[data-theme="light"] #connect .apply-title-sub {
   color: var(--color-text-secondary);
 }
 
@@ -133,7 +133,7 @@ html[data-theme="light"] #apply .apply-title-sub {
 }
 
 /* Darker overlay in light theme for better text contrast */
-html[data-theme="light"] #apply .apply-info-overlay {
+html[data-theme="light"] #connect .apply-info-overlay {
   background:
     linear-gradient(135deg,
       rgba(15, 23, 42, 0.12) 0%,
@@ -156,23 +156,23 @@ html[data-theme="light"] #apply .apply-info-overlay {
 }
 
 /* Light theme: increase readability of side card text */
-html[data-theme="light"] #apply .apply-info-title {
+html[data-theme="light"] #connect .apply-info-title {
   color: var(--color-text-primary);
 }
 
 /* Light mode: improve readability of match microcopy line under role chips */
-html[data-theme="light"] #apply #match-microcopy {
+html[data-theme="light"] #connect #match-microcopy {
   color: var(--color-text-primary);
   opacity: 0.9;
 }
 
 /* Light mode: footer helper texts inside Apply card */
-html[data-theme="light"] #apply .text-muted {
+html[data-theme="light"] #connect .text-muted {
   color: color-mix(in srgb, var(--color-text-primary) 78%, transparent);
   font-size: clamp(0.875rem, 0.5rem + 2vw, 1rem);
 }
 
-html[data-theme="light"] #apply .text-accent {
+html[data-theme="light"] #connect .text-accent {
   color: var(--color-text-primary);
   font-weight: var(--font-weight-medium);
   font-size: clamp(0.875rem, 0.5rem + 2vw, 1rem);
@@ -180,7 +180,7 @@ html[data-theme="light"] #apply .text-accent {
 
 /* Mobile: stacked layout */
 @media (max-width: 1024px) {
-  #apply {
+  #connect {
     padding: clamp(1rem, calc(2vw + 1rem), 2rem);
   }
 
@@ -198,7 +198,7 @@ html[data-theme="light"] #apply .text-accent {
   }
 }
 
-html[data-theme="dark"] #apply {
+html[data-theme="dark"] #connect {
   background:
     linear-gradient(150deg, #03161c 0%, #082c34 45%, #0b3f45 100%);
   --card-surface: color-mix(in srgb, #0f172a 80%, #0b3640 20%);
@@ -225,7 +225,7 @@ html[data-theme="dark"] #apply {
 }
 
 
-html[data-theme="dark"] #apply [data-component="RoleChips"] {
+html[data-theme="dark"] #connect [data-component="RoleChips"] {
   background: color-mix(in srgb, #08151b 84%, #0b3640);
   border: 1px solid color-mix(in srgb, #0da9a9 35%, transparent);
   box-shadow:
@@ -233,13 +233,13 @@ html[data-theme="dark"] #apply [data-component="RoleChips"] {
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-html[data-theme="dark"] #apply .role-chip {
+html[data-theme="dark"] #connect .role-chip {
   background: color-mix(in srgb, #0a1f29 78%, #13404d);
   border-color: color-mix(in srgb, #15bcbc 32%, transparent);
 }
 
-html[data-theme="dark"] #apply .role-chip.is-selected,
-html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
+html[data-theme="dark"] #connect .role-chip.is-selected,
+html[data-theme="dark"] #connect .role-chip[aria-pressed="true"] {
   background: color-mix(in srgb, #15bcbc 22%, rgba(255, 255, 255, 0.04));
   border-color: color-mix(in srgb, #36f0f0 55%, transparent);
   box-shadow:
@@ -247,7 +247,7 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
     0 1rem 2.8rem rgba(0, 0, 0, 0.45);
 }
 
-#apply > header h2 {
+#connect > header h2 {
   color: var(--apply-heading-color);
 }
 
@@ -272,20 +272,20 @@ html[data-theme="dark"] #apply .role-chip[aria-pressed="true"] {
   padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
 }
 
-#apply .apply-form-header h3,
-#apply .apply-form-header p,
-#apply .apply-form-header [data-stepper-status] {
+#connect .apply-form-header h3,
+#connect .apply-form-header p,
+#connect .apply-form-header [data-stepper-status] {
   color: #ffffff;
 }
 
 /* Light theme: ensure header text uses proper light theme tokens for contrast */
-html[data-theme="light"] #apply .apply-form-header h3,
-html[data-theme="light"] #apply .apply-form-header p,
-html[data-theme="light"] #apply .apply-form-header [data-stepper-status] {
+html[data-theme="light"] #connect .apply-form-header h3,
+html[data-theme="light"] #connect .apply-form-header p,
+html[data-theme="light"] #connect .apply-form-header [data-stepper-status] {
   color: var(--color-text-primary);
 }
 
-html[data-theme="light"] #apply .apply-form-header .text-secondary {
+html[data-theme="light"] #connect .apply-form-header .text-secondary {
   color: var(--color-text-secondary);
 }
 
@@ -335,7 +335,7 @@ html[data-theme="light"] #apply .apply-form-header .text-secondary {
 }
 
 /* Darker step cards in light mode for better contrast */
-html[data-theme="light"] #apply .apply-step {
+html[data-theme="light"] #connect .apply-step {
   background: color-mix(in srgb, var(--color-background-light) 72%, var(--color-primary) 28%);
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 32%, transparent);
 }
@@ -430,15 +430,15 @@ html[data-theme="light"] #apply .apply-step {
     0 0.6rem 1.4rem rgba(0, 0, 0, 0.12);
 }
 
-#apply .form-field label {
+#connect .form-field label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--apply-text-on-surface);
 }
 
-#apply .form-field input,
-#apply .form-field select,
-#apply .form-field textarea {
+#connect .form-field input,
+#connect .form-field select,
+#connect .form-field textarea {
   border-radius: 0.85rem;
   border: 1px solid color-mix(in srgb, var(--apply-text-secondary) 22%, transparent);
   background: var(--color-background-light);
@@ -456,18 +456,18 @@ html[data-theme="light"] #apply .apply-step {
     background-color var(--transition-fast);
 }
 
-#apply .form-field textarea {
+#connect .form-field textarea {
   resize: vertical;
   min-height: 7.5rem;
 }
 
-#apply .form-field input[type="date"] {
+#connect .form-field input[type="date"] {
   padding-right: 2.6rem;
   position: relative;
 }
 
 
-#apply .form-field input[type="date"]::-webkit-calendar-picker-indicator {
+#connect .form-field input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 1;
   width: 1.8rem;
   height: 1.8rem;
@@ -480,13 +480,13 @@ html[data-theme="light"] #apply .apply-step {
   color-scheme: light dark;
 }
 
-html[data-theme="light"] #apply .form-field input[type="date"]::-webkit-calendar-picker-indicator {
+html[data-theme="light"] #connect .form-field input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
 
-#apply .form-field input:focus-visible,
-#apply .form-field select:focus-visible,
-#apply .form-field textarea:focus-visible {
+#connect .form-field input:focus-visible,
+#connect .form-field select:focus-visible,
+#connect .form-field textarea:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--color-primary) 42%, transparent);
   outline-offset: 3px;
   border-color: color-mix(in srgb, var(--color-primary) 65%, transparent);
@@ -496,9 +496,9 @@ html[data-theme="light"] #apply .form-field input[type="date"]::-webkit-calendar
 }
 
 @media (hover: hover) {
-  #apply .form-field input:hover,
-  #apply .form-field select:hover,
-  #apply .form-field textarea:hover {
+  #connect .form-field input:hover,
+  #connect .form-field select:hover,
+  #connect .form-field textarea:hover {
     transform: translate3d(1px, -1px, 0);
     border-color: color-mix(in srgb, var(--apply-text-primary) 22%, transparent);
     box-shadow:
@@ -571,7 +571,7 @@ html[data-theme="light"] #apply .form-field input[type="date"]::-webkit-calendar
     inset 0 2px 10px rgba(0, 0, 0, 0.18);
 }
 
-#apply [data-component="RoleChips"] {
+#connect [data-component="RoleChips"] {
   border-radius: 1rem;
   border: var(--card-border);
   background: var(--surface-gradient-hero);
@@ -583,22 +583,22 @@ html[data-theme="light"] #apply .form-field input[type="date"]::-webkit-calendar
 }
 
 /* Light theme: role chips container with more noticeable tint */
-html[data-theme="light"] #apply [data-component="RoleChips"] {
+html[data-theme="light"] #connect [data-component="RoleChips"] {
   background: color-mix(in srgb, var(--color-background-light) 92%, var(--color-primary) 8%);
 }
 
-#apply [data-component="RoleChips"] [data-role-chips] {
+#connect [data-component="RoleChips"] [data-role-chips] {
   display: flex;
   list-style: none;
   gap: clamp(0.5rem, 1vw + 0.25rem, 0.75rem);
   padding-inline-start: 0;
 }
 
-#apply [data-component="RoleChips"] h3 {
+#connect [data-component="RoleChips"] h3 {
   color: var(--apply-text-on-surface);
 }
 
-#apply .role-chip {
+#connect .role-chip {
   border-radius: 0.85rem;
   padding: clamp(0.65rem, 1.2vw, 0.85rem) clamp(0.8rem, 1.6vw, 1.05rem);
   border: var(--card-border);
@@ -613,13 +613,13 @@ html[data-theme="light"] #apply [data-component="RoleChips"] {
 }
 
 /* Light theme: role chips with more noticeable background */
-html[data-theme="light"] #apply .role-chip {
+html[data-theme="light"] #connect .role-chip {
   background: color-mix(in srgb, var(--color-background-light) 88%, var(--color-primary) 12%);
   border: 1px solid color-mix(in srgb, var(--color-text-secondary) 22%, transparent);
 }
 
 @media (hover: hover) {
-  #apply .role-chip:hover {
+  #connect .role-chip:hover {
     transform: translate3d(2px, -2px, 0);
     box-shadow:
       0 0.6rem 1.4rem rgba(0, 0, 0, 0.16),
@@ -627,8 +627,8 @@ html[data-theme="light"] #apply .role-chip {
   }
 }
 
-#apply .role-chip.is-selected,
-#apply .role-chip[aria-pressed="true"] {
+#connect .role-chip.is-selected,
+#connect .role-chip[aria-pressed="true"] {
   border-color: color-mix(in srgb, var(--color-primary) 85%, transparent);
   border-width: 2px;
   background:
@@ -645,8 +645,8 @@ html[data-theme="light"] #apply .role-chip {
 }
 
 /* Light theme: selected role chips with stronger background */
-html[data-theme="light"] #apply .role-chip.is-selected,
-html[data-theme="light"] #apply .role-chip[aria-pressed="true"] {
+html[data-theme="light"] #connect .role-chip.is-selected,
+html[data-theme="light"] #connect .role-chip[aria-pressed="true"] {
   background: color-mix(in srgb, var(--color-primary) 18%, var(--color-background-light) 82%);
   border-color: color-mix(in srgb, var(--color-primary) 75%, transparent);
   color: var(--color-text-primary);
@@ -710,25 +710,25 @@ html[data-theme="light"] #apply .role-chip[aria-pressed="true"] {
 }
 
 @media (max-width: 768px) {
-  #apply .form-field label {
+  #connect .form-field label {
     font-size: var(--font-size-xs);
   }
 
-  #apply .form-field input,
-  #apply .form-field select,
-  #apply .form-field textarea {
+  #connect .form-field input,
+  #connect .form-field select,
+  #connect .form-field textarea {
     font-size: var(--font-size-sm);
   }
 
-  #apply .apply-submit {
+  #connect .apply-submit {
     font-size: var(--font-size-sm);
   }
 
-  #apply [data-component="RoleChips"] li {
+  #connect [data-component="RoleChips"] li {
     font-size: var(--font-size-xs);
   }
 
-  #apply .role-chip {
+  #connect .role-chip {
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
     padding: 0.5rem clamp(0.8rem, 1.2rem + 0.4vw, 1.05rem);
