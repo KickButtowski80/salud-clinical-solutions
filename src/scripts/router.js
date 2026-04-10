@@ -47,16 +47,26 @@ export function initRouter() {
       const section = document.getElementById(sectionId);
       
       if (section) {
-        // Smooth scroll to section
-        section.scrollIntoView({ behavior: 'smooth' });
-        
-        // Update navigation active state
-        this.updateNavActive(sectionId);
-        
-        // If hash fragment was used, update URL to clean URL
-        if (hash && path === '/') {
-          window.history.replaceState({}, '', `/${sectionId}`);
-        }
+        // Use requestAnimationFrame to ensure DOM is ready
+        requestAnimationFrame(() => {
+          // Scroll to section with proper offset
+          const headerHeight = 100; // Approximate header height
+          const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - headerHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+          
+          // Update navigation active state
+          this.updateNavActive(sectionId);
+          
+          // If hash fragment was used, update URL to clean URL
+          if (hash && path === '/') {
+            window.history.replaceState({}, '', `/${sectionId}`);
+          }
+        });
       }
     },
     
