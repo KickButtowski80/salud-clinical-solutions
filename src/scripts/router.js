@@ -23,6 +23,11 @@ export function initRouter() {
       window.addEventListener('popstate', () => {
         this.handleRoute();
       });
+      
+      // Handle hash fragment changes (for QR codes and legacy links)
+      window.addEventListener('hashchange', () => {
+        this.handleRoute();
+      });
     },
     
     navigateTo(path) {
@@ -32,8 +37,13 @@ export function initRouter() {
     },
     
     handleRoute() {
+      // Handle both clean URLs (/connect) and hash fragments (#connect)
       const path = window.location.pathname;
-      const sectionId = this.getPathToSectionId(path);
+      const hash = window.location.hash.replace('#', '');
+      
+      // Priority: hash fragment > clean URL
+      const target = hash || path;
+      const sectionId = this.getPathToSectionId(target);
       const section = document.getElementById(sectionId);
       
       if (section) {
@@ -42,16 +52,30 @@ export function initRouter() {
         
         // Update navigation active state
         this.updateNavActive(sectionId);
+        
+        // If hash fragment was used, update URL to clean URL
+        if (hash && path === '/') {
+          window.history.replaceState({}, '', `/${sectionId}`);
+        }
       }
     },
     
     getPathToSectionId(path) {
-      // Convert clean URLs to section IDs
-      if (path === '/' || path === '/home') return 'home';
-      if (path === '/locums') return 'locums';
-      if (path === '/about') return 'about';
-      if (path === '/contact') return 'contact';
-      if (path === '/connect') return 'connect';
+      // Convert clean URLs or hash fragments to section IDs
+      // Handle both "/connect" and "connect" (from hash fragments)
+      const cleanPath = path.replace('/', '');
+      
+      if (cleanPath === '' || cleanPath === 'home') return 'home';
+      if (cleanPath === 'locums') return 'locums';
+      if (cleanPath === 'about') return 'about';
+      if (cleanPath === 'contact') return 'contact';
+      if (cleanPath === 'connect') return 'connect';
+      
+      // Backward compatibility for old section IDs in QR codes
+      if (cleanPath === 'services') return 'locums';
+      if (cleanPath === 'about-us') return 'about';
+      if (cleanPath === 'apply') return 'connect';
+      
       return 'home'; // fallback
     },
     
