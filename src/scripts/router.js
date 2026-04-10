@@ -47,26 +47,29 @@ export function initRouter() {
       const section = document.getElementById(sectionId);
       
       if (section) {
-        // OPTION 1: Manual scroll calculation (commented out)
-        // requestAnimationFrame(() => {
-        //   const headerHeight = 60;
-        //   const elementPosition = section.getBoundingClientRect().top + window.scrollY;
-        //   const offsetPosition = elementPosition - headerHeight;
-        //   window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-        // });
+        // OPTION 1: Manual scroll calculation (working solution)
+        requestAnimationFrame(() => {
+          const headerHeight = 60;
+          const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - headerHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+          
+          // Update navigation active state
+          this.updateNavActive(sectionId);
+          
+          // If hash fragment was used, update URL to clean URL
+          if (hash && path === '/') {
+            window.history.replaceState({}, '', `/${sectionId}`);
+          }
+        });
         
-        // OPTION 3: Scroll to form element inside section (accounts for scroll-padding-top)
-        // For Connect section, scroll to the form box which is the main content
-        const formBox = section.querySelector('.apply-form-box') || section;
-        formBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        
-        // Update navigation active state
-        this.updateNavActive(sectionId);
-        
-        // If hash fragment was used, update URL to clean URL
-        if (hash && path === '/') {
-          window.history.replaceState({}, '', `/${sectionId}`);
-        }
+        // OPTION 3: Scroll to form element inside section (commented out)
+        // const formBox = section.querySelector('.apply-form-box') || section;
+        // formBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     },
     
