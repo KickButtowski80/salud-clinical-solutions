@@ -109,7 +109,3 @@ export function initRouter() {
   router.init();
   return router;
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  initRouter();
-});
