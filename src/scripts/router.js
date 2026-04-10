@@ -45,48 +45,18 @@ export function initRouter() {
       const target = hash || path;
       const sectionId = this.getPathToSectionId(target);
       const section = document.getElementById(sectionId);
-      
+      console.log('section', section);
       if (section) {
-        // OPTION 1: Manual scroll calculation with dynamic header height
-        requestAnimationFrame(() => {
-          // Dynamic header height based on device
-          const getHeaderHeight = () => {
-            // iPhone detection and Dynamic Island adjustment
-            const isIPhone = /iPhone/.test(navigator.userAgent);
-            const isSmallScreen = window.innerHeight <= 736; // iPhone SE, iPhone 12 mini, etc.
-            
-            if (isIPhone) {
-              // iPhone with Dynamic Island needs more offset
-              if (window.innerHeight >= 844) return 80; // iPhone 12/13/14/15 Pro/Plus
-              if (window.innerHeight >= 667) return 70; // iPhone SE, iPhone 12 mini
-              return 60; // Smaller iPhones
-            }
-            
-            // Android devices
-            return 60; // Standard Android offset
-          };
-          
-          const headerHeight = getHeaderHeight();
-          const elementPosition = section.getBoundingClientRect().top + window.scrollY;
-          const offsetPosition = elementPosition - headerHeight;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-          
-          // Update navigation active state
-          this.updateNavActive(sectionId);
-          
-          // If hash fragment was used, update URL to clean URL
-          if (hash && path === '/') {
-            window.history.replaceState({}, '', `/${sectionId}`);
-          }
-        });
+        // Simple scrollIntoView - let CSS handle the offset
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         
-        // OPTION 3: Scroll to form element inside section (commented out)
-        // const formBox = section.querySelector('.apply-form-box') || section;
-        // formBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Update navigation active state
+        this.updateNavActive(sectionId);
+        
+        // If hash fragment was used, update URL to clean URL
+        if (hash && path === '/') {
+          window.history.replaceState({}, '', `/${sectionId}`);
+        }
       }
     },
     
@@ -139,3 +109,7 @@ export function initRouter() {
   router.init();
   return router;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  initRouter();
+});

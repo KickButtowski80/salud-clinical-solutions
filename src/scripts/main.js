@@ -7,7 +7,8 @@ import { initThemeTogglePersistence } from './theme-toggle-persistence.js';
 import { initRoleChips } from './role-chips.js';
 import { initApplyFormStepper } from './apply-form-stepper.js';
 import { initContentReveal } from './content-reveal.js';
-import { initRouter } from './router.js';
+// Router is now initialized in router.js with DOMContentLoaded
+// import { initRouter } from './router.js';
 // import { initFooterYear } from './footer-year.js';
 
 // ==================== MAIN INITIALIZATION ====================
@@ -15,7 +16,7 @@ import { initRouter } from './router.js';
 document.addEventListener('DOMContentLoaded', () => {
   // initContentReveal(); // Initialize content reveal system first
   // initFooterYear(); // Initialize footer year
-  initRouter(); // Initialize client-side router first
+  // Router is now initialized in router.js with DOMContentLoaded
   initNavIntersectionObserver();
   initStaffCardScrollAnimations();
   initScrollToTop();
