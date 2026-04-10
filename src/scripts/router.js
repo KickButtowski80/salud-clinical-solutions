@@ -55,11 +55,11 @@ export function initRouter() {
         //   window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         // });
         
-        // OPTION 2: Use scrollIntoView with block center (simpler, responsive)
+        // OPTION 2: Use scrollIntoView with block end (testing)
         // block: 'start' = top of section at top of viewport
         // block: 'center' = section centered in viewport
         // block: 'end' = section at bottom of viewport
-        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        section.scrollIntoView({ behavior: 'smooth', block: 'end' });
         
         // Update navigation active state
         this.updateNavActive(sectionId);
