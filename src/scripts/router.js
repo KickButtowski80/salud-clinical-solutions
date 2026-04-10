@@ -47,27 +47,27 @@ export function initRouter() {
       const section = document.getElementById(sectionId);
       
       if (section) {
-        // Use requestAnimationFrame to ensure DOM is ready
-        requestAnimationFrame(() => {
-          // Scroll to section with proper offset
-          // Reduced offset to position form better in viewport
-          const headerHeight = 60; // Reduced from 100 to better position form
-          const elementPosition = section.getBoundingClientRect().top + window.scrollY;
-          const offsetPosition = elementPosition - headerHeight;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-          
-          // Update navigation active state
-          this.updateNavActive(sectionId);
-          
-          // If hash fragment was used, update URL to clean URL
-          if (hash && path === '/') {
-            window.history.replaceState({}, '', `/${sectionId}`);
-          }
-        });
+        // OPTION 1: Manual scroll calculation (commented out)
+        // requestAnimationFrame(() => {
+        //   const headerHeight = 60;
+        //   const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+        //   const offsetPosition = elementPosition - headerHeight;
+        //   window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        // });
+        
+        // OPTION 2: Use scrollIntoView with block center (simpler, responsive)
+        // block: 'start' = top of section at top of viewport
+        // block: 'center' = section centered in viewport
+        // block: 'end' = section at bottom of viewport
+        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Update navigation active state
+        this.updateNavActive(sectionId);
+        
+        // If hash fragment was used, update URL to clean URL
+        if (hash && path === '/') {
+          window.history.replaceState({}, '', `/${sectionId}`);
+        }
       }
     },
     
