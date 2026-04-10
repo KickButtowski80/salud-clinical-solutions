@@ -55,11 +55,10 @@ export function initRouter() {
         //   window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         // });
         
-        // OPTION 2: Use scrollIntoView with block end (testing)
-        // block: 'start' = top of section at top of viewport
-        // block: 'center' = section centered in viewport
-        // block: 'end' = section at bottom of viewport
-        section.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        // OPTION 3: Scroll to form element inside section (accounts for scroll-padding-top)
+        // For Connect section, scroll to the form box which is the main content
+        const formBox = section.querySelector('.apply-form-box') || section;
+        formBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
         
         // Update navigation active state
         this.updateNavActive(sectionId);
