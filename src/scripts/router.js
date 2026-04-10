@@ -47,17 +47,27 @@ export function initRouter() {
       const section = document.getElementById(sectionId);
       
       if (section) {
-        // Use scrollIntoView with scroll-padding-top from CSS
-        // CSS handles the offset automatically via scroll-padding-top
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        
-        // Update navigation active state
-        this.updateNavActive(sectionId);
-        
-        // If hash fragment was used, update URL to clean URL
-        if (hash && path === '/') {
-          window.history.replaceState({}, '', `/${sectionId}`);
-        }
+        // Use requestAnimationFrame to ensure DOM is ready
+        requestAnimationFrame(() => {
+          // Scroll to section with proper offset
+          // Reduced offset to position form better in viewport
+          const headerHeight = 60; // Reduced from 100 to better position form
+          const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - headerHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+          
+          // Update navigation active state
+          this.updateNavActive(sectionId);
+          
+          // If hash fragment was used, update URL to clean URL
+          if (hash && path === '/') {
+            window.history.replaceState({}, '', `/${sectionId}`);
+          }
+        });
       }
     },
     
