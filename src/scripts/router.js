@@ -47,9 +47,26 @@ export function initRouter() {
       const section = document.getElementById(sectionId);
       
       if (section) {
-        // OPTION 1: Manual scroll calculation (working solution)
+        // OPTION 1: Manual scroll calculation with dynamic header height
         requestAnimationFrame(() => {
-          const headerHeight = 60;
+          // Dynamic header height based on device
+          const getHeaderHeight = () => {
+            // iPhone detection and Dynamic Island adjustment
+            const isIPhone = /iPhone/.test(navigator.userAgent);
+            const isSmallScreen = window.innerHeight <= 736; // iPhone SE, iPhone 12 mini, etc.
+            
+            if (isIPhone) {
+              // iPhone with Dynamic Island needs more offset
+              if (window.innerHeight >= 844) return 80; // iPhone 12/13/14/15 Pro/Plus
+              if (window.innerHeight >= 667) return 70; // iPhone SE, iPhone 12 mini
+              return 60; // Smaller iPhones
+            }
+            
+            // Android devices
+            return 60; // Standard Android offset
+          };
+          
+          const headerHeight = getHeaderHeight();
           const elementPosition = section.getBoundingClientRect().top + window.scrollY;
           const offsetPosition = elementPosition - headerHeight;
           
