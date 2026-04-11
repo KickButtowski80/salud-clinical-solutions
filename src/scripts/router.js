@@ -45,7 +45,6 @@ export function initRouter() {
       const target = hash || path;
       const sectionId = this.getPathToSectionId(target);
       const section = document.getElementById(sectionId);
-      console.log('section', section);
       if (section) {
         // Simple scrollIntoView - let CSS handle the offset
         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
