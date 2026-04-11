@@ -12,10 +12,17 @@ import { initRouter } from './router.js';
 
 // ==================== MAIN INITIALIZATION ====================
 
+window.addEventListener('load', () => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      initRouter();
+    });
+  });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // initContentReveal(); // Initialize content reveal system first
   // initFooterYear(); // Initialize footer year
-  initRouter(); // Initialize client-side router first
   initNavIntersectionObserver();
   initStaffCardScrollAnimations();
   initScrollToTop();
